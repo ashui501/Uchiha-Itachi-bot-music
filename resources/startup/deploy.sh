@@ -1,16 +1,11 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 echo "
-	      ╔╦╦╦══╦═╦═╦══╦══╗
-	      ║║║╠╗╔╣╬║║╠║║╩╗╗║
-	      ║║║╚╣║║╗╣║╠║║╦╩╝║
-	      ╚═╩═╩╝╚╩╩═╩══╩══╝
-
+   _______       __             _  __
+  / ____(_)___  / /_  ___  ____| |/ /
+ / /   / / __ \/ __ \/ _ \/ ___/   /
+/ /___/ / /_/ / / / /  __/ /  /   |
+\____/_/ .___/_/ /_/\___/_/  /_/|_|
+      /_/
 	    °•° Deployment Begins •°•
 "
 echo '
@@ -18,7 +13,7 @@ echo '
 '
 
 export DEBIAN_FRONTEND=noninteractive
-export TZ=Asia/Kolkata
+export TZ=Asia/Tehran 
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 apt-get update
@@ -29,22 +24,23 @@ apt-get autoremove --purge
 echo '
         •• Cloning Repository
 '
-git clone https://github.com/TeamUltroid/Ultroid.git /root/TeamUltroid/
+git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
 
 echo '
 	•• Getting Libraries and Installing
 '
 pip install --upgrade pip setuptools wheel
-pip install -r /root/TeamUltroid/requirements.txt
+pip install -r /root/CipherX1-ops/requirements.txt
 
 echo "
 
-			      ┏┳┓╋┏┓╋╋╋╋┏┓┏┓
-			      ┃┃┣┓┃┗┳┳┳━╋╋┛┃
-			      ┃┃┃┗┫┏┫┏┫╋┃┃╋┃
-			      ┗━┻━┻━┻┛┗━┻┻━┛
-
+             _______       __             _  __
+            / ____(_)___  / /_  ___  ____| |/ /
+           / /   / / __ \/ __ \/ _ \/ ___/   /
+          / /___/ / /_/ / / / /  __/ /  /   |
+          \____/_/ .___/_/ /_/\___/_/  /_/|_|
+              /_/
 			•°• Deployed Successfully °•°
 		   •• Wait till python images are pushed
-	   •• Give build logs in @UltroidSupport if build fails
+	   •• Give build logs to @hackintush if build fails
 "
