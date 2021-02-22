@@ -1,11 +1,11 @@
 {
-    "name": "Ultroid UserBot",
-    "description": "Pluggable telegram userbot, made in python using Telethon.",
-    "logo": "https://telegra.ph/file/1518e15421d21c5afd9af.jpg",
-    "keywords": ["Telethon", "telegram", "userbot", "python"],
-    "repository": "https://github.com/TeamUltroid/Ultroid",
+    "name": "Mᴇgᴀᴛrᴏn Bot",
+    "description": "Pluggable telegram bot, made in python using Telethon.",
+    "logo": "https://telegra.ph/file/167a0b85048b04129bd3b.jpg",
+    "keywords": ["Telethon", "telegram", "Megatronbot", "python"],
+    "repository": "https://github.com/CipherX1-ops/Megatron/",
     "website": "https://ultroid.now.sh/",
-    "success_url": "https://t.me/TheUltroid",
+    "success_url": "https://t.me/Hackintush",
     "stack": "container",
     "env": {
         "API_ID": {
