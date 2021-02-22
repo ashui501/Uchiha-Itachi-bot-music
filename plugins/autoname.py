@@ -7,6 +7,9 @@
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
 
+import logging 
+import time
+
 from . import *
 
 DEL_TIME_OUT = 60
