@@ -8,7 +8,7 @@
 """
 ✘ Commands Available -
 
-• `{i}google <query>`
+• `{i}gs <query>`
     For doing google search.
 
 • `{i}img <query>`
@@ -29,7 +29,7 @@ from search_engine_parser import *
 from . import *
 
 
-@ultroid_cmd(pattern="google ?(.*)")
+@ultroid_cmd(pattern="gs ?(.*)")
 async def google(event):
     inp = event.pattern_match.group(1)
     if not inp:
