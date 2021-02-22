@@ -32,8 +32,8 @@ async def assistant(event):
         if event.is_private and event.sender_id in sed:
             return
         await event.reply(
-            f"Hey there, this is Ultroid Assistant of {OWNER_NAME}!\n\n{ok}",
-            buttons=[Button.url("Know More", url="https://t.me/TeamUltroid")],
+            f"Ⲏⲉⲩ, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
+            buttons=[Button.url("Ⳗⲟⲓⲛ Ⲙⲩ Ⲥⲏⲁⲛⲛⲉⳑ", url="https://t.me/FutureTechnologyGuard")],
         )
 
 
@@ -44,11 +44,11 @@ async def ultroid(event):
         return
     await asst.send_message(
         event.chat_id,
-        f"Hi {OWNER_NAME}. Please browse through the options",
+        f"Ⲏⲓ {OWNER_NAME}. Ⲣⳑⲉⲁⲋⲉ ⲃʀⲟⲱⲋⲉ ⲧⲏʀⲟυⳋⲏ ⲧⲏⲉ ⲟⲣⲧⲓⲟⲛⲋ",
         buttons=[
-            [custom.Button.inline("Settings ⚙️", data="setter")],
-            [custom.Button.inline("Stats", data="stat")],
-            [custom.Button.inline("Broadcast", data="bcast")],
+            [custom.Button.inline("Ⲋⲉⲧⲧⲓⲛⳋⲋ ⚙️", data="setter")],
+            [custom.Button.inline("Ⲋⲧⲁⲧⲋ", data="stat")],
+            [custom.Button.inline("Ⲃʀⲟⲁⲇⲥⲁⲋⲧ", data="bcast")],
         ],
     )
 
