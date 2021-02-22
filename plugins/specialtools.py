@@ -24,7 +24,7 @@
     Put in dd/mm/yy Format only(eg .dob 01/01/1999).
 
 • `{i}wall <query>`
-    Search Hd Wallpaper as Per ur Wish..
+    Search Hd Wallpaper as Per your Wish..
 """
 
 import os
@@ -133,7 +133,7 @@ async def hbd(event):
     ish = (cm - abhi.today()).days + 1
     dan = ish
     if dan == 0:
-        hp = "`Happy BirthDay To U🎉🎊`"
+        hp = "`Happy BirthDay To You🎉🎊`"
     elif dan < 0:
         okk = 365 + ish
         hp = f"{okk} Days Left 🥳"
