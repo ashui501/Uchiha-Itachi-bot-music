@@ -12,7 +12,7 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-UPSTREAM_REPO_URL = "https://github.com/TeamUltroid/Ultroid"
+UPSTREAM_REPO_URL = "https://github.com/CipherX1-ops/Megatron"
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
 )
@@ -124,7 +124,7 @@ async def upstream(ups):
         if not Var.HEROKU_APP_NAME:
             await eod(
                 pagal,
-                "`Please set up the HEROKU_APP_NAME variable to be able to update userbot.`",
+                "`Please set up the HEROKU_APP_NAME variable to be able to update bot.`",
                 time=10,
             )
             repo.__del__()
@@ -170,7 +170,7 @@ async def upstream(ups):
         await updateme_requirements()
         await eod(
             pagal,
-            "`Successfully Updated!\nBot is restarting... Wait for a second!`",
+            "`Successfully Updated!\nCɪᴘʜᴇʀX Bot is restarting... Wait for a second!`",
         )
         # Spin a new instance of bot
         args = [sys.executable, "./resources/startup/deploy.sh"]
