@@ -35,7 +35,7 @@ async def _(e):
         except ValueError as ex:
             return await eor(e, str(ex))
         except AttributeError:
-            return await eor(e, "No username of replied user wad found")
+            return await eor(e, "No username of replied user was found")
     else:
         put = e.pattern_match.group(1)
     if put:
@@ -149,7 +149,7 @@ async def _(e):
     if e.sender_id in buddhhu:
         await e.answer(snap[ids], alert=True)
     else:
-        await e.answer("Not For You", alert=True)
+        await e.answer("Not For You Bitch 😒", alert=True)
 
 
 @callback("del")
