@@ -75,7 +75,7 @@ async def _(event):
     translator = Translator()
     try:
         tt = translator.translate(text, dest=lan)
-        output_str = f"**TRANSLATED** from {tt.src} to {lan}\n{tt.text}"
+        output_str = f"**Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan}\n{tt.text}"
         await eod(xx, output_str)
     except Exception as exc:
         await eod(xx, str(exc), time=10)
@@ -259,18 +259,18 @@ async def _(event):
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     stdout, stderr = await process.communicate()
-    OUT = f"**☞ BASH\n\n• COMMAND:**\n`{cmd}` \n\n"
+    OUT = f"**☞ Ⲃⲁⲋⲏ\n\n• Ⲥⲟⲙⲙⲁⲛⲇ:**\n`{cmd}` \n\n"
     e = stderr.decode()
     if e:
-        OUT += f"**• ERROR:** \n`{e}`\n"
+        OUT += f"**• Ⲉʀʀⲟʀ:** \n`{e}`\n"
     o = stdout.decode()
     if not o and not e:
-        o = "Success"
-        OUT += f"**• OUTPUT:**\n`{o}`"
+        o = "Ⲋυⲥⲥⲉⲋⲋ"
+        OUT += f"**• Ⲟυⲧⲣυⲧ:**\n`{o}`"
     else:
         _o = o.split("\n")
         o = "`\n".join(_o)
-        OUT += f"**• OUTPUT:**\n{o}"
+        OUT += f"**• Ⲟυⲧⲣυⲧ:**\n{o}"
     if len(OUT) > 4096:
         with io.BytesIO(str.encode(OUT)) as out_file:
             out_file.name = "bash.txt"
@@ -326,9 +326,9 @@ async def _(event):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success"
+        evaluation = "Ⲋυⲥⲥⲉⲋⲋ"
     final_output = (
-        "__►__ **EVAL**\n```{}``` \n\n __►__ **OUTPUT**: \n```{}``` \n".format(
+        "__►__ **Ⲉⳳⲁⳑ**\n```{}``` \n\n __►__ **Ⲟυⲧⲣυⲧ**: \n```{}``` \n".format(
             cmd, evaluation
         )
     )
