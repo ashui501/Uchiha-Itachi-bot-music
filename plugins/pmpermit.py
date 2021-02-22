@@ -15,10 +15,10 @@ from . import *
 # ========================= CONSTANTS =============================
 COUNT_PM = {}
 LASTMSG = {}
-PMPIC = "https://telegra.ph/file/94f6a4aeb21ce2d58dd41.jpg"
+PMPIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 UNAPPROVED_MSG = """
 **PMSecurity of {}!**
-Please wait for me to respnd or you will be blocked and reported as spam!!
+Please wait for me to respond or you will be blocked and reported as spam!!
 
 You have {}/{} warnings!"""
 WARNS = 3
