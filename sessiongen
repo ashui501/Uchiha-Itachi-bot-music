@@ -1,7 +1,7 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Mᴇgᴀᴛrᴏn Bot
+# Copyright (C) 2020 Mᴇgᴀᴛrᴏn Team
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
+# PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
 
 bash resources/session/session.sh
