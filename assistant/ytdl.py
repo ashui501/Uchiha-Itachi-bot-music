@@ -183,7 +183,7 @@ async def _(fuk):
         await asst.send_file(
             getter,
             f"{ytdl_data['id']}.mp4",
-            thumb=f"./resources/extras/ultroid.jpg",
+            thumb=f"./resources/extras/cipherx.jpg",
             caption=f"**{ytdl_data['title']}\n{convert(ytdl_data['duration'])}\n{ytdl_data['uploader']}**",
             supports_streaming=True,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
