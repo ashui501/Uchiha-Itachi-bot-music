@@ -96,7 +96,7 @@ async def pdfsetxt(event):
     ok = await event.get_reply_message()
     msg = event.pattern_match.group(1)
     if not ok and ok.document and ok.document.mime_type == "application/pdf":
-        await eor(event, "`Reply The pdf u Want to Download..`")
+        await eor(event, "`Reply The pdf you Want to Download..`")
         return
     xx = await eor(event, "`Processing...`")
     if not msg:
@@ -154,7 +154,7 @@ async def pdfsetxt(event):
 async def imgscan(event):
     ok = await event.get_reply_message()
     if not (ok and (ok.media)):
-        await eor(event, "`Reply The pdf u Want to Download..`")
+        await eor(event, "`Reply The pdf you Want to Download..`")
         return
     ultt = await ok.download_media()
     if not ultt.endswith(("png", "jpg", "jpeg", "webp")):
@@ -273,7 +273,7 @@ async def sendpdf(event):
     if not os.path.exists("pdf/scan.pdf"):
         await eor(
             event,
-            "first select pages by replying .pdsave of which u want to make multi page pdf file",
+            "first select pages by replying .pdsave of which you want to make multi page pdf file",
         )
         return
     msg = event.pattern_match.group(1)
