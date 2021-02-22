@@ -22,9 +22,9 @@ from . import *
 
 # ================================================#
 notmine = "This bot is for {}".format(OWNER_NAME)
-ULTROID_PIC = "https://telegra.ph/file/11245cacbffe92e5d5b14.jpg"
+ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = """
-[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/ultroidsupport)
+[CɪᴘʜᴇʀX](t.me/Hackintush)
 
 **Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
 
@@ -34,7 +34,7 @@ Pʟᴜɢɪɴs ~ {}**
 
 if Var.ADDONS:
     zhelps = """
-[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/ultroidsupport)
+[CɪᴘʜᴇʀX](t.me/Hackintush)
 
 **Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
 
@@ -42,7 +42,7 @@ Aᴅᴅᴏɴs ~ {}**
 """
 else:
     zhelps = """
-[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/ultroidsupport)
+[CɪᴘʜᴇʀX](t.me/Hackintush)
 
 **Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
 
@@ -60,13 +60,13 @@ async def e(o):
         b = o.builder
         uptime = grt((time.time() - start_time))
         ALIVEMSG = """
-**The Ultroid Userbot...**\n\n
-✵ **Owner** - `{}`
-✵ **Ultroid** - `{}`
-✵ **UpTime** - `{}`
-✵ **Python** - `{}`
-✵ **Telethon** - `{}`
-✵ **Branch** - `{}`
+**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n\n
+✵ **Ⲟⲱⲛⲉʀ** - `{}`
+✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
+✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`
+✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
+✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
+✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
 """.format(
             OWNER_NAME,
             ultroid_version,
@@ -77,14 +77,14 @@ async def e(o):
         )
         res = [
             b.article(
-                title="Ultroid Userbot",
-                url="https://t.me/TeamUltroid",
-                description="Userbot | Telethon ",
+                title="CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ",
+                url="https://t.me/Hackintush",
+                description="Bot | Telethon ",
                 text=ALIVEMSG,
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
             )
         ]
-        await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
+        await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Ⲣⲟʀⲧⲁⳑ", switch_pm_param="start")
 
 
 if Var.BOT_USERNAME is not None and asst is not None:
@@ -98,8 +98,8 @@ if Var.BOT_USERNAME is not None and asst is not None:
         if event.query.user_id in sed and query.startswith("ultd"):
             result = builder.article(
                 title="Help Menu",
-                description="Help Menu - UserBot | Telethon ",
-                url="https://t.me/TheUltroid",
+                description="Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ | Telethon ",
+                url="https://t.me/Hackintush",
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 text=f"** Bᴏᴛ Oғ {OWNER_NAME}\n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\nAᴅᴅᴏɴs ~ {len(ADDONS)}**",
                 buttons=[
@@ -156,7 +156,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @callback("upp")
     async def _(event):
         uptime = grt((time.time() - start_time))
-        pin = f"🙋Uᴘᴛɪᴍᴇ = {uptime}"
+        pin = f"Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
     @callback("inlone")
@@ -403,7 +403,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
             reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
         else:
             reply_pop_up_alert = help_string
-        reply_pop_up_alert += "\n© @TheUltroid"
+        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
         try:
             if event.query.user_id in sed:
                 await event.edit(
