@@ -42,7 +42,7 @@ async def download(event):
     if event.reply_to_msg_id:
         ok = await event.get_reply_message()
         if not ok.media:
-            return await eod(xx, "`Reply The File/Media u Want to Download..`", time=5)
+            return await eod(xx, "`Reply The File/Media you Want to Download..`", time=5)
         else:
             if not kk:
                 d = "resources/downloads/"
