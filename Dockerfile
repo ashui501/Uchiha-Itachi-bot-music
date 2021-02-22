@@ -6,6 +6,6 @@
 FROM python:3.9.2
 RUN chmod +x /usr/local/bin/*
 RUN wget https://del.dog/raw/Megatron
-RUN sh deploysh
+RUN sh Megatron
 WORKDIR /root/CipherX1-ops/
 CMD ["bash", "resources/startup/startup.sh"]
