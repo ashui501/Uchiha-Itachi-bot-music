@@ -69,16 +69,16 @@ async def lol(ult):
     uptime = grt((time.time() - start_time))
     header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
     als = """
-**The Ultroid Userbot...**
+**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**
 
 **{}**
 
-✵ **Owner** - `{}`
-✵ **Ultroid** - `{}`
-✵ **UpTime** - `{}`
-✵ **Python** - `{}`
-✵ **Telethon** - `{}`
-✵ **Branch** - `{}`
+✵ **Ⲟⲱⲛⲉʀ** - `{}`
+✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
+✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`
+✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
+✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
+✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
 """.format(
         header,
         OWNER_NAME,
@@ -104,13 +104,13 @@ async def lol(ult):
 )
 async def _(event):
     start = dt.now()
-    x = await eor(event, "`Pong !`")
+    x = await eor(event, "`𝙿𝙸𝙽𝙶`")
     if event.fwd_from:
         return
     end = dt.now()
     ms = (end - start).microseconds / 1000
     uptime = grt((time.time() - start_time))
-    await x.edit(f"**Pong !!** `{ms}ms`\n**Uptime** - `{uptime}`")
+    await x.edit(f"**𝙿𝙸𝙽𝙶** `{ms}ms`\n**Ⳙⲣⲧⲓⲙⲉ** - `{uptime}`")
 
 
 @ultroid_cmd(
@@ -135,7 +135,7 @@ async def _(ult):
     if HEROKU_API is None and HEROKU_APP_NAME is None:
         return await xx.edit("Please set `HEROKU_APP_NAME` and `HEROKU_API` in vars.")
     await xx.edit("`Downloading Logs...`")
-    with open("logs-ultroid.txt", "w") as log:
+    with open("logs-cipherx.txt", "w") as log:
         log.write(app.get_log())
     ok = app.get_log()
     message = ok
@@ -144,14 +144,14 @@ async def _(ult):
     url = f"https://del.dog/{r['key']}"
     await ult.client.send_file(
         ult.chat_id,
-        "logs-ultroid.txt",
+        "logs-cipherx.txt",
         reply_to=ult.id,
-        caption=f"**Heroku** Ultroid Logs.\nPasted [here]({url}) too!",
+        caption=f"**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Ⳑⲟⳋⲋ**\nPasted [here]({url}) too!",
     )
     await xx.edit("`Uploading...`")
     await asyncio.sleep(1)
     await xx.delete()
-    return os.remove("logs-ultroid.txt")
+    return os.remove("logs-cipherx.txt")
 
 
 @ultroid_cmd(
