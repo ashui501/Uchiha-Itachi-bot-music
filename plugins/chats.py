@@ -39,7 +39,7 @@ async def _(e):
     except TypeError:
         return await eod(xx, "`Cant delete this chat`", time=10)
     except no_admin:
-        return await eod(xx, "`I m not an admin`", time=10)
+        return await eod(xx, "`I'm not an admin`", time=10)
     await e.client.send_message(Var.LOG_CHANNEL, f"#Deleted\nDeleted {e.chat_id}")
 
 
@@ -54,7 +54,7 @@ async def _(e):
             functions.messages.ExportChatInviteRequest(e.chat_id),
         )
     except no_admin:
-        return await eod(xx, "`I m not an admin`", time=10)
+        return await eod(xx, "`I'm not an admin`", time=10)
     await eod(xx, f"Link:- {r.link}")
 
 
@@ -69,7 +69,7 @@ async def _(e):
         try:
             r = await e.client(
                 functions.messages.CreateChatRequest(
-                    users=["@missrose_bot"],
+                    users=["@CipherXGroupManagerBot"],
                     title=group_name,
                 )
             )
@@ -77,7 +77,7 @@ async def _(e):
             await e.client(
                 functions.messages.DeleteChatUserRequest(
                     chat_id=created_chat_id,
-                    user_id="@missrose_bot",
+                    user_id="@CipherXGroupManagerBot",
                 )
             )
             result = await e.client(
@@ -86,7 +86,7 @@ async def _(e):
                 )
             )
             await xx.edit(
-                f"Your [{group_name}]({result.link}) Group Made Boss!",
+                f"Your [{group_name}]({result.link}) Group Made CɪᴘʜᴇʀX!",
                 link_preview=False,
             )
         except Exception as ex:
@@ -96,7 +96,7 @@ async def _(e):
             r = await e.client(
                 functions.channels.CreateChannelRequest(
                     title=group_name,
-                    about="Join @TeamUltroid",
+                    about="(c) @Hackintush",
                     megagroup=False if type_of_group == "c" else True,
                 )
             )
@@ -107,7 +107,7 @@ async def _(e):
                 )
             )
             await xx.edit(
-                f"Your [{group_name}]({result.link}) Group/Channel Has been made Boss!",
+                f"Your [{group_name}]({result.link}) Group/Channel Has been made CɪᴘʜᴇʀX!",
                 link_preview=False,
             )
         except Exception as ex:
