@@ -77,7 +77,7 @@ TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
 # Telegraph Things
 telegraph = Telegraph()
-telegraph.create_account(short_name="Ultroid")
+telegraph.create_account(short_name="CɪᴘʜᴇʀX")
 # ================================================================#
 
 
@@ -96,7 +96,7 @@ async def leave(ult):
     pattern="date$",
 )
 async def date(event):
-    k = pytz.timezone("Asia/Kolkata")
+    k = pytz.timezone("Asia/Tehran")
     m = dt.now(k).month
     y = dt.now(k).year
     d = dt.now(k).strftime("Date - %B %d, %Y\nTime- %H:%M:%S")
