@@ -166,49 +166,49 @@ if Var.BOT_USERNAME is not None and asst is not None:
             [
                 Button.switch_inline(
                     "Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
-                    query="send all",
+                    query="send ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
-                    query="app telegram",
+                    query="app ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "Mᴏᴅᴅᴇᴅ Aᴘᴘs",
-                    query="mods minecraft",
+                    query="mod ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
-                    query="CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ",
+                    query="google ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
-                    query="CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ",
+                    query="yahoo ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
-                    query="yt Who is CɪᴘʜᴇʀX",
+                    query="yt ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
-                    query="clipart frog",
+                    query="clipart ",
                     same_peer=True,
                 )
             ],
