@@ -1,18 +1,18 @@
 # !/bin/bash
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Megatron Bot
+# Copyright (C) 2020 Mᴇgᴀᴛrᴏn 
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
+# PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
 
 clear
 echo -e "\e[1m"
-echo "  _    _ _ _             _     _ "
-echo " | |  | | | |           (_)   | |"
-echo " | |  | | | |_ _ __ ___  _  __| |"
-echo " | |  | | | __| '__/ _ \| |/ _  |"
-echo " | |__| | | |_| | | (_) | | (_| |"
-echo "  \____/|_|\__|_|  \___/|_|\__,_|"
+echo  "   _______       __             _  __" 
+echo  "  / ____(_)___  / /_  ___  ____| |/ /" 
+echo  " / /   / / __ \/ __ \/ _ \/ ___/   /" 
+echo  "/ /___/ / /_/ / / / /  __/ /  /   |" 
+echo  "\____/_/ .___/_/ /_/\___/_/  /_/|_|" 
+echo  "      /_/" 
 echo -e "\e[0m"
 sec=5
 spinner=(⣻ ⢿ ⡿ ⣟ ⣯ ⣷)
@@ -26,7 +26,7 @@ apt-get update
 apt-get upgrade -y
 pkg upgrade -y
 pkg install python wget -y
-wget https://raw.githubusercontent.com/TeamUltroid/ultroid/main/resources/session/ssgen.py
+wget https://raw.githubusercontent.com/CipherX1-ops/Megatron/main/resources/session/ssgen.py
 pip install telethon
 clear
 python3 ssgen.py
