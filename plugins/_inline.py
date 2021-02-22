@@ -187,21 +187,21 @@ if Var.BOT_USERNAME is not None and asst is not None:
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
-                    query="go TeamUltroid",
+                    query="CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
-                    query="yahoo TeamUltroid",
+                    query="CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
                     "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
-                    query="yt How to Deploy Ultroid Userbot",
+                    query="yt Who is CɪᴘʜᴇʀX",
                     same_peer=True,
                 )
             ],
@@ -352,7 +352,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
             reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
         else:
             reply_pop_up_alert = help_string
-        reply_pop_up_alert += "\n© @TheUltroid"
+        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
         try:
             if event.query.user_id in sed:
                 await event.edit(
