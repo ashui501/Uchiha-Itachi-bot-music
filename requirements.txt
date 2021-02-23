@@ -8,6 +8,7 @@ googletrans==3.1.0a0
 heroku3
 imutils
 lottie
+logging
 lxml
 moviepy
 numpy
