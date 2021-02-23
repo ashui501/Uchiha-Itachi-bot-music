@@ -5,8 +5,8 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-from pyUltroid import *
-from pyUltroid.dB.database import Var
+from cython import *
+from cython.dB.database import Var
 from telethon import Button, custom
 
 OWNER_NAME = ultroid_bot.me.first_name
