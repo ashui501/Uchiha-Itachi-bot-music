@@ -7,13 +7,13 @@
 
 import time
 
-from pyUltroid import *
-from pyUltroid.dB.core import *
-from pyUltroid.functions import *
-from pyUltroid.functions.all import *
-from pyUltroid.functions.google_image import googleimagesdownload
-from pyUltroid.functions.sudos import *
-from pyUltroid.utils import *
+from cython import *
+from cython.dB.core import *
+from cython.functions import *
+from cython.functions.all import *
+from cython.functions.google_image import googleimagesdownload
+from cython.functions.sudos import *
+from cython.utils import *
 
 start_time = time.time()
 ultroid_version = "v0.0.1"
