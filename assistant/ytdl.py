@@ -11,7 +11,7 @@ import os
 import re
 import time
 
-from pyUltroid.functions.all import *
+from cython.functions.all import *
 from telethon import Button
 from telethon.tl.types import DocumentAttributeAudio, InputWebDocument as wb
 from youtube_dl import YoutubeDL
