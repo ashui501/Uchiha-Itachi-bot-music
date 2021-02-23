@@ -1,4 +1,4 @@
-git+https://github.com/CipherX1-ops/cython
+#git+https://github.com/CipherX1-ops/cython
 asyncurban
 carbonnow
 cairosvg
