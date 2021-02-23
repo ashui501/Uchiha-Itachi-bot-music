@@ -35,12 +35,12 @@ async def _(e):
         except ValueError as ex:
             return await eor(e, str(ex))
         except AttributeError:
-            return await eor(e, "No username of replied user was found")
+            return await eor(e, "Nᴏ usᴇrnᴀʍᴇ ᴏf rᴇᴩliᴇd usᴇr wᴀs fᴏund")
     else:
         put = e.pattern_match.group(1)
     if put:
         try:
-            results = await ultroid_bot.inline_query(Var.BOT_USERNAME, f"msg {put}")
+            results = await ultroid_bot.inline_query(Var.BOT_USERNAME, f"Mᴇssᴀgᴇ {put}")
         except rep:
             return await eor(
                 e,
@@ -55,7 +55,7 @@ async def _(e):
         await results[0].click(e.chat_id, reply_to=e.reply_to_msg_id, hide_via=True)
         await e.delete()
     else:
-        await eor(e, "Add some id or username too")
+        await eor(e, "Givᴇ ʍᴇ id ᴏr usᴇrnᴀʍᴇ ᴛᴏᴏ")
 
 
 @in_pattern("msg")
@@ -93,15 +93,15 @@ async def _(e):
                 status = "Last seen weeks ago"
             if isinstance(x, mt):
                 status = "Can't Tell"
-            text = f"**Name:**    `{name}`\n"
-            text += f"**Id:**    `{ids}`\n"
-            text += f"**Username:**    `{username}`\n"
-            text += f"**Status:**    `{status}`\n"
-            text += f"**About:**    `{bio}`"
+            text = f"**Ⲛⲁⲙⲉ:**    `{name}`\n"
+            text += f"**ⲒⲆ:**    `{ids}`\n"
+            text += f"**Ⳙⲋⲉʀⲛⲁⲙⲉ:**    `{username}`\n"
+            text += f"**Ⲋⲧⲁⲧυⲋ:**    `{status}`\n"
+            text += f"**Ⲁⲃⲟυⲧ:**    `{bio}`"
             button = [
-                Button.url("Private", url=f"t.me/{username}"),
+                Button.url("Privᴀᴛᴇ", url=f"t.me/{username}"),
                 Button.switch_inline(
-                    "Secret msg", query=f"msg {query} wspr ", same_peer=True
+                    "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"Mᴇssᴀgᴇ {query} Whisᴩᴇr ", same_peer=True
                 ),
             ]
             sur = e.builder.article(
@@ -111,7 +111,7 @@ async def _(e):
                 buttons=button,
             )
         except BaseException:
-            name = f"User {query} Not Found\nSearch Again"
+            name = f"Usᴇr {query} nᴏᴛ fᴏund\nSᴇᴀrᴄh ᴀgᴀin"
             sur = e.builder.article(
                 title=name,
                 text=name,
@@ -120,13 +120,13 @@ async def _(e):
         try:
             logi = await ultroid_bot.get_entity(query)
             button = [
-                Button.inline("Secret Msg", data=f"dd_{logi.id}"),
-                Button.inline("Delete Msg", data=f"del"),
+                Button.inline("Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", data=f"dd_{logi.id}"),
+                Button.inline("Dᴇlᴇᴛᴇ Mᴇssᴀgᴇ", data=f"del"),
             ]
             sur = e.builder.article(
                 title=f"{logi.first_name}",
                 description=desc,
-                text=f"@{logi.username} secret msg for you.\nDelete your msg after reading.\nOr the next msg will not be updated.",
+                text=f"@{logi.username} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩⲟυ.\nᴅᴇʟᴇᴛᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ᴀғᴛᴇʀ ʀᴇᴀᴅɪɴɢ.\n✨CɪᴘʜᴇʀX ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ✨",
                 buttons=button,
             )
             buddhhu.append(meme)
@@ -134,7 +134,7 @@ async def _(e):
             snap.update({logi.id: desc})
         except ValueError:
             sur = e.builder.article(
-                title="Type ur msg", text=f"You Didn't Type Your Msg"
+                title="Ⲧⲩⲣⲉ Ⲩⲟυʀ Ⲙⲉⲋⲋⲁⳋⲉ", text=f"ᴛʏᴘᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ"
             )
     await e.answer([sur])
 
@@ -149,7 +149,7 @@ async def _(e):
     if e.sender_id in buddhhu:
         await e.answer(snap[ids], alert=True)
     else:
-        await e.answer("Not For You Bitch 😒", alert=True)
+        await e.answer("Dᴏn'ᴛ sᴩy ᴀᴛ CɪᴘʜᴇʀX ᴩrivᴀᴛᴇ ʍᴇssᴀgᴇ ʙiᴛᴄh 😒", alert=True)
 
 
 @callback("del")
@@ -162,8 +162,8 @@ async def _(e):
             except KeyError:
                 pass
             try:
-                await e.edit("Msg deleted")
+                await e.edit("Mᴇssᴀgᴇ dᴇlᴇᴛᴇd")
             except np:
                 pass
     else:
-        await e.answer("You Can't do this", alert=True)
+        await e.answer("Yᴏu ᴀrᴇ nᴏᴛ ᴀllᴏwᴇd ᴛᴏ dᴏ ᴛhis", alert=True)
