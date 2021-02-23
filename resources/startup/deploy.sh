@@ -31,7 +31,7 @@ echo '
 '
 pip install --upgrade pip setuptools wheel
 pip install search-engine-parser==0.6.2
-git clone https://github.com/CipherX1-ops/cython.git /root/cython/
+pip install git+https://github.com/CipherX1-ops/cython.git /root/CipherX1-ops/
 pip install -r /root/CipherX1-ops/requirements.txt
 
 echo "
