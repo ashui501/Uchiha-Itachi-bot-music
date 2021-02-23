@@ -1,4 +1,3 @@
-
 echo "
  
         +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
@@ -8,4 +7,4 @@ echo "
 
 "
  
-python3 -m pyUltroid
+python3 -m cython
