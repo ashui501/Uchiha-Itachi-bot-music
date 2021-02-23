@@ -1,4 +1,4 @@
-py-Ultroid==2021.2.21
+git+https://github.com/CipherX1-ops/cython
 asyncurban
 carbonnow
 cairosvg
