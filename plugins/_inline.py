@@ -36,7 +36,7 @@ if Var.ADDONS:
     zhelps = """
 [CɪᴘʜᴇʀX](t.me/Hackintush)
 
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
+**{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ.
 
 Aᴅᴅᴏɴs ~ {}**
 """
@@ -44,7 +44,7 @@ else:
     zhelps = """
 [CɪᴘʜᴇʀX](t.me/Hackintush)
 
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
+**{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ.
 
 Aᴅᴅᴏɴs ~ {}
 
@@ -67,6 +67,7 @@ async def e(o):
 ✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
+✨ [CɪᴘʜᴇʀX](t.me/hackintush) is ᴛhᴇ Bᴇsᴛ ✨
 """.format(
             OWNER_NAME,
             ultroid_version,
@@ -101,7 +102,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 description="Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ | Telethon ",
                 url="https://t.me/Hackintush",
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
-                text=f"** Bᴏᴛ Oғ {OWNER_NAME}\n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\nAᴅᴅᴏɴs ~ {len(ADDONS)}**",
+                text=f"**{OWNER_NAME} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ \n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\nAᴅᴅᴏɴs ~ {len(ADDONS)}**",
                 buttons=[
                     [
                         Button.inline("• Pʟᴜɢɪɴs", data="hrrrr"),
@@ -180,7 +181,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
             [
                 Button.switch_inline(
                     "Mᴏᴅᴅᴇᴅ Aᴘᴘs",
-                    query="mod ",
+                    query="mods ",
                     same_peer=True,
                 )
             ],
@@ -240,7 +241,6 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 "• Iɴsᴛᴀʟʟ A Pʟᴜɢɪɴ Mᴀɴᴜᴀʟʟʏ Oʀ Aᴅᴅ Vᴀʀ ADDON Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ",
                 cache_time=0,
                 alert=True,
-                link_preview=False,
             )
 
     @callback("rstrt")
@@ -296,7 +296,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @owner
     async def backr(event):
         xhelps = helps.format(OWNER_NAME, len(PLUGINS) - 4)
-        current_page_number = 0
+        current_page_number = int(upage) 
         buttons = paginate_help(current_page_number, PLUGINS, "helpme")
         await event.edit(f"{xhelps}", buttons=buttons, link_preview=False)
 
@@ -304,7 +304,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @owner
     async def backr(event):
         xhelps = zhelps.format(OWNER_NAME, len(ADDONS))
-        current_page_number = 0
+        current_page_number = int(addpage) 
         buttons = paginate_addon(current_page_number, ADDONS, "addon")
         await event.edit(f"{xhelps}", buttons=buttons, link_preview=False)
 
@@ -427,6 +427,8 @@ def paginate_help(page_number, loaded_plugins, prefix):
     multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "✘")
     mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "✘")
     helpable_plugins = []
+    global upage
+    upage = page_number
     for p in loaded_plugins:
         if not p.startswith("_"):
             helpable_plugins.append(p)
@@ -459,6 +461,14 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 ),
             )
         ]
+    else:
+        pairs = pairs[
+            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
+        ] + [
+            (
+                Button.inline("-Bᴀᴄᴋ-", data="open"),
+            )
+        ]
     return pairs
 
 
@@ -468,6 +478,8 @@ def paginate_addon(page_number, loaded_plugins, prefix):
     multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "✘")
     mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "✘")
     helpable_plugins = []
+    global addpage
+    addpage = page_number
     for p in loaded_plugins:
         if not p.startswith("_"):
             helpable_plugins.append(p)
@@ -498,6 +510,14 @@ def paginate_addon(page_number, loaded_plugins, prefix):
                 Button.inline(
                     "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
                 ),
+            )
+        ]
+    else:
+        pairs = pairs[
+            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
+        ] + [
+            (
+                Button.inline("-Bᴀᴄᴋ-", data="open"),
             )
         ]
     return pairs
