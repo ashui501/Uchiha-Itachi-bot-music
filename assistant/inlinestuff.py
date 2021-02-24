@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import random
 import re
 from urllib.request import urlopen
@@ -29,16 +22,9 @@ async def gsearch(q_event):
     except IndexError:
         kkkk = q_event.builder.article(
             title="Search Something",
-            thumb=wb(
-                gugirl,
-                0,
-                "image/jpeg",
-                []),
-            text="**Gᴏᴏɢʟᴇ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
-            buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
-                query="go ",
-                same_peer=True),
+            thumb=wb(gugirl, 0, "image/jpeg", []),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Gᴏᴏɢʟᴇ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="go ", same_peer=True),
         )
         await q_event.answer([kkkk])
     searcher = []
@@ -64,7 +50,7 @@ async def gsearch(q_event):
                     title=title,
                     description=desc,
                     thumb=wb(gugirl, 0, "image/jpeg", []),
-                    text=f"**Gᴏᴏɢʟᴇ Sᴇᴀʀᴄʜ**\n\n**••Tɪᴛʟᴇ••**\n`{title}`\n\n**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`",
+                    text=f"**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Gᴏᴏɢʟᴇ Sᴇᴀʀᴄʜ**\n\n**••Tɪᴛʟᴇ••**\n`{title}`\n\n**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`",
                     link_preview=False,
                     buttons=[
                         [Button.url("Lɪɴᴋ", url=f"{link}")],
@@ -93,7 +79,7 @@ async def gsearch(q_event):
         kkkk = q_event.builder.article(
             title="Search Something",
             thumb=wb(yeah, 0, "image/jpeg", []),
-            text="**Yᴀʜᴏᴏ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Yᴀʜᴏᴏ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
             buttons=Button.switch_inline(
                 "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="yahoo ", same_peer=True
             ),
@@ -122,7 +108,7 @@ async def gsearch(q_event):
                     title=title,
                     description=desc,
                     thumb=wb(yeah, 0, "image/jpeg", []),
-                    text=f"**Yᴀʜᴏᴏ Sᴇᴀʀᴄʜ**\n\n**••Tɪᴛʟᴇ••**\n`{title}`\n\n**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`",
+                    text=f"**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Yᴀʜᴏᴏ Sᴇᴀʀᴄʜ**\n\n**••Tɪᴛʟᴇ••**\n`{title}`\n\n**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`",
                     link_preview=False,
                     buttons=[
                         [Button.url("Lɪɴᴋ", url=f"{link}")],
@@ -150,16 +136,9 @@ async def _(e):
     except IndexError:
         kkkk = e.builder.article(
             title="Search Something",
-            thumb=wb(
-                ps,
-                0,
-                "image/jpeg",
-                []),
-            text="**Pʟᴀʏ Sᴛᴏʀᴇ**\n\nYou didn't search anything",
-            buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
-                query="app ",
-                same_peer=True),
+            thumb=wb(ps, 0, "image/jpeg", []),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Pʟᴀʏ Sᴛᴏʀᴇ**\n\nYou didn't search anything",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="app ", same_peer=True),
         )
         await e.answer([kkkk])
     foles = []
@@ -211,11 +190,8 @@ async def _(e):
     except IndexError:
         kkkk = e.builder.article(
             title="Search Something",
-            text="**Mᴏᴅᴅᴇᴅ Aᴘᴘs**\n\nYou didn't search anything",
-            buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
-                query="mods ",
-                same_peer=True),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Mᴏᴅᴅᴇᴅ Aᴘᴘs**\n\nYou didn't search anything",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="mods ", same_peer=True),
         )
         await e.answer([kkkk])
     page = 1
@@ -268,7 +244,7 @@ async def clip(e):
     except IndexError:
         kkkk = e.builder.article(
             title="Search Something",
-            text="**Cʟɪᴘᴀʀᴛ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Cʟɪᴘᴀʀᴛ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
             buttons=Button.switch_inline(
                 "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="clipart ", same_peer=True
             ),
@@ -277,7 +253,7 @@ async def clip(e):
     quer = quer.replace(" ", "+")
     sear = f"https://clipartix.com/search/{quer}"
     html = urlopen(sear)
-    bs = BeautifulSoup(html, "lxml", from_encoding="utf-8")
+    bs = BeautifulSoup(html, "html.parser", from_encoding="utf-8")
     resul = bs.find_all("img", "attachment-full size-full")
     buil = e.builder
     hm = []
