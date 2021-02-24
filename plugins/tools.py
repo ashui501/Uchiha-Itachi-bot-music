@@ -31,10 +31,6 @@
 • `{i}sg`
     Reply The User to Get His Name History
 
-• `{i}tr <dest lang code> <input>`
-    Reply to a message with `{i}tr <lang code>`
-    Use `{i}tr <dest lang code> <input>`
-    To get translated message.
 """
 
 import asyncio
@@ -46,39 +42,12 @@ from asyncio.exceptions import TimeoutError
 
 import cv2
 import emoji
-from googletrans import Translator
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 from telethon.utils import pack_bot_file_id
 
 from . import *
-
-
-@ultroid_cmd(
-    pattern="tr",
-)
-async def _(event):
-    input = event.text[4:6]
-    txt = event.text[7:]
-    xx = await eor(event, "`Translating...`")
-    if event.reply_to_msg_id:
-        previous_message = await event.get_reply_message()
-        text = previous_message.message
-        lan = input or "en"
-    elif input:
-        text = txt
-        lan = input or "en"
-    else:
-        return await eod(xx, f"`{hndlr}tr LanguageCode` as reply to a message", time=5)
-    text = emoji.demojize(text.strip())
-    lan = lan.strip()
-    translator = Translator()
-    try:
-        tt = translator.translate(text, dest=lan)
-        output_str = f"**Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan}\n{tt.text}"
-        await eod(xx, output_str)
-    except Exception as exc:
-        await eod(xx, str(exc), time=10)
 
 
 @ultroid_cmd(
@@ -109,6 +78,12 @@ async def _(event):
 
 @ultroid_cmd(pattern="bots ?(.*)")
 async def _(ult):
+    await ult.edit("`...`")
+    if ult.is_private:
+        user = await ult.get_chat()
+        if not user.bot:
+            return await ult.edit("`Seariously ?`")
+
     mentions = "**Bots in this Chat**: \n"
     input_str = ult.pattern_match.group(1)
     to_write_chat = await ult.get_input_chat()
@@ -265,7 +240,7 @@ async def _(event):
         OUT += f"**• Ⲉʀʀⲟʀ:** \n`{e}`\n"
     o = stdout.decode()
     if not o and not e:
-        o = "Ⲋυⲥⲥⲉⲋⲋ"
+        o = "Success"
         OUT += f"**• Ⲟυⲧⲣυⲧ:**\n`{o}`"
     else:
         _o = o.split("\n")
