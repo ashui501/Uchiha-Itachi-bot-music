@@ -31,6 +31,11 @@
 • `{i}sg`
     Reply The User to Get His Name History
 
+• `{i}tr <dest lang code> <input>`
+    Reply to a message with `{i}tr <lang code>`
+    Use `{i}tr <dest lang code> <input>`
+    To get translated message.
+
 """
 
 import asyncio
@@ -38,6 +43,7 @@ import io
 import sys
 import time
 import traceback
+from googletrans import Translator
 from asyncio.exceptions import TimeoutError
 
 import cv2
@@ -49,6 +55,31 @@ from telethon.utils import pack_bot_file_id
 
 from . import *
 
+@ultroid_cmd(
+    pattern="tr",
+)
+async def _(event):
+    input = event.text[4:6]
+    txt = event.text[7:]
+    xx = await eor(event, "`Translating...`")
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        text = previous_message.message
+        lan = input or "en"
+    elif input:
+        text = txt
+        lan = input or "en"
+    else:
+        return await eod(xx, f"`{hndlr}tr LanguageCode` as reply to a message", time=5)
+    text = emoji.demojize(text.strip())
+    lan = lan.strip()
+    translator = Translator()
+    try:
+        tt = translator.translate(text, dest=lan)
+        output_str = f"**Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan} By CɪᴘʜᴇʀX Bᴏᴛ\n{tt.text}"
+        await eod(xx, output_str)
+    except Exception as exc:
+        await eod(xx, str(exc), time=10)
 
 @ultroid_cmd(
     pattern="id$",
