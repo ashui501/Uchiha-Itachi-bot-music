@@ -41,7 +41,7 @@ if not Redis("PM_TEXT"):
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
-🏴‍☠ Watch out! You have {}/{} warnings 🏴‍☠"""
+You have {}/{} warnings!"""
 else:
     UNAPPROVED_MSG = (
         """
@@ -55,7 +55,7 @@ else:
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
-🏴‍☠ Watch out! You have {}/{} warnings 🏴‍☠"""
+You have {}/{} warnings!"""
     )
 
 UND = "Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!"
@@ -151,7 +151,7 @@ if sett == "True" and sett != "False":
                 COUNT_PM[user.id] = COUNT_PM[user.id] + 1
             if COUNT_PM[user.id] > WARNS:
                 await event.respond(
-                    "`You were spamming my Master's PM, which I didn't like.`\n`You have been BLOCKED and reported as SPAM, until further notice.`"
+                    "`You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒`\n`You've been BLOCKED and reported to Telegram.`"
                 )
                 try:
                     del COUNT_PM[user.id]
@@ -160,7 +160,7 @@ if sett == "True" and sett != "False":
                     if Var.LOG_CHANNEL:
                         await event.client.send_message(
                             Var.LOG_CHANNEL,
-                            "PMPermit is messed! Pls restart the bot!!",
+                            "PMPermit is messed! Please restart the bot!!",
                         )
                         return LOGS.info("COUNT_PM is messed.")
                 await event.client(BlockRequest(user.id))
