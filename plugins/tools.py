@@ -240,7 +240,7 @@ async def _(event):
         OUT += f"**• Ⲉʀʀⲟʀ:** \n`{e}`\n"
     o = stdout.decode()
     if not o and not e:
-        o = "Success"
+        o = "Ⲋυⲥⲥⲉⲋⲋ"
         OUT += f"**• Ⲟυⲧⲣυⲧ:**\n`{o}`"
     else:
         _o = o.split("\n")
