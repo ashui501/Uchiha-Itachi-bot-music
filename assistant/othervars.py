@@ -14,7 +14,7 @@ from . import *
 @owner
 async def otvaar(event):
     await event.edit(
-        "Other Variables to set for @TheUltroid:",
+        "Other Variables to set for CɪᴘʜᴇʀX:",
         buttons=[
             [Button.inline("Tag Logger", data="taglog")],
             [Button.inline("PM Permit", data="pmset")],
