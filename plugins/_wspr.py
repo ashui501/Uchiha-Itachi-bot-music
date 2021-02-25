@@ -126,7 +126,7 @@ async def _(e):
             sur = e.builder.article(
                 title=f"{logi.first_name}",
                 description=desc,
-                text=f"@{logi.username} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩⲟυ.\nᴅᴇʟᴇᴛᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ᴀғᴛᴇʀ ʀᴇᴀᴅɪɴɢ.\n✨CɪᴘʜᴇʀX ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ✨",
+                text=f"@{logi.username} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩⲟυ.\n\nᴅᴇʟᴇᴛᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ᴀғᴛᴇʀ ʀᴇᴀᴅɪɴɢ.\n\n✨CɪᴘʜᴇʀX ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ✨",
                 buttons=button,
             )
             buddhhu.append(meme)
@@ -166,4 +166,4 @@ async def _(e):
             except np:
                 pass
     else:
-        await e.answer("Yᴏu ᴀrᴇ nᴏᴛ ᴀllᴏwᴇd ᴛᴏ dᴏ ᴛhis", alert=True)
+        await e.answer("Yᴏu ᴀrᴇ nᴏᴛ ᴀllᴏwᴇd ᴛᴏ dᴏ ᴛhis 😒", alert=True)
