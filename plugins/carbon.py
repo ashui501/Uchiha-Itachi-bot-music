@@ -221,7 +221,7 @@ async def crbn(event):
         code = event.text.split(" ", maxsplit=1)[1]
     col = random.choice(all_col)
     carbon = Carbon(code=code, background=col)
-    xx = await carbon.save("ultroid_carbon")
+    xx = await carbon.save("CipherX-Carbon")
     await xxxx.delete()
     await ultroid_bot.send_file(
         event.chat_id,
