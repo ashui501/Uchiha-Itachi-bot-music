@@ -57,17 +57,17 @@ async def set_not_afk(event):
                 shite = await ultroid_bot.send_message(event.chat_id, file=pic)
                 shites = await ultroid_bot.send_message(
                     event.chat_id,
-                    "`No Longer Afk`\n\nWas afk for~ " + total_afk_time + "`",
+                    "`No Longer Offline`\n\nWas offline for~ " + total_afk_time + "`",
                 )
             else:
                 shite = await ultroid_bot.send_message(
                     event.chat_id,
-                    "`No Longer Afk`\n\nWas afk for~ " + total_afk_time + "`",
+                    "`No Longer Offline`\n\nWas offline for~ " + total_afk_time + "`",
                     file=pic,
                 )
         except BaseException:
             shite = await ultroid_bot.send_message(
-                event.chat_id, "`No Longer Afk \nWas afk for " + total_afk_time + "`"
+                event.chat_id, "`No Longer Offline \nWas offline for " + total_afk_time + "`"
             )
         try:
             try:
@@ -131,12 +131,12 @@ async def on_afk(event):
         msg = None
         if reason:
             message_to_reply = (
-                f"__Master #AFK since__ `{total_afk_time}`\n\n"
+                f"__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`\n\n"
                 + f"__"
                 + f"\n\n**Reason:- `**{reason}`"
             )
         else:
-            message_to_reply = f"__Master #AFK since__ `{total_afk_time}`\n\n" + f"__"
+            message_to_reply = f"__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`\n\n" + f"__"
         try:
             if pic.endswith((".tgs", ".webp")):
                 msg = await event.reply(file=pic)
@@ -198,29 +198,29 @@ async def _(event):
                 if pic.endswith((".tgs", ".webp")):
                     await ultroid_bot.send_message(event.chat_id, file=pic)
                     await ultroid_bot.send_message(
-                        event.chat_id, f"Afk __because ~ {reason}__"
+                        event.chat_id, f"Offline __because ~ {reason}__"
                     )
                 else:
                     await ultroid_bot.send_message(
-                        event.chat_id, f"Afk __because ~ {reason}__", file=pic
+                        event.chat_id, f"Offline __because ~ {reason}__", file=pic
                     )
             except BaseException:
                 await ultroid_bot.send_message(
-                    event.chat_id, f"Afk __because ~ {reason}__"
+                    event.chat_id, f"Offline __because ~ {reason}__"
                 )
         else:
             try:
                 if pic.endswith((".tgs", ".webp")):
                     await ultroid_bot.send_message(event.chat_id, file=pic)
                     await ultroid_bot.send_message(
-                        event.chat_id, f"**I am Going afk!**"
+                        event.chat_id, f"**I'm Going Offline!**"
                     )
                 else:
                     await ultroid_bot.send_message(
-                        event.chat_id, f"**I am Going afk!**", file=pic
+                        event.chat_id, f"**I'm Going Offline!**", file=pic
                     )
             except BaseException:
-                await ultroid_bot.send_message(event.chat_id, f"**I am Going afk!**")
+                await ultroid_bot.send_message(event.chat_id, f"**I'm Going Offline!**")
         await event.delete()
         try:
             if reason and pic:
