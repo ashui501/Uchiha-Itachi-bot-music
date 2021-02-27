@@ -2,7 +2,7 @@
 A stable pluggable Telegram bot, based on Telethon.
 
 <p align="center">
-  <img src="./resources/extras/logo_rdm.png" alt="TeamUltroid">
+  <img src="./resources/extras/cipherx.jpg" alt="TeamUltroid">
 </p>
 
 [![Stars](https://img.shields.io/github/stars/TeamUltroid/Ultroid?style=social)](https://github.com/TeamUltroid/Ultroid/stargazers)
