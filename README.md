@@ -1,5 +1,5 @@
-# Ultroid - UserBot
-A stable pluggable Telegram userbot, based on Telethon.
+# Mᴇgᴀᴛrᴏn Bot
+A stable pluggable Telegram bot, based on Telethon.
 
 <p align="center">
   <img src="./resources/extras/logo_rdm.png" alt="TeamUltroid">
@@ -20,7 +20,7 @@ A stable pluggable Telegram userbot, based on Telethon.
 
 # Deploy 
 - [Heroku](https://github.com/CipherX1-ops/Megatron#Deploy-to-Heroku)
-- [Local Machine](https://github.com/TeamUltroid/Ultroid#Deploy-Locally)
+- [Local Machine](https://github.com/CipherX1-ops/Megatron#Deploy-Locally)
 
 ## Deploy to Heroku
 - Get your `API_ID` and `API_HASH` from [here](https://my.telegram.org/) and click the below button!  <br />  
@@ -31,7 +31,7 @@ A stable pluggable Telegram userbot, based on Telethon.
 - Get your `API_ID` and `API_HASH` from [here](https://my.telegram.org/)
 - Get your `REDIS_URI` and `REDIS_PASSWORD` from [here](https://redislabs.com), tutorial [here](./resources/extras/redistut.md).
 - Clone the repository: <br />
-`git clone https://github.com/TeamUltroid/Ultroid.git`
+`git clone https://github.com/CipherX1-ops/Megatron.git`
 - Go to the cloned folder: <br />
 `cd Ultroid`
 - Create a virtual env:   <br />
@@ -46,8 +46,7 @@ A stable pluggable Telegram userbot, based on Telethon.
 - Run the bot:   
 `bash resources/startup/startup.sh`
 
-Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid). <br />
-
+Made with 💕 by CɪᴘʜᴇʀX
 # Credits
 * [Lonami](https://github.com/LonamiWebs/) for [Telethon](https://github.com/LonamiWebs/Telethon)
 
