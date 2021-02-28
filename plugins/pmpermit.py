@@ -45,7 +45,7 @@ You have {}/{} warnings!"""
 else:
     UNAPPROVED_MSG = (
         """
-**PMSecurity of {}!**
+**PMSecurity of {}**
 
 """
         f"""{Redis("PM_TEXT")}"""
