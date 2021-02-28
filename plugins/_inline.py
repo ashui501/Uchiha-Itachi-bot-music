@@ -426,7 +426,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
             [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
         ]
         await event.edit(
-            f"✨ **{OWNER_NAME}** Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Oꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Uɴᴏꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(ADDONS)}**",
+            f"✨ **{OWNER_NAME}** Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Oꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Uɴᴏꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(ADDONS)}",
             buttons=buttons,
             link_preview=False,
         )
