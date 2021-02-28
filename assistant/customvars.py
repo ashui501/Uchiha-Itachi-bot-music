@@ -18,6 +18,7 @@ async def alvcs(event):
         "Customise your {}alive. Choose from the below options -".format(Var.HNDLR),
         buttons=[
             [Button.inline("Alive Text", data="alvtx")],
+            [Button.inline("Delete Alive text", data="deltx")], 
             [Button.inline("Alive Media", data="alvmed")],
             [Button.inline("Delete Alive Media", data="delmed")],
         ],
@@ -86,6 +87,14 @@ async def dell(event):
     except BaseException:
         return await event.edit("Something went wrong...")
 
+@callback("delvx")
+@owner
+async def dell(event):
+    try:
+        udB.delete("ALIVE_TEXT")
+        return await event.edit("Done!")
+    except BaseException:
+        return await event.edit("Something went wrong...")
 
 @callback("alvcstmm")
 @owner
