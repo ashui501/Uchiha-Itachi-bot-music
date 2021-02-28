@@ -17,8 +17,14 @@ from git import Repo
 from support import *
 from telethon import Button, __version__
 from telethon.tl.types import InputWebDocument
-
+from cython.dB.database import Var
 from . import *
+
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
+if PMPERMIT_PIC is None:
+    WARN_PIC = "https://telegra.ph/file/82c595986872349e5ba1a.jpg"
+else:
+    WARN_PIC = PMPERMIT_PIC
 
 # ================================================#
 notmine = "This bot is for {}".format(OWNER_NAME)
@@ -46,6 +52,101 @@ Gᴏ Aɴᴅ Aᴅᴅ ADDON Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**
 """
 # ============================================#
 
+@inline
+async def inline_handler(event):
+    builder = event.builder
+    result = None
+    query = event.text
+    if event.query.user_id == bot.uid and query.startswith("**PMSecurity"):
+        result = builder.photo(
+            file=WARN_PIC,
+            text=query,
+            buttons=[
+                [
+                    custom.Button.inline(
+                        "✘ I'm Here for Spamming ✘", data="dontspamnigga"
+                    )
+                ],
+                [
+                    custom.Button.inline(
+                        "✓ I'm Here for Talking with CɪᴘʜᴇʀX ✓",
+                        data="whattalk",
+                    )
+                ],
+                [
+                    custom.Button.inline(
+                        "✓ I'm Here for Asking Something ✓", data="askme"
+                    )
+                ],
+                [custom.Button.inline("≼≼≼Close Menu≽≽≽", data="sendclose")],
+            ],
+        )
+        await event.answer([result])
+
+@inline
+@callback("dontspamnigga")
+async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, You Don't Need To Use This."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
+    await event.get_chat()
+    him_id = event.query.user_id
+    text1 = "You Have Chosed A Prohibited Option. Therefore, You Have Been Blocked and Reported to Telegram Agency.\n(C) CɪᴘʜᴇʀX"
+    await event.edit("⨵ Choice not Accepted ⨵")
+    await ultroid_bot.send_message(event.query.user_id, text1)
+    await ultroid_bot(functions.contacts.BlockRequest(event.query.user_id))
+    await ultroid_bot.send_message(
+        LOG_CHANNEL,
+        f"Hello, [This](tg://user?id={him_id}) Selected Prohibited Option, Therefore Blocked.\n(C) CɪᴘʜᴇʀX",
+    )
+
+@inline
+@callback("whattalk")
+async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, you don't need to use this."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
+    await event.get_chat()
+    him_id = event.query.user_id
+    await event.edit("Choice Accepted ✓\n(C) CɪᴘʜᴇʀX")
+    text2 = "Ok. Please Wait until CɪᴘʜᴇʀX Approves you. Don't Spam or Try Anything Stupid. \nThanks for Contacting me."
+    await ultroid_bot.send_message(event.query.user_id, text2)
+    await ultroid_bot.send_message(
+        LOG_CHANNEL,
+        message=f"Hello, [New User](tg://user?id={him_id}) Wants to Talk with tou.\n(C) CɪᴘʜᴇʀX",
+        buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
+    )
+
+@inline
+@callback("askme")
+async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, you don't need to use this."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
+    await event.get_chat()
+    him_id = event.query.user_id
+    await event.edit("Choice Accepted ✓")
+    text3 = (
+        "Ok, Wait. You can Ask after CɪᴘʜᴇʀX Approves you. Kindly, Wait.\n(C) CɪᴘʜᴇʀX"
+    )
+    await ultroid_bot.send_message(event.query.user_id, text3)
+    await ultroid_bot.send_message(
+        LOG_CHANNEL,
+        message=f"Hello, [New User](tg://user?id={him_id}) Wants to Ask you Something.\n(C) CɪᴘʜᴇʀX",
+        buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
+    )
+
+
+@inline
+@callback("sendclose")
+async def users(event):
+    await event.edit(
+        "⨵CɪᴘʜᴇʀX Bot Pm-Security Closed⨵",
+        buttons=[(custom.Button.inline("≼≼≼Leave Me≽≽≽"))],
+    )
 
 @inline
 @in_owner
@@ -416,7 +517,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
 
 
 def paginate_help(page_number, loaded_plugins, prefix):
-    number_of_rows = 5
+    number_of_rows = 6
     number_of_cols = 2
     multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "🏴‍☠")
     mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "🏴‍☠")
@@ -467,7 +568,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
 
 
 def paginate_addon(page_number, loaded_plugins, prefix):
-    number_of_rows = 5
+    number_of_rows = 6
     number_of_cols = 2
     multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "🏴‍☠")
     mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "🏴‍☠")
