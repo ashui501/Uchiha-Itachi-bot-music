@@ -12,7 +12,7 @@
     Check if your bot is working.
 
 • `{i}ping`
-    Check Ultroid's response time.
+    Check CɪᴘʜᴇʀX Server response time.
 
 • `{i}cmds`
     View all plugin names.
@@ -21,13 +21,13 @@
     To restart your bot.
 
 • `{i}logs`
-    Get the last 100 lines from heroku logs.
+    Get the last 100 lines from CɪᴘʜᴇʀX bot logs.
 
 • `{i}usage`
-    Get app usage details.
+    Get CɪᴘʜᴇʀX bot usage details.
 
 • `{i}shutdown`
-    Turn off your bot.
+    Turn off your CɪᴘʜᴇʀX bot.
 """
 
 import asyncio
@@ -110,7 +110,7 @@ async def _(event):
     end = dt.now()
     ms = (end - start).microseconds / 1000
     uptime = grt((time.time() - start_time))
-    await x.edit(f"**𝙿𝙸𝙽𝙶** `{ms}ms`\n**Ⳙⲣⲧⲓⲙⲉ** - `{uptime}`")
+    await x.edit(f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n**➲ CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ** - `{ms}ms`\n**CɪᴘʜᴇʀX Bᴏᴛ Ⳙⲣⲧⲓⲙⲉ** - `{uptime}`")
 
 
 @ultroid_cmd(
@@ -207,11 +207,11 @@ async def dyno_usage(dyno):
     return await eod(
         dyn,
         "**⚙️ Dyno Usage ⚙️**:\n\n"
-        + f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
+        + f" -> `Dyno usage for`  **CɪᴘʜᴇʀX Bᴏᴛ**:\n"
         + f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
         + f"**|**  [`{AppPercentage}`**%**]"
         + "\n\n"
-        + " -> `Dyno hours quota remaining this month`:\n"
+        + " -> `Dyno hours remaining this month`:\n"
         + f"     •  `{hours}`**h**  `{minutes}`**m**  "
         + f"**|**  [`{percentage}`**%**]\n\n"
         + f"**Total Disk Space: {TOTAL}\n\n**"
