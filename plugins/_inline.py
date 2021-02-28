@@ -24,29 +24,23 @@ from . import *
 notmine = "This bot is for {}".format(OWNER_NAME)
 ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = """
-[CɪᴘʜᴇʀX](t.me/Hackintush)
+**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨
 
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.
-
-Pʟᴜɢɪɴs ~ {}**
+✵ Pʟᴜɢɪɴs ~ {}**
 """
 
 
 if Var.ADDONS:
     zhelps = """
-[CɪᴘʜᴇʀX](t.me/Hackintush)
+**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨
 
-**{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ.
-
-Aᴅᴅᴏɴs ~ {}**
+✵ Aᴅᴅᴏɴs ~ {}**
 """
 else:
     zhelps = """
-[CɪᴘʜᴇʀX](t.me/Hackintush)
+**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨
 
-**{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ.
-
-Aᴅᴅᴏɴs ~ {}
+✵ Aᴅᴅᴏɴs ~ {}
 
 Gᴏ Aɴᴅ Aᴅᴅ ADDON Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**
 """
@@ -67,7 +61,7 @@ async def e(o):
 ✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
-✨ [CɪᴘʜᴇʀX](t.me/hackintush) is ᴛhᴇ Bᴇsᴛ ✨
+✵ ✨ [CɪᴘʜᴇʀX](t.me/hackintush) is ᴛhᴇ Bᴇsᴛ ✨
 """.format(
             OWNER_NAME,
             ultroid_version,
@@ -78,9 +72,9 @@ async def e(o):
         )
         res = [
             b.article(
-                title="CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ",
+                title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
                 url="https://t.me/Hackintush",
-                description="Bot | Telethon ",
+                description=" (c) CɪᴘʜᴇʀX ",
                 text=ALIVEMSG,
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
             )
@@ -99,10 +93,10 @@ if Var.BOT_USERNAME is not None and asst is not None:
         if event.query.user_id in sed and query.startswith("ultd"):
             result = builder.article(
                 title="Help Menu",
-                description="Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ | Telethon ",
+                description="✵ Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵ | (c) CɪᴘʜᴇʀX",
                 url="https://t.me/Hackintush",
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
-                text=f"**{OWNER_NAME} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ \n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\nAᴅᴅᴏɴs ~ {len(ADDONS)}**",
+                text=f"**✨{OWNER_NAME} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ✨ \n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Aᴅᴅᴏɴs ~ {len(ADDONS)}**",
                 buttons=[
                     [
                         Button.inline("• Pʟᴜɢɪɴs", data="hrrrr"),
@@ -123,8 +117,8 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 text="Pᴀsᴛᴇᴅ Tᴏ Nᴇᴋᴏʙɪɴ!",
                 buttons=[
                     [
-                        Button.url("NekoBin", url=f"{link}"),
-                        Button.url("Raw", url=f"{link_raw}"),
+                        Button.url("✵NekoBin✵", url=f"{link}"),
+                        Button.url("✵Raw✵", url=f"{link_raw}"),
                     ]
                 ],
             )
@@ -157,7 +151,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @callback("upp")
     async def _(event):
         uptime = grt((time.time() - start_time))
-        pin = f"Uᴘᴛɪᴍᴇ = {uptime}"
+        pin = f"✵ Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
     @callback("inlone")
@@ -166,49 +160,49 @@ if Var.BOT_USERNAME is not None and asst is not None:
         button = [
             [
                 Button.switch_inline(
-                    "Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
+                    "✵ Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
                     query="send ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
+                    "✵ Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
                     query="app ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "Mᴏᴅᴅᴇᴅ Aᴘᴘs",
+                    "✵ Mᴏᴅᴅᴇᴅ Aᴘᴘs",
                     query="mods ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
+                    "✵ Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
                     query="google ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
+                    "✵ Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
                     query="yahoo ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
+                    "✵ YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
                     query="yt ",
                     same_peer=True,
                 )
             ],
             [
                 Button.switch_inline(
-                    "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
+                    "✵ CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
                     query="clipart ",
                     same_peer=True,
                 )
@@ -321,7 +315,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
             [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
         ]
         await event.edit(
-            f"** Bᴏᴛ Oғ {OWNER_NAME}\n\nMᴀɪɴ Mᴇɴᴜ\n\nOꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\nUɴᴏꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(ADDONS)}**",
+            f"✨ **{OWNER_NAME}** Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Oꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Uɴᴏꜰꜰɪᴄɪᴀʟ Pʟᴜɢɪɴs ~ {len(ADDONS)}**",
             buttons=buttons,
             link_preview=False,
         )
@@ -330,8 +324,8 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @owner
     async def on_plug_in_callback_query_handler(event):
         await event.edit(
-            "**Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ**",
-            buttons=Button.inline("Oᴘᴇɴ Mᴀɪɴ Mᴇɴᴜ Aɢᴀɪɴ", data="open"),
+            "**≼≼≼Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ≽≽≽**",
+            buttons=Button.inline("≼≼≼Oᴘᴇɴ Mᴀɪɴ Mᴇɴᴜ Aɢᴀɪɴ≽≽≽", data="open"),
         )
 
     @callback(
@@ -424,8 +418,8 @@ if Var.BOT_USERNAME is not None and asst is not None:
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = 5
     number_of_cols = 2
-    multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "✘")
-    mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "✘")
+    multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "🏴‍☠")
+    mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "🏴‍☠")
     helpable_plugins = []
     global upage
     upage = page_number
@@ -475,8 +469,8 @@ def paginate_help(page_number, loaded_plugins, prefix):
 def paginate_addon(page_number, loaded_plugins, prefix):
     number_of_rows = 5
     number_of_cols = 2
-    multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "✘")
-    mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "✘")
+    multi = os.environ.get("EMOJI_TO_DESPLAY_IN_HELP", "🏴‍☠")
+    mult2i = os.environ.get("EMOJI2_TO_DESPLAY_IN_HELP", "🏴‍☠")
     helpable_plugins = []
     global addpage
     addpage = page_number
