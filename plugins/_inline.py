@@ -20,11 +20,11 @@ from telethon.tl.types import InputWebDocument
 from cython.dB.database import Var
 from . import *
 
-PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
-if PMPERMIT_PIC is None:
+PMPIC = os.environ.get("PMPIC", None)
+if PMPIC is None:
     WARN_PIC = "https://telegra.ph/file/82c595986872349e5ba1a.jpg"
 else:
-    WARN_PIC = PMPERMIT_PIC
+    WARN_PIC = PMPIC
 
 # ================================================#
 notmine = "This bot is for {}".format(OWNER_NAME)
@@ -97,7 +97,7 @@ async def rip(event):
     await ultroid_bot.send_message(event.query.user_id, text1)
     await ultroid_bot(functions.contacts.BlockRequest(event.query.user_id))
     await ultroid_bot.send_message(
-        LOG_CHANNEL,
+        Var.LOG_CHANNEL,
         f"Hello, [This](tg://user?id={him_id}) Selected Prohibited Option, Therefore Blocked.\n(C) CɪᴘʜᴇʀX",
     )
 
@@ -114,7 +114,7 @@ async def rip(event):
     text2 = "Ok. Please Wait until CɪᴘʜᴇʀX Approves you. Don't Spam or Try Anything Stupid. \nThanks for Contacting me."
     await ultroid_bot.send_message(event.query.user_id, text2)
     await ultroid_bot.send_message(
-        LOG_CHANNEL,
+        Var.LOG_CHANNEL,
         message=f"Hello, [New User](tg://user?id={him_id}) Wants to Talk with tou.\n(C) CɪᴘʜᴇʀX",
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
@@ -134,7 +134,7 @@ async def rip(event):
     )
     await ultroid_bot.send_message(event.query.user_id, text3)
     await ultroid_bot.send_message(
-        LOG_CHANNEL,
+        Var.LOG_CHANNEL,
         message=f"Hello, [New User](tg://user?id={him_id}) Wants to Ask you Something.\n(C) CɪᴘʜᴇʀX",
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
