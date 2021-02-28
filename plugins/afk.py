@@ -10,8 +10,8 @@
 
 • `{i}afk <optional reason>`
     afk means away from keyboard,
-    After u active this if Someting tag or msg u then It auto Reply Him/her,
-    (Note : By Reply To any media U can set media afk too).
+    After you active this if Someting tag or message you, then It auto Reply Him/her,
+    (Note : By Reply To any media you can set media afk too).
 
 """
 
@@ -131,12 +131,12 @@ async def on_afk(event):
         msg = None
         if reason:
             message_to_reply = (
-                f"__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`\n\n"
-                + f"__"
-                + f"\n\n**Reason:- `**{reason}`"
+                f"✨__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`✨\n\n"
+                + f"✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
+                + f"\n\n**✵ Reason:- `**{reason}`"
             )
         else:
-            message_to_reply = f"__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`\n\n" + f"__"
+            message_to_reply = f"✨__CɪᴘʜᴇʀX is offline since__ `{total_afk_time}`✨\n\n" + f"__"
         try:
             if pic.endswith((".tgs", ".webp")):
                 msg = await event.reply(file=pic)
