@@ -14,7 +14,8 @@ async def _(event):
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
+    uptime = grt((time.time() - start_time))
     await asst.send_message(
         event.chat_id,
-        f"**𝙿𝙸𝙽𝙶**\n `{ms}ms`",
+        f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n ➲CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ : `{ms}ms`\n ➲ CɪᴘʜᴇʀX bot uptime : `{uptime}`",
     )
