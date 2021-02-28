@@ -109,6 +109,6 @@ async def setting(event):
             [custom.Button.inline("Alive Customisation", data="alvcstm")],
             [custom.Button.inline("PM Customisation", data="alvcstmm")],
             [custom.Button.inline("API Keys", data="apiset")],
-            [custom.Button.inline("Other Vars.", data="otvars")],
+            [custom.Button.inline("Other Vars", data="otvars")],
         ],
     )
