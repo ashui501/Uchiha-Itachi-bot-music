@@ -15,7 +15,7 @@ from platform import python_version as pyver
 
 from git import Repo
 from support import *
-from telethon import Button, __version__
+from telethon import Button, __version__, custom, events, functions 
 from telethon.tl.types import InputWebDocument
 from cython.dB.database import Var
 from . import *
@@ -53,6 +53,8 @@ Gᴏ Aɴᴅ Aᴅᴅ ADDON Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**
 # ============================================#
 
 @inline
+@in_pattern 
+@in_owner
 async def inline_handler(event):
     builder = event.builder
     result = None
@@ -84,6 +86,8 @@ async def inline_handler(event):
         await event.answer([result])
 
 @inline
+@in_pattern
+@in_owner
 @callback("dontspamnigga")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -102,6 +106,8 @@ async def rip(event):
     )
 
 @inline
+@in_pattern
+@in_owner
 @callback("whattalk")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -120,6 +126,8 @@ async def rip(event):
     )
 
 @inline
+@in_pattern
+@in_owner
 @callback("askme")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -141,6 +149,8 @@ async def rip(event):
 
 
 @inline
+@in_pattern
+@in_owner
 @callback("sendclose")
 async def users(event):
     await event.edit(
