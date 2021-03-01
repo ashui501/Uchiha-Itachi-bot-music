@@ -7,13 +7,13 @@ from langdetect import detect
 
 @asst_cmd("tr") 
 async def _(event):
-    input_str = event.pattern_match.group(1)
+    input = event.text[4:6]
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         text = previous_message.message
-        lan = input_str or "en"
-    elif "|" in input_str:
-        lan, text = input_str.split("|")
+        lan = input or "en"
+    elif "|" in input:
+        lan, text = input.split("|")
     else:
         await ultroid_bot.send_message(
             event.chat_id, "`/tr LanguageCode` as reply to a message"
