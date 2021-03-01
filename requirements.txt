@@ -5,6 +5,8 @@ cairosvg
 emoji
 GitPython
 googletrans==3.1.0a0
+langdetect
+google-trans-new
 heroku3
 imutils
 lottie
