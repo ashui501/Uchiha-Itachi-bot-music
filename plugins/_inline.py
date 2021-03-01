@@ -52,9 +52,7 @@ Gᴏ Aɴᴅ Aᴅᴅ ADDON Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**
 """
 # ============================================#
 
-@inline
 @in_pattern 
-@in_owner
 async def inline_handler(event):
     builder = event.builder
     result = None
@@ -85,9 +83,7 @@ async def inline_handler(event):
         )
         await event.answer([result])
 
-@inline
 @in_pattern
-@in_owner
 @callback("dontspamnigga")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -105,9 +101,7 @@ async def rip(event):
         f"Hello, [This](tg://user?id={him_id}) Selected Prohibited Option, Therefore Blocked.\n(C) CɪᴘʜᴇʀX",
     )
 
-@inline
 @in_pattern
-@in_owner
 @callback("whattalk")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -125,9 +119,7 @@ async def rip(event):
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
 
-@inline
 @in_pattern
-@in_owner
 @callback("askme")
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -148,9 +140,7 @@ async def rip(event):
     )
 
 
-@inline
 @in_pattern
-@in_owner
 @callback("sendclose")
 async def users(event):
     await event.edit(
@@ -158,7 +148,7 @@ async def users(event):
         buttons=[(custom.Button.inline("≼≼≼Leave Me≽≽≽"))],
     )
 
-@inline
+@inline 
 @in_owner
 async def e(o):
     if len(o.text) == 0:
