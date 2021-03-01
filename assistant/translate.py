@@ -15,7 +15,7 @@ async def _(event):
     elif "|" in input:
         lan, text = input.split("|")
     else:
-        await ultroid_bot.send_message(
+        await asst.send_message(
             event.chat_id, "`/tr LanguageCode` as reply to a message"
         )
         return
@@ -35,6 +35,6 @@ async def _(event):
 `{translated}`"""
 
     try:
-        await ultroid_bot.send_message(event.chat_id, output_str)
+        await asst.send_message(event.chat_id, output_str)
     except Exception:
-        await ultroid_bot.send_message(event.chat_id, "Something went wrong 🤔")
+        await asst.send_message(event.chat_id, "Something went wrong 🤔")
