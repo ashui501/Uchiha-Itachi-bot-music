@@ -27,7 +27,7 @@ async def _(event):
     after_tr_text = lmao
     source_lan = LANGUAGES[after_tr_text]
     transl_lan = LANGUAGES[lan]
-    output_str = f"""**Trᴀnslᴀᴛᴇd by By CɪᴘʜᴇʀX Bᴏᴛ**
+    output_str = f"""**Trᴀnslᴀᴛᴇd by CɪᴘʜᴇʀX Bᴏᴛ**
 **Source ({source_lan})**:
 `{text}`
 
