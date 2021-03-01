@@ -1,5 +1,6 @@
 git+https://github.com/CipherX1-ops/CythonX.git
 asyncurban
+apscheduler
 carbonnow
 cairosvg
 emoji
@@ -23,6 +24,7 @@ pytz
 requests>=2.18.4
 scikit-image
 speedtest-cli==2.1.2
+sqlalchemy>=1.2
 telegraph
 validators
 youtube_dl
