@@ -15,7 +15,7 @@ async def _(event):
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    uptime = grt((time.time() - start_time))
+    uptime = get_readable_time((time.time() - start_time))
     await asst.send_message(
         event.chat_id,
         f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n ➲CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ : `{ms}ms`\n ➲ CɪᴘʜᴇʀX bot uptime : `{uptime}`",
