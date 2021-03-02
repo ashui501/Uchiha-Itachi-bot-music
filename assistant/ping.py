@@ -13,7 +13,6 @@ from datetime import datetime
 Lastupdate = time.time()
 
 @asst_cmd("ping")
-@owner
 async def _(event):
     start = datetime.now()
     end = datetime.now()
