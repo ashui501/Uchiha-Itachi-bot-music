@@ -70,7 +70,9 @@ async def lol(ult):
     header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
     als = """
 **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**
+**{}**
 ✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
+
 ╔════❰ Ⲃⲟⲧ Ⲓⲛϝⲟʀⲙⲁⲧⲓⲟⲛ ❱═❍⊱❁۪۪۪
 ║╭━━━━━━━━━━━━━━━➣ 
 ║┣⪼ **Ⲟⲱⲛⲉʀ** - `{}` 
