@@ -18,7 +18,7 @@ async def alvcs(event):
         "Customise your {}alive. Choose from the below options -".format(Var.HNDLR),
         buttons=[
             [Button.inline("Alive Text", data="alvtx")],
-            [Button.inline("Delete Alive text", data="deltx")], 
+            [Button.inline("Delete Alive text", data="delvx")], 
             [Button.inline("Alive Media", data="alvmed")],
             [Button.inline("Delete Alive Media", data="delmed")],
         ],
