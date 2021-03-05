@@ -26,7 +26,10 @@ async def otvaar(event):
                 Button.inline("Exᴛʀᴀ Pʟᴜɢɪɴs", data="plg"),
                 Button.inline("Aᴅᴅᴏɴs", data="eaddon"),
             ],
-            [Button.inline("« Bᴀᴄᴋ", data="setter")],
+            [
+                Button.inline("ʙᴏᴛ ᴍᴏᴅᴇ", data="botmode"),
+                Button.inline("« Bᴀᴄᴋ", data="setter"),
+            ] 
         ],
     )
 
@@ -110,6 +113,60 @@ async def pmset(event):
         ],
     )
 
+callback("botmode")
+@owner
+async def pmset(event):
+    await event.edit(
+        "Bot Mode ~:",
+        buttons=[
+            [Button.inline("ʙᴏᴛ ᴍᴏᴅᴇ  Oɴ", data="onbot")],
+            [Button.inline("ʙᴏᴛ ᴍᴏᴅᴇ  Oғғ", data="offbot")],
+            [Button.inline("ᴏᴡɴᴇʀ ɪᴅ", data="ownerid")],
+            [Button.inline("« Bᴀᴄᴋ", data="otvars")],
+        ],
+    )
+
+@callback("onbot")
+@owner
+async def onbott(event):
+    var = "BOT_MODE"
+    await setit(event, var, "True")
+    await event.edit(
+        "Done! BOT_MODE has been turned on!!\n\n After Setting All Things Do Restart"
+    )
+
+@callback("offbot")
+@owner
+async def offbott(event):
+    var = "BOT_MODE"
+    await setit(event, var, "False")
+    await event.edit(
+        "Done! BOT_MODE has been turned off!!\n\n After Setting All Things Do Restart"
+    )
+
+@callback("ownerid")
+@owner
+async def ownerids(event):
+    await event.delete()
+    pru = event.sender_id
+    var = "OWNER_ID"
+    name = "Owner ID"
+    async with event.client.conversation(pru) as conv:
+        await conv.send_message(
+            "Send id of my owner\n\nUse /cancel to cancel."
+        )
+        response = conv.wait_event(events.NewMessage(chats=pru))
+        response = await response
+        themssg = response.message.message
+        if themssg == "/cancel":
+            return await conv.send_message("Cancelled!!")
+        else:
+            await setit(event, var, themssg)
+            await conv.send_message(
+                "{} changed to {}\n After Setting All Things Do Restart".format(
+                    name, themssg
+                )
+            )
 
 @callback("edon")
 @owner
