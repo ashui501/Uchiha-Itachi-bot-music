@@ -56,7 +56,9 @@ apt update && apt upgrade -y && apt install --no-install-recommends -y \
     make \
     libopus0 \
     libopus-dev \
-    gcc
+    gcc \
+    mediainfo \
+    megatools
 
 echo '
         •• Cloning Repository
