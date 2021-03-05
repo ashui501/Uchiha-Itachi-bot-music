@@ -113,7 +113,7 @@ async def pmset(event):
         ],
     )
 
-callback("botmode")
+@callback("botmode")
 @owner
 async def pmset(event):
     await event.edit(
