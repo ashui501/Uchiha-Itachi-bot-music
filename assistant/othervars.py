@@ -16,11 +16,65 @@ async def otvaar(event):
     await event.edit(
         "Other Variables to set for CɪᴘʜᴇʀX:",
         buttons=[
-            [Button.inline("Tag Logger", data="taglog")],
-            [Button.inline("PM Permit", data="pmset")],
-            [Button.inline("SuperFban", data="sfban")]
+            [Button.inline("Tᴀɢ Lᴏɢɢᴇʀ", data="taglog")],
+            [Button.inline("SᴜᴘᴇʀFʙᴀɴ", data="sfban")],
+            [
+                Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ", data="sudo"),
+                Button.inline("Hᴀɴᴅʟᴇʀ", data="hhndlr"),
+            ],
+            [
+                Button.inline("Exᴛʀᴀ Pʟᴜɢɪɴs", data="plg"),
+                Button.inline("Aᴅᴅᴏɴs", data="eaddon"),
+            ],
+            [Button.inline("« Bᴀᴄᴋ", data="setter")],
         ],
     )
+
+
+@callback("plg")
+@owner
+async def pluginch(event):
+    await event.delete()
+    pru = event.sender_id
+    var = "PLUGIN_CHANNEL"
+    name = "Plugin Channel"
+    async with event.client.conversation(pru) as conv:
+        await conv.send_message(
+            "Send id or username of a channel from where you want to install all plugins\n\nUse /cancel to cancel."
+        )
+        response = conv.wait_event(events.NewMessage(chats=pru))
+        response = await response
+        themssg = response.message.message
+        if themssg == "/cancel":
+            return await conv.send_message("Cancelled!!")
+        else:
+            await setit(event, var, themssg)
+            await conv.send_message(
+                "{} changed to {}\n After Setting All Things Do Restart".format(
+                    name, themssg
+                )
+            )
+
+
+@callback("hhndlr")
+@owner
+async def hndlrr(event):
+    await event.delete()
+    pru = event.sender_id
+    var = "HNDLR"
+    name = "Handler/ Trigger"
+    async with event.client.conversation(pru) as conv:
+        await conv.send_message(
+            f"Send The Symbol Which u want as Handler/Trigger to use bot\nUr Current Handler is [ `{HNDLR}` ]\n\n use /cancel to cancel."
+        )
+        response = conv.wait_event(events.NewMessage(chats=pru))
+        response = await response
+        themssg = response.message.message
+        if themssg == "/cancel":
+            return await conv.send_message("Cancelled!!")
+        else:
+            await setit(event, var, themssg)
+            await conv.send_message("{} changed to {}".format(name, themssg))
 
 
 @callback("taglog")
@@ -44,42 +98,83 @@ async def tagloggerr(event):
             await conv.send_message("{} changed to {}".format(name, themssg))
 
 
-@callback("pmset")
+@callback("eaddon")
 @owner
 async def pmset(event):
     await event.edit(
-        "PMPermit Settings:",
+        "ADDONS~ Extra Plugins:",
         buttons=[
-            [Button.inline("Turn PMPermit On", data="pmon")],
-            [Button.inline("Turn PMPermit Off", data="pmoff")],
+            [Button.inline("Aᴅᴅᴏɴs  Oɴ", data="edon")],
+            [Button.inline("Aᴅᴅᴏɴs  Oғғ", data="edof")],
+            [Button.inline("« Bᴀᴄᴋ", data="otvars")],
         ],
     )
 
 
-@callback("pmon")
+@callback("edon")
 @owner
-async def pmonn(event):
-    var = "PMSETTING"
+async def eddon(event):
+    var = "ADDONS"
     await setit(event, var, "True")
-    await event.edit(f"Done! PMPermit has been turned on!! Please `{hndlr}restart`")
+    await event.edit(
+        "Done! ADDONS has been turned on!!\n\n After Setting All Things Do Restart"
+    )
 
 
-@callback("pmoff")
+@callback("edof")
 @owner
-async def pmofff(event):
-    var = "PMSETTING"
+async def eddof(event):
+    var = "ADDONS"
     await setit(event, var, "False")
-    await event.edit(f"Done! PMPermit has been turned off!! Please `{hndlr}restart`")
+    await event.edit(
+        "Done! ADDONS has been turned off!! After Setting All Things Do Restart"
+    )
+
+
+@callback("sudo")
+@owner
+async def pmset(event):
+    await event.edit(
+        f"SUDO MODE ~ Some peoples can use ur Bot which u selected. To know More use `{HNDLR}help sudo`",
+        buttons=[
+            [Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ  Oɴ", data="onsudo")],
+            [Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ  Oғғ", data="ofsudo")],
+            [Button.inline("« Bᴀᴄᴋ", data="otvars")],
+        ],
+    )
+
+
+@callback("onsudo")
+@owner
+async def eddon(event):
+    var = "SUDO"
+    await setit(event, var, "True")
+    await event.edit(
+        "Done! SUDO MODE has been turned on!!\n\n After Setting All Things Do Restart"
+    )
+
+
+@callback("ofsudo")
+@owner
+async def eddof(event):
+    var = "SUDO"
+    await setit(event, var, "False")
+    await event.edit(
+        "Done! SUDO MODE has been turned off!! After Setting All Things Do Restart"
+    )
 
 
 @callback("sfban")
 @owner
 async def sfban(event):
-    await event.edit("SuperFban Settings:",
-                     buttons=[
-                         [Button.inline("FBan Group", data="sfgrp")],
-                         [Button.inline("Exclude Feds", data="sfexf")]
-                     ])
+    await event.edit(
+        "SuperFban Settings:",
+        buttons=[
+            [Button.inline("FBᴀɴ Gʀᴏᴜᴘ", data="sfgrp")],
+            [Button.inline("Exᴄʟᴜᴅᴇ Fᴇᴅs", data="sfexf")],
+            [Button.inline("« Bᴀᴄᴋ", data="otvars")],
+        ],
+    )
 
 
 @callback("sfgrp")
@@ -90,7 +185,9 @@ async def sfgrp(event):
     var = "FBAN_GROUP_ID"
     pru = event.sender_id
     async with asst.conversation(pru) as conv:
-        await conv.send_message(f"Make a group, add @MissRose_Bot, send `{hndlr}id`, copy that and send it here.\nUse /cancel to go back.")
+        await conv.send_message(
+            f"Make a group, add @MissRose_Bot, send `{hndlr}id`, copy that and send it here.\nUse /cancel to go back."
+        )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
         themssg = response.message.message
@@ -109,7 +206,9 @@ async def sfexf(event):
     var = "EXCLUDE_FED"
     pru = event.sender_id
     async with asst.conversation(pru) as conv:
-        await conv.send_message(f"Send the Fed IDs you want to exclude in the ban. Split by a space.\neg`id1 id2 id3`\nSet is as `None` if you dont want any.\nUse /cancel to go back.")
+        await conv.send_message(
+            f"Send the Fed IDs you want to exclude in the ban. Split by a space.\neg`id1 id2 id3`\nSet is as `None` if you dont want any.\nUse /cancel to go back."
+        )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
         themssg = response.message.message
