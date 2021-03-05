@@ -8,39 +8,20 @@
 import time
 
 from cython import *
+from cython.dB import *
 from cython.dB.core import *
 from cython.functions import *
 from cython.functions.all import *
+from cython.functions.broadcast_db import *
+from cython.functions.gban_mute_db import *
 from cython.functions.google_image import googleimagesdownload
 from cython.functions.sudos import *
 from cython.utils import *
 
 start_time = time.time()
-ultroid_version = "v0.0.1"
+ultroid_version = "v0.0.3"
 OWNER_NAME = ultroid_bot.me.first_name
 OWNER_ID = ultroid_bot.me.id
-DEVLIST = [
-    "798271566",
-]
-
-# sudo
-ok = udB.get("SUDOS")
-if ok:
-    SUDO_USERS = set(int(x) for x in ok.split())
-else:
-    SUDO_USERS = ""
-
-if SUDO_USERS:
-    sudos = list(SUDO_USERS)
-else:
-    sudos = ""
-
-on = Var.SUDO
-
-if Var.SUDO:
-    sed = [ultroid_bot.uid, *sudos]
-else:
-    sed = [ultroid_bot.uid]
 
 
 def grt(seconds: int) -> str:
@@ -73,7 +54,7 @@ def grt(seconds: int) -> str:
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
-    "Plagiarising hehe...",
+    "Plagiarizing hehe...",
     "Inviting this sticker over to my pack...",
     "Kanging this sticker...",
     "Hey that's a nice sticker!\nMind if I kang?!..",
