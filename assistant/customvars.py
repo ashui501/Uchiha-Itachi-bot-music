@@ -1,3 +1,10 @@
+# Ultroid - UserBot
+# Copyright (C) 2020 TeamUltroid
+#
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+
 import os
 
 from telegraph import Telegraph, upload_file
@@ -15,12 +22,13 @@ auth_url = r["auth_url"]
 @owner
 async def alvcs(event):
     await event.edit(
-        "Customise your {}alive. Choose from the below options -".format(Var.HNDLR),
+        "Customise your {}alive. Choose from the below options -".format(HNDLR),
         buttons=[
-            [Button.inline("Alive Text", data="alvtx")],
-            [Button.inline("Delete Alive text", data="delvx")], 
-            [Button.inline("Alive Media", data="alvmed")],
-            [Button.inline("Delete Alive Media", data="delmed")],
+            [Button.inline("Aʟɪᴠᴇ Tᴇxᴛ", data="alvtx")],
+            [Button.inline("Dᴇʟᴇᴛᴇ Aʟɪᴠᴇ Tᴇxᴛ", data="delvx")], 
+            [Button.inline("Aʟɪᴠᴇ ᴍᴇᴅɪᴀ", data="alvmed")],
+            [Button.inline("Dᴇʟᴇᴛᴇ Aʟɪᴠᴇ Mᴇᴅɪᴀ", data="delmed")],
+            [Button.inline("« Bᴀᴄᴋ", data="setter")],
         ],
     )
 
@@ -43,7 +51,11 @@ async def name(event):
             return await conv.send_message("Cancelled!!")
         else:
             await setit(event, var, themssg)
-            await conv.send_message("{} changed to {}".format(name, themssg))
+            await conv.send_message(
+                "{} changed to {}\n\nAfter Setting All Things Do restart".format(
+                    name, themssg
+                )
+            )
 
 
 @callback("alvmed")
@@ -87,6 +99,7 @@ async def dell(event):
     except BaseException:
         return await event.edit("Something went wrong...")
 
+
 @callback("delvx")
 @owner
 async def dell(event):
@@ -96,20 +109,22 @@ async def dell(event):
     except BaseException:
         return await event.edit("Something went wrong...")
 
-@callback("alvcstmm")
+@callback("pmcstm")
 @owner
 async def alvcs(event):
     await event.edit(
         "Customise your PMPERMIT Settings -",
         buttons=[
-            [Button.inline("PM Text", data="alvtxx")],
-            [Button.inline("Pm Media", data="alvmedd")],
-            [Button.inline("Delete PM Media", data="delmedd")],
+            [Button.inline("Pᴍ Tᴇxᴛ", data="pmtxt")],
+            [Button.inline("Pᴍ Mᴇᴅɪᴀ", data="pmmed")],
+            [Button.inline("PMLOGGER", data="pml")],
+            [Button.inline("Dᴇʟᴇᴛᴇ Pᴍ Mᴇᴅɪᴀ", data="delpmmed")],
+            [Button.inline("« Bᴀᴄᴋ", data="pmset")],
         ],
     )
 
 
-@callback("alvtxx")
+@callback("pmtxt")
 @owner
 async def name(event):
     await event.delete()
@@ -118,7 +133,7 @@ async def name(event):
     name = "PM Text"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**PM Text**\nEnter the new Pmpermit text.\n\nUse /cancel to terminate the operation."
+            "**PM Text**\nEnter the new Pmpermit text.\n\nu can use `{name}` `{fullname}` `{count}` `{mention}` `{username}` Too\n\nUse /cancel to terminate the operation."
         )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
@@ -127,10 +142,14 @@ async def name(event):
             return await conv.send_message("Cancelled!!")
         else:
             await setit(event, var, themssg)
-            await conv.send_message("{} changed to {}".format(name, themssg))
+            await conv.send_message(
+                "{} changed to {}\n\nAfter Setting All Things Do restart".format(
+                    name, themssg
+                )
+            )
 
 
-@callback("alvmedd")
+@callback("pmmed")
 @owner
 async def media(event):
     await event.delete()
@@ -139,7 +158,7 @@ async def media(event):
     name = "PM Media"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**PM Media**\nSend me a pic/gif/bot api id of sticker to set as Pmpermit media.\n\nUse /cancel to terminate the operation."
+            "**PM Media**\nSend me a pic/gif/bot api id of sticker to set as pmpermit media.\n\nUse /cancel to terminate the operation."
         )
         response = await conv.get_response()
         try:
@@ -162,7 +181,7 @@ async def media(event):
         await conv.send_message("{} has been set.".format(name))
 
 
-@callback("delmedd")
+@callback("delpmmed")
 @owner
 async def dell(event):
     try:
@@ -170,3 +189,64 @@ async def dell(event):
         return await event.edit("Done!")
     except BaseException:
         return await event.edit("Something went wrong...")
+
+
+@callback("pml")
+@owner
+async def alvcs(event):
+    await event.edit(
+        "PMLOGGER This Will Forward Ur Pm to Ur Private Group -",
+        buttons=[
+            [Button.inline("PMLOGGER ON", data="pmlog")],
+            [Button.inline("PMLOGGER OFF", data="pmlogof")],
+            [Button.inline("« Bᴀᴄᴋ", data="pmcstm")],
+        ],
+    )
+
+
+@callback("pmlog")
+@owner
+async def pmlog(event):
+    var = "PMLOG"
+    await setit(event, var, "True")
+    await event.edit(f"Done!! PMLOGGER  Started!!")
+
+
+@callback("pmlogof")
+@owner
+async def pmlogof(event):
+    try:
+        udB.delete("PMLOG")
+        return await event.edit("Done! PMLOGGER Stopped!!")
+    except BaseException:
+        return await event.edit("Something went wrong...")
+
+
+@callback("pmset")
+@owner
+async def pmset(event):
+    await event.edit(
+        "PMPermit Settings:",
+        buttons=[
+            [Button.inline("Tᴜʀɴ PMPᴇʀᴍɪᴛ Oɴ", data="pmon")],
+            [Button.inline("Tᴜʀɴ PMPᴇʀᴍɪᴛ Oғғ", data="pmoff")],
+            [Button.inline("Cᴜsᴛᴏᴍɪᴢᴇ PMPᴇʀᴍɪᴛ", data="pmcstm")],
+            [Button.inline("« Bᴀᴄᴋ", data="setter")],
+        ],
+    )
+
+
+@callback("pmon")
+@owner
+async def pmonn(event):
+    var = "PMSETTING"
+    await setit(event, var, "True")
+    await event.edit(f"Done! PMPermit has been turned on!!")
+
+
+@callback("pmoff")
+@owner
+async def pmofff(event):
+    var = "PMSETTING"
+    await setit(event, var, "False")
+    await event.edit(f"Done! PMPermit has been turned off!!")
