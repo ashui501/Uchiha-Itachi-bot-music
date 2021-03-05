@@ -27,7 +27,7 @@ async def assistant(event):
                 f"Bot started by [{event.sender_id}](tg://user?id={event.sender_id})",
             )
         ok = ""
-        if Var.MSG_FRWD is True:
+        if udB.get("MSG_FRWD") == True:
             ok = "You can contact me using this bot!!"
         if event.is_private and event.sender_id in sed:
             return
@@ -44,11 +44,27 @@ async def ultroid(event):
         return
     await asst.send_message(
         event.chat_id,
-        f"Ⲏⲓ {OWNER_NAME}. Ⲣⳑⲉⲁⲋⲉ ⲃʀⲟⲱⲋⲉ ⲧⲏʀⲟυⳋⲏ ⲧⲏⲉ ⲟⲣⲧⲓⲟⲛⲋ",
+        f"Hi {OWNER_NAME}. Please browse through the options",
         buttons=[
-            [custom.Button.inline("Ⲋⲉⲧⲧⲓⲛⳋⲋ ⚙️", data="setter")],
-            [custom.Button.inline("Ⲋⲧⲁⲧⲋ", data="stat")],
-            [custom.Button.inline("Ⲃʀⲟⲁⲇⲥⲁⲋⲧ", data="bcast")],
+            [Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter")],
+            [Button.inline("Sᴛᴀᴛs", data="stat")],
+            [Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ", data="bcast")],
+        ],
+    )
+
+
+# aah, repeat the codes..
+@callback("mainmenu")
+@owner
+async def ultroid(event):
+    if event.is_group:
+        return
+    await event.edit(
+        f"Hi {OWNER_NAME}. Please browse through the options",
+        buttons=[
+            [Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter")],
+            [Button.inline("Sᴛᴀᴛs", data="stat")],
+            [Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ", data="bcast")],
         ],
     )
 
@@ -57,7 +73,7 @@ async def ultroid(event):
 @owner
 async def botstat(event):
     ok = len(get_all_users())
-    msg = """CɪᴘʜᴇʀX Assistant - Stats
+    msg = """Ultroid Assistant - Stats
 Total Users - {}""".format(
         ok
     )
@@ -106,9 +122,12 @@ async def setting(event):
     await event.edit(
         "Choose from the below options -",
         buttons=[
-            [custom.Button.inline("Alive Customisation", data="alvcstm")],
-            [custom.Button.inline("PM Customisation", data="alvcstmm")],
-            [custom.Button.inline("API Keys", data="apiset")],
-            [custom.Button.inline("Other Vars", data="otvars")],
+            [Button.inline("API Kᴇʏs", data="apiset")],
+            [
+                Button.inline("Aʟɪᴠᴇ", data="alvcstm"),
+                Button.inline("PᴍPᴇʀᴍɪᴛ", data="pmset"),
+            ],
+            [Button.inline("Fᴇᴀᴛᴜʀᴇs", data="otvars")],
+            [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
         ],
     )
