@@ -397,7 +397,7 @@ async def ultdround(event):
 )
 async def ultdestroy(event):
     ult = await event.get_reply_message()
-   if not event.is_reply:
+    if not event.is_reply:
         return await eor(event, "`Reply to Animated Sticker Only...`")
     if not (
         ult.media and ult.media.document and "tgsticker" in ult.media.document.mime_type
