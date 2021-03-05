@@ -210,4 +210,4 @@ scheduler = AsyncIOScheduler(timezone="Asia/Tehran")
 scheduler.add_job(job_open, trigger="cron", hour=7, minute=10)
 scheduler.start()
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
