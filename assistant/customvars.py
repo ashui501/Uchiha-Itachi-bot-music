@@ -116,9 +116,10 @@ async def alvcs(event):
         "Customise your PMPERMIT Settings -",
         buttons=[
             [Button.inline("Pᴍ Tᴇxᴛ", data="pmtxt")],
+            [Button.inline("Dᴇʟᴇᴛᴇ Pᴍ Tᴇxᴛ", data="delpmtxt")],
             [Button.inline("Pᴍ Mᴇᴅɪᴀ", data="pmmed")],
+            [Button.inline("Dᴇʟᴇᴛᴇ Pᴍ Mᴇᴅɪᴀ", data="delpmmed")], 
             [Button.inline("PMLOGGER", data="pml")],
-            [Button.inline("Dᴇʟᴇᴛᴇ Pᴍ Mᴇᴅɪᴀ", data="delpmmed")],
             [Button.inline("« Bᴀᴄᴋ", data="pmset")],
         ],
     )
@@ -147,6 +148,16 @@ async def name(event):
                     name, themssg
                 )
             )
+
+@callback("delpmtxt")
+@owner
+async def dell(event):
+    try:
+        udB.delete("PM_TEXT")
+        return await event.edit("Done!")
+    except BaseException:
+        return await event.edit("Something went wrong...")
+
 
 
 @callback("pmmed")
