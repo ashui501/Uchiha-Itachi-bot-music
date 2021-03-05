@@ -5,7 +5,7 @@ carbonnow
 cairosvg
 emoji
 GitPython
-googletrans==3.1.0a0
+googletrans==4.0.0rc1
 langdetect
 google-trans-new
 heroku3
@@ -23,6 +23,7 @@ psutil
 pytz
 requests>=2.18.4
 scikit-image
+selenium
 speedtest-cli==2.1.2
 sqlalchemy>=1.2
 telegraph
