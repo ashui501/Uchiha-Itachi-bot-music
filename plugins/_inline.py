@@ -455,7 +455,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 z.append(y)
         cmd = len(z) + 10
         await event.edit(
-            f"✨ **{OWNER_NAME}** Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n✵ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Aᴅᴅᴏɴs ~ {len(ADDONS)}\n✵ Tᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {cmd}**",
+            f"✨ **{OWNER_NAME}** Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n✵ Pʟᴜɢɪɴs ~ {len(PLUGINS) - 4}\n✵ Aᴅᴅᴏɴs ~ {len(ADDONS)}\n✵ Tᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {cmd}",
             buttons=buttons,
             link_preview=False,
         )
