@@ -67,7 +67,8 @@ databased = logging.getLogger("DATABASE")
 
 
 def start() -> scoped_session:
-    engine = create_engine(Var.REDIS_URI)
+    database = udB.get("REDIS_URI")
+    engine = create_engine(database)
     BASE.metadata.bind = engine
     BASE.metadata.create_all(engine)
     return scoped_session(sessionmaker(bind=engine, autoflush=False))
@@ -171,7 +172,7 @@ async def job_close():
                     peer=int(warner.chat_id), banned_rights=hehes
                 )
             )
-            if Config.CLEAN_GROUPS:
+            if udB.get("CLEAN_GROUPS"):
                 async for user in ultroid_bot.iter_participants(int(warner.chat_id)):
                     if user.deleted:
                         await ultroid_bot.edit_permissions(
