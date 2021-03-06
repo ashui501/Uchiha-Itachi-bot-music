@@ -190,7 +190,7 @@ async def hehe(args):
     if photo:
         splat = args.text.split()
         if not emojibypass:
-            emoji = "🔰"
+            emoji = "🏴‍☠"
         pack = 1
         if len(splat) == 3:
             pack = splat[2]  # User sent ultroid_both
@@ -335,9 +335,9 @@ async def hehe(args):
                 await conv.get_response()
                 await ultroid_bot.send_read_acknowledge(conv.chat_id)
         await xx.edit(
-            f"`Kanged!`\
-            \n`Emoji` - {emoji}\
-            \n`Sticker Pack` [here](t.me/addstickers/{packname})",
+            f"`Ⲕⲁⲛⳋⲉⲇ`\
+            \n`Ⲉⲙⲟⳗⲓ` - {emoji}\
+            \n`Ⲋⲧⲓⲥⲕⲉʀ Ⲣⲁⲥⲕ` [here](t.me/addstickers/{packname})",
             parse_mode="md",
         )
         try:
