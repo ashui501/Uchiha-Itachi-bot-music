@@ -38,7 +38,7 @@ else:
     PMPIC = "https://telegra.ph/file/82c595986872349e5ba1a.jpg"
 if not Redis("PM_TEXT"):
     UNAPPROVED_MSG = """
-** 🏴‍☠Hello, This is CɪᴘʜᴇʀX PM Protection Service 🏴‍☠**
+** 🏴‍☠Hello, This is {} PM Protection Service 🏴‍☠**
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
@@ -52,7 +52,7 @@ else:
         f"""{Redis("PM_TEXT")}"""
         """
 
-** 🏴‍☠Hello, This is CɪᴘʜᴇʀX PM Protection Service 🏴‍☠**
+** 🏴‍☠Hello, This is {} PM Protection Service 🏴‍☠**
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
