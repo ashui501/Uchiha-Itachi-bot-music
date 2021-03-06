@@ -438,7 +438,7 @@ async def delete_it(delme):
         except BaseException:
             await eod(
                 delme,
-                f"Couldn't delete the message.\n\n**ERROR:**\n`{str(e)}`",
+                f"Couldn't delete the message.\n\n**ERROR:**\n`{str(delme)}`",
                 time=5,
             )
 
