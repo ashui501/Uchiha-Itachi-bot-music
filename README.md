@@ -49,4 +49,4 @@ A stable pluggable Telegram bot, based on Telethon.
 Made with 💕 by CɪᴘʜᴇʀX
 # Credits
 * [Lonami](https://github.com/LonamiWebs/) for [Telethon](https://github.com/LonamiWebs/Telethon)
-
+Based on Ultroid Bot
