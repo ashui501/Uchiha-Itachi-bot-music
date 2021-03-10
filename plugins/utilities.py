@@ -539,7 +539,7 @@ async def telegraphcmd(event):
             if input_str:
                 tcom = input_str
             else:
-                tcom = "CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ"
+                tcom = "CɪᴘʜᴇʀX"
             makeit = telegraph.create_page(title=tcom, content=[f"{cd}"])
             war = makeit["url"]
             os.remove(getit)
@@ -548,7 +548,7 @@ async def telegraphcmd(event):
             if input_str:
                 tcom = input_str
             else:
-                tcom = "CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ"
+                tcom = "CɪᴘʜᴇʀX"
             makeit = telegraph.create_page(title=tcom, content=[f"{getmsg.text}"])
             war = makeit["url"]
             await xx.edit(f"Pasted to Telegraph : [Telegraph]({war})")
