@@ -539,7 +539,7 @@ async def telegraphcmd(event):
             if input_str:
                 tcom = input_str
             else:
-                tcom = "Ultroid"
+                tcom = "CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ"
             makeit = telegraph.create_page(title=tcom, content=[f"{cd}"])
             war = makeit["url"]
             os.remove(getit)
