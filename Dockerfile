@@ -6,6 +6,5 @@
 FROM python:3.9.2-slim-buster
 COPY resources/startup/deploy.sh .
 RUN chmod +x deploy.sh && sh deploy.sh
-RUN git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
 WORKDIR /root/CipherX1-ops/
 CMD ["bash", "resources/startup/startup.sh"]
