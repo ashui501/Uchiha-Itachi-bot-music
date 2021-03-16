@@ -28,6 +28,7 @@ speedtest-cli==2.1.2
 sqlalchemy>=1.2
 telegraph
 validators
+yaml
 youtube_dl
 youtube-search-python
 google-api-python-client==1.7.11
@@ -36,4 +37,3 @@ httplib2==0.13.1
 rextester_py
 glitch_this
 emoji
-yaml
