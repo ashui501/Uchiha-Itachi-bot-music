@@ -44,14 +44,10 @@ async def _(e):
         except rep:
             return await eor(
                 e,
-                "`The bot did not respond to the inline query.\nConsider using {}restart`".format(
-                    HNDLR
-                ),
+                get_string("help_2").format(HNDLR),
             )
         except dis:
-            return await eor(
-                e, "`Please turn on inline mode for your bot from` @Botfather."
-            )
+            return await eor(e, get_string("help_3"))
         await results[0].click(e.chat_id, reply_to=e.reply_to_msg_id, hide_via=True)
         await e.delete()
     else:
@@ -126,7 +122,7 @@ async def _(e):
             sur = e.builder.article(
                 title=f"{logi.first_name}",
                 description=desc,
-                text=f"@{logi.username} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩⲟυ.\n\nᴅᴇʟᴇᴛᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ᴀғᴛᴇʀ ʀᴇᴀᴅɪɴɢ.\n\n✨CɪᴘʜᴇʀX ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ✨",
+                text=get_string("wspr_1").format(logi.username),
                 buttons=button,
             )
             buddhhu.append(meme)
@@ -162,7 +158,7 @@ async def _(e):
             except KeyError:
                 pass
             try:
-                await e.edit("Mᴇssᴀgᴇ dᴇlᴇᴛᴇd")
+                await e.edit(get_string("wspr_2"))
             except np:
                 pass
     else:
