@@ -42,7 +42,7 @@ if not Redis("PM_TEXT"):
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
-You have {}/{} warnings!"""
+You have {warn}/{twarn} warnings!"""
 else:
     UNAPPROVED_MSG = (
         """
@@ -56,14 +56,20 @@ else:
 Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!
 ⚜ Protection By CɪᴘʜᴇʀX ⚜
 
-You have {}/{} warnings!"""
+You have {warn}/{twarn} warnings!"""
     )
 
 UND = "Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!"
 UNS = "You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒"
 
-WARNS = 3
-NO_REPLY = "Reply to someone's message or try this commmand in private."
+if Redis("PMWARNS"):
+    try:
+        WARNS = int(Redis("PMWARNS"))
+    except BaseException:
+        WARNS = 4
+else:
+    WARNS = 4
+NO_REPLY = get_string("pmperm_3")
 PMCMDS = [
     f"{hndlr}a",
     f"{hndlr}approve",
@@ -79,8 +85,10 @@ async def permitpm(event):
     user = await event.get_chat()
     if user.bot or user.is_self:
         return
-    apprv = is_approved(user.id)
-    if apprv and (Redis("PMLOG") == "True"):
+    if Redis("PMLOG") == "True":
+        pl = udB.get("PMLOGGROUP")
+        if pl is not None:
+            return await event.forward_to(pl)
         await event.forward_to(Var.LOG_CHANNEL)
 
 
@@ -92,12 +100,12 @@ if sett == "True" and sett != "False":
     @ultroid_bot.on(events.NewMessage(outgoing=True, func=lambda e: e.is_private))
     async def autoappr(e):
         miss = await e.get_chat()
-        if miss.bot or miss.is_self or miss.verified:
+        if miss.bot or miss.is_self or miss.verified or Redis("AUTOAPPROVE") != "True":
             return
         if str(miss.id) in DEVLIST:
             return
         mssg = e.text
-        if mssg in PMCMDS:  # do not approve if outgoing is a command.
+        if mssg.startswith(HNDLR):  # do not approve if outgoing is a command.
             return
         if not is_approved(e.chat_id):
             approve_user(e.chat_id)
@@ -128,9 +136,9 @@ if sett == "True" and sett != "False":
             mention = f"[{get_display_name(user)}](tg://user?id={user.id})"
             count = len(get_approved())
             try:
-                wrn = COUNT_PM[user.id]
+                wrn = COUNT_PM[user.id] + 1
             except KeyError:
-                wrn = 0
+                wrn = 1
             if user.id in LASTMSG:
                 prevmsg = LASTMSG[user.id]
                 if event.text != prevmsg:
@@ -146,6 +154,17 @@ if sett == "True" and sett != "False":
                         user.id,
                         PMPIC,
                         caption=UNAPPROVED_MSG.format(OWNER_NAME, wrn, WARNS),
+                        caption=UNAPPROVED_MSG.format(
+                            ON=OWNER_NAME,
+                            warn=wrn,
+                            twarn=WARNS,
+                            UND=UND,
+                            name=name,
+                            fullname=fullname,
+                            username=username,
+                            count=count,
+                            mention=mention,
+                        ),
                     )
                 elif event.text == prevmsg:
                     async for message in event.client.iter_messages(
@@ -155,24 +174,44 @@ if sett == "True" and sett != "False":
                     await event.client.send_file(
                         user.id,
                         PMPIC,
-                        caption=UNAPPROVED_MSG.format(OWNER_NAME, wrn, WARNS),
+                        caption=UNAPPROVED_MSG.format(
+                            ON=OWNER_NAME,
+                            warn=wrn,
+                            twarn=WARNS,
+                            UND=UND,
+                            name=name,
+                            fullname=fullname,
+                            username=username,
+                            count=count,
+                            mention=mention,
+                        ),
                     )
                 LASTMSG.update({user.id: event.text})
             else:
                 await event.client.send_file(
                     user.id,
                     PMPIC,
-                    caption=UNAPPROVED_MSG.format(OWNER_NAME, wrn, WARNS),
+                    caption=UNAPPROVED_MSG.format(
+                        ON=OWNER_NAME,
+                        warn=wrn,
+                        twarn=WARNS,
+                        UND=UND,
+                        name=name,
+                        fullname=fullname,
+                        username=username,
+                        count=count,
+                        mention=mention,
+                    ),
                 )
                 LASTMSG.update({user.id: event.text})
             if user.id not in COUNT_PM:
                 COUNT_PM.update({user.id: 1})
             else:
                 COUNT_PM[user.id] = COUNT_PM[user.id] + 1
-            if COUNT_PM[user.id] > WARNS:
-                await event.respond(
-                    "`You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒`\n`You've been BLOCKED and reported to Telegram.`"
-                )
+            if COUNT_PM[user.id] >= WARNS:
+                async for message in event.client.iter_messages(user.id, search=UND):
+                    await message.delete()
+                await event.respond(UNS)
                 try:
                     del COUNT_PM[user.id]
                     del LASTMSG[user.id]
