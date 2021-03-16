@@ -28,7 +28,7 @@ speedtest-cli==2.1.2
 sqlalchemy>=1.2
 telegraph
 validators
-yaml
+pyyaml
 youtube_dl
 youtube-search-python
 google-api-python-client==1.7.11
