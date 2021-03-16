@@ -149,7 +149,7 @@ async def e(o):
             Repo().active_branch,
         )
         res = [
-            b.article(
+                await b.article(
                 title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
                 url="https://t.me/Hackintush",
                 description=" (c) CɪᴘʜᴇʀX ",
