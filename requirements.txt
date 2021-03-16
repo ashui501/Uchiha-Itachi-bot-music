@@ -36,3 +36,4 @@ httplib2==0.13.1
 rextester_py
 glitch_this
 emoji
+yaml
