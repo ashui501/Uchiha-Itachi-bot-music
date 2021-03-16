@@ -421,7 +421,7 @@ async def _(e):
     else:
         return await eod(
             xx,
-            "`Reply to someone's msg to delete.`",
+            "`Reply to someone's message to delete.`",
             time=5,
         )
 
