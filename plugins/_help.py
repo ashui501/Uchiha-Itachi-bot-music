@@ -40,7 +40,7 @@ async def ult(ult):
                         x += "\n"
                     await eor(ult, x)
                 except BaseException:
-                    await eod(ult, f"`{plug}` is not a valid plugin!", time=5)
+                    await eod(ult, get_string("help_1").format(plug), time=5)
         except BaseException:
             await eor(ult, "Error 🤔 occured.")
     else:
@@ -49,18 +49,14 @@ async def ult(ult):
         except rep:
             return await eor(
                 ult,
-                "`The bot did not respond to the inline query.\nConsider using {}restart`".format(
-                    HNDLR
-                ),
+                get_string("help_2").format(HNDLR),
             )
         except dis:
-            return await eor(
-                ult, "`Please turn on inline mode for your bot from` @Botfather."
-            )
+            return await eor(ult, get_string("help_3"))
         except bmi:
             return await eor(
                 ult,
-                f"Hey, \nYou are on Bot Mode. \nBot Mode Users Cant Get Help Directly ... \nInstead Copy Paste The Following in The Chat and Click The Pop Up \n\n `@{tgbot} ultd`",
+                get_string("help_4").format(tgbot),
             )
         await results[0].click(ult.chat_id, reply_to=ult.reply_to_msg_id, hide_via=True)
         await ult.delete()
