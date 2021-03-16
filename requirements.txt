@@ -1,3 +1,4 @@
+git+https://github.com/CipherX1-ops/CythonX.git
 asyncurban
 apscheduler
 carbonnow
