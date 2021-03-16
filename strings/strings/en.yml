@@ -19,43 +19,23 @@ autopic_2: "No Results found for `{}`"
 autopic_3: "Got a Collection `{}` related to your search !\nStarting Autopic !"
 
 # inline
-inline_1: "[CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ](t.me/FutureTechnologyGuardX)\n\n
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\n
-Pʟᴜɢɪɴs ~ {}**"
-inline_2: "[CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ](t.me/FutureTechnologyGuardX)\n\n
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\n
-Aᴅᴅᴏɴs ~ {}**"
-inline_3: "[CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ](t.me/FutureTechnologyGuardX)\n\n
-**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\n
-Aᴅᴅᴏɴs ~ {}\n\n
+inline_1: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n
+✵ Pʟᴜɢɪɴs ~ {}**"
+inline_2: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n
+✵ Aᴅᴅᴏɴs ~ {}**"
+inline_3: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n\n
+✵ Aᴅᴅᴏɴs ~ {}\n\n
 Gᴏ Aɴᴅ Aᴅᴅ `ADDONS` Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**"
-inline_4: "** Bᴏᴛ Oғ {}\n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {}\nAᴅᴅᴏɴs ~ {}\nTᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {}**"
-inline_5: "**Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ**"
+inline_4: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ✨\n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Pʟᴜɢɪɴs ~ {}\n✵ Aᴅᴅᴏɴs ~ {}\n✵ Tᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {}**"
+inline_5: "**≼≼≼Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ≽≽≽**"
 
 # tagnotif
 tagnot_1: "{} tagged you in {}\n\n```{}```\n\n[📨Message📨]({})"
 tagnot_2: "{} tagged you in {}\n\n [📨Message📨]({})"
 
 # whisper
-wspr_1: "@{} secret msg for you.\nDelete your msg after reading.\nOr the next msg will not be updated."
-wspr_2: "Message deleted"
-
-# afk
-afk_1: "`No Longer Offline\n\n
-Was away for ~ {}`"
-afk_2: "#Offline Mode\n
-Set Offline mode to False.\n
-Was Offline for {}`"
-afk_3: "I'm currently Offline.\n
-Last seen {} ago.`\n\n
-**Reason:** `{}`"
-afk_4: "`I'm currently Offline.\n\n
-Last seen {} ago.`"
-afk_5: "`Going Offline.`\n\n
-**Reason:** `{}`"
-afk_6: "I'm going Offline."
-afk_7: "Currently Offline with reason {}"
-afk_8: "Currently Offline."
+wspr_1: "@{} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩⲟυ.\n\nᴅᴇʟᴇᴛᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ᴀғᴛᴇʀ ʀᴇᴀᴅɪɴɢ.\n\n✨CɪᴘʜᴇʀX ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ✨"
+wspr_2: "Mᴇssᴀgᴇ dᴇlᴇᴛᴇd"
 
 # bot
 alive_1: "**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**
@@ -98,7 +78,7 @@ bd_6: "`Channel is already is database!`"
 
 # carbon
 carbon_1: "Processing..."
-carbon_2: "Carbonised by [{}](tg://user?id={})"
+carbon_2: "Carbonized by [{}](tg://user?id={})"
 
 # chats
 chats_1: "`Processing...`"
@@ -107,7 +87,7 @@ chats_3: "`I'm not an admin`"
 chats_4: "#Deleted\nDeleted {}"
 chats_5: "Your [{}]({}) Group Made Boss!"
 chats_6: "Join @FutureTechnologyGuardX"
-chats_6: "Your [{}]({}) Group/Channel Has been made Boss!"
+chats_6: "Your [{}]({}) Group/Channel Has been made CɪᴘʜᴇʀX"
 
 # converter
 cvt_1: "Reply to any media/Document."
@@ -169,8 +149,8 @@ gdrive_6: "`Go to `{}` and send ``/auth.`"
 gdrive_7: "**Successfully Uploaded File on G-Drive :**\n\n[{}]({})"
 
 # pmpermit
-pmperm_1: "Please wait for me to respond or you will be blocked and reported as spam!!"
-pmperm_2: "You were spamming my Master's PM, which I didn't like.\nYou have been BLOCKED and reported as SPAM, until further notice."
+pmperm_1: "Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!"
+pmperm_2: "`You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒`\n`You've been BLOCKED and reported to Telegram.`"
 pmperm_3: "Reply to someone's message or try this commmand in private."
 
 # updater
@@ -184,7 +164,7 @@ upd_7: "\n`Your BOT is`  **up-to-date**  `with`  **[[{}]]({}/tree/{})**\n"
 
 # upload download
 udl_1: "`Reply to the file/media you want to download...`"
-udl_2: "Download Successful..\nTo\n`{}`\nin `{}`"
+udl_2: "Download Successful by CɪᴘʜᴇʀX Bᴏᴛ\nTo\n`{}`\nin `{}`"
 udl_3: "`Give a specific path to file`"
 
 # words
