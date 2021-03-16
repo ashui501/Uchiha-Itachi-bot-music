@@ -34,57 +34,16 @@ from telethon import events
 
 from . import *
 
-TOKEN_FILE = "resources/downloads/auth_token.txt"
-
-
-@asst_cmd("auth")
-async def aut(event):
-    if event.is_group:
-        return
-    if os.path.exists(TOKEN_FILE):
-        return await event.reply("`You have already authorised with Google Drive`")
-    if Redis("GDRIVE_CLIENT_ID") == None or Redis("GDRIVE_CLIENT_SECRET") == None:
-        await event.reply(
-            "Go [here](https://console.developers.google.com/flows/enableapi?apiid=drive) and get your GDRIVE_CLIENT_ID and GDRIVE_CLIENT_SECRET\n\n"
-            + "Send your GDRIVE_CLIENT_ID and GDRIVE_CLIENT_SECRET as this.\n`GDRIVE_CLIENT_ID GDRIVE_CLIENT_SECRET` separated by space.",
-        )
-        async with asst.conversation(ultroid_bot.uid) as conv:
-            reply = conv.wait_event(events.NewMessage(from_users=ultroid_bot.uid))
-            repl = await reply
-            try:
-                creds = repl.text.split(" ")
-                id = creds[0]
-                if not id.endswith("com"):
-                    return await event.reply("`Wrong Client Id`")
-                try:
-                    secret = creds[1]
-                except IndexError:
-                    return await event.reply("`No Client Secret Found`")
-                udB.set("GDRIVE_CLIENT_ID", id)
-                udB.set("GDRIVE_CLIENT_SECRET", secret)
-                return await repl.reply("`Success!` Now send /auth again")
-            except Exception as exx:
-                return await repl.reply(
-                    "`Something went wrong! Send `/auth` again.\nCɪᴘʜᴇʀX Bot"
-                )
-    else:
-        storage = await create_token_file(TOKEN_FILE, event)
-        http = authorize(TOKEN_FILE, storage)
-        f = open(TOKEN_FILE, "r")
-        token_file_data = f.read()
-        udB.set("GDRIVE_TOKEN", token_file_data)
-        await event.reply(
-            "`Success!\nYou are all set to use Google Drive with CɪᴘʜᴇʀX Bot.`"
-        )
+TOKEN_FILE = "resources/auths/auth_token.txt"
 
 
 @ultroid_cmd(
     pattern="ugdrive ?(.*)",
 )
 async def _(event):
-    mone = await eor(event, "Processing ...")
+    mone = await eor(event, get_string("com_1"))
     if not os.path.exists(TOKEN_FILE):
-        return await eod(mone, f"`Go to `{Var.BOT_USERNAME}` and send ``/auth.`")
+        return await eod(mone, get_string("gdrive_6").format(Var.BOT_USERNAME))
     input_str = event.pattern_match.group(1)
     required_file_name = None
     start = datetime.now()
@@ -122,7 +81,7 @@ async def _(event):
             await mone.edit("Found `{}` in {} seconds.".format(input_str, ms))
         else:
             return await eod(
-                mone, "File Not found in local server. Give me a file path :((", time=5
+                mone, "File Not found in CɪᴘʜᴇʀX Bot server. Give me a file path :((", time=5
             )
     if required_file_name:
         http = authorize(TOKEN_FILE, None)
@@ -136,15 +95,11 @@ async def _(event):
                 mone,
                 Redis("GDRIVE_FOLDER_ID"),
             )
-            await mone.edit(
-                "**Successfully Uploaded File on G-Drive :**\n\n[{}]({})".format(
-                    file_name, g_drive_link
-                )
-            )
+            await mone.edit(get_string("gdrive_7").format(file_name, g_drive_link))
         except Exception as e:
             await mone.edit(f"Exception occurred while uploading to gDrive {e}")
     else:
-        return await eod(mone, "`File Not found in local server.`", time=10)
+        return await eod(mone, "`File Not found in CɪᴘʜᴇʀX Bot server.`", time=10)
 
 
 @ultroid_cmd(
@@ -152,7 +107,7 @@ async def _(event):
 )
 async def sch(event):
     if not os.path.exists(TOKEN_FILE):
-        return await eod(mone, f"`Go to `{Var.BOT_USERNAME}` and send ``/auth.`")
+        return await eod(event, get_string("gdrive_6").format(Var.BOT_USERNAME))
     http = authorize(TOKEN_FILE, None)
     input_str = event.pattern_match.group(1).strip()
     a = await eor(event, "Searching for {} in G-Drive.".format(input_str))
@@ -174,11 +129,11 @@ async def sch(event):
 )
 async def _(event):
     if not os.path.exists(TOKEN_FILE):
-        return await eod(mone, f"`Go to `{Var.BOT_USERNAME}` and send ``/auth.`")
+        return await eod(mone, get_string("gdrive_6").format(Var.BOT_USERNAME))
     input_str = event.pattern_match.group(1)
     if os.path.isdir(input_str):
         http = authorize(TOKEN_FILE, None)
-        a = await eor(event, "Uploading `{}` to G-Drive...".format(input_str))
+        a = await eor(event, "Uploading `{}` to G-Drive by CɪᴘʜᴇʀX Bot...".format(input_str))
         dir_id = await create_directory(
             http,
             os.path.basename(os.path.abspath(input_str)),
@@ -186,10 +141,7 @@ async def _(event):
         )
         await DoTeskWithDir(http, input_str, event, dir_id)
         dir_link = "https://drive.google.com/folderview?id={}".format(dir_id)
-        await eod(
-            a,
-            f"**Successfully Uploaded Folder To G-Drive...**\n[{input_str}]({dir_link})",
-        )
+        await eod(a, get_string("gdrive_7").format(input_str, dir_link))
     else:
         return await eod(event, f"Directory {input_str} does not seem to exist", time=5)
 
