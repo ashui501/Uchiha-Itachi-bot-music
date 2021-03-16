@@ -68,7 +68,7 @@ async def _(e):
     await dloader(e, host, file)
 
 
-@in_pattern("support")
+@in_pattern("cipherx")
 @in_owner
 async def repo(e):
     res = [
