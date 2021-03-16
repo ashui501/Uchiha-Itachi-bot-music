@@ -63,9 +63,6 @@ apt update && apt upgrade -y && apt install --no-install-recommends -y \
 echo '
         •• Cloning Repository
 '
-
-git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
-git clone https://github.com/CipherX1-ops/CythonX.git
 echo '
 	•• Getting Libraries and Installing
 '
