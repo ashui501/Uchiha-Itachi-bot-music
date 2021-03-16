@@ -245,8 +245,8 @@ async def _(event):
                     await ultroid_bot.send_message(LOG, f"AFK mode to On", file=pic)
             else:
                 await ultroid_bot.send_message(LOG, f"AFK mode to On")
-        except Exception as e:
-            logger.warn(str(e))
+        except BaseException:
+            pass
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
