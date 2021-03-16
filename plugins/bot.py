@@ -67,24 +67,8 @@ except BaseException:
 async def lol(ult):
     pic = udB.get("ALIVE_PIC")
     uptime = grt((time.time() - start_time))
-    header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
-    als = """
-**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**
-**{}**
-✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
-
-╔════❰ Ⲃⲟⲧ Ⲓⲛϝⲟʀⲙⲁⲧⲓⲟⲛ ❱═❍⊱❁۪۪۪
-║╭━━━━━━━━━━━━━━━➣ 
-║┣⪼ **Ⲟⲱⲛⲉʀ** - `{}` 
-║┣⪼ **Ⲋⲧⲁⲧυⲋ** - Ⲟⲛⳑⲓⲛⲉ 
-║┣⪼ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
-║┣⪼ **Ⲟⲋ** - Ⲕⲁⳑⲓ Ⳑⲓⲛυⲭ 𝟸𝟶𝟸𝟶.𝟺 
-║┣⪼ **Ⳙⲣⲧⲓⲙⲉ** - `{}` 
-║┣⪼ **Ⲣⲩⲧⲏⲟⲛ** - `{}` 
-║┣⪼ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}` 
-║┣⪼ **✨ CɪᴘʜᴇʀX ⲓⲋ ⲧⲏⲉ ⲃⲉⲋⲧ ✨**
-║╰━━━━━━━━━━━━━━━➣ ╚══════════════════❍⊱❁۪۪۪
-""".format(
+    header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey, I'm alive."
+    als = (get_string("alive_1")).format(
         header,
         OWNER_NAME,
         ultroid_version,
@@ -115,7 +99,7 @@ async def _(event):
     end = dt.now()
     ms = (end - start).microseconds / 1000
     uptime = grt((time.time() - start_time))
-    await x.edit(f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n\n**➲ CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ** - `{ms}ms`\n\n**➲ CɪᴘʜᴇʀX Bᴏᴛ Ⳙⲣⲧⲓⲙⲉ** - `{uptime}`")
+    await x.edit(get_string("ping").format(ms, uptime))
 
 
 @ultroid_cmd(
@@ -143,15 +127,18 @@ async def _(ult):
     with open("logs-cipherx.txt", "w") as log:
         log.write(app.get_log())
     ok = app.get_log()
-    message = ok
-    url = "https://del.dog/documents"
-    r = requests.post(url, data=message.encode("UTF-8")).json()
-    url = f"https://del.dog/{r['key']}"
+    key = (
+        requests.post("https://nekobin.com/api/documents", json={"content": ok})
+        .json()
+        .get("result")
+        .get("key")
+    )
+    url = f"https://nekobin.com/{key}"
     await ult.client.send_file(
         ult.chat_id,
         "logs-cipherx.txt",
         reply_to=ult.id,
-        caption=f"**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Ⳑⲟⳋⲋ**\nPasted [here]({url}) too!",
+        caption=get_string("log").format(url),
     )
     await xx.edit("`Uploading...`")
     await asyncio.sleep(1)
@@ -211,18 +198,23 @@ async def dyno_usage(dyno):
     FREE = humanbytes(free)
     return await eod(
         dyn,
-        "**⚙️ Dyno Usage ⚙️**:\n\n"
-        + f" -> `Dyno usage for`  **CɪᴘʜᴇʀX Bᴏᴛ**:\n"
-        + f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-        + f"**|**  [`{AppPercentage}`**%**]"
-        + "\n\n"
-        + " -> `Dyno hours remaining this month`:\n"
-        + f"     •  `{hours}`**h**  `{minutes}`**m**  "
-        + f"**|**  [`{percentage}`**%**]\n\n"
-        + f"**Total Disk Space: {TOTAL}\n\n**"
-        + f"**Used: {USED}  Free: {FREE}\n\n**"
-        + f"**📊Data Usage📊\n\nUpload: {upload}\nDown: {down}\n\n**"
-        + f"**CPU: {cpuUsage}%\nRAM: {memory}%\nDISK: {disk}%**",
+        get_string("usage").format(
+            Var.HEROKU_APP_NAME,
+            AppHours,
+            AppMinutes,
+            AppPercentage,
+            hours,
+            minutes,
+            percentage,
+            TOTAL,
+            USED,
+            FREE,
+            upload,
+            down,
+            cpuUsage,
+            memory,
+            disk,
+        ),
     )
 
 
@@ -230,7 +222,7 @@ async def dyno_usage(dyno):
     pattern="shutdown$",
 )
 async def shht(event):
-    await eor(event, "GoodBye {}.\n`Shutting down...`".format(OWNER_NAME))
+    await eor(event, get_string("shutdown").format(OWNER_NAME))
     await ultroid_bot.disconnect()
 
 
