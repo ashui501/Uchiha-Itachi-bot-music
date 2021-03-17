@@ -46,7 +46,7 @@ You have {warn}/{twarn} warnings!"""
 else:
     UNAPPROVED_MSG = (
         """
-**PMSecurity of {}**
+**PMSecurity of {ON}**
 
 """
         f"""{Redis("PM_TEXT")}"""
