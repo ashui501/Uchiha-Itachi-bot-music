@@ -16,10 +16,10 @@ from . import *
 gugirl = "https://telegra.ph/file/0df54ae4541abca96aa11.jpg"
 yeah = "https://telegra.ph/file/e3c67885e16a194937516.jpg"
 ps = "https://telegra.ph/file/de0b8d9c858c62fae3b6e.jpg"
-ultpic = "https://telegra.ph/file/4136aa1650bc9d4109cc5.jpg"
+ultpic = "https://telegra.ph/file/b2da137de76fc5cd85ffa.jpg"
 
 
-@in_pattern("fl2lnk ?(.*)")
+@in_pattern("file ?(.*)")
 @in_owner
 async def _(e):
     file_path = e.pattern_match.group(1)
@@ -40,13 +40,13 @@ async def _(e):
     ]
     try:
         lnk = e.builder.article(
-            title="fl2lnk",
+            title="file",
             text=f"**File:**\n{file_name}",
             buttons=bitton,
         )
     except:
         lnk = e.builder.article(
-            title="fl2lnk",
+            title="file",
             text="File not found",
         )
     await e.answer([lnk])
