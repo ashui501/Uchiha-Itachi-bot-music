@@ -153,7 +153,6 @@ if sett == "True" and sett != "False":
                     await event.client.send_file(
                         user.id,
                         PMPIC,
-                        caption=UNAPPROVED_MSG.format(OWNER_NAME, wrn, WARNS),
                         caption=UNAPPROVED_MSG.format(
                             ON=OWNER_NAME,
                             warn=wrn,
