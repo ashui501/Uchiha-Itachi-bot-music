@@ -146,6 +146,7 @@ if sett == "True" and sett != "False":
                         user.id, search=UND
                     ):
                         await message.delete()
+
                     async for message in event.client.iter_messages(
                         user.id, search=UNS
                     ):
@@ -187,6 +188,8 @@ if sett == "True" and sett != "False":
                     )
                 LASTMSG.update({user.id: event.text})
             else:
+                async for message in event.client.iter_messages(user.id, search=UND):
+                    await message.delete()
                 await event.client.send_file(
                     user.id,
                     PMPIC,
@@ -218,7 +221,7 @@ if sett == "True" and sett != "False":
                     if Var.LOG_CHANNEL:
                         await event.client.send_message(
                             Var.LOG_CHANNEL,
-                            "PMPermit is messed! Please restart the bot!!",
+                            "PMPermit is messed! Pls restart the bot!!",
                         )
                         return LOGS.info("COUNT_PM is messed.")
                 await event.client(BlockRequest(user.id))
