@@ -46,6 +46,7 @@ async def assistant(event):
                 [
                     Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
                 ],
+            ],
         )
 
 @callback("trans")
