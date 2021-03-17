@@ -35,16 +35,16 @@ async def assistant(event):
             f"Ⲏⲉⲩ, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
             buttons=[
                 [
-                    Button.url("Jᴏin Chᴀnnᴇl", url="https://t.me/FutureTechnologyGuardX"),
+                    Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
                 ],
                 [
-                    Button.url("CɪᴘʜᴇʀX Sᴇrvᴇr Ping", url="https://t.me/CipherXBot?start=ping"),
+                    Button.url("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", url="https://t.me/CipherXBot?start=ping"),
                 ],
                 [
-                    Button.inline("Tᴇxᴛ Trᴀnslᴀᴛᴏr", data="trans"),
+                    Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="trans"),
                 ],
                 [
-                    Button.inline("CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ", data="list"),
+                    Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
                 ],
         )
 
