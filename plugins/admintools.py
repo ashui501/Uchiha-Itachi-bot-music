@@ -406,7 +406,7 @@ async def fastpurgerme(purg):
     pattern="purgeall$",
 )
 async def _(e):
-    xx = await eor(ult, get_string("com_1"))
+    xx = await eor(e, get_string("com_1")) 
     if e.reply_to_msg_id:
         input = (await e.get_reply_message()).sender_id
         (await e.client.get_entity(input)).first_name
