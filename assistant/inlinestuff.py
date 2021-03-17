@@ -5,7 +5,7 @@ from urllib.request import urlopen
 import play_scraper
 import requests
 from bs4 import BeautifulSoup
-from pyUltroid.functions.parser import GoogleSearch, YahooSearch
+from cython.functions.parser import GoogleSearch, YahooSearch
 from rextester_py import rexec_aio
 from rextester_py.rextester_aio import UnknownLanguage
 from telethon import Button
