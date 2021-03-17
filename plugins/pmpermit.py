@@ -221,7 +221,7 @@ if sett == "True" and sett != "False":
                     if Var.LOG_CHANNEL:
                         await event.client.send_message(
                             Var.LOG_CHANNEL,
-                            "PMPermit is messed! Pls restart the bot!!",
+                            "PMPermit is messed! Please restart the bot!!",
                         )
                         return LOGS.info("COUNT_PM is messed.")
                 await event.client(BlockRequest(user.id))
