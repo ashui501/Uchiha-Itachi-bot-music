@@ -5,6 +5,9 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
+import time
+import shutil
+import psutil
 from datetime import datetime
 
 from cython.functions.asst_fns import *
@@ -38,7 +41,7 @@ async def assistant(event):
                     Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
                 ],
                 [
-                    Button.url("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", url="https://t.me/CipherXBot?start=ping"),
+                    Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
                 ],
                 [
                     Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="trans"),
@@ -56,6 +59,18 @@ async def trans(event):
 @callback("list")
 async def list(event):
     await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆InvisibleX Group Manager ~ [Bot Link](https://t.me/InvisibleXBot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot)")
+
+Lastupdate = time.time()
+
+@callback("ping")
+async def _(event):
+    start = datetime.now()
+    end = datetime.now()
+    ms = (end - start).microseconds / 1000
+    await asst.send_message(
+        event.chat_id,
+        f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n\n ➲CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ~`{ms}ms`",
+    )
 
 @asst_cmd("start")
 @owner
