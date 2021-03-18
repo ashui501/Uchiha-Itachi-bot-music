@@ -399,8 +399,6 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @owner
     async def backr(event):
         xhelps = zhelps.format(OWNER_NAME, len(ADDONS))
-        global addpage
-        addpage = page_number
         current_page_number = int(addpage) 
         buttons = paginate_addon(current_page_number, ADDONS, "addon")
         await event.edit(f"{xhelps}", buttons=buttons, link_preview=False)
