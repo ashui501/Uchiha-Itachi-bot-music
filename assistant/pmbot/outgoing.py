@@ -17,7 +17,7 @@ from . import *
 
 @asst.on(events.NewMessage(func=lambda e: e.is_private))
 async def on_out_mssg(event):
-        x = await event.get_reply_message()
+    x = await event.get_reply_message()
     if x is None:
         return
     to_send = event.raw_text
