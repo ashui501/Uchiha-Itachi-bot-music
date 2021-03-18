@@ -17,13 +17,16 @@ from . import *
 
 @asst.on(events.NewMessage(func=lambda e: e.is_private))
 async def on_out_mssg(event):
-    to_send = await event.get_reply_message()
-    if to_send is None:
+        x = await event.get_reply_message()
+    if x is None:
         return
-    to_send.id
-    send_mssg = event.raw_text
+    to_send = event.raw_text
     who = event.sender_id
-    user_id, reply_message_id = get_user_id(to_send.id)
+    if x.fwd_from:
+        to_user = x.fwd_from.sender_id.user_id
+    else:
+        # this is a weird way of doing it
+        return
     if who == OWNER_ID:
         if to_send.startswith("/"):
             return
