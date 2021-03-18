@@ -41,6 +41,9 @@ async def assistant(event):
                     Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
                 ],
                 [
+                    Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                ],
+                [
                     Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
                 ],
                 [
@@ -59,6 +62,10 @@ async def trans(event):
 @callback("list")
 async def list(event):
     await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆InvisibleX Group Manager ~ [Bot Link](https://t.me/InvisibleXBot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot)")
+
+@callback("chat")
+async def chat(event):
+    await asst.send_message(event.chat_id, "Send your message please. I'll see and answer you whenever get online\n\n✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ✨")
 
 Lastupdate = time.time()
 
