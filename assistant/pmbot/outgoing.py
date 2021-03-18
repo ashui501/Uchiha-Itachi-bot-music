@@ -23,7 +23,7 @@ async def on_out_mssg(event):
     to_send = event.raw_text
     who = event.sender_id
     if x.fwd_from:
-        to_user = x.fwd_from.sender_id.user_id
+        to_user = x.fwd_from.user_id
     else:
         # this is a weird way of doing it
         return
