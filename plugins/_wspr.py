@@ -102,6 +102,7 @@ async def _(e):
                     "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr ", same_peer=True
                 ),
             ]
+            us = logi.username
             sur = e.builder.article(
                 title=f"{name}",
                 description=desc,
