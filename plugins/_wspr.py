@@ -102,7 +102,6 @@ async def _(e):
                     "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr ", same_peer=True
                 ),
             ]
-            us = logi.username
             sur = e.builder.article(
                 title=f"{name}",
                 description=desc,
@@ -122,6 +121,7 @@ async def _(e):
                 Button.inline("Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", data=f"dd_{logi.id}"),
                 Button.inline("Dᴇlᴇᴛᴇ Mᴇssᴀgᴇ", data=f"del"),
             ]
+            us = logi.username
             sur = e.builder.article(
                 title=f"{logi.first_name}",
                 description=desc,
