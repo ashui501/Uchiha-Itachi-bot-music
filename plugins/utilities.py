@@ -360,7 +360,7 @@ async def _(event):
     pattern="info ?(.*)",
 )
 async def _(event):
-    xx = await eor(ult, get_string("com_1"))
+    xx = await eor(event, "`Processing...`")
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await xx.edit("Please reply to a user.\nError - " + str(error_i_a))
