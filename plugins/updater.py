@@ -65,7 +65,7 @@ async def upstream(ups):
         if conf != "now":
             await eod(
                 pagal,
-                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the userbot using** `.update now.`",
+                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the bot using** `.update now.`",
                 time=30,
             )
             return
@@ -140,13 +140,13 @@ async def upstream(ups):
         if heroku_app is None:
             await eod(
                 pagal,
-                f"{txt}\n`Invalid Heroku credentials for updating userbot dyno.`",
+                f"{txt}\n`Invalid Heroku credentials for updating bot dyno.`",
                 time=10,
             )
             repo.__del__()
             return
         await eor(
-            pagal, "`Userbot dyno build in progress, please wait for it to complete.`"
+            pagal, "`CɪᴘʜᴇʀX bot dyno build in progress, please wait for it to complete...`"
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -164,7 +164,7 @@ async def upstream(ups):
             await eod(pagal, f"{txt}\n`Here is the error log:\n{error}`", time=10)
             repo.__del__()
             return
-        await eod(pagal, "`Successfully Updated!\nRestarting, please wait...`", time=60)
+        await eod(pagal, "`Successfully Updated CɪᴘʜᴇʀX bot\nRestarting, please wait...`", time=60)
     else:
         # Classic Updater, pretty straightforward.
         try:
@@ -174,7 +174,7 @@ async def upstream(ups):
         await updateme_requirements()
         await eod(
             pagal,
-            "`Successfully Updated!\nCɪᴘʜᴇʀX Bot is restarting... Wait for a second!`",
+            "`Successfully Updated!\nCɪᴘʜᴇʀX Bot is restarting...`",
         )
         # Spin a new instance of bot
         args = [sys.executable, "./resources/startup/deploy.sh"]
