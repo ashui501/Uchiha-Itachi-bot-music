@@ -214,7 +214,6 @@ async def dyno_usage(dyno):
     return await eod(
         dyn,
         get_string("usage").format(
-            Var.HEROKU_APP_NAME,
             AppHours,
             AppMinutes,
             AppPercentage,
