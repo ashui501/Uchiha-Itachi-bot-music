@@ -298,15 +298,15 @@ async def pin(msg):
         try:
             await ultroid_bot.pin_message(msg.chat_id, xx, notify=slnt)
         except BadRequestError:
-            return await x.edit("`Hmm, I'm have no rights here...`")
+            return await xx.edit("`Hmm, I have no rights here...`")
         except Exception as e:
             return await xx.edit(f"**ERROR:**`{str(e)}`")
-        await x.edit(f"`Pinned` [this message](https://t.me/c/{cht.id}/{xx})!")
+        await xx.edit(f"`Pinned` [this message](https://t.me/c/{cht.id}/{xx})!")
     else:
         try:
             await ultroid_bot.pin_message(msg.chat_id, xx, notify=False)
         except BadRequestError:
-            return await eor(msg, "`Hmm, I'm have no rights here...`")
+            return await eor(msg, "`Hmm, I have no rights here...`")
         except Exception as e:
             return await eor(msg, f"**ERROR:**`{str(e)}`")
         try:
