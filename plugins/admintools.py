@@ -294,14 +294,14 @@ async def pin(msg):
     ch = msg.pattern_match.group(1)
     if ch != "silent":
         slnt = True
-        xx = await eor(msg, get_string("com_1"))
+        x = await eor(msg, get_string("com_1"))
         try:
             await ultroid_bot.pin_message(msg.chat_id, xx, notify=slnt)
         except BadRequestError:
-            return await xx.edit("`Hmm, I have no rights here...`")
+            return await x.edit("`Hmm, I have no rights here...`")
         except Exception as e:
-            return await xx.edit(f"**ERROR:**`{str(e)}`")
-        await xx.edit(f"`Pinned` [this message](https://t.me/c/{cht.id}/{xx})!")
+            return await x.edit(f"**ERROR:**`{str(e)}`")
+        await x.edit(f"`Pinned` [this message](https://t.me/c/{cht.id}/{xx})!")
     else:
         try:
             await ultroid_bot.pin_message(msg.chat_id, xx, notify=False)
