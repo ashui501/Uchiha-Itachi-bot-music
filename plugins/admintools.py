@@ -294,7 +294,7 @@ async def pin(msg):
     ch = msg.pattern_match.group(1)
     if ch != "silent":
         slnt = True
-        xx = await eor(ult, get_string("com_1"))
+        xx = await eor(msg, get_string("com_1"))
         try:
             await ultroid_bot.pin_message(msg.chat_id, xx, notify=slnt)
         except BadRequestError:
