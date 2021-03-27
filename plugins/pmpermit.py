@@ -85,10 +85,8 @@ async def permitpm(event):
     user = await event.get_chat()
     if user.bot or user.is_self:
         return
-    if Redis("PMLOG") == "True":
-        pl = udB.get("PMLOGGROUP")
-        if pl is not None:
-            return await event.forward_to(pl)
+    apprv = is_approved(user.id)
+    if apprv and (Redis("PMLOG") == "True"):
         await event.forward_to(Var.LOG_CHANNEL)
 
 
