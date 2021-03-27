@@ -60,7 +60,7 @@ You have {warn}/{twarn} warnings!"""
     )
 
 UND = "Please wait till I approve you to pm. Never mind spamming inbox cause you'll get blocked and reported by Telegram instantly!"
-UNS = "You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒"
+UNS = "You were spamming CɪᴘʜᴇʀX inbox, which I didn't like 😒\n Therefore you've been blocked and reported by Telegram\n\n✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨"
 
 if Redis("PMWARNS"):
     try:
