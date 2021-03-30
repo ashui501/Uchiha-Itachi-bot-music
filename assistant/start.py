@@ -44,6 +44,9 @@ async def assistant(event):
                     Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
                 ],
                 [
+                    Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
+                ],
+                [
                     Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
                 ],
                 [
@@ -78,6 +81,13 @@ async def _(event):
         event.chat_id,
         f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n\n ➲CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ~`{ms}ms`",
     )
+
+@callback("group")
+async def users(event):
+    await event.delete()
+    grabon = "🎆 Here Are Some Commands for group/channel management\n➤ /start ~ Check if I'm Alive \n➤ /ping ~ Ping CɪᴘʜᴇʀX Server Response Time\n➤ /tr <lang-code>\n➤ /id ~ Shows ID of User/Media/Chat\n➤ /ban ~ Works in Group , Bans a User \n➤ /unban ~ Works in Group , Unbans a User\n➤ /promote ~ Promotes A User \n➤ /demote ~ Demotes A User \n➤ /pin ~ Pins a Message\n(c)✨ CɪᴘʜᴇʀX Ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ ✨"
+    await asst.send_message(event.chat_id, grabon)
+
 
 @asst_cmd("start")
 @owner
