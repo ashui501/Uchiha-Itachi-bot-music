@@ -265,7 +265,6 @@ async def pin(event):
 
 async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
-    args = event.pattern_match.group(1)
     extra = None
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
