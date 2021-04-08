@@ -1,4 +1,7 @@
 git+https://github.com/CipherX1-ops/CythonX.git
+git+https://github.com/buddhhu/search-engine-parser.git
+git+https://github.com/buddhhu/ofox.git
+git+https://github.com/ProgrammingError/rextester_py.git
 asyncurban
 apscheduler
 carbonnow
@@ -7,6 +10,7 @@ emoji
 GitPython
 googletrans==4.0.0rc1
 langdetect
+gingerit
 google-trans-new
 heroku3
 imutils
