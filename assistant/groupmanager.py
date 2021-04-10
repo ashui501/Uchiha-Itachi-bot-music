@@ -250,7 +250,7 @@ async def pin(event):
         await event.reply("`Reply to a message to pin it.`")
         return
 
-    options = event.is_group
+    options = event.pattern_match.group(1).decode("UTF-8")
     is_silent = True
     if options.lower() == "loud":
         is_silent = False
@@ -265,12 +265,12 @@ async def pin(event):
 
 async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
-    args = event.is_group.split(" ", 1)
+    args = event.pattern_match.group(1).split(" ", 1)
     extra = None
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.from_id)
-        extra = event.is_group
+        extra = event.pattern_match.group(1).decode("UTF-8")
     elif args:
         user = args[0]
         if len(args) == 2:
