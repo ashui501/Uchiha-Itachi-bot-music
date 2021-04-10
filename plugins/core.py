@@ -55,10 +55,10 @@ async def inline_handler(event):
                             [
                                 Button.switch_inline(
                                     "Search Again..?", query="send ", same_peer=True
-                                )
-                            ]
+                                ),
+                            ],
                         ],
-                    )
+                    ),
                 )
             except BaseException:
                 pass
@@ -74,8 +74,8 @@ async def inline_handler(event):
                     [
                         Button.switch_inline(
                             "Search Again..?", query="send ", same_peer=True
-                        )
-                    ]
+                        ),
+                    ],
                 ],
             )
             await event.answer([ultroid])
@@ -89,8 +89,8 @@ async def inline_handler(event):
                     [
                         Button.switch_inline(
                             "Search Again", query="send ", same_peer=True
-                        )
-                    ]
+                        ),
+                    ],
                 ],
             )
             await event.answer([ultroidcode])
@@ -110,7 +110,7 @@ async def install(event):
 async def unload(event):
     shortname = event.pattern_match.group(1)
     if not shortname:
-        await eor(event, "`Give name of plugin which u want to unload`")
+        await eor(event, "`Give name of plugin which you want to unload`")
         return
     lsd = os.listdir("addons")
     lst = os.listdir("plugins")
