@@ -8,6 +8,9 @@
 """
 ✘ Commands Available -
 
+• `{i}color <reply to any Black and White media>`
+    To make it Colorfull.
+
 • `{i}toon <reply to any media>`
     To make it toon.
 
@@ -88,6 +91,36 @@ async def sketch(e):
     await xx.delete()
     os.remove(file)
     os.remove("ulti.png")
+
+@ultroid_cmd(pattern="color$")
+async def _(event):
+    reply = await event.get_reply_message()
+    if not reply.media:
+        return await eor(event, "`Reply To a Black and White Image`")
+    xx = await eor(event, "`Coloring image 🎨🖌️...`")
+    image = await ultroid_bot.download_media(reply.media)
+    img = cv2.VideoCapture(image)
+    ret, frame = img.read()
+    cv2.imwrite("cipherx.jpg", frame)
+    if udB.get("DEEP_API"):
+        key = Redis("DEEP_API")
+    else:
+        key = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
+    r = requests.post(
+        "https://api.deepai.org/api/colorizer",
+        files={"image": open("ult.jpg", "rb")},
+        headers={"api-key": key},
+    )
+    os.remove("cipherx.jpg")
+    os.remove(image)
+    if "status" in r.json():
+        return await event.edit(
+            r.json()["status"] + "\nGet api and set `{i}setredis DEEP_API key`"
+        )
+    r_json = r.json()["output_url"]
+    await ultroid_bot.send_file(event.chat_id, r_json, reply_to=reply)
+    await xx.delete()
+
 
 
 @ultroid_cmd(
@@ -367,7 +400,7 @@ async def ultd(event):
     )
     centers = np.uint8(centers)
     ish = centers[labels.flatten()]
-    ultroid = ish.reshape((ult.shape))
+    ultroid = ish.reshape(ult.shape)
     cv2.imwrite("ult.jpg", ultroid)
     await event.client.send_file(
         event.chat_id, "ult.jpg", force_document=False, reply_to=event.reply_to_msg_id
@@ -446,7 +479,7 @@ async def ultd(event):
     got = upf(file)
     lnk = f"https://telegra.ph{got[0]}"
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=blurpify&image={lnk}"
+        f"https://nekobot.xyz/api/imagegen?type=blurpify&image={lnk}",
     ).json()
     ms = r.get("message")
     utd = url(ms)
