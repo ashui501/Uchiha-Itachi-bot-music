@@ -149,7 +149,7 @@ async def _(ult):
     await xx.edit("`Downloading Logs...`")
     with open("cipherx.txt", "w") as log:
         log.write(app.get_log())
-    ok = app.get_log()
+    k = app.get_log()
     key = (
         requests.post("https://nekobin.com/api/documents", json={"content": k})
         .json()
@@ -159,7 +159,7 @@ async def _(ult):
     url = f"https://nekobin.com/{key}"
     await ultroid.send_file(
         file="cipherx.log",
-        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here](https://nekobin.com/{key}) too!",
+        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here](https://nekobin.com/{key}) too",
     )
     await xx.edit("Done")
     await xx.delete()
