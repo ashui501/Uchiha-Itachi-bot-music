@@ -158,6 +158,7 @@ async def _(ult):
     )
     url = f"https://nekobin.com/{key}"
     await ultroid.send_file(
+        ult.chat_id,
         file="cipherx.log",
         caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here](https://nekobin.com/{key}) too",
     )
