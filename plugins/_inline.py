@@ -150,7 +150,7 @@ async def e(o):
 ✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
 ✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
-✵ ✨ [CɪᴘʜᴇʀX](t.me/hackintush) is ᴛhᴇ Bᴇsᴛ ✨
+✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨
 """.format(
             OWNER_NAME,
             ultroid_version,
@@ -167,7 +167,7 @@ async def e(o):
                 text=ALIVEMSG,
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 buttons=[
-                    [Button.url(text="CɪᴘʜᴇʀX DM", url="t.me/Hackintush")],
+                    [Button.url(text="✵CɪᴘʜᴇʀX DM✵", url="t.me/Hackintush")],
                 ],
             ),
         ]
