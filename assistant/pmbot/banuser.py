@@ -11,7 +11,7 @@ async def banhammer(event):
         blacklist_user(target)
         await asst.send_message(event.chat_id, f"#BAN\nUser - {target}")
         await asst.send_message(
-            target
+            target,
             "`GoodBye! You have been banned.`\n**Further messages you send will not be forwarded.**",
         )
     else:
