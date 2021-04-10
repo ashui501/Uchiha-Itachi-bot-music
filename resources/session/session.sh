@@ -1,18 +1,19 @@
-# !/bin/bash
+#!/usr/bin/env bash
 # Megatron Bot
 # Copyright (C) 2020 Mᴇgᴀᴛrᴏn 
 #
 # This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
-# PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
 
 clear
 echo -e "\e[1m"
-echo  "   _______       __             _  __" 
-echo  "  / ____(_)___  / /_  ___  ____| |/ /" 
-echo  " / /   / / __ \/ __ \/ _ \/ ___/   /" 
-echo  "/ /___/ / /_/ / / / /  __/ /  /   |" 
-echo  "\____/_/ .___/_/ /_/\___/_/  /_/|_|" 
-echo  "      /_/" 
+echo "    _______       __             _  __ "
+echo "   / ____(_)___  / /_  ___  ____| |/ / "
+echo "  / /   / / __ \/ __ \/ _ \/ ___/   /  "
+echo " / /___/ / /_/ / / / /  __/ /  /   |   "
+echo " \____/_/ .___/_/ /_/\___/_/  /_/|_|   "
+echo "       /_/                             "
 echo -e "\e[0m"
 sec=5
 spinner=(⣻ ⢿ ⡿ ⣟ ⣯ ⣷)
