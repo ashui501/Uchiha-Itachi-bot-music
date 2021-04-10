@@ -9,19 +9,19 @@
 ✘ Commands Available -
 
 • `{i}pdf <page num> <reply to pdf file>`
-    Extract nd Send page as a Image.(note-: For Extraction all pages just use .pdf)
+    Extract and Send page as a Image.(note-: For Extraction all pages just use .pdf)
 
 • `{i}pdtext <page num> <reply to pdf file>`
     Extract Text From the Pdf.(note-: For Extraction all text just use .pdtext)
 
 • `{i}pdscan <reply to image>`
-    It scan, crop nd send img as pdf.
+    It scan, crop nd send image as pdf.
 
 • `{i}pdsave <reply to image/pdf>`
-    It scan, crop nd save file to merge u can merge many pages as a single pdf.
+    It scan, crop and save file to merge u can merge many pages as a single pdf.
 
 • `{i}pdsend `
-    Merge nd send the Pdf to collected from .pdsave.
+    Merge and send the Pdf to collected from .pdsave.
 """
 
 import os
@@ -48,7 +48,7 @@ async def pdfseimg(event):
     ok = await event.get_reply_message()
     msg = event.pattern_match.group(1)
     if not ok and ok.document and ok.document.mime_type == "application/pdf":
-        await eor(event, "`Reply The pdf u Want to Download..`")
+        await eor(event, "`Reply The pdf you Want to Download..`")
         return
     xx = await eor(event, "Processing...")
     if not msg:
@@ -107,7 +107,7 @@ async def pdfsetxt(event):
             for page_num in range(pdf.numPages):
                 pageObj = pdf.getPage(page_num)
                 txt = pageObj.extractText()
-                f.write("Page {0}\n".format(page_num + 1))
+                f.write("Page {}\n".format(page_num + 1))
                 f.write("".center(100, "-"))
                 f.write(txt)
         await event.client.send_file(
@@ -231,7 +231,7 @@ async def savepdf(event):
         for cnt in contours:
             hull = cv2.convexHull(cnt)
             polygons.append(
-                cv2.approxPolyDP(hull, 0.01 * cv2.arcLength(hull, True), False)
+                cv2.approxPolyDP(hull, 0.01 * cv2.arcLength(hull, True), False),
             )
             sortedPoly = sorted(polygons, key=cv2.contourArea, reverse=True)
             cv2.drawContours(image, sortedPoly[0], -1, (0, 0, 255), 5)
