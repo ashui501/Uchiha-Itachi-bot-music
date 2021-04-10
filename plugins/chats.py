@@ -71,19 +71,19 @@ async def _(e):
                 functions.messages.CreateChatRequest(
                     users=["@CipherXGroupManagerBot"],
                     title=group_name,
-                )
+                ),
             )
             created_chat_id = r.chats[0].id
             await e.client(
                 functions.messages.DeleteChatUserRequest(
                     chat_id=created_chat_id,
                     user_id="@CipherXGroupManagerBot",
-                )
+                ),
             )
             result = await e.client(
                 functions.messages.ExportChatInviteRequest(
                     peer=created_chat_id,
-                )
+                ),
             )
             await xx.edit(
                 f"Your [{group_name}]({result.link}) Group Made CɪᴘʜᴇʀX!",
@@ -96,15 +96,15 @@ async def _(e):
             r = await e.client(
                 functions.channels.CreateChannelRequest(
                     title=group_name,
-                    about="(c) @Hackintush",
+                    about="(c) @Hackintush Exclusive",
                     megagroup=False if type_of_group == "c" else True,
-                )
+                ),
             )
             created_chat_id = r.chats[0].id
             result = await e.client(
                 functions.messages.ExportChatInviteRequest(
                     peer=created_chat_id,
-                )
+                ),
             )
             await xx.edit(
                 f"Your [{group_name}]({result.link}) Group/Channel Has been made CɪᴘʜᴇʀX!",
