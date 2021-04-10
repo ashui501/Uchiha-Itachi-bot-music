@@ -17,7 +17,7 @@
 
 import asyncio
 from datetime import datetime
-
+from cython.functions.pmpermit_db import *
 from telethon import events
 from telethon.tl import functions, types
 
@@ -49,7 +49,7 @@ async def set_not_afk(event):
     back_alive = datetime.now()
     afk_end = back_alive.replace(microsecond=0)
     if afk_start != {}:
-        total_afk_time = str((afk_end - afk_start))
+        total_afk_time = str(afk_end - afk_start)
     current_message = event.message.message
     if "afk" not in current_message and "yes" in USER_AFK:
         try:
@@ -110,11 +110,14 @@ async def set_not_afk(event):
 
 
 @ultroid_bot.on(
-    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
+    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private)),
 )
 async def on_afk(event):
     if event.fwd_from:
         return
+    if event.is_private:
+        if not is_approved(event.chat_id):
+            return
     global USER_AFK
     global afk_time
     global last_afk_message
@@ -123,11 +126,12 @@ async def on_afk(event):
     back_alivee = datetime.now()
     afk_end = back_alivee.replace(microsecond=0)
     if afk_start != {}:
-        total_afk_time = str((afk_end - afk_start))
+        total_afk_time = str(afk_end - afk_start)
     current_message_text = event.message.message.lower()
     if "afk" in current_message_text:
         return False
-    if USER_AFK and not (await event.get_sender()).bot:
+    sender = await event.get_sender()
+    if USER_AFK and not (sender.bot or sender.verified):
         msg = None
         if reason:
             message_to_reply = (
@@ -188,7 +192,7 @@ async def _(event):
         pic = None
     if not USER_AFK:
         last_seen_status = await ultroid_bot(
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp()),
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             afk_time = datetime.datetime.now()
