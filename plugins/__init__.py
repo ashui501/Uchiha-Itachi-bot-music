@@ -14,14 +14,23 @@ from cython.functions import *
 from cython.functions.all import *
 from cython.functions.broadcast_db import *
 from cython.functions.gban_mute_db import *
+from cython.functions.goodbye_db import *
 from cython.functions.google_image import googleimagesdownload
 from cython.functions.sudos import *
+from cython.functions.welcome_db import *
 from cython.utils import *
 
 from strings import get_string
 
+try:
+    import glitch_me
+except ModuleNotFoundError:
+    os.system(
+        "git clone https://github.com/1Danish-00/glitch_me.git && pip install -e ./glitch_me"
+    )
+    
 start_time = time.time()
-ultroid_version = "v0.0.4"
+ultroid_version = "v0.0.5"
 OWNER_NAME = ultroid_bot.me.first_name
 OWNER_ID = ultroid_bot.me.id
 
