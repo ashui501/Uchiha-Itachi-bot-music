@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Megatron Bot
 # Copyright (C) 2020 Mᴇgᴀᴛrᴏn 
 #
@@ -6,19 +6,28 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
 
-from telethon.sessions import StringSession
-from telethon.sync import TelegramClient
-
-print("Please ensure that you have your API ID and API HASH.")
-print("")
-
-API_ID = int(input("Enter API ID: "))
-API_HASH = input("Enter API HASH: ")
-
-with TelegramClient(StringSession(), API_ID, API_HASH) as client:
-    ult = client.send_message("me", client.session.save())
-    ult.reply(
-        "The above is the `SESSION` for your current session.")
-    print("")
-    print("String Session for the current login has been generated.")
-    print("Check your Telegram Saved messages for your SESSION.")
+clear
+echo -e "\e[1m"
+echo "    _______       __             _  __ "
+echo "   / ____(_)___  / /_  ___  ____| |/ / "
+echo "  / /   / / __ \/ __ \/ _ \/ ___/   /  "
+echo " / /___/ / /_/ / / / /  __/ /  /   |   "
+echo " \____/_/ .___/_/ /_/\___/_/  /_/|_|   "
+echo "       /_/                             "
+echo -e "\e[0m"
+sec=5
+spinner=(⣻ ⢿ ⡿ ⣟ ⣯ ⣷)
+while [ $sec -gt 0 ]; do
+    echo -ne "\e[33m ${spinner[sec]} Starting dependency installation in $sec seconds...\r"
+    sleep 1
+    sec=$(($sec - 1))
+done
+echo -e "\e[1;32mInstalling Dependencies ---------------------------\e[0m\n" # Don't Remove Dashes / Fix it
+apt-get update
+apt-get upgrade -y
+pkg upgrade -y
+pkg install python wget -y
+wget https://raw.githubusercontent.com/CipherX1-ops/Megatron/main/resources/session/ssgen.py
+pip install telethon
+clear
+python3 ssgen.py
