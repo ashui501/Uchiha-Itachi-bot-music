@@ -38,7 +38,6 @@ if add_ons:
 else:
     zhelps = get_string("inline_3")
 # ============================================#
-ALIVEMSG = 
     
 @in_pattern 
 async def inline_handler(event):
