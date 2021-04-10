@@ -17,8 +17,6 @@
 • `{i}save <filename.ext>`
     Reply to a text msg to save it in a file.
 
-• `{i}open`
-    Reply to a file to reveal it's text.
 """
 
 import asyncio
@@ -35,6 +33,8 @@ opn = []
     pattern="dl ?(.*)",
 )
 async def download(event):
+    if not event.is_reply:
+        return await eor(event, "`Reply to a Media Message`")
     xx = await eor(event, get_string("com_1"))
     kk = event.pattern_match.group(1)
     s = dt.now()
@@ -56,7 +56,7 @@ async def download(event):
                             xx,
                             k,
                             "Downloading...",
-                        )
+                        ),
                     ),
                 )
             else:
@@ -77,7 +77,10 @@ async def download(event):
                 )
     e = datetime.now()
     t = time_formatter(((e - s).seconds) * 1000)
-    await eod(xx, get_string("udl_2").format(o, t))
+    if t:
+        await eod(xx, get_string("udl_2").format(o, t))
+    else:
+        await eod(xx, f"Downloaded `{o}` in `0 second(s)`")
 
 
 @ultroid_cmd(
@@ -96,6 +99,8 @@ async def download(event):
                 event.chat_id,
                 kk,
                 caption=kk,
+                force_document=True,
+                thumb="resources/extras/cipherx.jpg",
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(
                         d,
@@ -139,37 +144,6 @@ async def _(event):
             await event.client.send_file(event.chat_id, input_str)
             await xx.delete()
             os.remove(input_str)
-
-
-@ultroid_cmd(
-    pattern="open$",
-)
-async def _(event):
-    xx = await eor(event, get_string("com_1"))
-    if event.reply_to_msg_id:
-        a = await event.get_reply_message()
-        if a.media:
-            b = await a.download_media()
-            c = open(b, "r")
-            d = c.read()
-            c.close()
-            n = 4096
-            for bkl in range(0, len(d), n):
-                opn.append(d[bkl : bkl + n])
-            for bc in opn:
-                await event.client.send_message(
-                    event.chat_id,
-                    f"```{bc}```",
-                    reply_to=event.reply_to_msg_id,
-                )
-            await event.delete()
-            opn.clear()
-            os.remove(b)
-            await xx.delete()
-        else:
-            return await eod(xx, "`Reply to a readable file`", time=10)
-    else:
-        return await eod(xx, "`Reply to a readable file`", time=10)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
