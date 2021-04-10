@@ -48,7 +48,7 @@ async def _(event):
         title = v["title"]
         ids = v["id"]
         duration = v["duration"]
-        thumb = f"https://img.youtube.com/vi/{ids}/cipherx.jpg"
+        thumb = f"https://img.youtube.com/vi/{ids}/hqdefault.jpg"
         text = f"**•Tɪᴛʟᴇ•** `{title}`\n\n**••[Lɪɴᴋ]({link})••**\n\n**••Dᴜʀᴀᴛɪᴏɴ••** `{duration}`\n\n\n"
         desc = f"Title : {title}\nDuration : {duration}"
         results.append(
