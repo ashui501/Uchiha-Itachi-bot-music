@@ -38,7 +38,8 @@ if add_ons:
 else:
     zhelps = get_string("inline_3")
 # ============================================#
-
+ALIVEMSG = 
+    
 @in_pattern 
 async def inline_handler(event):
     builder = event.builder
@@ -142,7 +143,16 @@ async def e(o):
         b = o.builder
         uptime = grt(time.time() - start_time)
         header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
-        ALIVEMSG = get_string("alive_1").format(
+        ALIVEMSG = """
+**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n\n
+✵ **Ⲟⲱⲛⲉʀ** - `{}`
+✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
+✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`
+✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
+✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
+✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
+✵ ✨ [CɪᴘʜᴇʀX](t.me/hackintush) is ᴛhᴇ Bᴇsᴛ ✨
+""".format(
             OWNER_NAME,
             ultroid_version,
             uptime,
