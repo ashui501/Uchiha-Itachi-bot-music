@@ -31,7 +31,7 @@ from . import *
 
 @ultroid_cmd(pattern="add ?(.*)", allow_sudo=False)
 async def broadcast_adder(event):
-    if "addsudo" in event.text:  # weird fix
+    if not event.text[4] == " ":  # weird fix
         return
     msgg = event.pattern_match.group(1)
     x = await eor(event, get_string("bd_1"))
@@ -92,6 +92,8 @@ async def broadcast_adder(event):
 
 @ultroid_cmd(pattern="rem ?(.*)", allow_sudo=False)
 async def broadcast_remover(event):
+    if not event.text[4] == " ":  # weird fix
+        return
     chat_id = event.pattern_match.group(1)
     x = await eor(event, get_string("com_1"))
     if chat_id == "all":
@@ -150,8 +152,6 @@ async def list_all(event):
 
 @ultroid_cmd(pattern="forward ?(.*)", allow_sudo=False)
 async def forw(event):
-    if event.fwd_from:
-        return
     if not event.is_reply:
         await eor(event, "Reply to a message to broadcast.")
         return
@@ -163,8 +163,6 @@ async def forw(event):
     sent_count = 0
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        previous_message.message
-        previous_message.raw_text
     error_count = 0
     for channel in channels:
         try:
@@ -173,16 +171,11 @@ async def forw(event):
             await x.edit(
                 f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
             )
-        except Exception as error:
+        except Exception:
             try:
                 await ultroid_bot.send_message(
                     Var.LOG_CHANNEL, f"Error in sending at {channel}."
                 )
-                await ultroid_bot.send_message(Var.LOG_CHANNEL, "Error! " + str(error))
-                if error == "The message cannot be empty unless a file is provided":
-                    return await x.edit(
-                        "For sending files, upload in Saved Messages and reply .forward to it."
-                    )
             except BaseException:
                 pass
             error_count += 1
@@ -258,7 +251,7 @@ async def sending(event):
                             == "The message cannot be empty unless a file is provided"
                         ):
                             return await x.edit(
-                                f"For sending files, upload in Saved Messages and reply {hndlr}forward to in."
+                                f"For sending files, upload in Saved Messages and reply {hndlr}forward to in.",
                             )
                     except BaseException:
                         pass
@@ -298,7 +291,7 @@ async def sending(event):
                             == "The message cannot be empty unless a file is provided"
                         ):
                             return await x.edit(
-                                f"For sending files, upload in Saved Messages and reply {hndlr}forward to in."
+                                f"For sending files, upload in Saved Messages and reply {hndlr}forward to in.",
                             )
                     except BaseException:
                         pass
