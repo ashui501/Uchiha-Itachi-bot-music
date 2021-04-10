@@ -26,7 +26,7 @@ else:
     WARN_PIC = PMPIC
 
 # ================================================#
-notmine = "This bot is for {}".format(OWNER_NAME)
+notmine = "This bot is for {OWNER_NAME}"
 ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = get_string("inline_1")
 
@@ -139,7 +139,8 @@ async def users(event):
 async def e(o):
     if len(o.text) == 0:
         b = o.builder
-        uptime = grt((time.time() - start_time))
+        uptime = grt(time.time() - start_time)
+        header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
         ALIVEMSG = get_string("alive_1").format(
             OWNER_NAME,
             ultroid_version,
@@ -149,7 +150,7 @@ async def e(o):
             Repo().active_branch,
         )
         res = [
-                await b.article(
+            await b.article(
                 title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
                 url="https://t.me/Hackintush",
                 description=" (c) CɪᴘʜᴇʀX ",
@@ -158,7 +159,7 @@ async def e(o):
                 buttons=[
                     [Button.url(text="CɪᴘʜᴇʀX DM", url="t.me/Hackintush")],
                 ],
-            )
+            ),
         ]
         await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Ⲣⲟʀⲧⲁⳑ", switch_pm_param="start")
 
@@ -202,8 +203,8 @@ if Var.BOT_USERNAME is not None and asst is not None:
                     [
                         Button.url(
                             "⚙️Sᴇᴛᴛɪɴɢs⚙️",
-                            url=f"https://t.me/{bnn}?start={ultroid_bot.me.id}",
-                        )
+                            url=f"https://t.me/{bnn}?start=set",
+                        ),
                     ],
                     [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
                 ],
@@ -220,7 +221,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                     [
                         Button.url("✵NekoBin✵", url=f"{link}"),
                         Button.url("✵Raw✵", url=f"{link_raw}"),
-                    ]
+                    ],
                 ],
             )
             await event.answer([result] if result else None)
@@ -251,7 +252,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
 
     @callback("upp")
     async def _(event):
-        uptime = grt((time.time() - start_time))
+        uptime = grt(time.time() - start_time)
         pin = f"✵ Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
@@ -264,55 +265,62 @@ if Var.BOT_USERNAME is not None and asst is not None:
                     "✵ Rᴇxᴛᴇsᴛᴇr",
                     query="rex ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
                     query="app ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ Mᴏᴅᴅᴇᴅ Aᴘᴘs",
                     query="mods ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
                     query="google ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
                     query="yahoo ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
                     query="yt ",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "✵ CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
                     query="clipart ",
                     same_peer=True,
-                )
+                ),
+            ],
+            [
+                Button.switch_inline(
+                    "OʀᴀɴɢᴇFᴏx🦊Rᴇᴄᴏᴠᴇʀʏ",
+                    query="ofox ",
+                    same_peer=True,
+                ),
             ],
             [
                 Button.inline(
                     "<- Bᴀᴄᴋ",
                     data="open",
-                )
+                ),
             ],
         ]
         await e.edit(buttons=button, link_preview=False)
@@ -463,7 +471,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
         except BaseException:
             pass
         if help_string == "":
-            reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
+            reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
@@ -480,7 +488,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 reply_pop_up_alert = notmine
                 await event.answer(reply_pop_up_alert, cache_time=0)
         except BaseException:
-            halps = "Do .help {} to get the list of commands.".format(plugin_name)
+            halps = f"Do .help {plugin_name} to get the list of commands."
             await event.edit(halps)
 
     @callback(
@@ -514,7 +522,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 except BaseException:
                     pass
         if help_string == "":
-            reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
+            reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
@@ -531,7 +539,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 reply_pop_up_alert = notmine
                 await event.answer(reply_pop_up_alert, cache_time=0)
         except BaseException:
-            halps = "Do .help {} to get the list of commands.".format(plugin_name)
+            halps = f"Do .help {plugin_name} to get the list of commands."
             await event.edit(halps)
 
 
@@ -555,7 +563,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
             "{} {} {}".format(
                 random.choice(list(multi)), x, random.choice(list(mult2i))
             ),
-            data="us_plugin_{}".format(x),
+            data=f"us_plugin_{x}",
         )
         for x in helpable_plugins
     ]
@@ -576,7 +584,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 Button.inline(
                     "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
                 ),
-            )
+            ),
         ]
     else:
         pairs = pairs[
@@ -609,7 +617,7 @@ def paginate_addon(page_number, loaded_plugins, prefix):
             "{} {} {}".format(
                 random.choice(list(multi)), x, random.choice(list(mult2i))
             ),
-            data="add_plugin_{}".format(x),
+            data=f"add_plugin_{x}",
         )
         for x in helpable_plugins
     ]
@@ -630,7 +638,7 @@ def paginate_addon(page_number, loaded_plugins, prefix):
                 Button.inline(
                     "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
                 ),
-            )
+            ),
         ]
     else:
         pairs = pairs[
