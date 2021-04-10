@@ -14,7 +14,8 @@ from platform import python_version as pyver
 
 from git import Repo
 from support import *
-from telethon import Button, __version__, custom, events, functions 
+from cython import __version__ as UltVer
+from telethon import Button, __version__
 from telethon.tl.types import InputWebDocument
 from cython.dB.database import Var
 from . import *
@@ -26,7 +27,7 @@ else:
     WARN_PIC = PMPIC
 
 # ================================================#
-notmine = "This bot is for {OWNER_NAME}"
+notmine = f"This bot is for {OWNER_NAME}"
 ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = get_string("inline_1")
 
