@@ -126,7 +126,10 @@ async def download(event):
         await x.edit(f"`{kk}`\nTime Taken: `{t}`")
     except BaseException:
         pass
-    await eod(xx, f"Uploaded `{kk}` in `{t}`", time=5)
+    if t:
+        await eod(xx, f"Uploaded `{kk}` in `{t}`", time=5)
+    else:
+        await eod(xx, f"Uploaded `{kk}` in `0 second(s)`")
 
 
 @ultroid_cmd(
