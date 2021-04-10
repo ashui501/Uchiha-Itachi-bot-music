@@ -3,7 +3,7 @@
 # This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
 # PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>.
 
-FROM python:3.9.2-slim-buster
+FROM ultroidteam/ultroid:0.0.3
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     dpkg -i ./google-chrome-stable_current_amd64.deb; apt -fqqy install && \
     rm ./google-chrome-stable_current_amd64.deb
