@@ -83,11 +83,10 @@ PMCMDS = [
 @ultroid_bot.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def permitpm(event):
     user = await event.get_chat()
-    if user.bot or user.is_self:
+    if user.bot or user.is_self or user.verified:
         return
-    apprv = is_approved(user.id)
-    if apprv and (Redis("PMLOG") == "True"):
-        await event.forward_to(Var.LOG_CHANNEL)
+    if Redis("PMLOG") == "True":
+        pl = udB.get("PMLOGGROUP")
 
 
 sett = Redis("PMSETTING")
@@ -129,8 +128,11 @@ if sett == "True" and sett != "False":
         apprv = is_approved(user.id)
         if not apprv and event.text != UND:
             name = user.first_name
-            fullname = (user.first_name, user.last_name)
-            username = user.username
+            if user.last_name:
+                fullname = f"{name} {user.last_name}"
+            else:
+                fullname = name
+            username = f"@{user.username}"
             mention = f"[{get_display_name(user)}](tg://user?id={user.id})"
             count = len(get_approved())
             try:
@@ -302,13 +304,13 @@ if sett == "True" and sett != "False":
             if is_approved(replied_user.id):
                 disapprove_user(replied_user.id)
                 await e.edit(
-                    f"[{name0}](tg://user?id={replied_user.id}) `Disaproved to PM!`"
+                    f"[{name0}](tg://user?id={replied_user.id}) `Disaproved to PM!`",
                 )
                 await asyncio.sleep(5)
                 await e.delete()
             else:
                 await e.edit(
-                    f"[{name0}](tg://user?id={replied_user.id}) was never approved!"
+                    f"[{name0}](tg://user?id={replied_user.id}) was never approved!",
                 )
                 await asyncio.sleep(5)
                 await e.delete()
@@ -317,7 +319,7 @@ if sett == "True" and sett != "False":
             aname = await e.client.get_entity(bbb.id)
             if str(bbb.id) in DEVLIST:
                 return await eor(
-                    e, "`Lol, He is my Developer\nHe Can't Be DisApproved.`"
+                    e, "`Lol, He is my Developer\nHe Can't Be DisApproved.`",
                 )
             name0 = str(aname.first_name)
             if is_approved(bbb.id):
