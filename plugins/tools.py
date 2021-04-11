@@ -28,7 +28,7 @@
     Reply a User to Get His Id
     Without Replying You Will Get the Chat's Id
 
-• `{i}sg`
+• `{i}sg <reply to a user><username/id>`
     Reply The User to Get His Name History
 
 • `{i}tr <dest lang code> <input>`
@@ -50,7 +50,8 @@ import cv2
 import emoji
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
+from telethon.tl.types import (ChannelParticipantAdmin,
+                               ChannelParticipantsBots, User)
 from telethon.utils import pack_bot_file_id
 
 from . import *
@@ -122,7 +123,7 @@ async def _(ult):
     if not input_str:
         chat = to_write_chat
     else:
-        mentions = "**Bots in **{}: \n".format(input_str)
+        mentions = f"**Bots in **{input_str}: \n"
         try:
             chat = await ultroid_bot.get_entity(input_str)
         except Exception as e:
@@ -176,7 +177,7 @@ async def _(e):
         c = await a.download_media(
             "resources/downloads/",
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, z, toime, "**Dᴏᴡɴʟᴏᴀᴅɪɴɢ...**")
+                progress(d, t, z, toime, "**Dᴏᴡɴʟᴏᴀᴅɪɴɢ...**"),
             ),
         )
         await z.edit("**Dᴏᴡɴʟᴏᴀᴅᴇᴅ...\nNᴏᴡ Cᴏɴᴠᴇʀᴛɪɴɢ...**")
@@ -225,7 +226,7 @@ async def _(e):
             video_note=True,
             reply_to=a,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, z, taime, "**Uᴘʟᴏᴀᴅɪɴɢ...**")
+                progress(d, t, z, taime, "**Uᴘʟᴏᴀᴅɪɴɢ...**"),
             ),
         )
         await z.delete()
@@ -265,27 +266,20 @@ async def _(event):
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     stdout, stderr = await process.communicate()
-    OUT = f"<b>☞ Ⲃⲁⲋⲏ\n\n• Ⲥⲟⲙⲙⲁⲛⲇ:</b>\n<code>{cmd}</code> \n\n"
+    OUT = f"**☞ Ⲃⲁⲋⲏ\n\n• Ⲥⲟⲙⲙⲁⲛⲇ:**\n`{cmd}` \n\n"
     e = stderr.decode()
     if e:
-        OUT += f"<b>• Ⲉʀʀⲟʀ:</b> \n<code>{e}</code>\n"
+        OUT += f"**• Ⲉʀʀⲟʀ:** \n`{e}`\n"
     o = stdout.decode()
     if not o and not e:
         o = "Ⲋυⲥⲥⲉⲋⲋ"
-        OUT += f"<b>• Ⲟυⲧⲣυⲧ:</b>\n<code>{o}</b>"
+        OUT += f"**• Ⲟυⲧⲣυⲧ:**\n`{o}`"
     else:
         _o = o.split("\n")
         o = "\n".join(_o)
-        OUT += f"<b>• Ⲟυⲧⲣυⲧ:</b>\n<code>{o}</code>"
+        OUT += f"**• Ⲟυⲧⲣυⲧ:**\n`{o}`"
     if len(OUT) > 4096:
-        ultd = (
-            OUT.replace("<code>", "")
-            .replace("</code>", "")
-            .replace("<b>", "")
-            .replace("</b>", "")
-            .replace("<i>", "")
-            .replace("</i>", "")
-        )
+        ultd = OUT.replace("`", "").replace("*", "").replace("_", "")
         with io.BytesIO(str.encode(ultd)) as out_file:
             out_file.name = "bash.txt"
             await event.client.send_file(
@@ -298,7 +292,7 @@ async def _(event):
             )
             await xx.delete()
     else:
-        await eod(xx, OUT, parse_mode="html")
+        await eod(xx, OUT)
 
 
 @ultroid_cmd(
@@ -341,18 +335,14 @@ async def _(event):
         evaluation = stdout
     else:
         evaluation = "Ⲋυⲥⲥⲉⲋⲋ"
-    final_output = "<i>►</i> <b>Ⲉⳳⲁⳑ</b>\n<code>{}</code>\n\n<i>►</i><b>Ⲟυⲧⲣυⲧ</b>: \n<code>{}</code>".format(
-        cmd, evaluation
+    final_output = (
+        "__►__ **Ⲉⳳⲁⳑ**\n```{}``` \n\n __►__ **Ⲟυⲧⲣυⲧ**: \n```{}``` \n".format(
+            cmd,
+            evaluation,
+        )
     )
     if len(final_output) > 4096:
-        ultd = (
-            final_output.replace("<code>", "")
-            .replace("</code>", "")
-            .replace("<b>", "")
-            .replace("</b>", "")
-            .replace("<i>", "")
-            .replace("</i>", "")
-        )
+        ultd = final_output.replace("`", "").replace("*", "").replace("_", "")
         with io.BytesIO(str.encode(ultd)) as out_file:
             out_file.name = "eval.txt"
             await ultroid_bot.send_file(
@@ -365,7 +355,7 @@ async def _(event):
             )
             await xx.delete()
     else:
-        await eod(xx, final_output, parse_mode="html")
+        await eod(xx, final_output)
 
 
 async def aexec(code, event):
@@ -374,29 +364,31 @@ async def aexec(code, event):
     exec(
         f"async def __aexec(e, client): "
         + "\n message = event = e"
-        + "".join(f"\n {l}" for l in code.split("\n"))
+        + "".join(f"\n {l}" for l in code.split("\n")),
     )
 
     return await locals()["__aexec"](e, e.client)
 
 
 @ultroid_cmd(
-    pattern="sg(?: |$)(.*)",
+    pattern="sg ?(.*)",
 )
 async def lastname(steal):
-    if steal.fwd_from:
+    mat = steal.pattern_match.group(1)
+    if not (steal.is_reply or mat):
+        await eor(steal, "`Use this command with reply or give Username/id...`")
         return
-    if not steal.reply_to_msg_id:
-        await steal.edit("Reply to any user message.")
-        return
+    if mat:
+        user_id = await get_user_id(mat)
     message = await steal.get_reply_message()
+    if message:
+        user_id = message.sender.id
     chat = "@SangMataInfo_bot"
-    user_id = message.sender.id
     id = f"/search_id {user_id}"
-    if message.sender.bot:
-        await steal.edit("Reply to actual users message.")
-        return
-    lol = await eor(steal, "Processingg !!!!!")
+    check = await ultroid_bot.get_entity(user_id)
+    if not isinstance(check, User) or check.bot:
+        return await eor(steal, "Reply to Actual User's Message !")
+    lol = await eor(steal, "`Processing...`")
     try:
         async with ultroid_bot.conversation(chat) as conv:
             try:
@@ -422,7 +414,8 @@ async def lastname(steal):
                     await lol.edit(respond.message)
                     await lol.reply(response.message)
             await steal.client.delete_messages(
-                conv.chat_id, [msg.id, responds.id, respond.id, response.id]
+                conv.chat_id,
+                [msg.id, responds.id, respond.id, response.id],
             )
     except TimeoutError:
         return await lol.edit("Error: @SangMataInfo_bot is not responding!.")
