@@ -1,3 +1,10 @@
+# Ultroid - UserBot
+# Copyright (C) 2020 TeamUltroid
+#
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+
 from random import randrange
 from re import compile as re_compile
 from re import findall
@@ -6,7 +13,7 @@ from urllib.request import urlopen
 import requests
 from bs4 import BeautifulSoup
 from orangefoxapi import OrangeFoxAPI
-from play_scraper import search 
+from play_scraper import search
 from rextester_py import rexec_aio
 from rextester_py.rextester_aio import UnknownLanguage
 from search_engine_parser import GoogleSearch, YahooSearch
@@ -88,6 +95,7 @@ async def _(e):
         )
         await e.answer([sed])
 
+
 @in_pattern("file ?(.*)")
 @in_owner
 async def _(e):
@@ -137,22 +145,6 @@ async def _(e):
     await dloader(e, host, file)
 
 
-@in_pattern("cipherx")
-@in_owner
-async def repo(e):
-    res = [
-        await e.builder.article(
-            title="CɪᴘʜᴇʀX Bᴏᴛ",
-            description="CɪᴘʜᴇʀX Bᴏᴛ | Telethon",
-            thumb=wb(ultpic, 0, "image/jpeg", []),
-            text="• **CɪᴘʜᴇʀX Bᴏᴛ** •",
-            buttons=[
-                [Button.url("CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ", url="t.me/FutureTechnologyGuardX")],
-            ],
-        ),
-    ]
-    await e.answer(res)
-
 @in_pattern("go")
 @in_owner
 async def gsearch(q_event):
@@ -196,10 +188,14 @@ async def gsearch(q_event):
                         [Button.url("Lɪɴᴋ", url=f"{link}")],
                         [
                             Button.switch_inline(
-                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="go ", same_peer=True
+                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                                query="go ",
+                                same_peer=True,
                             ),
                             Button.switch_inline(
-                                "Sʜᴀʀᴇ", query=f"go {match}", same_peer=False
+                                "Sʜᴀʀᴇ",
+                                query=f"go {match}",
+                                same_peer=False,
                             ),
                         ],
                     ],
@@ -208,6 +204,7 @@ async def gsearch(q_event):
         except IndexError:
             break
     await q_event.answer(searcher)
+
 
 @in_pattern("rex")
 @in_owner
@@ -219,7 +216,8 @@ async def rextester(event):
             if "|" in omk:
                 lang, codee = omk.split("|")
             else:
-                code = codee
+                lang = "python3"
+                codee = omk
             if lang == "php":
                 code = f"<?php {codee} ?>"
             else:
@@ -246,7 +244,9 @@ async def rextester(event):
             title="Error",  # By @ProgrammingError
             description="Invalid language choosen",
             text=f"The list of valid languages are\n\n{rex_langs}\n\n\nFormat to use Rextester is `@Yourassistantusername rex langcode|code`",
+        )
         await event.answer([resultm])
+
 
 @in_pattern("yahoo")
 @in_owner
@@ -259,7 +259,9 @@ async def gsearch(q_event):
             thumb=wb(yeah, 0, "image/jpeg", []),
             text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Yᴀʜᴏᴏ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
             buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="yahoo ", same_peer=True
+                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                query="yahoo ",
+                same_peer=True,
             ),
         )
         await q_event.answer([kkkk])
@@ -293,10 +295,14 @@ async def gsearch(q_event):
                         [Button.url("Lɪɴᴋ", url=f"{link}")],
                         [
                             Button.switch_inline(
-                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="yahoo ", same_peer=True
+                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                                query="yahoo ",
+                                same_peer=True,
                             ),
                             Button.switch_inline(
-                                "Sʜᴀʀᴇ", query=f"yahoo {match}", same_peer=False
+                                "Sʜᴀʀᴇ",
+                                query=f"yahoo {match}",
+                                same_peer=False,
                             ),
                         ],
                     ],
@@ -403,10 +409,14 @@ async def _(e):
                     [Button.url("Dᴏᴡɴʟᴏᴀᴅ", url=f"{link}")],
                     [
                         Button.switch_inline(
-                            "Mᴏʀᴇ Mᴏᴅs", query="mods ", same_peer=True
+                            "Mᴏʀᴇ Mᴏᴅs",
+                            query="mods ",
+                            same_peer=True,
                         ),
                         Button.switch_inline(
-                            "Sʜᴀʀᴇ", query=f"mods {quer}", same_peer=False
+                            "Sʜᴀʀᴇ",
+                            query=f"mods {quer}",
+                            same_peer=False,
                         ),
                     ],
                 ],
@@ -425,7 +435,9 @@ async def clip(e):
             title="Search Something",
             text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Cʟɪᴘᴀʀᴛ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
             buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="clipart ", same_peer=True
+                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                query="clipart ",
+                same_peer=True,
             ),
         )
         await e.answer([kkkk])
