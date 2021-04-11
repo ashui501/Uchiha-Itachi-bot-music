@@ -70,7 +70,7 @@ async def rf(e):
     await eor(e, f"Done : Filter `{wrd}` Removed.")
 
 
-@ultroid_cmd(pattern="listfilter$")
+@ultroid_cmd(pattern="listfilters$")
 async def lsnote(e):
     x = list_filter(e.chat_id)
     if x:
