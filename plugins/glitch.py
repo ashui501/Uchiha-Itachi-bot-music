@@ -23,7 +23,7 @@ async def _(e):
         return await eor(e, "reply to any media")
     xx = await eor(e, "`Gliching...`")
     ok = await bot.download_media(reply.media)
-    cmd = f"glitch_me gif --line_count 200 -f 10 -d 50 '{ok}' cipherx.gif"
+    cmd = f"glitch_me gif --line_count 100 -f 10 -d 50 '{ok}' cipherx.gif"
     stdout, stderr = await bash(cmd)
     await ultroid_bot.send_file(
         e.chat_id, "cipherx.gif", force_document=False, reply_to=reply
