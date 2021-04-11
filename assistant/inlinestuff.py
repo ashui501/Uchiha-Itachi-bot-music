@@ -39,7 +39,6 @@ swift, tcl, vb.net"""
 
 ofox_api = OrangeFoxAPI()
 
-
 @in_pattern("ofox")
 @in_owner
 async def _(e):
@@ -144,7 +143,23 @@ async def _(e):
     await e.edit(f"Uploading... `{file_name}` on {host}")
     await dloader(e, host, file)
 
-
+@in_pattern("cipherx")
+@in_owner
+async def repo(e):
+    res = [
+        await e.builder.article(
+            title="CɪᴘʜᴇʀX Bᴏᴛ",
+            description="CɪᴘʜᴇʀX Bᴏᴛ | Telethon",
+            thumb=wb(ultpic, 0, "image/jpeg", []),
+            text="• **CɪᴘʜᴇʀX Bᴏᴛ** •",
+            buttons=[
+                [Button.url("CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ", url="t.me/FutureTechnologyGuardX")],
+            ],
+        ),
+    ]
+    await e.answer(res)
+    
+    
 @in_pattern("go")
 @in_owner
 async def gsearch(q_event):
