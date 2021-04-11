@@ -4,29 +4,43 @@
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+"""
+✘ Commands Available -
+• `{i}update`
+    See changelogs if any update is available.
 
+• `{i}update now`
+    (Force)Update your bots to the latest version.
+"""
 import asyncio
 import sys
-from os import environ, execle, path, remove
+from os import environ, execl, path, remove
 
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from . import get_string
-
+from . import HELP, get_string, ultroid_version
 
 UPSTREAM_REPO_URL = "https://github.com/CipherX1-ops/Megatron"
 requirements_path = path.join(
-    path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
+    path.dirname(path.dirname(path.dirname(__file__))),
+    "requirements.txt",
 )
 
 
 async def gen_chlog(repo, diff):
-    ch_log = ""
-    d_form = "On %d/%m/%y at %H:%M:%S"
+    ac_br = repo.active_branch.name
+    ch_log = tldr_log = ""
+    ch = f"<b>CɪᴘʜᴇʀX Bot {ultroid_version} updates for <a href={UPSTREAM_REPO_URL}/tree/{ac_br}>[{ac_br}]</a>:</b>"
+    ch_tl = f"CɪᴘʜᴇʀX Bot {ultroid_version} updates for {ac_br}:"
+    d_form = "%d/%m/%y || %H:%M"
     for c in repo.iter_commits(diff):
-        ch_log += f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by `{c.author}`\n"
-    return ch_log
+        ch_log += f"\n\n💬 <b>{c.count()}</b> 🗓 <b>[{c.committed_datetime.strftime(d_form)}]</b>\n<b><a href={UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}>[{c.summary}]</a></b> 👨‍💻 <code>{c.author}</code>"
+        tldr_log += f"\n\n💬 {c.count()} 🗓 [{c.committed_datetime.strftime(d_form)}]\n[{c.summary}] 👨‍💻 {c.author}"
+    if ch_log:
+        return str(ch + ch_log), str(ch_tl + tldr_log)
+    else:
+        return ch_log, tldr_log
 
 
 async def updateme_requirements():
@@ -65,7 +79,7 @@ async def upstream(ups):
         if conf != "now":
             await eod(
                 pagal,
-                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the bot using** `.update now.`",
+                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the userbot using** `.update now.`",
                 time=30,
             )
             return
@@ -76,41 +90,33 @@ async def upstream(ups):
         repo.heads.main.set_tracking_branch(origin.refs.main)
         repo.heads.main.checkout(True)
     ac_br = repo.active_branch.name
-    #    if ac_br != "main":
-    #        await eod(
-    #            pagal,
-    #            f"**[UPDATER]:**` You are on ({ac_br})\n Please change to the main branch.`",
-    #        )
-    #        repo.__del__()
-    #        return
     try:
         repo.create_remote("upstream", off_repo)
     except BaseException:
         pass
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
-    changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
+    changelog, tl_chnglog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
     if "now" not in conf:
         if changelog:
-            changelog_str = get_string("upd_3").format(
-                ac_br, UPSTREAM_REPO_URL, ac_br, changelog
+            changelog_str = (
+                changelog + f"\n\nUse <code>{hndlr}update now</code> to update!"
             )
+            tldr_str = tl_chnglog + f"\n\nUse {hndlr}update now to update!"
             if len(changelog_str) > 4096:
                 await eor(pagal, get_string("upd_4"))
-                file = open("output.txt", "w+")
-                file.write(changelog_str)
+                file = open(f"cipherxupdates.txt", "w+")
+                file.write(tldr_str)
                 file.close()
                 await ups.client.send_file(
                     ups.chat_id,
-                    "output.txt",
+                    f"cipherxupdates.txt",
                     caption=get_string("upd_5").format(hndlr),
                     reply_to=ups.id,
                 )
-                remove("output.txt")
+                remove(f"cipherxupdates.txt")
             else:
-                return await eod(
-                    pagal, get_string("upd_6").format(changelog_str, hndlr)
-                )
+                return await eod(pagal, changelog_str, parse_mode="html")
         else:
             await eod(
                 pagal,
@@ -140,18 +146,20 @@ async def upstream(ups):
         if heroku_app is None:
             await eod(
                 pagal,
-                f"{txt}\n`Invalid Heroku credentials for updating bot dyno.`",
+                f"{txt}\n`Invalid Heroku credentials for updating bot.`",
                 time=10,
             )
             repo.__del__()
             return
         await eor(
-            pagal, "`CɪᴘʜᴇʀX bot dyno build in progress, please wait for it to complete...`"
+            pagal,
+            "`CɪᴘʜᴇʀX bot dyno build in progress, please wait for it to complete...`",
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
-            "https://", "https://api:" + Var.HEROKU_API + "@"
+            "https://",
+            "https://api:" + Var.HEROKU_API + "@",
         )
         if "heroku" in repo.remotes:
             remote = repo.remote("heroku")
@@ -180,3 +188,6 @@ async def upstream(ups):
         args = [sys.executable, "./resources/startup/deploy.sh"]
         execle(sys.executable, *args, environ)
         return
+
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
