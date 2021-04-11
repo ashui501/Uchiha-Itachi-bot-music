@@ -79,7 +79,7 @@ async def upstream(ups):
         if conf != "now":
             await eod(
                 pagal,
-                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the userbot using** `.update now.`",
+                f"**Unfortunately, the directory {error} does not seem to be a git repository.Or Maybe it just needs a sync verification with {GIT_REPO_NAME} But we can fix that by force updating the bot using** `.update now.`",
                 time=30,
             )
             return
