@@ -63,10 +63,10 @@ apt update && apt upgrade -y && apt install --no-install-recommends -y \
 echo '
         •• Cloning Repository
 '
-git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
 git clone https://github.com/buddhhu/search-engine-parser.git
 git clone https://github.com/buddhhu/ofox.git
 git clone https://github.com/ProgrammingError/rextester_py.git
+git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
 
 echo '
 	•• Getting Libraries and Installing
