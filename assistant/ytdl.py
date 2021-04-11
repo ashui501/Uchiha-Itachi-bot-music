@@ -205,6 +205,7 @@ async def _(fuk):
             f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
         \nby *{ytdl_data['uploader']}*",
+        ) 
         MSG = f"**{ytdl_data['title']}** Uploaded Successfully !"
         chat = fuk.chat_id
         whome = ultroid_bot
