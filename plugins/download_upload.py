@@ -14,9 +14,6 @@
 • `{i}dl <filename(optional)>`
     Reply to file to download.
 
-• `{i}save <filename.ext>`
-    Reply to a text msg to save it in a file.
-
 """
 
 import asyncio
@@ -130,29 +127,6 @@ async def download(event):
         await eod(xx, f"Uploaded `{kk}` in `{t}`", time=5)
     else:
         await eod(xx, f"Uploaded `{kk}` in `0 second(s)`")
-
-
-@ultroid_cmd(
-    pattern="save",
-)
-async def _(event):
-    input_str = event.text[6:]
-    xx = await eor(event, get_string("com_1"))
-    if event.reply_to_msg_id:
-        a = await event.get_reply_message()
-        if not a.message:
-            return await xx.edit("`Reply to a message`")
-        else:
-            b = open(input_str, "w")
-            b.write(str(a.message))
-            b.close()
-            await xx.edit(f"**Packing into** `{input_str}`")
-            await asyncio.sleep(2)
-            await xx.edit(f"**Uploading** `{input_str}`")
-            await asyncio.sleep(2)
-            await event.client.send_file(event.chat_id, input_str)
-            await xx.delete()
-            os.remove(input_str)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
