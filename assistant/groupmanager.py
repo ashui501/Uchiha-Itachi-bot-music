@@ -222,7 +222,7 @@ async def demote(event):
         return
     await event.reply("`Demoted this retard Successfully!`")
 
-@asst_cmd("pin") 
+@asst_cmd("gpin") 
 async def pin(event):
     userids = []
     noob = event.sender_id
