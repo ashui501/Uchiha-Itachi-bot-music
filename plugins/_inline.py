@@ -143,14 +143,16 @@ async def e(o):
         uptime = grt(time.time() - start_time)
         header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
         ALIVEMSG = """
-**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n\n
-✵ **Ⲟⲱⲛⲉʀ** - `{}`
-✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
-✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`
-✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`
-✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`
-✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`
-✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨
+**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n
+✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
+✵ **Ⲟⲱⲛⲉʀ** - `{}`         ✵
+✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`        ✵
+✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`         ✵
+✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`         ✵
+✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`        ✵
+✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`         ✵
+✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨✵
+✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵ ✵
 """.format(
             OWNER_NAME,
             ultroid_version,
