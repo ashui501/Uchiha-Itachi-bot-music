@@ -69,7 +69,7 @@ async def trans(event):
 
 @callback("list")
 async def list(event):
-    await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆InvisibleX Group Manager ~ [Bot Link](https://t.me/InvisibleXBot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot)")
+    await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆LynX Group Manager ~ [Bot Link](https://t.me/LynXGroupManagerRobot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot)")
 
 @callback("chat")
 async def chat(event):
@@ -90,7 +90,7 @@ async def _(event):
 @callback("group")
 async def users(event):
     await event.delete()
-    grabon = "🎆 Here Are Some Commands for group/channel management\n➤ /start ~ Check if I'm Alive \n➤ /ping ~ Ping CɪᴘʜᴇʀX Server Response Time\n➤ /tr <lang-code>\n➤ /id ~ Shows ID of User/Media/Chat\n➤ /ban ~ Works in Group , Bans a User \n➤ /unban ~ Works in Group , Unbans a User\n➤ /promote ~ Promotes A User \n➤ /demote ~ Demotes A User \n➤ /pin ~ Pins a Message\n(c)✨ CɪᴘʜᴇʀX Ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ ✨"
+    grabon = "🎆 Here Are Some Commands for group/channel management\n➤ /start ~ Check if I'm Alive \n➤ /ping ~ Ping CɪᴘʜᴇʀX Server Response Time\n➤ /tr <lang-code>\n➤ /id ~ Shows ID of User/Media/Chat\n➤ /ban ~ Works in Group , Bans a User \n➤ /unban ~ Works in Group , Unbans a User\n➤ /promote ~ Promotes A User \n➤ /demote ~ Demotes A User \n➤ /gpin ~ Pins a Message\n(c)✨ CɪᴘʜᴇʀX Ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ ✨"
     await asst.send_message(event.chat_id, grabon)
 
 
