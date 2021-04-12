@@ -108,7 +108,7 @@ async def _(event):
         key = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
     r = requests.post(
         "https://api.deepai.org/api/colorizer",
-        files={"image": open("ult.jpg", "rb")},
+        files={"image": open("cipherx.jpg", "rb")},
         headers={"api-key": key},
     )
     os.remove("cipherx.jpg")
