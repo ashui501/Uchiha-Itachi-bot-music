@@ -151,9 +151,9 @@ async def repo(e):
             title="CɪᴘʜᴇʀX Bᴏᴛ",
             description="CɪᴘʜᴇʀX Bᴏᴛ | Telethon",
             thumb=wb(ultpic, 0, "image/jpeg", []),
-            text="• **CɪᴘʜᴇʀX Bᴏᴛ** •",
+            text="• **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ** •",
             buttons=[
-                [Button.url("CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ", url="t.me/FutureTechnologyGuardX")],
+                [Button.url("• CɪᴘʜᴇʀX Bᴏᴛ Sᴜᴘᴘᴏʀᴛ •", url="t.me/FutureTechnologyGuardX")],
             ],
         ),
     ]
