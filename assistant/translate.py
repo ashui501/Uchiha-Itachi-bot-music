@@ -37,4 +37,4 @@ async def _(event):
     try:
         await asst.send_message(event.chat_id, output_str)
     except Exception:
-        await asst.send_message(event.chat_id, "Something went wrong 🤔")
+        await asst.send_message(event.chat_id, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.")
