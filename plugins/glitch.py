@@ -7,7 +7,7 @@
 
 """
 ✘ Commands Available -
-•`{i}glitch <replt to media>`
+•`{i}wglitch <replt to media>`
     gives a glitchy gif.
 """
 
@@ -16,7 +16,7 @@ import os
 from . import *
 
 
-@ultroid_cmd(pattern="glitch$")
+@ultroid_cmd(pattern="wglitch$")
 async def _(e):
     reply = await e.get_reply_message()
     if not reply.media:
