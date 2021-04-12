@@ -24,7 +24,7 @@ async def assistant(event):
     if event.is_group and event.sender_id in sed:
         bnn = (await asst.get_me()).username
         return await event.reply(
-            "`I dont work in groups`",
+            "`Click the button below to see my full commands`",
             buttons=[Button.url("⚙️Sᴛᴀʀᴛ⚙️", url=f"https://t.me/{bnn}?start=set")],
         )
     else:
