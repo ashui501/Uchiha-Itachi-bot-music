@@ -198,6 +198,7 @@ async def crbn(event):
         xx,
         caption=f"Carbonised by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
         force_document=True,
+        reply_to=event.message.reply_to_msg_id,
     )
     os.remove(xx)
 
@@ -228,6 +229,7 @@ async def crbn(event):
         xx,
         caption=f"Carbonised by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
         force_document=True,
+        reply_to=event.message.reply_to_msg_id,
     )
     os.remove(xx)
 
