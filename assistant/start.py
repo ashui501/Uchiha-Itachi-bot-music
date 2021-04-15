@@ -13,6 +13,7 @@ from datetime import datetime
 from cython.functions.asst_fns import *
 from cython.misc._decorators import sed
 from telethon import Button, events
+from telethon.utils import get_display_name
 
 from plugins import *
 
@@ -35,33 +36,62 @@ async def assistant(event):
                 f"Bot started by [{event.sender_id}](tg://user?id={event.sender_id})",
             )
         ok = ""
-        if udB.get("PMBOT") == "True":
-            ok = "You can contact me using this bot!!"
         if event.is_private and event.sender_id in sed:
             return
-        await event.reply(
-            f"Ⲏⲉⲩ, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
-            buttons=[
-                [
-                    Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
+        if not udB.get("STARTMSG"):
+            if udB.get("PMBOT") == "True":
+                ok = "You can contact me using this bot"
+            await event.reply(
+                f"Ⲏⲉⲩ, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
+                buttons=[
+                    [
+                        Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
+                    ],
+                    [
+                        Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                    ],
+                    [
+                        Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
+                    ],
+                    [
+                        Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
+                    ],
+                    [
+                        Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="trans"),
+                    ],
+                    [
+                        Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
+                    ],
                 ],
-                [
-                    Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+            )
+        else:
+            u = await event.client.get_entity(event.chat_id)
+            me = f"[{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})"
+            mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
+            await event.reply(
+                Redis("STARTMSG").format(me=me, mention=mention),
+                buttons=[
+                    [
+                        Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
+                    ],
+                    [
+                        Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                    ],
+                    [
+                        Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
+                    ],
+                    [
+                        Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
+                    ],
+                    [
+                        Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="trans"),
+                    ],
+                    [
+                        Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
+                    ],
                 ],
-                [
-                    Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
-                ],
-                [
-                    Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
-                ],
-                [
-                    Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="trans"),
-                ],
-                [
-                    Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
-                ],
-            ],
-        )
+            )
+            
 
 @callback("trans")
 async def trans(event):
