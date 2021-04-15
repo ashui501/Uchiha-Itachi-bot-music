@@ -136,7 +136,11 @@ async def cmds(event):
     pattern="restart$",
 )
 async def restartbt(ult):
-    await restart(ult)
+    if not Var.HEROKU_API:
+        await eor(ult, "`Restarting...`")
+        await bash("pkill python3 && python3 -m cython")
+    else:
+        await restart(ult)
 
 
 @ultroid_cmd(
@@ -160,6 +164,7 @@ async def _(ult):
     await ultroid.send_file(
         ult.chat_id,
         file="cipherx.log",
+        thumb="resources/extras/cipherx.jpg",
         caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here](https://nekobin.com/{key}) too",
     )
     await xx.edit("Done")
