@@ -27,16 +27,12 @@ from . import *
 
 @ultroid_cmd(pattern="addsnip ?(.*)")
 async def an(e):
-    wrd = e.pattern_match.group(1)
+    wrd = (e.pattern_match.group(1)).lower()
     wt = await e.get_reply_message()
     if not (wt and wrd):
         return await eor(e, "Give word to set as snip and reply to a message.")
     if "$" in wrd:
         wrd = wrd.replace("$", "")
-    try:
-        rem_snip(int(chat), wrd)
-    except:
-        pass
     if wt and wt.media:
         wut = mediainfo(wt.media)
         if wut.startswith(("pic", "gif")):
@@ -65,7 +61,7 @@ async def an(e):
 
 @ultroid_cmd(pattern="remsnip ?(.*)")
 async def rs(e):
-    wrd = e.pattern_match.group(1)
+    wrd = (e.pattern_match.group(1)).lower()
     if not wrd:
         return await eor(e, "Give the word to remove...")
     if wrd.startswith("$"):
@@ -86,7 +82,7 @@ async def lsnote(e):
 
 @ultroid_bot.on(events.NewMessage(outgoing=True))
 async def notes(e):
-    xx = e.text
+    xx = (e.text).lower()
     if not xx.startswith("$"):
         return
     xx = xx.replace("$", "")
