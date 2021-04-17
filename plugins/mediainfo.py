@@ -24,7 +24,7 @@ async def mi(e):
         return await eod(e, "`Reply to any media`")
     xx = mediainfo(r.media)
     murl = r.media.stringify()
-    url = html("Mediainfo", "CipherX", f"<code>{murl}</code>")
+    url = murl("Mediainfo", "CipherX", f"<code>{murl}</code>")
     ee = await eor(e, f"**[{xx}]({url})**\n\n`Loading More...`", link_preview=False)
     dl = await ultroid_bot.download_media(r.media)
     out, er = await bash(f"mediainfo {dl}")
