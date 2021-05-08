@@ -8,7 +8,7 @@
 """
 ✘ Commands Available
 🔹 `{i}shift <from channel> | <to channel>`
-     This will transfer all old post from channel A to channel B.
+     This will transfer all old post from channel a to channel B.
       (u can use username or id of channel too)
       example : `{i}shift @abc | @xyz`
       [note - this (" | ") sign is nessesary]
@@ -20,11 +20,11 @@
    * `listsource <channel username or id>`
       Show list of source channels
    * `{i}adest <channel username or id>`
-      This add Ur channels to database
+      This add your channels to database
    * `{i}ddest <channel username or id>`
-      This Remove Ur channels from database
+      This Remove your channels from database
    * `{i}listdest <channel username or id>`
-      Show List of Ur channels
+      Show List of your channels
    'you can set many channels in database'
    'For activating auto-post use `{i}setredis AUTOPOST True` '
 """
