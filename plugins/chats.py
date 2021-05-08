@@ -97,7 +97,7 @@ async def _(e):
             r = await e.client(
                 CreateChannelRequest(
                     title=group_name,
-                    about="(c) @Hackintush Exclusive",
+                    about="(c) CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ",
                     megagroup=False if type_of_group == "c" else True,
                 ),
             )
