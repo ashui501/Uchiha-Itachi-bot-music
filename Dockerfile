@@ -12,11 +12,11 @@ FROM ultroidteam/ultroid:0.0.3
 #    rm chromedriver.zip
 RUN curl --silent --location https://deb.nodesource.com/setup_15.x | bash -
 RUN apt-get install -y nodejs
+RUN git clone https://github.com/CipherX1-ops/CythonX.git /root/CipherX1-ops/
+RUN git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
 RUN git clone https://github.com/1Danish-00/glitch_me.git && pip install -e ./glitch_me
-COPY resources/startup/deploy.sh .
-RUN chmod +x deploy.sh && sh deploy.sh
 WORKDIR /root/CipherX1-ops/
+RUN pip install -r requirements.txt
 RUN rm -rf /usr/local/lib/python3.9/site-packages/.wh*
 RUN npm install -g npm@7.9.0 && npm install
 RUN npm run build
-CMD ["bash", "resources/startup/startup.sh"]
