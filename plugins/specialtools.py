@@ -9,13 +9,13 @@
 ✘ Commands Available -
 
 • `{i}wspr <username>`
-    Send secret message..
+    Send secret message.
 
 • `{i}sticker <query>`
-    Search Stickers as Per ur Wish..
+    Search Stickers as Per your Wish..
 
 • `{i}getaudio <reply to an audio>`
-    Download Audio To put in ur Desired Video/Gif.
+    Download Audio To put in your Desired Video/Gif.
 
 • `{i}addaudio <reply to Video/gif>`
     It will put the above audio to the replied video/gif.
@@ -46,13 +46,13 @@ from . import *
 async def daudtoid(event):
     ureply = await event.get_reply_message()
     if not (ureply and ("audio" in ureply.document.mime_type)):
-        await eor(event, "`Reply To Audio Only..`")
+        await eor(event, "`Reply To Audio Only...`")
         return
     xx = await eor(event, "`processing...`")
     d = os.path.join("resources/extras/", "ul.mp3")
-    await xx.edit("`Downloading... Large Files Takes Time..`")
+    await xx.edit("`Downloading... Large Files Takes Time.`")
     await event.client.download_media(ureply, d)
-    await xx.edit("`Done.. Now reply to video In which u want to add that Audio`")
+    await xx.edit("`Done. Now reply to video in which you want to add that Audio`")
 
 
 @ultroid_cmd(
@@ -61,7 +61,7 @@ async def daudtoid(event):
 async def adaudroid(event):
     ureply = await event.get_reply_message()
     if not (ureply and ("video" in ureply.document.mime_type)):
-        await eor(event, "`Reply To Gif/Video In which u want to add audio.`")
+        await eor(event, "`Reply To Gif/Video in which you want to add audio.`")
         return
     xx = await eor(event, "`processing...`")
     ultt = await ureply.download_media()
