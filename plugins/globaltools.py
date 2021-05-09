@@ -14,6 +14,9 @@
 • `{i}ungban <reply user/ username>`
     Unban Globally.
 
+• `{i}listgban`
+   List all GBanned users.
+
 • `{i}gmute <reply user/ username>`
     Globally Mute the User.
 
@@ -29,6 +32,7 @@
 • `{i}gucast <Message>`
     Globally Send that message in all your Chat Users.
 """
+import os
 
 from telethon import events
 
@@ -69,6 +73,7 @@ async def _(e):
             except BaseException:
                 pass
     ungban(userid)
+    delete_gban_reason(userid)
     await xx.edit(
         f"`Ungbanned` [{name}](tg://user?id={userid}) `in {chats} chats.\nRemoved from gbanwatch.`",
     )
@@ -79,21 +84,35 @@ async def _(e):
 )
 async def _(e):
     xx = await eor(e, "`Gbanning...`")
+    reason = ""
     if e.is_private:
         userid = (await e.get_chat()).id
+        try:
+            reason = e.text.split(" ", maxsplit=1)[1]
+        except IndexError:
+            reason = ""
     elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
+        try:
+            reason = e.text.split(" ", maxsplit=1)[1]
+        except IndexError:
+            reason = ""
     elif e.pattern_match.group(1):
+        usr = e.text.split(" ", maxsplit=2)[1]
         if (e.pattern_match.group(1)).isdigit():
             try:
-                userid = (await e.client.get_entity(int(e.pattern_match.group(1)))).id
+                userid = (await e.client.get_entity(int(usr))).id
             except ValueError as err:
                 return await eod(xx, f"{str(err)}", time=5)
         else:
             try:
-                userid = (await e.client.get_entity(str(e.pattern_match.group(1)))).id
+                userid = (await e.client.get_entity(str(usr))).id
             except ValueError as err:
                 return await eod(xx, f"{str(err)}", time=5)
+        try:
+            reason = e.text.split(" ", maxsplit=2)[2]
+        except IndexError:
+            reason = ""
     else:
         return await eod(xx, "`Reply to some msg or add their id.`", tome=5)
     name = (await e.client.get_entity(userid)).first_name
@@ -114,15 +133,19 @@ async def _(e):
             except BaseException:
                 pass
     gban(userid)
-    await xx.edit(
-        f"`Gbanned` [{name}](tg://user?id={userid}) `in {chats} chats.\nAdded to gbanwatch.`",
-    )
+    add_gban_reason(userid, reason)
+    gb_msg = f"**#Gbanned** [{name}](tg://user?id={userid}) `in {chats} chats and added to gbanwatch!`"
+    if reason != "":
+        gb_msg += f"\n**Reason** - {reason}"
+    await xx.edit(gb_msg)
 
 
 @ultroid_cmd(
     pattern="gcast ?(.*)",
 )
 async def gcast(event):
+    if not event.out and not is_fullsudo(event.sender_id):
+        return await eor(event, "`This Command is Sudo Restricted.`")
     xx = event.pattern_match.group(1)
     if not xx:
         return eor(event, "`Give some text to Globally Broadcast`")
@@ -146,6 +169,8 @@ async def gcast(event):
     pattern="gucast ?(.*)",
 )
 async def gucast(event):
+    if not event.out and not is_fullsudo(event.sender_id):
+        return await eor(event, "`This Command is Sudo Restricted.`")
     xx = event.pattern_match.group(1)
     if not xx:
         return eor(event, "`Give some text to Globally Broadcast`")
@@ -292,11 +317,46 @@ async def _(e):
                     await e.client.edit_permissions(
                         chat.id, user.id, view_messages=False
                     )
-                    gban_watch = f"`Gbanned User` [{user.first_name}](tg://user?id={user.id}) `Spotted\n"
-                    gban_watch += f"Banned Successfully`"
+                    reason = get_gban_reason(user.id)
+                    gban_watch = f"#GBanned_User Joined.\n\n**User** - [{user.first_name}](tg://user?id={user.id})\n"
+                    if reason is not None:
+                        gban_watch += f"**Reason**: {reason}\n\n"
+                    gban_watch += f"`User Banned.`"
                     await e.reply(gban_watch)
                 except BaseException:
                     pass
+                
+@ultroid_cmd(pattern="listgban")
+async def list_gengbanned(event):
+    users = gbanned_user()
+    x = await eor(event, get_string("com_1"))
+    msg = ""
+    if not udB.get("GBAN"):
+        return await x.edit("`You haven't GBanned anyone!`")
+    for i in users:
+        try:
+            name = (await ultroid.get_entity(int(i))).first_name
+        except BaseException:
+            name = i
+        msg += "**User**: " + name + "\n"
+        reason = get_gban_reason(i)
+        if reason is not None:
+            msg += f"**Reason**: {reason}\n\n"
+        else:
+            msg += "\n"
+    gbanned_users = f"**List of users GBanned by {OWNER_NAME}**:\n\n{msg}"
+    if len(gbanned_users) > 4096:
+        f = open("gbanned.txt", "w")
+        f.write(gbanned_users.replace("`", "").replace("*", ""))
+        f.close()
+        await x.reply(
+            file="gbanned.txt",
+            caption=f"List of users GBanned by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
+        )
+        os.remove("gbanned.txt")
+        await x.delete()
+    else:
+        await x.edit(gbanned_users)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
