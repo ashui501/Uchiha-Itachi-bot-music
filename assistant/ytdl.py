@@ -130,7 +130,7 @@ async def _(sur):
         if sur.is_private and sur.sender_id != ultroid_bot.uid:
             chat = sur.sender_id
             whome = asst
-            MSG += f"\nGet at {Var.BOT_USERNAME}"
+            MSG += f"\nGet at {asst.me.username}"
         try:
             await whome.send_file(
                 chat,
@@ -212,7 +212,7 @@ async def _(fuk):
         if event.is_private and event.sender_id != ultroid_bot.uid:
             chat = fuk.sender_id
             whome = asst
-            MSG += f"\nGet at {Var.BOT_USERNAME}"
+            MSG += f"\nGet at {asst.me.username}"
         try:
             await whome.send_file(
                 chat,
