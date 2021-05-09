@@ -176,8 +176,7 @@ async def e(o):
         await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Ⲣⲟʀⲧⲁⳑ", switch_pm_param="start")
 
 
-if Var.BOT_USERNAME is not None and asst is not None:
-
+if asst.me is not None:
     @inline
     @in_owner
     async def inline_handler(event):
@@ -190,11 +189,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 for y in x:
                     z.append(y)
             cmd = len(z) + 10
-            bn = Var.BOT_USERNAME
-            if bn.startswith("@"):
-                bnn = bn.replace("@", "")
-            else:
-                bnn = bn
+            bn = asst.me.username
             result = builder.article(
                 title="Help Menu",
                 description="✵ Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵ | (c) CɪᴘʜᴇʀX",
@@ -426,11 +421,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
     @callback("open")
     @owner
     async def opner(event):
-        bn = Var.BOT_USERNAME
-        if bn.startswith("@"):
-            bnn = bn.replace("@", "")
-        else:
-            bnn = bn
+        bn = asst.me.username
         buttons = [
             [
                 Button.inline("• Pʟᴜɢɪɴs ", data="hrrrr"),
