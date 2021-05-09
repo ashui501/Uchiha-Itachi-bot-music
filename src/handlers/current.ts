@@ -28,7 +28,7 @@ export const songHandler = Composer.command('current', async ctx => {
 
     const { id, title, duration } = song.song;
     const { id: from_id, f_name } = song.by;
-    return await ctx.replyWithPhoto(`https://img.youtube.com/vi/${id}/cipherx.jpg`, {
+    return await ctx.replyWithPhoto(`https://img.youtube.com/vi/${id}/hqdefault.jpg`, {
         caption: `<b>Playing : </b> <a href="https://www.youtube.com/watch?v=${id}">${escapeHtml(title)}</a>\n` +
             `<b>Duration: </b>${getDuration(duration)}\n` +
             `<b>Requested by :</b> <a href="tg://user?id=${from_id}">${f_name}</a>`,
@@ -36,7 +36,10 @@ export const songHandler = Composer.command('current', async ctx => {
         ...Markup.inlineKeyboard([
             [
                 Markup.button.callback('Pause', `pause:${id}`),
-                Markup.button.callback('Skip', `skip:${id}`)
+                Markup.button.callback('Skip', `skip:${id}`),
+            ],
+            [
+                Markup.button.callback('Exit', `exitVc`),
             ]
         ])
     })
