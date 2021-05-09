@@ -19,3 +19,5 @@ cipherx.log
 target/npmlist.json
 node_modules
 glitch_me/
+.idea
+venv/
