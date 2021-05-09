@@ -38,6 +38,7 @@ async def assistant(event):
         ok = ""
         if event.is_private and event.sender_id in sed:
             return
+        u = await event.client.get_entity(event.chat_id)
         if not udB.get("STARTMSG"):
             if udB.get("PMBOT") == "True":
                 ok = "You can contact me using this bot"
