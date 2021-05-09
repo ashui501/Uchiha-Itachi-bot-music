@@ -26,6 +26,7 @@
 • `{i}logpm`
     Start logging again from that user.
 """
+import re
 
 from cython.functions.logusers_db import *
 from cython.functions.pmpermit_db import *
@@ -191,6 +192,19 @@ if sett == "True" and sett != "False":
             try:
                 wrn = COUNT_PM[user.id] + 1
             except KeyError:
+                try:
+                    await asst.send_message(
+                        Var.LOG_CHANNEL,
+                        f"Incoming PM from {mention}!",
+                        buttons=[
+                            Button.inline("Approve PM", data=f"approve_{user.id}"),
+                            Button.inline("Block PM", data=f"block_{user.id}"),
+                        ],
+                    )
+                except BaseException:
+                    await ultroid.send_message(
+                        Var.LOG_CHANNEL, f"Incoming PM from {mention}!"
+                    )
                 wrn = 1
             if user.id in LASTMSG:
                 prevmsg = LASTMSG[user.id]
@@ -453,6 +467,130 @@ if sett == "True" and sett != "False":
                 Var.LOG_CHANNEL,
                 f"[{name0}](tg://user?id={replied_user.id}) was unblocked!.",
             )
+
+@callback(
+    re.compile(
+        b"approve_(.*)",
+    ),
+)
+@owner
+async def apr_in(event):
+    uid = int(event.data_match.group(1).decode("UTF-8"))
+    if str(uid) in DEVLIST:
+        await event.edit("It's a dev! Approved!")
+    if not is_approved(uid):
+        approve_user(uid)
+        try:
+            user_name = (await ultroid.get_entity(uid)).first_name
+        except BaseException:
+            user_name = ""
+        await event.edit(
+            f"[{user_name}](tg://user?id={uid}) `approved to PM!`",
+            buttons=[
+                Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
+                Button.inline("Block", data=f"block_{uid}"),
+            ],
+        )
+        async for message in ultroid.iter_messages(uid, search=UND):
+            await message.delete()
+        async for message in ultroid.iter_messages(uid, search=UNS):
+            await message.delete()
+        await event.answer("Approved.")
+        x = await ultroid.send_message(uid, "You have been approved to PM CɪᴘʜᴇʀX!")
+        await asyncio.sleep(5)
+        await x.delete()
+    else:
+        await event.edit(
+            "`User may already be approved.`",
+            buttons=[
+                Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
+                Button.inline("Block", data=f"block_{uid}"),
+            ],
+        )
+
+
+@callback(
+    re.compile(
+        b"disapprove_(.*)",
+    ),
+)
+@owner
+async def disapr_in(event):
+    uid = int(event.data_match.group(1).decode("UTF-8"))
+    if is_approved(uid):
+        disapprove_user(uid)
+        try:
+            user_name = (await ultroid.get_entity(uid)).first_name
+        except BaseException:
+            user_name = ""
+        await event.edit(
+            f"[{user_name}](tg://user?id={uid}) `disapproved from PMs!`",
+            buttons=[
+                Button.inline("Approve PM", data=f"approve_{uid}"),
+                Button.inline("Block", data=f"block_{uid}"),
+            ],
+        )
+        await event.answer("DisApproved.")
+        x = await ultroid.send_message(uid, "You have been disapproved from PMing CɪᴘʜᴇʀX!")
+        await asyncio.sleep(5)
+        await x.delete()
+    else:
+        await event.edit(
+            "`User was never approved!`",
+            buttons=[
+                Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
+                Button.inline("Block", data=f"block_{uid}"),
+            ],
+        )
+
+
+@callback(
+    re.compile(
+        b"block_(.*)",
+    ),
+)
+@owner
+async def blck_in(event):
+    uid = int(event.data_match.group(1).decode("UTF-8"))
+    await ultroid(BlockRequest(uid))
+    try:
+        user_name = (await ultroid.get_entity(uid)).first_name
+    except BaseException:
+        user_name = ""
+    await event.answer("Blocked.")
+    await event.edit(
+        f"[{user_name}](tg://user?id={uid}) has been **blocked!**",
+        buttons=Button.inline("UnBlock", data=f"unblock_{uid}"),
+    )
+
+
+@callback(
+    re.compile(
+        b"unblock_(.*)",
+    ),
+)
+@owner
+async def unblck_in(event):
+    uid = int(event.data_match.group(1).decode("UTF-8"))
+    await ultroid(UnblockRequest(uid))
+    try:
+        user_name = (await ultroid.get_entity(uid)).first_name
+    except BaseException:
+        user_name = ""
+    await event.answer("UnBlocked.")
+    await event.edit(
+        f"[{user_name}](tg://user?id={uid}) has been **unblocked!**",
+        buttons=[
+            Button.inline("Block", data=f"block_{uid}"),
+            Button.inline("Close", data="deletedissht"),
+        ],
+    )
+
+
+@callback("deletedissht")
+async def ytfuxist(e):
+    await e.answer("Deleted.")
+    await e.delete()
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
