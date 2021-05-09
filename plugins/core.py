@@ -159,7 +159,7 @@ async def uninstall(event):
 async def load(event):
     shortname = event.pattern_match.group(1)
     if not shortname:
-        await eor(event, "`Give name of plugin which u want to load`")
+        await eor(event, "`Give name of plugin which you want to load`")
         return
     try:
         try:
