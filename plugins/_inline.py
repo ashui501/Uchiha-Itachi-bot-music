@@ -33,7 +33,7 @@ helps = get_string("inline_1")
 
 
 add_ons = udB.get("ADDONS")
-if add_ons:
+if add_ons == "True" or add_ons is None:
     zhelps = get_string("inline_2")
 else:
     zhelps = get_string("inline_3")
