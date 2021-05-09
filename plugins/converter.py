@@ -62,9 +62,30 @@ async def imak(event):
         await eor(event, "Give The name nd extension of file")
         return
     xx = await eor(event, "`Processing...`")
-    image = await ultroid_bot.download_media(reply)
-    os.rename(image, inp)
-    await ultroid_bot.send_file(event.chat_id, inp, force_document=True, reply_to=reply)
+    if reply.media:
+        if hasattr(reply.media, "document"):
+            file = reply.media.document
+            image = await downloader(
+                reply.file.name, reply.media.document, xx, t, "Downloading..."
+            )
+            file = image.name
+        else:
+            file = await event.download_media(reply)
+    os.rename(file, inp)
+    if Redis("CUSTOM_THUMBNAIL"):
+        await bash(
+            f"wget {Redis('CUSTOM_THUMBNAIL')} -O resources/extras/new_thumb.jpg"
+        )
+    k = time.time()
+    xxx = await uploader(inp, inp, k, xx, "Uploading...")
+    await ultroid_bot.send_file(
+        event.chat_id,
+        xxx,
+        force_document=True,
+        thumb="resources/extras/new_thumb.jpg",
+        caption=f"`{xxx.name}`",
+        reply_to=reply,
+    )
     os.remove(inp)
     await xx.delete()
 
