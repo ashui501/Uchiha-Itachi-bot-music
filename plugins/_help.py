@@ -26,15 +26,15 @@ async def ult(ult):
                 output = f"**Plugin** - `{plug}`\n"
                 for i in HELP[plug]:
                     output += i
-                output += "\n© CɪᴘʜᴇʀX"
+                output += "\n© CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ"
                 await eor(ult, output)
             elif plug in CMD_HELP:
-                kk = f"Plugin Name-{plug}\n\n✘ Commands Available-\n\n"
+                kk = f"Plugin Name-{plug}\n\n✘ Commands Available -\n\n"
                 kk += str(CMD_HELP[plug])
                 await eor(ult, kk)
             else:
                 try:
-                    x = f"Plugin Name-{plug}\n\n✘ Commands Available-\n\n"
+                    x = f"Plugin Name-{plug}\n\n✘ Commands Available -\n\n"
                     for d in LIST[plug]:
                         x += HNDLR + d
                         x += "\n"
