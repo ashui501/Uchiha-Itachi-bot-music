@@ -1,10 +1,10 @@
 {
     "name": "Mᴇgᴀᴛrᴏn Bot",
-    "description": "Pluggable telegram bot, made in python using Telethon.",
+    "description": "Pluggable telegram userbot, made in python using Telethon.",
+    "logo": "https://telegra.ph/file/031957757a4f6a5191040.jpg",
     "logo": "https://telegra.ph/file/167a0b85048b04129bd3b.jpg",
     "keywords": ["Telethon", "telegram", "Megatronbot", "python"],
     "repository": "https://github.com/CipherX1-ops/Megatron/",
-    "website": "https://ultroid.now.sh/",
     "success_url": "https://t.me/Hackintush",
     "stack": "container",
     "env": {
@@ -14,10 +14,6 @@
         },
         "API_HASH": {
             "description": "You api hash, from my.telegram.org or @ScrapperRoBot.",
-            "value": ""
-        },
-        "BOT_USERNAME": {
-            "description": "Make a bot from @BotFather, and enter it's username here, with '@'",
             "value": ""
         },
         "BOT_TOKEN": {
@@ -43,11 +39,22 @@
         },
         "HEROKU_APP_NAME": {
             "description": "Name of your heroku app, given in the first blank on this page. To be added if deploying to heroku ONLY.",
-            "value": ""
+            "value": "",
+            "required": false
         },
         "LOG_CHANNEL": {
             "description": "Create a private group. Add @missrose_bot and your BOT_USERNAME bot. Do /id. Paste that here",
-             "value": ""
+            "value": ""
+        }
+    },
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        },
+        "web": {
+            "quantity": 0,
+            "size": "free"
         }
     }
 }
