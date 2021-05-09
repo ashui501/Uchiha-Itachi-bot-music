@@ -23,20 +23,37 @@
 • `{i}rename <file name with extension>`
     rename the file
 
+• `{i}thumbnail <reply to image`
+    upload Your file with your custom thumbnail.
+    In Commands `{i}rename` and `{i}ul`
 """
 import asyncio
 import os
+import time
 
 import cv2
 import requests
 from PIL import Image
+from telegraph import upload_file as uf
 
 from . import *
 
+@ultroid_cmd(pattern="thumbnail$")
+async def _(e):
+    r = await e.get_reply_message()
+    if not (r and r.media):
+        return await eor(e, "`Reply to img`")
+    dl = await ultroid_bot.download_media(r.media)
+    variable = uf(dl)
+    os.remove(dl)
+    nn = "https://telegra.ph" + variable[0]
+    udB.set("CUSTOM_THUMBNAIL", str(nn))
+    await eor(e, f"Added [This]({nn}) As Your Custom Thumbnail", link_preview=False)
 
 @ultroid_cmd(pattern="rename ?(.*)")
 async def imak(event):
     reply = await event.get_reply_message()
+    t = time.time()
     if not reply:
         await eor(event, "Reply to any media/Document.")
         return
@@ -50,62 +67,6 @@ async def imak(event):
     await ultroid_bot.send_file(event.chat_id, inp, force_document=True, reply_to=reply)
     os.remove(inp)
     await xx.delete()
-
-@ultroid_cmd(
-    pattern="doc",
-)
-async def _(event):
-    input_str = event.text[5:]
-    xx = await eor(event, get_string("com_1"))
-    if event.reply_to_msg_id:
-        a = await event.get_reply_message()
-        if not a.message:
-            return await xx.edit("`Reply to a message`")
-        else:
-            b = open(input_str, "w")
-            b.write(str(a.message))
-            b.close()
-            await xx.edit(f"**Packing into** `{input_str}`")
-            await asyncio.sleep(2)
-            await xx.edit(f"**Uploading...** `{input_str}`")
-            await asyncio.sleep(2)
-            await event.client.send_file(event.chat_id, input_str)
-            await xx.delete()
-            os.remove(input_str)
-
-
-@ultroid_cmd(
-    pattern="open$",
-)
-async def _(event):
-    xx = await eor(event, get_string("com_1"))
-    if event.reply_to_msg_id:
-        a = await event.get_reply_message()
-        if a.media:
-            b = await a.download_media()
-            c = open(b)
-            d = c.read()
-            c.close()
-            try:
-                await xx.edit(f"```{d}```")
-            except BaseException:
-                key = (
-                    requests.post(
-                        "https://nekobin.com/api/documents", json={"content": d}
-                    )
-                    .json()
-                    .get("result")
-                    .get("key")
-                )
-                await xx.edit(
-                    f"**Message Exceeds Telegram Limits**\n\nSo Pasted it on [NEKOBIN](https://nekobin.com/{key})"
-                )
-        else:
-            return await eod(xx, "`Reply to a readable file`", time=5)
-    else:
-        return await eod(xx, "`Reply to a readable file`", time=5)
-
-
 
 @ultroid_cmd(pattern="mtoi$")
 async def imak(event):
@@ -149,6 +110,64 @@ async def smak(event):
     await xx.delete()
     os.remove(file)
     os.remove(image)
+
+
+@ultroid_cmd(
+    pattern="doc",
+)
+async def _(event):
+    input_str = event.text[5:]
+    xx = await eor(event, get_string("com_1"))
+    if event.reply_to_msg_id:
+        a = await event.get_reply_message()
+        if not a.message:
+            return await xx.edit("`Reply to a message`")
+        else:
+            b = open(input_str, "w")
+            b.write(str(a.message))
+            b.close()
+            await xx.edit(f"**Packing into** `{input_str}`")
+            await asyncio.sleep(2)
+            await xx.edit(f"**Uploading** `{input_str}`")
+            await asyncio.sleep(2)
+            await event.client.send_file(
+                event.chat_id, input_str, thumb="resources/extras/new_thumb.jpg"
+            )
+            await xx.delete()
+            os.remove(input_str)
+
+
+@ultroid_cmd(
+    pattern="open$",
+)
+async def _(event):
+    xx = await eor(event, get_string("com_1"))
+    if event.reply_to_msg_id:
+        a = await event.get_reply_message()
+        if a.media:
+            b = await a.download_media()
+            c = open(b)
+            d = c.read()
+            c.close()
+            try:
+                await xx.edit(f"```{d}```")
+            except BaseException:
+                key = (
+                    requests.post(
+                        "https://nekobin.com/api/documents", json={"content": d}
+                    )
+                    .json()
+                    .get("result")
+                    .get("key")
+                )
+                await xx.edit(
+                    f"**MESSAGE EXCEEDS TELEGRAM LIMITS**\n\nSo Pasted It On [NEKOBIN](https://nekobin.com/{key})"
+                )
+            os.remove(b)
+        else:
+            return await eod(xx, "`Reply to a readable file`", time=5)
+    else:
+        return await eod(xx, "`Reply to a readable file`", time=5)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
