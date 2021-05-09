@@ -1,7 +1,6 @@
 {
     "name": "Mᴇgᴀᴛrᴏn Bot",
     "description": "Pluggable telegram userbot, made in python using Telethon.",
-    "logo": "https://telegra.ph/file/031957757a4f6a5191040.jpg",
     "logo": "https://telegra.ph/file/167a0b85048b04129bd3b.jpg",
     "keywords": ["Telethon", "telegram", "Megatronbot", "python"],
     "repository": "https://github.com/CipherX1-ops/Megatron/",
