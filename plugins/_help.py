@@ -89,10 +89,5 @@ async def ult(ult):
             )
         except dis:
             return await eor(ult, get_string("help_3"))
-        except bmi:
-            return await eor(
-                ult,
-                get_string("help_4").format(tgbot),
-            )
         await results[0].click(ult.chat_id, reply_to=ult.reply_to_msg_id, hide_via=True)
         await ult.delete()
