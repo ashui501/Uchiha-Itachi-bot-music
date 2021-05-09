@@ -20,8 +20,8 @@ async def saf(e):
         return await eod(
             e, "Reply to any message to save it to your saved messages", time=5
         )
-    await ultroid_bot.send_message("me", x)
-    await eod(e, "Message saved at saved messages", time=5)
+    await ultroid_bot.send_message(e.sender_id, x)
+    await eod(e, "Message saved to Your Pm/Saved Messages.", time=5)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
