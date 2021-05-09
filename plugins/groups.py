@@ -16,7 +16,7 @@
 """
 
 
-from telethon.tl import functions
+from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import (
     ChannelParticipantsKicked,
     ChatBannedRights,
@@ -83,7 +83,7 @@ async def _(event):
             if "empty" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     y -= 1
@@ -94,7 +94,7 @@ async def _(event):
             if "month" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     m -= 1
@@ -105,7 +105,7 @@ async def _(event):
             if "week" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     w -= 1
@@ -116,7 +116,7 @@ async def _(event):
             if "offline" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     o -= 1
@@ -127,7 +127,7 @@ async def _(event):
             if "online" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     q -= 1
@@ -138,7 +138,7 @@ async def _(event):
             if "recently" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     r -= 1
@@ -149,7 +149,7 @@ async def _(event):
             if "bot" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     b -= 1
@@ -160,7 +160,7 @@ async def _(event):
             if "deleted" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     d -= 1
@@ -171,7 +171,7 @@ async def _(event):
             if "none" in input_str:
                 try:
                     await event.client(
-                        functions.channels.EditBannedRequest(event.chat_id, i, rights),
+                        EditBannedRequest(event.chat_id, i, rights),
                     )
                     c += 1
                     n -= 1
