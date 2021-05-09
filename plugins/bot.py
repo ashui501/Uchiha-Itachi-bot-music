@@ -141,8 +141,7 @@ async def restartbt(ult):
             await bash("pkill python3 && python3 -m cython")
     else:
         await bash("pkill python3 && python3 -m cython")
-    else:
-        await restart(ult)
+
 
 @ultroid_cmd(pattern="shutdown")
 async def shutdownbot(ult):
