@@ -7,7 +7,6 @@
 
 import time
 
-from cython import *
 from cython.dB import *
 from cython.dB.core import *
 from cython.functions import *
@@ -30,9 +29,13 @@ except ModuleNotFoundError:
     )
     
 start_time = time.time()
-ultroid_version = "v0.0.5"
+ultroid_version = "v0.0.6"
 OWNER_NAME = ultroid_bot.me.first_name
 OWNER_ID = ultroid_bot.me.id
+
+List = []
+Dict = {}
+N = 0
 
 
 def grt(seconds: int) -> str:
