@@ -122,6 +122,14 @@ async def _(event):
                     bot_api_file_id,
                 ),
             )
+        else:
+            await eor(
+                event,
+                "**Chat ID:**  `{}`\n**User ID:**  `{}`".format(
+                    str(event.chat_id),
+                    str(r_msg.sender_id),
+                ),
+            )
     elif event.pattern_match.group(1):
         ids = await get_user_id(event.pattern_match.group(1))
         return await eor(
@@ -131,14 +139,6 @@ async def _(event):
                 str(ids),
             ),
         )
-        else:
-            await eor(
-                event,
-                "**Chat ID:**  `{}`\n**User ID:**  `{}`".format(
-                    str(event.chat_id),
-                    str(r_msg.sender_id),
-                ),
-            )
     else:
         await eor(event, "**Current Chat ID:**  `{}`".format(str(event.chat_id)))
 
