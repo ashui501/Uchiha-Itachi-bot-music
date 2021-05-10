@@ -27,6 +27,9 @@ async def apiset(event):
 @callback("rmbg")
 @owner
 async def rmbgapi(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "RMBG_API"
