@@ -186,9 +186,8 @@ Total Users - {}""".format(
 @callback("bcast")
 @owner
 async def bdcast(event):
-    if not event.out:
-        if not is_fullsudo(event.sender_id):
-            return await eor(event, "`This Command is Sudo Restricted.`")
+    if not is_fullsudo(event.sender_id):
+        return await event.edit("`This Command is Sudo Restricted.`")
     ok = get_all_users()
     await event.edit(f"Broadcast to {len(ok)} users.")
     async with event.client.conversation(OWNER_ID) as conv:
