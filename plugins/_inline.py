@@ -10,27 +10,20 @@ import re
 import time
 from datetime import datetime
 from math import ceil
-from platform import python_version as pyver
+from platform import python_version as PyVer
 
 from git import Repo
-from support import *
 from cython import __version__ as UltVer
+from support import *
 from telethon import Button, __version__
 from telethon.tl.types import InputWebDocument
-from cython.dB.database import Var
-from . import *
 
-PMPIC = os.environ.get("PMPIC", None)
-if PMPIC is None:
-    WARN_PIC = "https://telegra.ph/file/82c595986872349e5ba1a.jpg"
-else:
-    WARN_PIC = PMPIC
+from . import *
 
 # ================================================#
 notmine = f"This bot is for {OWNER_NAME}"
-ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
+ULTROID_PIC = "https://telegra.ph/file/82c595986872349e5ba1a.jpg"
 helps = get_string("inline_1")
-
 
 add_ons = udB.get("ADDONS")
 if add_ons == "True" or add_ons is None:
@@ -38,104 +31,9 @@ if add_ons == "True" or add_ons is None:
 else:
     zhelps = get_string("inline_3")
 # ============================================#
-    
-@in_pattern 
-async def inline_handler(event):
-    builder = event.builder
-    result = None
-    query = event.text
-    if event.query.user_id == bot.uid and query.startswith("**PMSecurity"):
-        result = builder.photo(
-            file=WARN_PIC,
-            text=query,
-            buttons=[
-                [
-                    custom.Button.inline(
-                        "✘ I'm Here for Spamming ✘", data="dontspamnigga"
-                    )
-                ],
-                [
-                    custom.Button.inline(
-                        "✓ I'm Here for Talking with CɪᴘʜᴇʀX ✓",
-                        data="whattalk",
-                    )
-                ],
-                [
-                    custom.Button.inline(
-                        "✓ I'm Here for Asking Something ✓", data="askme"
-                    )
-                ],
-                [custom.Button.inline("≼≼≼Close Menu≽≽≽", data="sendclose")],
-            ],
-        )
-        await event.answer([result])
-
-@in_pattern
-@callback("dontspamnigga")
-async def rip(event):
-    if event.query.user_id == bot.uid:
-        sedok = "Master, You Don't Need To Use This."
-        await event.answer(sedok, cache_time=0, alert=True)
-        return
-    await event.get_chat()
-    him_id = event.query.user_id
-    text1 = "You Have Chosed A Prohibited Option. Therefore, You Have Been Blocked and Reported to Telegram Agency.\n(C) CɪᴘʜᴇʀX"
-    await event.edit("⨵ Choice not Accepted ⨵")
-    await ultroid_bot.send_message(event.query.user_id, text1)
-    await ultroid_bot(functions.contacts.BlockRequest(event.query.user_id))
-    await ultroid_bot.send_message(
-        Var.LOG_CHANNEL,
-        f"Hello, [This](tg://user?id={him_id}) Selected Prohibited Option, Therefore Blocked.\n(C) CɪᴘʜᴇʀX",
-    )
-
-@in_pattern
-@callback("whattalk")
-async def rip(event):
-    if event.query.user_id == bot.uid:
-        sedok = "Master, you don't need to use this."
-        await event.answer(sedok, cache_time=0, alert=True)
-        return
-    await event.get_chat()
-    him_id = event.query.user_id
-    await event.edit("Choice Accepted ✓\n(C) CɪᴘʜᴇʀX")
-    text2 = "Ok. Please Wait until CɪᴘʜᴇʀX Approves you. Don't Spam or Try Anything Stupid. \nThanks for Contacting me."
-    await ultroid_bot.send_message(event.query.user_id, text2)
-    await ultroid_bot.send_message(
-        Var.LOG_CHANNEL,
-        message=f"Hello, [New User](tg://user?id={him_id}) Wants to Talk with tou.\n(C) CɪᴘʜᴇʀX",
-        buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
-    )
-
-@in_pattern
-@callback("askme")
-async def rip(event):
-    if event.query.user_id == bot.uid:
-        sedok = "Master, you don't need to use this."
-        await event.answer(sedok, cache_time=0, alert=True)
-        return
-    await event.get_chat()
-    him_id = event.query.user_id
-    await event.edit("Choice Accepted ✓")
-    text3 = (
-        "Ok, Wait. You can Ask after CɪᴘʜᴇʀX Approves you. Kindly, Wait.\n(C) CɪᴘʜᴇʀX"
-    )
-    await ultroid_bot.send_message(event.query.user_id, text3)
-    await ultroid_bot.send_message(
-        Var.LOG_CHANNEL,
-        message=f"Hello, [New User](tg://user?id={him_id}) Wants to Ask you Something.\n(C) CɪᴘʜᴇʀX",
-        buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
-    )
 
 
-@in_pattern
-@callback("sendclose")
-async def users(event):
-    await event.edit(
-        "⨵CɪᴘʜᴇʀX Bot Pm-Security Closed⨵",
-        buttons=[(custom.Button.inline("≼≼≼Leave Me≽≽≽"))],
-    )
-
-@inline 
+@in_pattern("")
 @in_owner
 async def e(o):
     if len(o.text) == 0:
@@ -144,9 +42,10 @@ async def e(o):
         header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
         ALIVEMSG = """
 **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n
-✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
+**{}**
 ✵ **Ⲟⲱⲛⲉʀ** - `{}`         
-✵ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`        
+✵ **Ⲃⲟⲧ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
+✵ **Ⳑⲓⲃʀⲁʀⲩ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
 ✵ **Ⳙⲣⲧⲓⲙⲉ** - `{}`         
 ✵ **Ⲣⲩⲧⲏⲟⲛ** - `{}`         
 ✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`        
@@ -154,10 +53,12 @@ async def e(o):
 ✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨
 ✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵ 
 """.format(
+            header,
             OWNER_NAME,
             ultroid_version,
+            UltVer,
             uptime,
-            pyver(),
+            PyVer(),
             __version__,
             Repo().active_branch,
         )
@@ -169,14 +70,21 @@ async def e(o):
                 text=ALIVEMSG,
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 buttons=[
-                    [Button.url(text="✵CɪᴘʜᴇʀX DM✵", url="t.me/Hackintush")],
+                    [Button.url(text="✵CɪᴘʜᴇʀX Ⲃⲟⲧ✵", url="t.me/CipherXBot")],
+                    [
+                        Button.url(
+                            text="✵Ⲋυⲣⲣⲟʀⲧ Ⲥⲏⲁⲛⲛⲉⳑ✵",
+                            url="t.me/FutureTechnologyOfficial",
+                        ),
+                    ],
                 ],
             ),
         ]
-        await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Ⲣⲟʀⲧⲁⳑ", switch_pm_param="start")
+        await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Pᴏrᴛᴀl", switch_pm_param="start")
 
 
 if asst.me is not None:
+
     @inline
     @in_owner
     async def inline_handler(event):
@@ -189,14 +97,17 @@ if asst.me is not None:
                 for y in x:
                     z.append(y)
             cmd = len(z) + 10
-            bn = asst.me.username
+            bnn = asst.me.username
             result = builder.article(
                 title="Help Menu",
                 description="✵ Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵ | (c) CɪᴘʜᴇʀX",
-                url="https://t.me/Hackintush",
+                url="https://t.me/CipherXBot",
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 text=get_string("inline_4").format(
-                    OWNER_NAME, len(PLUGINS) - 5, len(ADDONS), cmd
+                    OWNER_NAME,
+                    len(PLUGINS) - 5,
+                    len(ADDONS),
+                    cmd,
                 ),
                 buttons=[
                     [
@@ -226,15 +137,13 @@ if asst.me is not None:
                 text="Pᴀsᴛᴇᴅ Tᴏ Nᴇᴋᴏʙɪɴ!",
                 buttons=[
                     [
-                        Button.url("✵NekoBin✵", url=f"{link}"),
-                        Button.url("✵Raw✵", url=f"{link_raw}"),
+                        Button.url("✵NᴇᴋᴏBin✵", url=f"{link}"),
+                        Button.url("✵Rᴀw✵", url=f"{link_raw}"),
                     ],
                 ],
             )
             await event.answer([result] if result else None)
 
-    @inline
-    @in_owner
     @callback("ownr")
     @owner
     async def setting(event):
@@ -260,7 +169,7 @@ if asst.me is not None:
     @callback("upp")
     async def _(event):
         uptime = grt(time.time() - start_time)
-        pin = f"✵ Uᴘᴛɪᴍᴇ = {uptime}"
+        pin = f"🙋Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
     @callback("inlone")
@@ -269,56 +178,50 @@ if asst.me is not None:
         button = [
             [
                 Button.switch_inline(
-                    "✵ Rᴇxᴛᴇsᴛᴇr",
-                    query="rex ",
+                    "Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
+                    query="send ",
                     same_peer=True,
                 ),
             ],
             [
                 Button.switch_inline(
-                    "✵ Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
+                    "Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
                     query="app ",
                     same_peer=True,
                 ),
-            ],
-            [
                 Button.switch_inline(
-                    "✵ Mᴏᴅᴅᴇᴅ Aᴘᴘs",
+                    "Mᴏᴅᴅᴇᴅ Aᴘᴘs",
                     query="mods ",
                     same_peer=True,
                 ),
             ],
             [
                 Button.switch_inline(
-                    "✵ Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
-                    query="google ",
+                    "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
+                    query="go ",
                     same_peer=True,
                 ),
-            ],
-            [
                 Button.switch_inline(
-                    "✵ Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
+                    "Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
                     query="yahoo ",
                     same_peer=True,
                 ),
             ],
             [
                 Button.switch_inline(
-                    "✵ YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
+                    "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
                     query="yt ",
                     same_peer=True,
                 ),
             ],
             [
                 Button.switch_inline(
-                    "✵ CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
+                    "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
                     query="clipart ",
                     same_peer=True,
                 ),
-            ],
-            [
                 Button.switch_inline(
-                    "OʀᴀɴɢᴇFᴏx🦊Rᴇᴄᴏᴠᴇʀʏ",
+                    "OʀᴀɴɢᴇFᴏx🦊",
                     query="ofox ",
                     same_peer=True,
                 ),
@@ -406,7 +309,7 @@ if asst.me is not None:
     @owner
     async def backr(event):
         xhelps = helps.format(OWNER_NAME, len(PLUGINS) - 5)
-        current_page_number = int(upage) 
+        current_page_number = int(upage)
         buttons = paginate_help(current_page_number, PLUGINS, "helpme")
         await event.edit(f"{xhelps}", buttons=buttons, link_preview=False)
 
@@ -414,14 +317,14 @@ if asst.me is not None:
     @owner
     async def backr(event):
         xhelps = zhelps.format(OWNER_NAME, len(ADDONS))
-        current_page_number = int(addpage) 
+        current_page_number = int(addpage)
         buttons = paginate_addon(current_page_number, ADDONS, "addon")
         await event.edit(f"{xhelps}", buttons=buttons, link_preview=False)
 
     @callback("open")
     @owner
     async def opner(event):
-        bn = asst.me.username
+        bnn = asst.me.username
         buttons = [
             [
                 Button.inline("• Pʟᴜɢɪɴs ", data="hrrrr"),
@@ -433,8 +336,9 @@ if asst.me is not None:
             ],
             [
                 Button.url(
-                    "⚙️Sᴇᴛᴛɪɴɢs⚙️", url=f"https://t.me/{bnn}?start={ultroid_bot.me.id}"
-                )
+                    "⚙️Sᴇᴛᴛɪɴɢs⚙️",
+                    url=f"https://t.me/{bnn}?start={ultroid_bot.me.id}",
+                ),
             ],
             [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
         ]
@@ -445,7 +349,10 @@ if asst.me is not None:
         cmd = len(z) + 10
         await event.edit(
             get_string("inline_4").format(
-                OWNER_NAME, len(PLUGINS) - 5, len(ADDONS), cmd
+                OWNER_NAME,
+                len(PLUGINS) - 5,
+                len(ADDONS),
+                cmd,
             ),
             buttons=buttons,
             link_preview=False,
@@ -456,7 +363,7 @@ if asst.me is not None:
     async def on_plug_in_callback_query_handler(event):
         await event.edit(
             get_string("inline_5"),
-            buttons=Button.inline("≼≼≼Oᴘᴇɴ Mᴀɪɴ Mᴇɴᴜ Aɢᴀɪɴ≽≽≽", data="open"),
+            buttons=Button.inline("Oᴘᴇɴ Mᴀɪɴ Mᴇɴᴜ Aɢᴀɪɴ", data="open"),
         )
 
     @callback(
@@ -477,7 +384,7 @@ if asst.me is not None:
             reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
-        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
+        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ"
         try:
             if event.query.user_id in sed:
                 await event.edit(
@@ -528,7 +435,7 @@ if asst.me is not None:
             reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
-        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX"
+        reply_pop_up_alert += "\n© CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ"
         try:
             if event.query.user_id in sed:
                 await event.edit(
@@ -547,13 +454,13 @@ if asst.me is not None:
 
 
 def paginate_help(page_number, loaded_plugins, prefix):
-    number_of_rows = 6
+    number_of_rows = 5
     number_of_cols = 2
     emoji = Redis("EMOJI_IN_HELP")
     if emoji:
         multi, mult2i = emoji, emoji
     else:
-        multi, mult2i = "✵", "✵"
+        multi, mult2i = "✘", "✘"
     helpable_plugins = []
     global upage
     upage = page_number
@@ -564,7 +471,9 @@ def paginate_help(page_number, loaded_plugins, prefix):
     modules = [
         Button.inline(
             "{} {} {}".format(
-                random.choice(list(multi)), x, random.choice(list(mult2i))
+                random.choice(list(multi)),
+                x,
+                random.choice(list(mult2i)),
             ),
             data=f"us_plugin_{x}",
         )
@@ -581,33 +490,31 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ] + [
             (
                 Button.inline(
-                    "<- Pʀᴇᴠɪᴏᴜs", data="{}_prev({})".format(prefix, modulo_page)
+                    "<- Pʀᴇᴠɪᴏᴜs",
+                    data=f"{prefix}_prev({modulo_page})",
                 ),
                 Button.inline("-Bᴀᴄᴋ-", data="open"),
                 Button.inline(
-                    "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
+                    "Nᴇxᴛ ->",
+                    data=f"{prefix}_next({modulo_page})",
                 ),
             ),
         ]
     else:
         pairs = pairs[
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
-        ] + [
-            (
-                Button.inline("-Bᴀᴄᴋ-", data="open"),
-            )
-        ]
+        ] + [(Button.inline("-Bᴀᴄᴋ-", data="open"),)]
     return pairs
 
 
 def paginate_addon(page_number, loaded_plugins, prefix):
-    number_of_rows = 6
+    number_of_rows = 5
     number_of_cols = 2
     emoji = Redis("EMOJI_IN_HELP")
     if emoji:
         multi, mult2i = emoji, emoji
     else:
-        multi, mult2i = "✵", "✵"
+        multi, mult2i = "✘", "✘"
     helpable_plugins = []
     global addpage
     addpage = page_number
@@ -618,7 +525,9 @@ def paginate_addon(page_number, loaded_plugins, prefix):
     modules = [
         Button.inline(
             "{} {} {}".format(
-                random.choice(list(multi)), x, random.choice(list(mult2i))
+                random.choice(list(multi)),
+                x,
+                random.choice(list(mult2i)),
             ),
             data=f"add_plugin_{x}",
         )
@@ -635,20 +544,18 @@ def paginate_addon(page_number, loaded_plugins, prefix):
         ] + [
             (
                 Button.inline(
-                    "<- Pʀᴇᴠɪᴏᴜs", data="{}_prev({})".format(prefix, modulo_page)
+                    "<- Pʀᴇᴠɪᴏᴜs",
+                    data=f"{prefix}_prev({modulo_page})",
                 ),
                 Button.inline("-Bᴀᴄᴋ-", data="open"),
                 Button.inline(
-                    "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
+                    "Nᴇxᴛ ->",
+                    data=f"{prefix}_next({modulo_page})",
                 ),
             ),
         ]
     else:
         pairs = pairs[
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
-        ] + [
-            (
-                Button.inline("-Bᴀᴄᴋ-", data="open"),
-            )
-        ]
+        ] + [(Button.inline("-Bᴀᴄᴋ-", data="open"),)]
     return pairs
