@@ -83,6 +83,9 @@ async def _(e):
     pattern="tr",
 )
 async def _(event):
+    if len(event.text) > 3:
+        if not event.text[3] == " ":
+            return
     input = event.text[4:6]
     txt = event.text[7:]
     xx = await eor(event, "`Translating...`")
@@ -100,8 +103,8 @@ async def _(event):
     translator = Translator()
     try:
         tt = translator.translate(text, dest=lan)
-        output_str = f"**Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan} By CɪᴘʜᴇʀX Bᴏᴛ\n{tt.text}"
-        await eod(xx, output_str)
+        output_str = f"Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan} By CɪᴘʜᴇʀX Bᴏᴛ\n{tt.text}"
+        await eor(xx, output_str)
     except Exception as exc:
         await eod(xx, str(exc), time=10)
 
