@@ -103,7 +103,7 @@ async def _(event):
     translator = Translator()
     try:
         tt = translator.translate(text, dest=lan)
-        output_str = f"Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan} By CɪᴘʜᴇʀX Bᴏᴛ\n{tt.text}"
+        output_str = f"**Trᴀnslᴀᴛᴇd** Frᴏʍ {tt.src} Tᴏ {lan} By CɪᴘʜᴇʀX Bᴏᴛ\n{tt.text}"
         await eor(xx, output_str)
     except Exception as exc:
         await eod(xx, str(exc), time=10)
