@@ -13,6 +13,7 @@ from telegraph import Telegraph
 from telegraph import upload_file as upl
 
 from . import *
+from Megatron.plugins import *
 
 # --------------------------------------------------------------------#
 telegraph = Telegraph()
