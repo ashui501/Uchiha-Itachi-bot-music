@@ -41,7 +41,7 @@ async def assistant(event):
         u = await event.client.get_entity(event.chat_id)
         if not udB.get("STARTMSG"):
             if udB.get("PMBOT") == "True":
-                ok = "You can contact me using this bot"
+                ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
             await event.reply(
                 f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
                 buttons=[
