@@ -169,7 +169,7 @@ if asst.me is not None:
     @callback("upp")
     async def _(event):
         uptime = grt(time.time() - start_time)
-        pin = f"🙋Uᴘᴛɪᴍᴇ = {uptime}"
+        pin = f"✵ Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
     @callback("inlone")
@@ -454,13 +454,13 @@ if asst.me is not None:
 
 
 def paginate_help(page_number, loaded_plugins, prefix):
-    number_of_rows = 5
+    number_of_rows = 6
     number_of_cols = 2
     emoji = Redis("EMOJI_IN_HELP")
     if emoji:
         multi, mult2i = emoji, emoji
     else:
-        multi, mult2i = "✘", "✘"
+        multi, mult2i = "✵", "✵"
     helpable_plugins = []
     global upage
     upage = page_number
@@ -508,13 +508,13 @@ def paginate_help(page_number, loaded_plugins, prefix):
 
 
 def paginate_addon(page_number, loaded_plugins, prefix):
-    number_of_rows = 5
+    number_of_rows = 6
     number_of_cols = 2
     emoji = Redis("EMOJI_IN_HELP")
     if emoji:
         multi, mult2i = emoji, emoji
     else:
-        multi, mult2i = "✘", "✘"
+        multi, mult2i = "✵", "✵"
     helpable_plugins = []
     global addpage
     addpage = page_number
