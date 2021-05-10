@@ -18,7 +18,8 @@
     List all sudo users.
 """
 
-from cython.misc._decorators import sed
+
+from pyUltroid.misc._decorators import sed
 
 from . import *
 
@@ -31,24 +32,25 @@ async def _(ult):
     if Var.BOT_MODE:
         try:
             if ult.sender_id != int(Redis(OWNER_ID)):
-                return await eod(ult, "`Sudo users can't add new sudos!`", time=5)
+                return await eod(ult, "`Sudo users can't add new sudos!`", time=10)
         except BaseException:
             pass
     else:
         if ult.sender_id != ultroid_bot.uid:
-            return await eod(ult, "`Sudo users can't add new sudos!`", time=5)
+            return await eod(ult, "`Sudo users can't add new sudos!`", time=10)
     ok = await eor(ult, "`Updating SUDO Users List ...`")
-
     if ult.reply_to_msg_id:
         replied_to = await ult.get_reply_message()
         id = await get_user_id(replied_to.sender_id)
         name = (await ult.client.get_entity(int(id))).first_name
         sed.append(id)
+        mmm = ""
         if id == ultroid_bot.me.id:
             mmm += "You cant add yourself as Sudo User..."
         elif is_sudo(id):
             mmm += f"[{name}](tg://user?id={id}) `is already a SUDO User ...`"
         elif add_sudo(id):
+            udB.set("SUDO", "True")
             mmm += f"**Added [{name}](tg://user?id={id}) as SUDO User**"
         else:
             mmm += "`SEEMS LIKE THIS FUNCTION CHOOSE TO BREAK ITSELF`"
@@ -73,6 +75,7 @@ async def _(ult):
             udB.set("SUDO", "True")
             if name != "":
                 mmm += f"**Added [{name}](tg://user?id={id}) as SUDO User**"
+            else:
                 mmm += f"**Added **`{id}`** as SUDO User**"
         else:
             mmm += "`SEEMS LIKE THIS FUNCTION CHOOSE TO BREAK ITSELF`"
@@ -90,16 +93,16 @@ async def _(ult):
         try:
             if ult.sender_id != int(Redis(OWNER_ID)):
                 return await eod(
-                    ult, "You are sudo user, You cant add other sudo users.",
+                    ult,
+                    "You are sudo user, You cant add other sudo user.",
                     time=5,
                 )
         except BaseException:
             pass
     else:
         if ult.sender_id != ultroid_bot.uid:
-            return await eor(ult, "You are sudo user, You cant add other sudo users.")
+            return await eor(ult, "You are sudo user, You cant add other sudo user.")
     ok = await eor(ult, "`Updating SUDO Users List ...`")
-
     if ult.reply_to_msg_id:
         replied_to = await ult.get_reply_message()
         id = await get_user_id(replied_to.sender_id)
@@ -141,7 +144,7 @@ async def _(ult):
     pattern="listsudo$",
 )
 async def _(ult):
-    ok = await eor(ult, "...")
+    ok = await eor(ult, "`...`")
     sudos = Redis("SUDOS")
     if sudos == "" or sudos is None:
         return await eod(ult, "`No SUDO User was assigned ...`", time=5)
