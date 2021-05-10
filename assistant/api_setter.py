@@ -6,7 +6,7 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import *
-from Megatron.plugins import *
+from plugins import *
 # main menu for api setting
 
 
