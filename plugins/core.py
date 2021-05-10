@@ -38,6 +38,9 @@ from . import *
 )
 @in_owner
 async def inline_handler(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     builder = event.builder
     input_str = event.pattern_match.group(1)
     if input_str is None or input_str == "":
@@ -101,8 +104,9 @@ async def inline_handler(event):
     pattern="install",
 )
 async def install(event):
-    if not is_fullsudo(event.sender_id):
-        return await eod(event, "`This Command Is Sudo Restricted.`")
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await safeinstall(event)
 
 
@@ -110,6 +114,9 @@ async def install(event):
     pattern=r"unload ?(.*)",
 )
 async def unload(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     shortname = event.pattern_match.group(1)
     if not shortname:
         await eor(event, "`Give name of plugin which u want to unload`")
@@ -133,9 +140,12 @@ async def unload(event):
     pattern=r"uninstall ?(.*)",
 )
 async def uninstall(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     shortname = event.pattern_match.group(1)
     if not shortname:
-        await eor(event, "`Give name of plugin which u want to uninstall`")
+        await eor(event, "`Give name of plugin which you want to uninstall`")
         return
     lsd = os.listdir("addons")
     lst = os.listdir("plugins")
@@ -157,6 +167,9 @@ async def uninstall(event):
     pattern=r"load ?(.*)",
 )
 async def load(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     shortname = event.pattern_match.group(1)
     if not shortname:
         await eor(event, "`Give name of plugin which you want to load`")
