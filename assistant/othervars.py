@@ -130,6 +130,9 @@ async def _(e):
 @callback("authorise")
 @owner
 async def _(e):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     if not e.is_private:
         return
     if not udB.get("GDRIVE_CLIENT_ID"):
@@ -151,6 +154,9 @@ async def _(e):
 @callback("folderid")
 @owner
 async def _(e):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     if not e.is_private:
         return
     await e.edit(
@@ -175,6 +181,9 @@ async def _(e):
 @callback("clientsec")
 @owner
 async def _(e):
+    if not e.out:
+        if not is_fullsudo(e.sender_id):
+            return await eor(e, "`This Command is Sudo Restricted.`")
     if not e.is_private:
         return
     await e.edit("Send your CLIENT SECRET")
@@ -191,6 +200,9 @@ async def _(e):
 @callback("clientid")
 @owner
 async def _(e):
+    if not e.out:
+        if not is_fullsudo(e.sender_id):
+            return await eor(e, "`This Command is Sudo Restricted.`")
     if not e.is_private:
         return
     await e.edit("Send your CLIENT ID ending with .com")
@@ -260,6 +272,9 @@ async def otvaar(event):
 @callback("emoj")
 @owner
 async def emoji(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "EMOJI_IN_HELP"
@@ -290,6 +305,9 @@ async def emoji(event):
 @callback("plg")
 @owner
 async def pluginch(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "PLUGIN_CHANNEL"
@@ -325,6 +343,9 @@ async def pluginch(event):
 @callback("hhndlr")
 @owner
 async def hndlrr(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "HNDLR"
@@ -362,6 +383,9 @@ async def hndlrr(event):
 @callback("taglog")
 @owner
 async def tagloggerr(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "TAG_LOG"
@@ -401,6 +425,9 @@ async def pmset(event):
 @callback("onbot")
 @owner
 async def onbott(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "BOT_MODE"
     await setit(event, var, "True")
     await event.edit(
@@ -412,6 +439,9 @@ async def onbott(event):
 @callback("offbot")
 @owner
 async def offbott(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "BOT_MODE"
     await setit(event, var, "False")
     await event.edit(
@@ -422,6 +452,9 @@ async def offbott(event):
 @callback("ownerid")
 @owner
 async def ownerids(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "OWNER_ID"
@@ -460,6 +493,9 @@ async def pmset(event):
 @callback("edon")
 @owner
 async def eddon(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "ADDONS"
     await setit(event, var, "True")
     await event.edit(
@@ -471,6 +507,9 @@ async def eddon(event):
 @callback("edof")
 @owner
 async def eddof(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "ADDONS"
     await setit(event, var, "False")
     await event.edit(
@@ -483,7 +522,7 @@ async def eddof(event):
 @owner
 async def pmset(event):
     await event.edit(
-        f"SUDO MODE ~ Some peoples can use ur Bot which u selected. To know More use `{HNDLR}help sudo`",
+        f"SUDO MODE ~ Some peoples can use your Bot which you selected. To know More use `{HNDLR}help sudo`",
         buttons=[
             [Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ  Oɴ", data="onsudo")],
             [Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ  Oғғ", data="ofsudo")],
@@ -495,6 +534,9 @@ async def pmset(event):
 @callback("onsudo")
 @owner
 async def eddon(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "SUDO"
     await setit(event, var, "True")
     await event.edit(
@@ -506,6 +548,9 @@ async def eddon(event):
 @callback("ofsudo")
 @owner
 async def eddof(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "SUDO"
     await setit(event, var, "False")
     await event.edit(
@@ -530,6 +575,9 @@ async def sfban(event):
 @callback("sfgrp")
 @owner
 async def sfgrp(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     name = "FBan Group ID"
     var = "FBAN_GROUP_ID"
@@ -557,6 +605,9 @@ async def sfgrp(event):
 @callback("sfexf")
 @owner
 async def sfexf(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     name = "Excluded Feds"
     var = "EXCLUDE_FED"
@@ -618,6 +669,9 @@ async def alvcs(event):
 @callback("alvtx")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "ALIVE_TEXT"
@@ -647,6 +701,9 @@ async def name(event):
 @callback("delvx")
 @owner
 async def dell(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("ALIVE_TEXT")
         return await event.edit("Done!", buttons=get_back_button("alvcstm"))
@@ -659,6 +716,9 @@ async def dell(event):
 @callback("alvmed")
 @owner
 async def media(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "ALIVE_PIC"
@@ -703,6 +763,9 @@ async def media(event):
 @callback("delmed")
 @owner
 async def dell(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("ALIVE_PIC")
         return await event.edit("Done!", buttons=get_back_button("alvcstm"))
@@ -741,6 +804,9 @@ async def alvcs(event):
 @callback("pmtxt")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "PM_TEXT"
@@ -776,6 +842,9 @@ async def name(event):
 @callback("swarn")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     m = range(1, 10)
     tultd = [Button.inline(f"{x}", data=f"wrns_{x}") for x in m]
     lst = list(zip(tultd[::3], tultd[1::3], tultd[2::3]))
@@ -789,6 +858,9 @@ async def name(event):
 @callback(re.compile(b"wrns_(.*)"))
 @owner
 async def set_wrns(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     value = int(event.data_match.group(1).decode("UTF-8"))
     dn = udB.set("PMWARNS", value)
     if dn:
@@ -806,6 +878,9 @@ async def set_wrns(event):
 @callback("pmmed")
 @owner
 async def media(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "PMPIC"
@@ -851,6 +926,9 @@ async def media(event):
 @callback("delpmmed")
 @owner
 async def dell(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("PMPIC")
         return await event.edit("Done!", buttons=get_back_button("pmcstm"))
@@ -863,6 +941,9 @@ async def dell(event):
 @callback("delpmtxt")
 @owner
 async def dell(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("PM_TEXT")
         return await event.edit("Done!", buttons=get_back_button("pmcstm"))
@@ -888,6 +969,9 @@ async def apauto(event):
 @callback("apon")
 @owner
 async def apon(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "AUTOAPPROVE"
     await setit(event, var, "True")
     await event.edit(
@@ -899,6 +983,9 @@ async def apon(event):
 @callback("apof")
 @owner
 async def apof(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("AUTOAPPROVE")
         return await event.edit(
@@ -928,6 +1015,9 @@ async def alvcs(event):
 @callback("pmlog")
 @owner
 async def pmlog(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "PMLOG"
     await setit(event, var, "True")
     await event.edit(
@@ -939,6 +1029,9 @@ async def pmlog(event):
 @callback("pmlogof")
 @owner
 async def pmlogof(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     try:
         udB.delete("PMLOG")
         return await event.edit(
@@ -969,6 +1062,9 @@ async def pmset(event):
 @callback("pmon")
 @owner
 async def pmonn(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "PMSETTING"
     await setit(event, var, "True")
     await event.edit(
@@ -980,6 +1076,9 @@ async def pmonn(event):
 @callback("pmoff")
 @owner
 async def pmofff(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "PMSETTING"
     await setit(event, var, "False")
     await event.edit(
@@ -1006,6 +1105,9 @@ async def chbot(event):
 @callback("bwel")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "STARTMSG"
@@ -1036,6 +1138,9 @@ async def name(event):
 @callback("onchbot")
 @owner
 async def chon(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "PMBOT"
     await setit(event, var, "True")
     await event.edit(
@@ -1047,6 +1152,9 @@ async def chon(event):
 @callback("ofchbot")
 @owner
 async def chon(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     var = "PMBOT"
     await setit(event, var, "False")
     await event.edit(
@@ -1072,6 +1180,9 @@ async def vcb(event):
 @callback("vcs")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "VC_SESSION"
@@ -1102,6 +1213,9 @@ async def name(event):
 @callback("vcw")
 @owner
 async def name(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eor(event, "`This Command is Sudo Restricted.`")
     await event.delete()
     pru = event.sender_id
     var = "WEBSOCKET_URL"
