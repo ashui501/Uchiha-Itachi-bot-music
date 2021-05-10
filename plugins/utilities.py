@@ -110,7 +110,7 @@ async def date(event):
 
 
 @ultroid_cmd(
-    pattern="cal",
+    pattern="cal$",
 )
 async def _(event):
     x = await eor(event, get_string("com_1"))
