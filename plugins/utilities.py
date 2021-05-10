@@ -200,7 +200,7 @@ async def stats(
 ) -> None:
     if BOT_MODE:
         return await eor(ult, "You Cant Use this Command in BOT_MODE")
-    ok = await eor(event, "`Collecting stats...`")
+    ok = await eor(event, "`Ⲥⲟⳑⳑⲉⲥⲧⲓⲛⳋ Ⲋⲧⲁⲧⲋ...`")
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -360,7 +360,7 @@ async def _(event):
     except Exception as e:
         dc_id = "Need a Profile Picture to check this"
         str(e)
-    caption = """<b>Exᴛʀᴀᴄᴛᴇᴅ Dᴀᴛᴀʙᴀsᴇ Fʀᴏᴍ Tᴇʟᴇɢʀᴀᴍ's Dᴀᴛᴀʙᴀsᴇ<b>
+    caption = """<b>Exᴛʀᴀᴄᴛᴇᴅ Fʀᴏᴍ Tᴇʟᴇɢʀᴀᴍ's Dᴀᴛᴀʙᴀsᴇ<b>
     <b>••Tᴇʟᴇɢʀᴀᴍ ID</b>: <code>{}</code>
     <b>••Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: <a href='tg://user?id={}'>Click Here</a>
     <b>••Fɪʀsᴛ Nᴀᴍᴇ</b>: <code>{}</code>
