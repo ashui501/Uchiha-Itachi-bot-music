@@ -34,7 +34,7 @@ import asyncio
 import os
 import time
 from datetime import datetime as dt
-from platform import python_version as pyver
+from platform import python_version as PyVer
 
 import heroku3
 import requests
@@ -75,7 +75,8 @@ async def lol(ult):
 ║╭━━━━━━━━━━━━━━━➣ 
 ║┣⪼ **Ⲟⲱⲛⲉʀ** - `{}` 
 ║┣⪼ **Ⲋⲧⲁⲧυⲋ** - `Ⲟⲛⳑⲓⲛⲉ`
-║┣⪼ **Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
+║┣⪼ **Ⲃⲟⲧ Ⳳⲉʀⲋⲓⲟⲛ** - `{}`
+║┣⪼ **Ⳑⲓⲃʀⲁʀⲩ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
 ║┣⪼ **Ⲟⲋ** - `Ⲕⲁⳑⲓ Ⳑⲓⲛυⲭ 𝟸𝟶𝟸𝟶.𝟺`
 ║┣⪼ **Ⳙⲣⲧⲓⲙⲉ** - `{}` 
 ║┣⪼ **Ⲣⲩⲧⲏⲟⲛ** - `{}` 
@@ -86,8 +87,9 @@ async def lol(ult):
         header,
         OWNER_NAME,
         ultroid_version,
+        UltVer,
         uptime,
-        pyver(),
+        PyVer(),
         __version__,
         Repo().active_branch,
     )
