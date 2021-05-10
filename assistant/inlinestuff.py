@@ -211,49 +211,6 @@ async def gsearch(q_event):
             break
     await q_event.answer(searcher)
 
-
-@in_pattern("rex")
-@in_owner
-async def rextester(event):
-    builder = event.builder
-    try:
-        omk = event.text.split(" ", maxsplit=1)[1]
-        if omk is not None:
-            if "|" in omk:
-                lang, codee = omk.split("|")
-            else:
-                lang = "python3"
-                codee = omk
-            if lang == "php":
-                code = f"<?php {codee} ?>"
-            else:
-                code = codee
-            output = await rexec_aio(lang, code)
-            stats = output.stats
-            if output.errors is not None:
-                outputt = output.errors
-                resultm = builder.article(
-                    title="Code",
-                    description=f"Language-`{lang}` & Code-`{code}`",
-                    text=f"Language:\n`{lang}`\n\nCode:\n`{code}`\n\nErrors:\n`{outputt}`\n\nStats:\n`{stats}`",
-                )
-            else:  # By @ProgrammingError
-                outputt = output.results
-                resultm = builder.article(
-                    title="Code",  # By @ProgrammingError
-                    description=f"Language-`{lang}` & Code-`{code}`",
-                    text=f"Language:\n`{lang}`\n\nCode:\n`{code}`\n\nResult:\n`{outputt}`\n\nStats:\n`{stats}`",
-                )
-            await event.answer([resultm])
-    except UnknownLanguage:
-        resultm = builder.article(
-            title="Error",  # By @ProgrammingError
-            description="Invalid language choosen",
-            text=f"The list of valid languages are\n\n{rex_langs}\n\n\nFormat to use Rextester is `@Yourassistantusername rex langcode|code`",
-        )
-        await event.answer([resultm])
-
-
 @in_pattern("yahoo")
 @in_owner
 async def gsearch(q_event):
