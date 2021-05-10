@@ -36,6 +36,9 @@ from . import *
     groups_only=True,
 )
 async def _(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eod(event, "`This Command is Sudo Restricted.`")
     xx = await eor(event, "Searching Participant Lists.")
     p = 0
     (await event.get_chat()).title
@@ -55,6 +58,9 @@ async def _(event):
     groups_only=True,
 )
 async def _(event):
+    if not event.out:
+        if not is_fullsudo(event.sender_id):
+            return await eod(event, "`This Command is Sudo Restricted.`")
     xx = await eor(event, "Searching Participant Lists.")
     input_str = event.pattern_match.group(1)
     if input_str:
