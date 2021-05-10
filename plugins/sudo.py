@@ -19,7 +19,7 @@
 """
 
 
-from pyUltroid.misc._decorators import sed
+from cython.misc._decorators import sed
 
 from . import *
 
