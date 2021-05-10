@@ -68,6 +68,9 @@ from . import *
     admins_only=True,
 )
 async def prmte(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eor(ult, "`This Command is Sudo Restricted.`")
     xx = await eor(ult, get_string("com_1"))
     await ult.get_chat()
     user, rank = await get_user_info(ult)
@@ -106,6 +109,9 @@ async def prmte(ult):
     admins_only=True,
 )
 async def dmote(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eor(ult, "`This Command is Sudo Restricted.`")
     xx = await eor(ult, get_string("com_1"))
     await ult.get_chat()
     user, rank = await get_user_info(ult)
@@ -144,6 +150,9 @@ async def dmote(ult):
     admins_only=True,
 )
 async def bban(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eor(ult, "`This Command is Sudo Restricted.`")
     xx = await eor(ult, get_string("com_1"))
     await ult.get_chat()
     user, reason = await get_user_info(ult)
@@ -181,6 +190,9 @@ async def bban(ult):
     admins_only=True,
 )
 async def uunban(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eor(ult, "`This Command is Sudo Restricted.`")
     xx = await eor(ult, get_string("com_1"))
     await ult.get_chat()
     user, reason = await get_user_info(ult)
@@ -208,6 +220,9 @@ async def uunban(ult):
     admins_only=True,
 )
 async def kck(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eor(ult, "`This Command is Sudo Restricted.`")
     if ult.text == f"{HNDLR}kickme":
         return
     xx = await eor(ult, get_string("com_1"))
@@ -315,6 +330,9 @@ async def unp(ult):
     pattern="purge ?(.*)",
 )
 async def fastpurger(purg):
+    if not purg.out:
+        if not is_fullsudo(purg.sender_id):
+            return await eor(purg, "`This Command is Sudo Restricted.`")
     chat = await purg.get_input_chat()
     match = purg.pattern_match.group(1)
     if match and purg.text[6] == " ":
@@ -353,6 +371,9 @@ async def fastpurger(purg):
     pattern="purgeme ?(.*)",
 )
 async def fastpurgerme(purg):
+    if not purg.out:
+        if not is_fullsudo(purg.sender_id):
+            return await eor(purg, "`This Command is Sudo Restricted.`")
     num = purg.pattern_match.group(1)
     if num and not purg.is_reply:
         try:
@@ -395,6 +416,9 @@ async def fastpurgerme(purg):
     pattern="purgeall$",
 )
 async def _(e):
+    if not e.out:
+        if not is_fullsudo(e.sender_id):
+            return await eor(e, "`This Command is Sudo Restricted.`")
     xx = await eor(e, get_string("com_1")) 
     if e.reply_to_msg_id:
         input = (await e.get_reply_message()).sender_id
@@ -419,6 +443,9 @@ async def _(e):
     pattern="del$",
 )
 async def delete_it(delme):
+    if not delme.out:
+        if not is_fullsudo(delme.sender_id):
+            return await eor(delme, "`This Command is Sudo Restricted.`")
     msg_src = await delme.get_reply_message()
     if delme.reply_to_msg_id:
         try:
