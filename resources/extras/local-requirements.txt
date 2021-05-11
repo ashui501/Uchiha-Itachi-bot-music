@@ -6,7 +6,7 @@ cairosvg
 emoji
 GitPython
 googletrans==4.0.0rc1
-google-trans-new
+google_trans_new
 git+https://github.com/ProgrammingError/heroku3.py
 imutils
 lottie
