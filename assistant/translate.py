@@ -1,6 +1,6 @@
 import emoji
 from . import *
-from google-trans-new import google_translator
+from google_trans_new import google_translator  
 from googletrans import LANGUAGES
 from langdetect import detect
 
