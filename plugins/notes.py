@@ -90,7 +90,7 @@ async def lsnote(e):
             return await eod(e, "`You Are Not Admin Here.", time=5)
     x = list_note(e.chat_id)
     if x:
-        sd = "Notes Found in This Chats are\n\n"
+        sd = "Notes Found in this Chat are\n\n"
         await eor(e, sd + x)
     else:
         await eor(e, "No Notes Found Here")
