@@ -7,12 +7,16 @@
 
 """
 ✘ Commands Available -
+
 • `{i}addnote <word><reply to a message>`
     add note in the used chat with replied message and choosen word.
+
 • `{i}rmnote <word>`
     Remove the note from used chat.
+
 • `{i}listnote`
     list all notes.
+
 • Use :
    set notes in group so all can use it.
    type `#(Keyword of note)` to get it
@@ -30,7 +34,7 @@ from . import *
 async def an(e):
     if e.is_group:
         if not e._chat.admin_rights:
-            return await eod(e, "`You Are Not Admin Here.", time=5)
+            return await eod(e, "`You are not Admin Here.", time=5)
     wrd = (e.pattern_match.group(1)).lower()
     wt = await e.get_reply_message()
     chat = e.chat_id
@@ -64,11 +68,11 @@ async def an(e):
     await eor(e, f"Done Note : `#{wrd}` saved.")
 
 
-@ultroid_cmd(pattern="remnote ?(.*)")
+@ultroid_cmd(pattern="rmnote ?(.*)")
 async def rn(e):
     if e.is_group:
         if not e._chat.admin_rights:
-            return await eod(e, "`You Are Not Admin Here.", time=5)
+            return await eod(e, "`You are not Admin Here.", time=5)
     wrd = (e.pattern_match.group(1)).lower()
     chat = e.chat_id
     if not wrd:
@@ -86,7 +90,7 @@ async def lsnote(e):
             return await eod(e, "`You Are Not Admin Here.", time=5)
     x = list_note(e.chat_id)
     if x:
-        sd = "Notes Found in This Chat are\n\n"
+        sd = "Notes Found in This Chats are\n\n"
         await eor(e, sd + x)
     else:
         await eor(e, "No Notes Found Here")
@@ -94,9 +98,6 @@ async def lsnote(e):
 
 @ultroid_bot.on(events.NewMessage())
 async def notes(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return
     xx = e.text
     if not xx.startswith("#"):
         return
