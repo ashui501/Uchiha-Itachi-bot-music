@@ -481,7 +481,7 @@ async def pmset(event):
 
 @callback("edon")
 @owner
-async def eddon(event)
+async def eddon(event):
     if not is_fullsudo(event.sender_id):
         return await event.edit("`This Command is Sudo Restricted.`")
     var = "ADDONS"
