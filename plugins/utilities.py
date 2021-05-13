@@ -87,7 +87,7 @@ telegraph.create_account(short_name="CɪᴘʜᴇʀX")
 # ================================================================#
 
 
-)
+
 @ultroid_cmd(pattern="kickme$", groups_only=True, allow_sudo=False)
 async def leave(ult):
     if not ult.out:
