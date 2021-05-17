@@ -56,38 +56,50 @@ async def _(e):
     levels = data["data"]["level"]
     banks = data["data"]["bank"]
     countrys = data["data"]["country"]
-    text = f"**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`\n"
-    text += f"**Ⲋⲧⲁⲧυⲋ** `{messages}`\n"
-    text += f"**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`\n"
-    text += f"**Ⳳⲉⲛⲇⲟʀ** `{vendors}`\n"
-    text += f"**Ⳑⲉⳳⲉⳑ** `{levels}`\n"
-    text += f"**Ⲧⲩⲣⲉ** `{types}`\n"
-    text += f"**Ⲃⲁⲛⲕ** `{banks}`\n"
-    text += f"**Ⲥⲟυⲛⲧʀⲩ** `{countrys}`\n\n"
-    text += "**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**"
-    list.append(
-        await e.builder.article(
-            title=f"Bin Nuʍʙᴇr : {quer}",
-            description=f"{results}\n{messages}",
-            text=text,
-            link_preview=False,
-            buttons=[
-                [
-                    Button.switch_inline(
-                        "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
-                        query="bin ",
-                        same_peer=True,
-                    ),
-                    Button.switch_inline(
-                        "Sʜᴀʀᴇ",
-                        query=f"bin {quer}",
-                        same_peer=False,
-                    ),
+    text = """
+**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`
+**Ⲋⲧⲁⲧυⲋ** `{messages}`
+**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`
+**Ⳳⲉⲛⲇⲟʀ** `{vendors}`
+**Ⳑⲉⳳⲉⳑ** `{levels}`
+**Ⲧⲩⲣⲉ** `{types}`
+**Ⲃⲁⲛⲕ** `{banks}`
+**Ⲥⲟυⲛⲧʀⲩ** `{countrys}`
+**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**
+""".format(
+            results,
+            messages,
+            bins,
+            vendors,
+            levels,
+            types,
+            banks,
+            countrys,
+        )
+        but = [
+            await e.builder.article(
+                title=f"Bin Nuʍʙᴇr : {quer}",
+                description=f"{results}\n{messages}",
+                text=text,
+                thumb=wb(binpic, 0, "image/jpeg", []),
+                link_preview=False,
+                buttons=[
+                    [
+                        Button.switch_inline(
+                            "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                            query="bin ",
+                            same_peer=True,
+                        ),
+                        Button.switch_inline(
+                            "Sʜᴀʀᴇ",
+                            query=f"bin {quer}",
+                            same_peer=False,
+                        ),
+                    ],
                 ],
-            ],
-        ),
-    )
-    await e.answer(lists)
+            ),
+        ] 
+        await e.answer(but)
     
     
 @in_pattern("ofox")
