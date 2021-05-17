@@ -7,7 +7,6 @@ emoji
 GitPython
 google-trans-new
 googletrans==4.0.0rc1
-langdetect
 git+https://github.com/ProgrammingError/heroku3.py
 imutils
 lottie
