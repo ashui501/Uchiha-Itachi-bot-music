@@ -47,14 +47,13 @@ async def _(e):
     results = data.get("result")
     message = data.get("message")
     items = data.get("data")
-    search(quer)
-    lists = []
     bins = items.get("bin")
     vendor = items.get("vendor")
     types = items.get("type")
     level = items.get("level")
     bank = items.get("bank")
     country = items.get("country")
+    lists = []
     lists.append(
         await e.builder.article(
             results=results,
