@@ -36,7 +36,8 @@ async def _(e):
         quer = e.text.split(" ", maxsplit=1)[1]
     except IndexError:
         kkkk = e.builder.article(
-            title="Give me your bin number",
+            title="Bin Checker",
+            description="Give me your bin number",
             thumb=wb(binpic, 0, "image/jpeg", []),
             text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Ⲃⲓⲛ Ⲥⲏⲉⲥⲕⲉʀ**\n\nYou didn't search any bin number",
             buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="bin ", same_peer=True),
@@ -44,8 +45,10 @@ async def _(e):
         await e.answer([kkkk])
     url = f"https://bins-su-api.vercel.app/api/{quer}"
     data = requests.get(url).json()
+    search(quer)
+    lists = [] 
     results = data.get("result")
-    message = data.get("message")
+    messages = data.get("message")
     items = data.get("data")
     bins = items.get("bin")
     vendor = items.get("vendor")
@@ -53,17 +56,19 @@ async def _(e):
     level = items.get("level")
     bank = items.get("bank")
     country = items.get("country")
-    lists = []
+    text = f"**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`\n"
+    text += f"**Ⲋⲧⲁⲧυⲋ** `{message}`\n"
+    text += f"**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`\n"
+    text += f"**Ⳳⲉⲛⲇⲟʀ** `{vendor}`\n"
+    text += f"**Ⲧⲩⲣⲉ** `{types}`\n"
+    text += f"**Ⲃⲁⲛⲕ** `{bank}`\n"
+    text += f"**Ⲥⲟυⲛⲧʀⲩ** `{country}`\n\n"
+    text += "**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**"
     lists.append(
         await e.builder.article(
-            results=results,
-            message=message,
-            bins=bins,
-            vendor=vendor,
-            types=types,
-            bank=bank,
-            country=country,
-            text=f"**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`\n**Ⲋⲧⲁⲧυⲋ** `{message}`\n**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`\n**Ⳳⲉⲛⲇⲟʀ** `{vendor}`\n**Ⲧⲩⲣⲉ** `{types}`\n**Ⲃⲁⲛⲕ** `{bank}`\n**Ⲥⲟυⲛⲧʀⲩ** `{country}`\n\n**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**",
+            title=f"Bin Nuʍʙᴇr : {quer}",
+            description=f"{results}\n{messages}",
+            text=text,
             link_preview=False,
             buttons=[
                 [
