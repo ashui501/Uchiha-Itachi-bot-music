@@ -34,14 +34,13 @@ async def _(event):
 
 **Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({transl_lan})**:
 `{translated}`"""
-
     try:
         await asst.send_message(event.chat_id, output_str)
-        if len(tr_text) >= 4096:
+        if len(output_str) >= 4096:
             url = "https://del.dog/documents"
-            r = requests.post(url, data=tr_text.encode("UTF-8")).json()
+            r = requests.post(url, data=output_str.encode("UTF-8")).json()
             url2 = f"https://del.dog/{r['key']}"
-            tr_text = (
+            output_str = (
                 f"Translated text was too big, so I've pasted it [Here]({url2})"
             )
     await event.edit(tr_text)
