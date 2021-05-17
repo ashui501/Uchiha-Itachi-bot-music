@@ -51,7 +51,6 @@ async def e(o):
 ✵ **Ⲧⲉⳑⲉⲧⲏⲟⲛ** - `{}`        
 ✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`         
 ✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨
-✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵ 
 """.format(
             header,
             OWNER_NAME,
@@ -211,6 +210,11 @@ if asst.me is not None:
                 Button.switch_inline(
                     "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
                     query="yt ",
+                    same_peer=True,
+                ),
+                Button.switch_inline(
+                    "Ⲃⲓⲛ Ⲥⲏⲉⲥⲕⲉʀ",
+                    query="bin ",
                     same_peer=True,
                 ),
             ],
