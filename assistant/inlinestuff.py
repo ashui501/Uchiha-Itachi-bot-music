@@ -82,7 +82,7 @@ async def _(e):
             ],
         ),
     )
-await e.answer(lists)
+    await e.answer(lists)
     
     
 @in_pattern("ofox")
