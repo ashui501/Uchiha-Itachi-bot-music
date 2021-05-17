@@ -1,2 +1,3 @@
 git+https://github.com/CipherX1-ops/CythonX.git
 google-trans-new
+langdetect>=1.0.8
