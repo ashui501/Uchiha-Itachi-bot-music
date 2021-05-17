@@ -76,30 +76,30 @@ async def _(e):
             banks,
             countrys,
         )
-        but = [
-            await e.builder.article(
-                title=f"Bin Nuʍʙᴇr : {quer}",
-                description=f"{results}\n{messages}",
-                text=text,
-                thumb=wb(binpic, 0, "image/jpeg", []),
-                link_preview=False,
-                buttons=[
-                    [
-                        Button.switch_inline(
-                            "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
-                            query="bin ",
-                            same_peer=True,
-                        ),
-                        Button.switch_inline(
-                            "Sʜᴀʀᴇ",
-                            query=f"bin {quer}",
-                            same_peer=False,
-                        ),
-                    ],
+    but = [
+        await e.builder.article(
+            title=f"Bin Nuʍʙᴇr : {quer}",
+            description=f"{results}\n{messages}",
+            text=text,
+            thumb=wb(binpic, 0, "image/jpeg", []),
+            link_preview=False,
+            buttons=[
+                [
+                    Button.switch_inline(
+                        "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                        query="bin ",
+                        same_peer=True,
+                    ),
+                    Button.switch_inline(
+                        "Sʜᴀʀᴇ",
+                        query=f"bin {quer}",
+                        same_peer=False,
+                    ),
                 ],
-            ),
-        ] 
-        await e.answer(but)
+            ],
+        ),
+    ] 
+    await e.answer(but)
     
     
 @in_pattern("ofox")
