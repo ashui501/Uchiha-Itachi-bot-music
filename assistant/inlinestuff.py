@@ -20,7 +20,7 @@ from telethon.tl.types import InputWebDocument as wb
 
 from . import *
 from . import humanbytes as hb
-
+binpic = "https://telegra.ph/file/be4dd7375ef2313a43c41.jpg"
 ofox = "https://telegra.ph/file/231f0049fcd722824f13b.jpg"
 gugirl = "https://telegra.ph/file/0df54ae4541abca96aa11.jpg"
 yeah = "https://telegra.ph/file/e3c67885e16a194937516.jpg"
@@ -29,6 +29,62 @@ ultpic = "https://telegra.ph/file/b2da137de76fc5cd85ffa.jpg"
 
 ofox_api = OrangeFoxAPI()
 
+@in_pattern("bin")
+@in_owner
+async def _(e):
+    try:
+        quer = e.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        kkkk = e.builder.article(
+            title="Give me your bin number",
+            thumb=wb(binpic, 0, "image/jpeg", []),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ Ⲃⲓⲛ Ⲥⲏⲉⲥⲕⲉʀ**\n\nYou didn't search any bin number",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="bin ", same_peer=True),
+        )
+        await e.answer([kkkk])
+    url = f"https://bins-su-api.vercel.app/api/{quer}"
+    data = requests.get(url).json()
+    results = data.get("result")
+    message = data.get("message")
+    items = data.get("data")
+    search(quer)
+    lists = []
+    bins = items.get("bin")
+    vendor = items.get("vendor")
+    types = items.get("type")
+    level = items.get("level")
+    bank = items.get("bank")
+    country = items.get("country")
+    lists.append(
+        await e.builder.article(
+            results=results,
+            message=message,
+            bins=bins,
+            vendor=vendor,
+            types=types,
+            bank=bank,
+            country=country,
+            text=f"**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`\n**Ⲋⲧⲁⲧυⲋ** `{message}`\n**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`\n**Ⳳⲉⲛⲇⲟʀ** `{vendor}`\n**Ⲧⲩⲣⲉ** `{types}`\n**Ⲃⲁⲛⲕ** `{bank}`\n**Ⲥⲟυⲛⲧʀⲩ** `{country}`\n\n**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**",
+            link_preview=False,
+            buttons=[
+                [
+                    Button.switch_inline(
+                        "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                        query="bin ",
+                        same_peer=True,
+                    ),
+                    Button.switch_inline(
+                        "Sʜᴀʀᴇ",
+                        query=f"bin {quer}",
+                        same_peer=False,
+                    ),
+                ],
+            ],
+        ),
+    )
+await e.answer(lists)
+    
+    
 @in_pattern("ofox")
 @in_owner
 async def _(e):
