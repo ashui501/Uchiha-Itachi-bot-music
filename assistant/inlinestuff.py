@@ -11,6 +11,7 @@ from re import findall
 from urllib.request import urlopen
 
 import requests
+import json
 from bs4 import BeautifulSoup
 from orangefoxapi import OrangeFoxAPI
 from play_scraper import search
@@ -44,27 +45,27 @@ async def _(e):
         )
         await e.answer([kkkk])
     url = f"https://bins-su-api.vercel.app/api/{quer}"
-    data = requests.get(url).json()
+    data = json.loads(requests.get(url).text) 
     search(quer)
-    lists = [] 
-    results = data.get("result")
-    messages = data.get("message")
-    items = data.get("data")
-    bins = items.get("bin")
-    vendor = items.get("vendor")
-    types = items.get("type")
-    level = items.get("level")
-    bank = items.get("bank")
-    country = items.get("country")
+    list = [] 
+    results = data["result"]
+    messages = data["message"]
+    types = data["data"]["type"]
+    bins = data["data"]["bin"]
+    vendors = data["data"]["vendor"]
+    levels = data["data"]["level"]
+    banks = data["data"]["bank"]
+    countrys = data["data"]["country"]
     text = f"**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`\n"
-    text += f"**Ⲋⲧⲁⲧυⲋ** `{message}`\n"
+    text += f"**Ⲋⲧⲁⲧυⲋ** `{messages}`\n"
     text += f"**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`\n"
-    text += f"**Ⳳⲉⲛⲇⲟʀ** `{vendor}`\n"
+    text += f"**Ⳳⲉⲛⲇⲟʀ** `{vendors}`\n"
+    text += f"**Ⳑⲉⳳⲉⳑ** `{levels}`\n"
     text += f"**Ⲧⲩⲣⲉ** `{types}`\n"
-    text += f"**Ⲃⲁⲛⲕ** `{bank}`\n"
-    text += f"**Ⲥⲟυⲛⲧʀⲩ** `{country}`\n\n"
+    text += f"**Ⲃⲁⲛⲕ** `{banks}`\n"
+    text += f"**Ⲥⲟυⲛⲧʀⲩ** `{countrys}`\n\n"
     text += "**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**"
-    lists.append(
+    list.append(
         await e.builder.article(
             title=f"Bin Nuʍʙᴇr : {quer}",
             description=f"{results}\n{messages}",
