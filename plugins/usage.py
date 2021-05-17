@@ -98,7 +98,6 @@ def heroku_usage():
     USED = humanbytes(used)
     FREE = humanbytes(free)
     return True, get_string("usage").format(
-        Var.HEROKU_APP_NAME,
         AppHours,
         AppMinutes,
         AppPercentage,
