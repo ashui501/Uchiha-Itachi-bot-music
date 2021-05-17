@@ -43,7 +43,7 @@ async def _(event):
             output_str = (
                 f"Translated text was too big, so I've pasted it [Here]({url2})"
             )
-    await event.edit(tr_text)
+            await event.edit(output_str)
     except Exception:
         await asst.send_message(event.chat_id, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.")
         
