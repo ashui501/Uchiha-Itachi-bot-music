@@ -136,7 +136,7 @@ async def _(e):
     orgs = data["org"]
     ass = data["as"]
     que = data["query"]
-    linkk = "https://maps.google.com/?q={lt},{ln}"
+    linkk = f"https://maps.google.com/?q={lt},{ln}"
     text = """
 **IP Aɗɗrᥱss**:- `{}`
 **𐍃ᴛᥲᴛᥙs**:- `{}`
