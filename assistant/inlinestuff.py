@@ -57,14 +57,14 @@ async def _(e):
     banks = data["data"]["bank"]
     countrys = data["data"]["country"]
     text = """
-**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{results}`
-**Ⲋⲧⲁⲧυⲋ** `{messages}`
-**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{bins}`
-**Ⳳⲉⲛⲇⲟʀ** `{vendors}`
-**Ⳑⲉⳳⲉⳑ** `{levels}`
-**Ⲧⲩⲣⲉ** `{types}`
-**Ⲃⲁⲛⲕ** `{banks}`
-**Ⲥⲟυⲛⲧʀⲩ** `{countrys}`
+**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{}`
+**Ⲋⲧⲁⲧυⲋ** `{}`
+**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{}`
+**Ⳳⲉⲛⲇⲟʀ** `{}`
+**Ⳑⲉⳳⲉⳑ** `{}`
+**Ⲧⲩⲣⲉ** `{}`
+**Ⲃⲁⲛⲕ** `{}`
+**Ⲥⲟυⲛⲧʀⲩ** `{}`
 **✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**
 """.format(
             results,
@@ -78,7 +78,7 @@ async def _(e):
         )
     but = [
         await e.builder.article(
-            title=f"Bin Nuʍʙᴇr : {quer}",
+            title=f"Bin Nuʍʙᴇr Sᴇᴀrᴄh Rᴇsulᴛ",
             description=f"{results}\n{messages}",
             text=text,
             thumb=wb(binpic, 0, "image/jpeg", []),
