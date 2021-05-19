@@ -133,7 +133,7 @@ async def _(e):
     lt = data["lat"]
     ln = data["lon"]
     tz = data["timezone"]
-    or = data["org"]
+    orgs = data["org"]
     ass = data["as"]
     que = data["query"]
     linkk = "https://maps.google.com/?q={lt},{ln}"
@@ -167,7 +167,7 @@ async def _(e):
             lt,
             ln,
             tz,
-            or,
+            orgs,
             ass,
             linkk,
         )
