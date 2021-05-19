@@ -177,7 +177,7 @@ async def _(e):
             description=f"{stat}\n{count}",
             text=text,
             thumb=wb(ippic, 0, "image/jpeg", []),
-            link_preview=True,
+            link_preview=False,
             buttons=[
                 [
                     Button.switch_inline(
