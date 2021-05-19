@@ -21,7 +21,9 @@ from telethon.tl.types import InputWebDocument as wb
 
 from . import *
 from . import humanbytes as hb
+
 binpic = "https://telegra.ph/file/be4dd7375ef2313a43c41.jpg"
+ippic = "https://telegra.ph/file/807e012dbe2789c0648ee.jpg"
 ofox = "https://telegra.ph/file/231f0049fcd722824f13b.jpg"
 gugirl = "https://telegra.ph/file/0df54ae4541abca96aa11.jpg"
 yeah = "https://telegra.ph/file/e3c67885e16a194937516.jpg"
@@ -57,14 +59,14 @@ async def _(e):
     banks = data["data"]["bank"]
     countrys = data["data"]["country"]
     text = """
-**••Ⳳⲁⳑⲓⲇⲓⲧⲩ••** `{}`
-**Ⲋⲧⲁⲧυⲋ** `{}`
-**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ** `{}`
-**Ⳳⲉⲛⲇⲟʀ** `{}`
-**Ⳑⲉⳳⲉⳑ** `{}`
-**Ⲧⲩⲣⲉ** `{}`
-**Ⲃⲁⲛⲕ** `{}`
-**Ⲥⲟυⲛⲧʀⲩ** `{}`
+**Ⳳⲁⳑⲓⲇⲓⲧⲩ**:- `{}`
+**Ⲋⲧⲁⲧυⲋ**:- `{}`
+**Ⲃⲓⲛ Ⲛυⲙⲃⲉʀ**:- `{}`
+**Ⳳⲉⲛⲇⲟʀ**:- `{}`
+**Ⳑⲉⳳⲉⳑ**:- `{}`
+**Ⲧⲩⲣⲉ**:- `{}`
+**Ⲃⲁⲛⲕ**:- `{}`
+**Ⲥⲟυⲛⲧʀⲩ**:- `{}`
 **✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**
 """.format(
             results,
@@ -102,6 +104,99 @@ async def _(e):
     await e.answer(but)
     
     
+
+@in_pattern("ip")
+@in_owner
+async def _(e):
+    try:
+        quer = e.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        kkkk = e.builder.article(
+            title="Ip Info",
+            description="Give me an ip address",
+            thumb=wb(ippic, 0, "image/jpeg", []),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ ⲒⲢ Ⲓⲛϝⲟ**\n\nYou didn't search any ip address",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="ip ", same_peer=True),
+        )
+        await e.answer([kkkk])
+    url = f"http://ip-api.com/json/{quer}"
+    data = json.loads(requests.get(url).text) 
+    search(quer)
+    list = [] 
+    stat = data["status"]
+    count = data["country"]
+    countc = data["countryCode"]
+    reg = data["region"]
+    regn = data["regionName"]
+    cit = data["city"]
+    zp = data["zip"]
+    lt = data["lat"]
+    ln = data["lon"]
+    tz = data["timezone"]
+    or = data["org"]
+    ass = data["as"]
+    que = data["query"]
+    linkk = "https://maps.google.com/?q={lt},{ln}"
+    text = """
+**IP Aɗɗrᥱss**:- `{}`
+**𐍃ᴛᥲᴛᥙs**:- `{}`
+**𑀝᧐ᥙᥒᴛry**:- `{}`
+**𑀝᧐ᥙᥒᴛry 𑀝᧐ɗᥱ**:- `{}`
+**Rᥱgi᧐ᥒ**:- `{}`
+**Rᥱgi᧐ᥒ 𐌽ᥲⲙᥱ**:- `{}`
+**𑀝iᴛy**:- `{}`
+**Ziρ**:- `{}`
+**𑀉ᥲᴛiᴛᥙɗᥱ**:- `{}`
+**𑀉᧐ᥒgiᴛᥙɗᥱ**:- `{}`
+**Tiⲙᥱ Z᧐ᥒᥱ**:- `{}`
+**I𐍃P**:- `{}`
+**𐌏RᏵ**:- `{}`
+**A𐍃**:- `{}`
+**𑀉᧐ᥴᥲᴛi᧐ᥒ 𑀉iᥒκ**:- [Link]({})
+
+**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**
+""".format(
+            que,
+            stat,
+            count,
+            countc,
+            reg,
+            regn,
+            cit,
+            zp,
+            lt,
+            ln,
+            tz,
+            or,
+            ass,
+            linkk,
+        )
+    but = [
+        await e.builder.article(
+            title=f"IP Iᥒf᧐rⲙᥲᴛi᧐ᥒ Rᥱsᥙᥣᴛ",
+            description=f"{stat}\n{count}",
+            text=text,
+            thumb=wb(ippic, 0, "image/jpeg", []),
+            link_preview=True,
+            buttons=[
+                [
+                    Button.switch_inline(
+                        "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                        query="ip ",
+                        same_peer=True,
+                    ),
+                    Button.switch_inline(
+                        "Sʜᴀʀᴇ",
+                        query=f"ip {quer}",
+                        same_peer=False,
+                    ),
+                ],
+            ],
+        ),
+    ] 
+    await e.answer(but)
+
+
 @in_pattern("ofox")
 @in_owner
 async def _(e):
