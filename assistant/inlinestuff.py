@@ -49,7 +49,6 @@ async def _(e):
     url = f"https://bins-su-api.vercel.app/api/{quer}"
     data = json.loads(requests.get(url).text) 
     search(quer)
-    list = [] 
     results = data["result"]
     messages = data["message"]
     types = data["data"]["type"]
@@ -122,7 +121,6 @@ async def _(e):
     url = f"http://ip-api.com/json/{quer}"
     data = json.loads(requests.get(url).text) 
     search(quer)
-    list = [] 
     stat = data["status"]
     count = data["country"]
     countc = data["countryCode"]
@@ -133,6 +131,7 @@ async def _(e):
     lt = data["lat"]
     ln = data["lon"]
     tz = data["timezone"]
+    isps = data["isp"]
     orgs = data["org"]
     ass = data["as"]
     que = data["query"]
@@ -167,6 +166,7 @@ async def _(e):
             lt,
             ln,
             tz,
+            isps,
             orgs,
             ass,
             linkk,
