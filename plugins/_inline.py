@@ -67,6 +67,7 @@ async def e(o):
                 url="https://t.me/Hackintush",
                 description=" (c) CɪᴘʜᴇʀX ",
                 text=ALIVEMSG,
+                file=f"./resources/extras/CipherX.mp4", 
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 buttons=[
                     [Button.url(text="✵CɪᴘʜᴇʀX Ⲃⲟⲧ✵", url="t.me/CipherXBot")],
@@ -179,6 +180,11 @@ if asst.me is not None:
                 Button.switch_inline(
                     "Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
                     query="send ",
+                    same_peer=True,
+                ),
+                Button.switch_inline(
+                    "ⲒⲢ Ⳑⲟⲟⲕυⲣ",
+                    query="bin ",
                     same_peer=True,
                 ),
             ],
