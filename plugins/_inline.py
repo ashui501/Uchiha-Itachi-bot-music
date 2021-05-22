@@ -67,7 +67,6 @@ async def e(o):
                 url="https://t.me/Hackintush",
                 description=" (c) CɪᴘʜᴇʀX ",
                 text=ALIVEMSG,
-                file=f"./resources/extras/CipherX.mp4", 
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 buttons=[
                     [Button.url(text="✵CɪᴘʜᴇʀX Ⲃⲟⲧ✵", url="t.me/CipherXBot")],
@@ -100,10 +99,11 @@ if asst.me is not None:
             bnn = asst.me.username
             result = builder.document(
                 file=f"./resources/extras/CipherX.mp4",
+                link_preview=False,
+                force_document=True,
                 title="Help Menu",
                 description="✵ Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵ | (c) CɪᴘʜᴇʀX",
                 url="https://t.me/CipherXBot",
-                thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 text=get_string("inline_4").format(
                     OWNER_NAME,
                     len(PLUGINS) - 5,
@@ -148,7 +148,20 @@ if asst.me is not None:
     @callback("ownr")
     @owner
     async def setting(event):
+        z = []
+        for x in LIST.values():
+            for y in x:
+                z.append(y)
+        cmd = len(z)
         await event.edit(
+            get_string("inline_4").format(
+                OWNER_NAME,
+                len(PLUGINS),
+                len(ADDONS),
+                cmd,
+            ),
+            file=f"./resources/extras/CipherX.mp4",
+            link_preview=False,
             buttons=[
                 [
                     Button.inline("•Pɪɴɢ•", data="pkng"),
