@@ -98,7 +98,8 @@ if asst.me is not None:
                     z.append(y)
             cmd = len(z) + 10
             bnn = asst.me.username
-            result = builder.article(
+            result = builder.document(
+                file=f"./resources/extras/CipherX.mp4",
                 title="Help Menu",
                 description="✵ Help Menu of CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵ | (c) CɪᴘʜᴇʀX",
                 url="https://t.me/CipherXBot",
