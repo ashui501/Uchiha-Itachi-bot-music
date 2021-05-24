@@ -17,6 +17,7 @@ from cython.functions.goodbye_db import *
 from cython.functions.google_image import googleimagesdownload
 from cython.functions.sudos import *
 from cython.functions.welcome_db import *
+from cython.functions.ytdl import *
 from cython.utils import *
 
 from strings import get_string
@@ -29,7 +30,7 @@ except ModuleNotFoundError:
     )
     
 start_time = time.time()
-ultroid_version = "v0.0.6"
+ultroid_version = "v0.0.7"
 OWNER_NAME = ultroid_bot.me.first_name
 OWNER_ID = ultroid_bot.me.id
 
