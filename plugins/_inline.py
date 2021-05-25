@@ -67,23 +67,23 @@ async def e(o):
         )
         res = [
             await b.article(
-                title="Ultroid Userbot",
-                url="https://t.me/TeamUltroid",
-                description="Userbot | Telethon ",
+                title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
+                url="https://t.me/Hackintush",
+                description=" (c) CɪᴘʜᴇʀX ",
                 text=ALIVEMSG,
                 thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
                 buttons=[
-                    [Button.url(text="Support Group", url="t.me/UltroidSupport")],
+                    [Button.url(text="✵CɪᴘʜᴇʀX Ⲃⲟⲧ✵", url="t.me/CipherXBot")],
                     [
                         Button.url(
-                            text="Repo",
-                            url="https://github.com/Teamultroid/Ultroid",
+                            text="✵Ⲋυⲣⲣⲟʀⲧ Ⲥⲏⲁⲛⲛⲉⳑ✵",
+                            url="t.me/FutureTechnologyOfficial",
                         ),
                     ],
                 ],
             ),
         ]
-        await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
+        await o.answer(res, switch_pm=f"👥 CɪᴘʜᴇʀX Pᴏrᴛᴀl", switch_pm_param="start")
 
 
 @in_pattern("ultd")
