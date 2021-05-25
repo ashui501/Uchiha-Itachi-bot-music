@@ -13,7 +13,7 @@ from os import remove
 from platform import python_version as PyVer
 
 from git import Repo
-from pyUltroid import __version__ as UltVer
+from cython import __version__ as UltVer
 from support import *
 from telethon import Button, __version__
 from telethon.tl.types import InputWebDocument
