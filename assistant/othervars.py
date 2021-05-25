@@ -68,14 +68,18 @@ async def update(eve):
     ups_rem = repo.remote("upstream")
     if Var.HEROKU_API:
         import heroku3
-
-        heroku = heroku3.from_key(Var.HEROKU_API)
-        heroku_app = None
-        heroku_applications = heroku.apps()
+        try:
+            heroku = heroku3.from_key(Var.HEROKU_API)
+            heroku_app = None
+            heroku_applications = heroku.apps()
+        except BaseException:
+            return await eve.edit(
+                "`Invalid Heroku credentials for updating userbot dyno.`"
+            )
         for app in heroku_applications:
             if app.name == Var.HEROKU_APP_NAME:
                 heroku_app = app
-        if heroku_app is None:
+        if not heroku_app:
             await eve.edit("`Invᴀlid Kᴇy Sᴇᴛ`")
             repo.__del__()
             return
@@ -99,18 +103,6 @@ async def update(eve):
             repo.__del__()
             return
         await eve.edit("`Suᴄᴄᴇssfully Uᴩdᴀᴛᴇd!\nRᴇsᴛᴀrᴛing CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ...`")
-    elif Var.HEROKU_API is None:
-        try:
-            ups_rem.pull(ac_br)
-        except GitCommandError:
-            repo.git.reset("--hard", "FETCH_HEAD")
-        await updateme_requirements()
-        await eve.edit(
-            "`Suᴄᴄᴇssfully Uᴩdᴀᴛᴇd!\nRᴇsᴛᴀrᴛing CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ...`"
-        )
-        os.system("git pull"), os.system(
-            "pip3.9 install -U -r requirements.txt"
-        ), os.execl(sys.executable, sys.executable, "-m", "cython")
     else:
         try:
             ups_rem.pull(ac_br)
