@@ -22,7 +22,7 @@ from . import *
 
 # ================================================#
 notmine = f"This bot is for {OWNER_NAME}"
-ULTROID_PIC = "https://telegra.ph/file/115f149ed8e154641708b.jpg"
+ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = get_string("inline_1")
 
 add_ons = udB.get("ADDONS")
@@ -33,7 +33,7 @@ else:
 if udB.get("INLINE_PIC"):
     _file_to_replace = udB.get("INLINE_PIC")
 else:
-    _file_to_replace = "resources/extras/inline.jpg"
+    _file_to_replace = "resources/extras/cipherx.jpg"
 # ============================================#
 
 
