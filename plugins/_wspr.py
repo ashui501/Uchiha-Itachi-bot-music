@@ -99,7 +99,7 @@ async def _(e):
             button = [
                 Button.url("Privᴀᴛᴇ", url=f"t.me/{username}"),
                 Button.switch_inline(
-                    "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr ", same_peer=True
+                    "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr Hello 👋", same_peer=True
                 ),
             ]
             sur = e.builder.article(
