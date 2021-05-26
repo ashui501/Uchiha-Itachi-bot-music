@@ -11,7 +11,7 @@
 • `{i}kickme`
     Leaves the group in which it is used.
 
-• `{i}cal <equation>`
+• `{i}bcal <equation>`
     A simple calculator.
 
 • `{i}date`
@@ -110,7 +110,7 @@ async def date(event):
 
 
 @ultroid_cmd(
-    pattern="cal",
+    pattern="bcal",
 )
 async def _(event):
     x = await eor(event, get_string("com_1"))
