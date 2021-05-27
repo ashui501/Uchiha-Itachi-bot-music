@@ -35,7 +35,7 @@ import os
 import re
 import time
 from datetime import datetime as dt
-from platform import python_version as PyVer
+from platform import python_version as pyver
 
 import heroku3
 import requests
