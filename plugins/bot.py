@@ -32,6 +32,7 @@
 
 import asyncio
 import os
+import re
 import time
 from datetime import datetime as dt
 from platform import python_version as PyVer
@@ -40,7 +41,7 @@ import heroku3
 import requests
 from git import Repo
 from cython import __version__ as UltVer
-from telethon import __version__
+from telethon import __version__, events
 from telethon.errors.rpcerrorlist import ChatSendMediaForbiddenError
 
 from . import *
@@ -66,7 +67,11 @@ except BaseException:
 async def lol(ult):
     pic = udB.get("ALIVE_PIC")
     uptime = grt(time.time() - start_time)
-    header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
+    header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey, I'm alive."
+    y = Repo().active_branch
+    xx = Repo().remotes[0].config_reader.get("url")
+    rep = xx.replace(".git", f"/tree/{y}")
+    kk = f" `[{y}]({rep})` "
     als = """
 **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**
 **{}**
@@ -89,9 +94,9 @@ async def lol(ult):
         ultroid_version,
         UltVer,
         uptime,
-        PyVer(),
+        pyver(),
         __version__,
-        Repo().active_branch,
+        kk,
     )
     if pic is None:
         return await eor(ult, als)
@@ -112,10 +117,12 @@ async def lol(ult):
             await eor(ult, als, link_preview=False)
 
 
-@ultroid_cmd(
-    pattern="ping$",
-)
+@ultroid_bot.on(events.NewMessage(pattern=re.escape(f"{HNDLR}ping"))) 
 async def _(event):
+    if event.fwd_from:
+        return
+    if not event.out and not is_sudo(event.sender_id):
+        return
     start = dt.now()
     x = await eor(event, "`𝙿𝙸𝙽𝙶`")
     end = dt.now()
@@ -136,14 +143,9 @@ async def cmds(event):
 )
 async def restartbt(ult):
     if Var.HEROKU_API:
-        await eor(ult, "`Restarting...`")
-        try:
-            await restart(ult)
-        except BaseException:
-            await bash("pkill python3 && python3 -m cython")
+       await restart(ult)
     else:
         await bash("pkill python3 && python3 -m cython")
-
 
 @ultroid_cmd(pattern="shutdown")
 async def shutdownbot(ult):
@@ -159,10 +161,12 @@ async def shutdownbot(ult):
     else:
         await shutdown(ult)
         
-@ultroid_cmd(
-    pattern="logs",
-)
-async def get_logs(event):
+@ultroid_bot.on(events.NewMessage(pattern=re.escape(f"{HNDLR}logs")))
+async def _(event):
+    if event.fwd_from:
+        return
+    if not event.out and not is_sudo(event.sender_id):
+        return
     try:
         opt = event.text.split(" ", maxsplit=1)[1]
     except IndexError:
