@@ -18,6 +18,7 @@ from . import *
 
 # taglogger
 
+
 @ultroid_bot.on(
     events.NewMessage(
         incoming=True,
@@ -136,14 +137,13 @@ async def when_ultd_added_to_chat(event):
     elif event.user_joined:
         user = await event.get_user()
         chat = (await event.get_chat()).title
-       if user.is_self:
+        if user.is_self:
             buttons = Button.inline("Leave Chat", data=f"leave_ch_{event.chat_id}|user")
             return await asst.send_message(
                 int(udB.get("LOG_CHANNEL")),
                 f"#JOIN_LOG\n\n[{user.first_name}](tg://user?id={user.id}) just joined {chat}.",
                 buttons=buttons,
             )
-
 
 
 @callback(
