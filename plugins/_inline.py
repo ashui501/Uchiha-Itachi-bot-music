@@ -30,12 +30,12 @@ if add_ons == "True" or add_ons is None:
     zhelps = get_string("inline_2")
 else:
     zhelps = get_string("inline_3")
-if udB.get("INLINE_PIC"):
-    _file_to_replace = udB.get("INLINE_PIC")
-else:
-    _file_to_replace = "resources/extras/CipherX.mp4"
+#if udB.get("INLINE_PIC"):
+#    _file_to_replace = udB.get("INLINE_PIC")
+#else:
+#    _file_to_replace = "resources/extras/CipherX.mp4"
 # ============================================#
-
+_file_to_replace = await ultroid_bot.upload_file("resources/extras/CipherX.mp4")
 
 @in_pattern("")
 @in_owner
