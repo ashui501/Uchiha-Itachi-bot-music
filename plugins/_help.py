@@ -56,11 +56,9 @@ async def ult(ult):
             bnn = asst.me.username
             return await ultroid_bot.send_message(
                 ult.chat_id,
-                file="resources/extras/CipherX.mp4", 
-                link_preview=False,
                 get_string("inline_4").format(
                     OWNER_NAME,
-                    len(PLUGINS) - 6,
+                    len(PLUGINS) - 5,
                     len(ADDONS),
                     cmd,
                 ),
