@@ -35,7 +35,6 @@ else:
 #else:
 #    _file_to_replace = "resources/extras/CipherX.mp4"
 # ============================================#
-_file_to_replace = ultroid_bot.upload_file("resources/extras/CipherX.mp4")
 
 @in_pattern("")
 @in_owner
@@ -95,6 +94,7 @@ async def inline_handler(event):
             z.append(y)
     cmd = len(z)
     bnn = asst.me.username
+    _file_to_replace = ultroid_bot.upload_file("resources/extras/CipherX.mp4")
     result = event.builder.document(
         file=_file_to_replace,
         link_preview=False,
