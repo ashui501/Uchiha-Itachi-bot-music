@@ -4,16 +4,16 @@
 """
 ✘ Commands Available
 
-• `{i}list idtext`
+• `{i}lid idtext`
     Get users id of a chat in txt format.
 
-• `{i}list idcsv`
+• `{i}lid idcsv`
     Get users id of a chat in csv format.
 
-• `{i}list usertext`
+• `{i}lid usertext`
     Get users username of a chat in txt format.
 
-• `{i}list usercsv`
+• `{i}lid usercsv`
     Get users username of a chat in csv format.
 """ 
 
@@ -22,7 +22,7 @@ from telethon.errors import ChatAdminRequiredError
 from . import * 
 
 
-@ultroid_cmd(pattern="list")
+@ultroid_cmd(pattern="lid")
 async def listtotal(event):
     x = await eor(event, get_string("com_1"))
     try:
