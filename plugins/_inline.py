@@ -30,10 +30,10 @@ if add_ons == "True" or add_ons is None:
     zhelps = get_string("inline_2")
 else:
     zhelps = get_string("inline_3")
-#if udB.get("INLINE_PIC"):
-#    _file_to_replace = udB.get("INLINE_PIC")
-#else:
-#    _file_to_replace = "resources/extras/CipherX.mp4"
+if udB.get("INLINE_PIC"):
+    _file_to_replace = udB.get("INLINE_PIC")
+else:
+    _file_to_replace = "resources/extras/CipherX.mp4"
 # ============================================#
 
 @in_pattern("")
@@ -94,8 +94,8 @@ async def inline_handler(event):
             z.append(y)
     cmd = len(z)
     bnn = asst.me.username
-    _file_to_replace = await ultroid_bot.upload_file("resources/extras/CipherX.mp4")
-    result = event.builder.document(
+    #_file_to_replace = await ultroid_bot.upload_file("resources/extras/CipherX.mp4")
+    result = event.builder.photo(
         file=_file_to_replace,
         link_preview=False,
         text=get_string("inline_4").format(
