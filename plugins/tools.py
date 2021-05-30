@@ -34,23 +34,20 @@
     To get translated message.
 """
 
-import asyncio
-import io
 import os
-import sys
 import time
-import traceback
 from googletrans import Translator
 from asyncio.exceptions import TimeoutError
-from os import remove
 from pathlib import Path
 
 import cv2
 import emoji
-from carbonnow import Carbon
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots, User
+from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
+from telethon.tl.types import DocumentAttributeVideo as video
+from telethon.tl.types import User
 from telethon.utils import pack_bot_file_id
 
 from . import *
@@ -123,7 +120,9 @@ async def _(event):
         await eor(event, "**Current Chat ID:**  `{}`".format(str(event.chat_id)))
 
 
-@ultroid_cmd(pattern="bots ?(.*)")
+@ultroid_cmd(
+    pattern="bots ?(.*)",
+)
 async def _(ult):
     await ult.edit("`...`")
     if ult.is_private:
@@ -161,7 +160,9 @@ async def _(ult):
     await eor(ult, mentions)
 
 
-@ultroid_cmd(pattern="hl")
+@ultroid_cmd(
+    pattern="hl",
+)
 async def _(ult):
     try:
         input = ult.text.split(" ", maxsplit=1)[1]
@@ -187,67 +188,48 @@ async def _(e):
             output = cv2.resize(im, dsize, interpolation=cv2.INTER_AREA)
             cv2.imwrite("img.png", output)
             thumb = "img.png"
+            os.remove(bbbb)
         except TypeError:
-            thumb = "./resources/extras/new_thumb.jpg"
-        c = await a.download_media(
-            "resources/downloads/",
-            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, z, toime, "**Dᴏᴡɴʟᴏᴀᴅɪɴɢ...**"),
-            ),
+            bbbb = "resources/extras/ultroid.jpg"
+            im = cv2.imread(bbbb)
+            dsize = (320, 320)
+            output = cv2.resize(im, dsize, interpolation=cv2.INTER_AREA)
+            cv2.imwrite("img.png", output)
+            thumb = "img.png"
+        c = await downloader(
+            "resources/downloads/" + a.file.name,
+            a.media.document,
+            z,
+            toime,
+            "Dᴏᴡɴʟᴏᴀᴅɪɴɢ...",
         )
         await z.edit("**Dᴏᴡɴʟᴏᴀᴅᴇᴅ...\nNᴏᴡ Cᴏɴᴠᴇʀᴛɪɴɢ...**")
-        cmd = [
-            "ffmpeg",
-            "-i",
-            c,
-            "-acodec",
-            "libmp3lame",
-            "-ac",
-            "2",
-            "-ab",
-            "144k",
-            "-ar",
-            "44100",
-            "comp.mp3",
-        ]
-        proess = await asyncio.create_subprocess_exec(
-            *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        await bash(
+            f'ffmpeg -i "{c.name}" -preset ultrafast -acodec libmp3lame -ac 2 -ab 144 -ar 44100 comp.mp3'
         )
-        stdout, stderr = await proess.communicate()
-        stderr.decode().strip()
-        stdout.decode().strip()
-        mcd = [
-            "ffmpeg",
-            "-y",
-            "-i",
-            thumb,
-            "-i",
-            "comp.mp3",
-            "-c:a",
-            "copy",
-            "circle.mp4",
-        ]
-        process = await asyncio.create_subprocess_exec(
-            *mcd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        await bash(
+            f'ffmpeg -y -i "{thumb}" -i comp.mp3 -preset ultrafast -c:a copy circle.mp4'
         )
-        stdout, stderr = await process.communicate()
-        stderr.decode().strip()
-        stdout.decode().strip()
         taime = time.time()
+        foile = await uploader("circle.mp4", "circle.mp4", taime, z, "Uᴘʟᴏᴀᴅɪɴɢ...")
+        f = "circle.mp4"
+        metadata = extractMetadata(createParser(f))
+        duration = metadata.get("duration").seconds
+        height = metadata.get("height")
+        width = metadata.get("width")
+        attributes = [video(duration=duration, w=width, h=height, round_message=True)]
         await e.client.send_file(
             e.chat_id,
-            "circle.mp4",
+            foile,
             thumb=thumb,
             video_note=True,
             reply_to=a,
-            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, z, taime, "**Uᴘʟᴏᴀᴅɪɴɢ...**"),
-            ),
+            video_note=True,
+            attributes=attributes,
         )
         await z.delete()
         os.system("rm resources/downloads/*")
         os.system("rm circle.mp4 comp.mp3 img.png")
-        os.remove(bbbb)
     elif a.document and a.document.mime_type == "video/mp4":
         z = await eor(e, "**Cʀᴇᴀᴛɪɴɢ Vɪᴅᴇᴏ Nᴏᴛᴇ**")
         c = await a.download_media("resources/downloads/")
@@ -255,7 +237,7 @@ async def _(e):
             e.chat_id,
             c,
             video_note=True,
-            thumb="resources/extras/new_thumb.jpg",
+            thumb="resources/extras/cipherx.jpg",
             reply_to=a,
         )
         await z.delete()
@@ -263,7 +245,9 @@ async def _(e):
     else:
         return await eor(e, "**Reply to a gif or audio file only**")
 
-@ultroid_cmd(pattern="ls ?(.*)")
+@ultroid_cmd(
+    pattern="ls ?(.*)",
+)
 async def _(e):
     if not e.out:
         if not is_fullsudo(e.sender_id):
@@ -288,7 +272,7 @@ async def _(e):
     text = []
     apk = []
     exe = []
-    zip = []
+    zip_ = []
     book = []
     for file in sorted(files):
         if os.path.isdir(file):
@@ -297,7 +281,7 @@ async def _(e):
             pyfiles.append("🐍 " + str(file))
         elif str(file).endswith(".json"):
             jsons.append("🔮 " + str(file))
-        elif str(file).endswith((".mkv", ".mp4", ".avi")):
+        elif str(file).endswith((".mkv", ".mp4", ".avi", ".gif")):
             vdos.append("🎥 " + str(file))
         elif str(file).endswith((".mp3", ".ogg", ".m4a")):
             audios.append("🔊 " + str(file))
@@ -308,9 +292,9 @@ async def _(e):
         elif str(file).endswith((".apk", ".xapk")):
             apk.append("📲 " + str(file))
         elif str(file).endswith(".exe"):
-            set.append("⚙ " + str(file))
+            exe.append("⚙ " + str(file))
         elif str(file).endswith((".zip", ".rar")):
-            zip.append("🗜 " + str(file))
+            zip_.append("🗜 " + str(file))
         elif str(file).endswith((".pdf", ".epub")):
             book.append("📗 " + str(file))
         elif "." in str(file)[1:]:
@@ -321,7 +305,7 @@ async def _(e):
         *sorted(folders),
         *sorted(pyfiles),
         *sorted(jsons),
-        *sorted(zip),
+        *sorted(zip_),
         *sorted(vdos),
         *sorted(pics),
         *sorted(audios),
@@ -333,6 +317,8 @@ async def _(e):
         *sorted(otherfiles),
     ]
     text = ""
+    fls, fos = 0, 0
+    flc, foc = 0, 0
     for i in omk:
         emoji = i.split()[0]
         name = i.split(maxsplit=1)[1]
@@ -345,16 +331,28 @@ async def _(e):
                     size += os.path.getsize(fp)
             if hb(size):
                 text += emoji + f" `{nam}`" + "  `" + hb(size) + "`\n"
+                fos += size
             else:
                 text += emoji + f" `{nam}`" + "\n"
+            foc += 1
         else:
             if hb(int(os.path.getsize(name))):
                 text += (
                     emoji + f" `{nam}`" + "  `" + hb(int(os.path.getsize(name))) + "`\n"
                 )
+                fls += int(os.path.getsize(name))
             else:
                 text += emoji + f" `{nam}`" + "\n"
-
+                
+            flc += 1
+    tfos, tfls, ttol = hb(fos), hb(fls), hb(fos + fls)
+    if not hb(fos):
+        tfos = "0 B"
+    if not hb(fls):
+        tfls = "0 B"
+    if not hb(fos + fls):
+        ttol = "0 B"
+    text += f"\n\n`Folders` :  `{foc}` :   `{tfos}`\n`Files` :       `{flc}` :   `{tfls}`\n`Total` :       `{flc+foc}` :   `{ttol}`"
     await eor(e, text)
 
 
