@@ -25,6 +25,15 @@
     
 • `{i}logpm`
     Start logging again from that user.
+    
+• `{i}startarchive`
+    Will start adding new PMs to archive.
+    
+• `{i}stoparchive`
+    Will stop adding new PMs to archive.
+    
+• `{i}cleararchive`
+    Unarchive all chats.
 """
 import re
 
@@ -130,7 +139,7 @@ async def permitpm(event):
         pl = udB.get("PMLOGGROUP")
         if pl is not None:
             return await event.forward_to(int(pl))
-        await event.forward_to(Var.LOG_CHANNEL)
+        await event.forward_to(int(udB.get("LOG_CHANNEL")))
 
 
 sett = Redis("PMSETTING")
@@ -159,13 +168,16 @@ if sett == "True" and sett != "False":
                 await message.delete()
             async for message in e.client.iter_messages(e.chat_id, search=UNS):
                 await message.delete()
-            if Var.LOG_CHANNEL:
-                name = await e.client.get_entity(e.chat_id)
-                name0 = str(name.first_name)
-                await e.client.send_message(
-                    Var.LOG_CHANNEL,
-                    f"#AutoApproved\nUser - [{name0}](tg://user?id={e.chat_id})",
-                )
+            try:
+                await ultroid_bot.edit_folder(e.chat_id, folder=0)
+            except BaseException:
+                pass
+            name = await e.client.get_entity(e.chat_id)
+            name0 = str(name.first_name)
+            await asst.send_message(
+                int(udB.get("LOG_CHANNEL")),
+                f"#AutoApproved\nUser - [{name0}](tg://user?id={e.chat_id})",
+            )
 
     @ultroid_bot.on(
         events.NewMessage(
@@ -181,6 +193,13 @@ if sett == "True" and sett != "False":
             return
         apprv = is_approved(user.id)
         if not apprv and event.text != UND:
+            if Redis("MOVE_ARCHIVE") == "True":
+                try:
+                    await event.client.edit_folder(user.id, folder=1)
+                except BaseException:
+                    pass
+            if event.media:
+                await event.delete()
             name = user.first_name
             if user.last_name:
                 fullname = f"{name} {user.last_name}"
@@ -194,7 +213,7 @@ if sett == "True" and sett != "False":
             except KeyError:
                 try:
                     await asst.send_message(
-                        Var.LOG_CHANNEL,
+                        int(udB.get("LOG_CHANNEL")),
                         f"Incoming PM from {mention}!",
                         buttons=[
                             Button.inline("Approve PM", data=f"approve_{user.id}"),
@@ -203,7 +222,7 @@ if sett == "True" and sett != "False":
                     )
                 except BaseException:
                     await ultroid.send_message(
-                        Var.LOG_CHANNEL, f"Incoming PM from {mention}!"
+                        int(udB.get("LOG_CHANNEL")), f"Incoming PM from {mention}!"
                     )
                 wrn = 1
             if user.id in LASTMSG:
@@ -287,21 +306,37 @@ if sett == "True" and sett != "False":
                     del COUNT_PM[user.id]
                     del LASTMSG[user.id]
                 except KeyError:
-                    if Var.LOG_CHANNEL:
-                        await event.client.send_message(
-                            Var.LOG_CHANNEL,
-                            "PMPermit is messed! Please restart the bot!!",
-                        )
-                        return LOGS.info("COUNT_PM is messed.")
+                    await event.client.send_message(
+                        int(udB.get("LOG_CHANNEL")),
+                        "PMPermit is messed! Pls restart the bot!!",
+                    )
+                    return LOGS.info("COUNT_PM is messed.")
                 await event.client(BlockRequest(user.id))
                 await event.client(ReportSpamRequest(peer=user.id))
-                if Var.LOG_CHANNEL:
-                    name = await event.client.get_entity(user.id)
-                    name0 = str(name.first_name)
-                    await event.client.send_message(
-                        Var.LOG_CHANNEL,
-                        f"[{name0}](tg://user?id={user.id}) was blocked for spamming.",
-                    )
+                name = await event.client.get_entity(user.id)
+                name0 = str(name.first_name)
+                await event.client.send_message(
+                    int(udB.get("LOG_CHANNEL")),
+                    f"[{name0}](tg://user?id={user.id}) was Blocked for spamming.",
+                )
+
+    @ultroid_cmd(
+        pattern="(start|stop|clear)archive$",
+    )
+    async def _(e):
+        x = e.pattern_match.group(1)
+        if x == "start":
+            udB.set("MOVE_ARCHIVE", "True")
+            await eod(e, "Now I will move new Unapproved DM's to archive")
+        elif x == "stop":
+            udB.set("MOVE_ARCHIVE", "False")
+            await eod(e, "Now I won't move new Unapproved DM's to archive")
+        elif x == "clear":
+            try:
+                await e.client.edit_folder(unpack=1)
+                await eod(e, "Unarchived all chats")
+            except Exception as mm:
+                await eod(e, str(mm))
 
     @ultroid_cmd(
         pattern="(a|approve)(?: |$)",
@@ -319,6 +354,10 @@ if sett == "True" and sett != "False":
             uid = replied_user.id
             if not is_approved(uid):
                 approve_user(uid)
+                try:
+                    await apprvpm.client.edit_folder(uid, folder=0)
+                except BaseException:
+                    pass
                 await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
                 await asyncio.sleep(3)
                 await apprvpm.delete()
@@ -337,6 +376,10 @@ if sett == "True" and sett != "False":
             uid = user.id
             if not is_approved(uid):
                 approve_user(uid)
+                try:
+                    await apprvpm.client.edit_folder(uid, folder=0)
+                except BaseException:
+                    pass
                 await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
                 async for message in apprvpm.client.iter_messages(user.id, search=UND):
                     await message.delete()
@@ -344,20 +387,18 @@ if sett == "True" and sett != "False":
                     await message.delete()
                 await asyncio.sleep(3)
                 await apprvpm.delete()
-                if Var.LOG_CHANNEL:
-                    await apprvpm.client.send_message(
-                        Var.LOG_CHANNEL,
-                        f"#APPROVED\nUser: [{name0}](tg://user?id={uid})",
-                    )
+                await apprvpm.client.send_message(
+                    int(udB.get("LOG_CHANNEL")),
+                    f"#APPROVED\nUser: [{name0}](tg://user?id={uid})",
+                )
             else:
                 await apprvpm.edit("`User may already be approved.`")
                 await asyncio.sleep(5)
                 await apprvpm.delete()
-                if Var.LOG_CHANNEL:
-                    await apprvpm.client.send_message(
-                        Var.LOG_CHANNEL,
-                        f"#APPROVED\nUser: [{name0}](tg://user?id={uid})",
-                    )
+                await apprvpm.client.send_message(
+                    int(udB.get("LOG_CHANNEL")),
+                    f"#APPROVED\nUser: [{name0}](tg://user?id={uid})",
+                )
         else:
             await apprvpm.edit(NO_REPLY)
 
@@ -400,11 +441,10 @@ if sett == "True" and sett != "False":
                 await e.edit(f"[{name0}](tg://user?id={bbb.id}) `Disaproved to PM!`")
                 await asyncio.sleep(5)
                 await e.delete()
-                if Var.LOG_CHANNEL:
-                    await e.client.send_message(
-                        Var.LOG_CHANNEL,
-                        f"[{name0}](tg://user?id={bbb.id}) was disapproved to PM you.",
-                    )
+                await e.client.send_message(
+                    int(udB.get("LOG_CHANNEL")),
+                    f"[{name0}](tg://user?id={bbb.id}) was disapproved to PM you.",
+                )
             else:
                 await e.edit(f"[{name0}](tg://user?id={bbb.id}) was never approved!")
                 await asyncio.sleep(5)
@@ -412,61 +452,58 @@ if sett == "True" and sett != "False":
         else:
             await e.edit(NO_REPLY)
 
-    @ultroid_cmd(
-        pattern="block$",
-    )
-    async def blockpm(block):
-        if block.reply_to_msg_id:
-            reply = await block.get_reply_message()
-            replied_user = await block.client.get_entity(reply.sender_id)
-            aname = replied_user.id
-            if str(aname) in DEVLIST:
-                return await eor(
-                    block, "`Lol, He is my Developer\nHe Can't Be Blocked`"
-                )
-            name0 = str(replied_user.first_name)
-            await block.client(BlockRequest(replied_user.id))
-            await block.edit("`You've been blocked!`")
-            uid = replied_user.id
-        elif block.is_private:
-            bbb = await block.get_chat()
-            if str(bbb.id) in DEVLIST:
-                return await eor(
-                    block, "`Lol, He is my Developer\nHe Can't Be Blocked`"
-                )
-            await block.client(BlockRequest(bbb.id))
-            aname = await block.client.get_entity(bbb.id)
-            await block.edit("`You've been blocked!`")
-            name0 = str(aname.first_name)
-            uid = bbb.id
-        else:
-            await block.edit(NO_REPLY)
-        try:
-            disapprove_user(uid)
-        except AttributeError:
-            pass
-        if Var.LOG_CHANNEL:
-            await block.client.send_message(
-                Var.LOG_CHANNEL, f"#BLOCKED\nUser: [{name0}](tg://user?id={uid})"
-            )
 
-    @ultroid_cmd(
-        pattern="unblock$",
+@ultroid_cmd(
+    pattern="block ?(.*)",
+)
+async def blockpm(block):
+    match = block.pattern_match.group(1)
+    if block.is_reply:
+        reply = await block.get_reply_message()
+        user = reply.sender_id
+    elif match:
+        user = await get_user_id(match)
+    elif block.is_private:
+        user = block.chat_id
+    else:
+        return await eod(block, NO_REPLY)
+    if str(user) in DEVLIST:
+        return await eor(
+            block,
+            "`Lol, He is my Developer\nHe Can't Be Blocked`",
+        )
+    await block.client(BlockRequest(user))
+    aname = await block.client.get_entity(user)
+    await eor(block, f"`{aname.first_name} has been blocked!`")
+    try:
+        disapprove_user(user)
+    except AttributeError:
+        pass
+    await ultroid_bot.send_message(
+        int(udB.get("LOG_CHANNEL")),
+        f"#BLOCKED\nUser: [{aname.first_name}](tg://user?id={user})",
     )
-    async def unblockpm(unblock):
-        if unblock.reply_to_msg_id:
-            reply = await unblock.get_reply_message()
-            replied_user = await unblock.client.get_entity(reply.sender_id)
-            name0 = str(replied_user.first_name)
-            await unblock.client(UnblockRequest(replied_user.id))
-            await unblock.edit("`You have been unblocked.`")
-        else:
-            await unblock.edit(NO_REPLY)
-        if Var.LOG_CHANNEL:
-            await unblock.client.send_message(
-                Var.LOG_CHANNEL,
-                f"[{name0}](tg://user?id={replied_user.id}) was unblocked!.",
-            )
+
+
+@ultroid_cmd(
+    pattern="unblock ?(.*)",
+)
+async def unblockpm(unblock):
+    match = unblock.pattern_match.group(1)
+    if unblock.is_reply:
+        reply = await unblock.get_reply_message()
+        user = reply.sender_id
+    elif match:
+        user = await get_user_id(match)
+    else:
+        return await eod(unblock, NO_REPLY)
+    try:
+        await unblock.client(UnblockRequest(user))
+        aname = await unblock.client.get_entity(user)
+        await eor(unblock, f"`{aname.first_name} has been UnBlocked!`")
+    except Exception as et:
+        await eod(unblock, f"ERROR - {str(et)}")
+
 
 @callback(
     re.compile(
@@ -480,6 +517,10 @@ async def apr_in(event):
         await event.edit("It's a dev! Approved!")
     if not is_approved(uid):
         approve_user(uid)
+        try:
+            await ultroid_bot.edit_folder(uid, folder=0)
+        except BaseException:
+            pass
         try:
             user_name = (await ultroid.get_entity(uid)).first_name
         except BaseException:
@@ -496,7 +537,7 @@ async def apr_in(event):
         async for message in ultroid.iter_messages(uid, search=UNS):
             await message.delete()
         await event.answer("Approved.")
-        x = await ultroid.send_message(uid, "You have been approved to PM CɪᴘʜᴇʀX!")
+        x = await ultroid.send_message(uid, "You have been approved to PM me!")
         await asyncio.sleep(5)
         await x.delete()
     else:
@@ -531,7 +572,7 @@ async def disapr_in(event):
             ],
         )
         await event.answer("DisApproved.")
-        x = await ultroid.send_message(uid, "You have been disapproved from PMing CɪᴘʜᴇʀX!")
+        x = await ultroid.send_message(uid, "You have been disapproved from PMing me!")
         await asyncio.sleep(5)
         await x.delete()
     else:
@@ -591,6 +632,5 @@ async def unblck_in(event):
 async def ytfuxist(e):
     await e.answer("Deleted.")
     await e.delete()
-
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
