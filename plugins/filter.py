@@ -19,6 +19,7 @@ import os
 
 from cython.functions.filter_db import *
 from telegraph import upload_file as uf
+from telethon.tl.types import User
 from telethon.utils import pack_bot_file_id
 
 from . import *
@@ -78,6 +79,8 @@ async def lsnote(e):
 
 @ultroid_bot.on(events.NewMessage())
 async def fl(e):
+    if isinstance(e.sender, User) and e.sender.bot:
+        return
     xx = (e.text).lower()
     chat = e.chat_id
     x = get_filter(int(chat))
