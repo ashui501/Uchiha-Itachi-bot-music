@@ -218,7 +218,6 @@ async def _(e):
             thumb=thumb,
             video_note=True,
             reply_to=a,
-            video_note=True,
             attributes=attributes,
         )
         await z.delete()
