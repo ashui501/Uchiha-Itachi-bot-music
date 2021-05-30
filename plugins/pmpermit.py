@@ -537,7 +537,7 @@ async def apr_in(event):
         async for message in ultroid.iter_messages(uid, search=UNS):
             await message.delete()
         await event.answer("Approved.")
-        x = await ultroid.send_message(uid, "You have been approved to PM me!")
+        x = await ultroid.send_message(uid, "You have been approved to PM CɪᴘʜᴇʀX!")
         await asyncio.sleep(5)
         await x.delete()
     else:
@@ -572,7 +572,7 @@ async def disapr_in(event):
             ],
         )
         await event.answer("DisApproved.")
-        x = await ultroid.send_message(uid, "You have been disapproved from PMing me!")
+        x = await ultroid.send_message(uid, "You have been disapproved from PMing CɪᴘʜᴇʀX!")
         await asyncio.sleep(5)
         await x.delete()
     else:
