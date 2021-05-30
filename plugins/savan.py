@@ -28,7 +28,7 @@ async def siesace(e):
     if not song:
         return await eod(e, "`Give me Something to Search")
     hmm = time.time()
-    lol = await eor(e, "`...`")
+    lol = await eor(e, "`Searching on Saavn...`")
     sung = song.replace(" ", "%20")
     url = f"https://jostapi.herokuapp.com/saavn?query={sung}"
     try:
@@ -48,6 +48,7 @@ async def siesace(e):
     await ultroid_bot.send_file(
         e.chat_id,
         okk,
+        caption="`" + title + "`" + "\n`By CɪᴘʜᴇʀX Bot`",
         attributes=[
             DocumentAttributeAudio(
                 duration=int(duration),
