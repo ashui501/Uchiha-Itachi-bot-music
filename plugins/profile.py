@@ -158,6 +158,8 @@ async def gpoto(e):
     if not ult and e.is_reply:
         gs = await e.get_reply_message()
         ult = gs.sender_id
+    if not (ult or e.is_reply):
+        ult = e.chat_id
     try:
         okla = await ultroid_bot.download_profile_photo(
             ult, "profile.jpg", download_big=True
