@@ -26,10 +26,10 @@
     Globally Kick User.
 
 • `{i}gcast <Message>`
-    Globally Send that msg in all grps.
+    Globally Send that message in all groups.
 
 • `{i}gucast <Message>`
-    Globally Send that msg in all Ur Chat Users.
+    Globally Send that message in all your Chat Users.
 
 •`{i}gpromote <reply to user> <channel/group/all> <rank>`
     globally promote user where you are admin.
