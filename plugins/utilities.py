@@ -73,6 +73,7 @@ from telethon.tl.functions.channels import (
 )
 from telethon.tl.functions.messages import AddChatUserRequest
 from telethon.tl.functions.photos import GetUserPhotosRequest
+from telethon.tl.functions.contacts import GetBlockedRequest
 from telethon.tl.types import Channel, Chat, InputMediaPoll, Poll, PollAnswer, User
 from telethon.utils import get_input_location
 
@@ -246,7 +247,7 @@ async def stats(
         unread_mentions += dialog.unread_mentions_count
         unread += dialog.unread_count
     stop_time = time.time() - start_time
-
+    ct = (await ultroid_bot(GetBlockedRequest(1, 0))).count
     full_name = inline_mention(await ultroid_bot.get_me())
     response = f"🔸 **Stats for {full_name}** \n\n"
     response += f"**Private Chats:** {private_chats} \n"
@@ -261,7 +262,8 @@ async def stats(
     response += f"**  •• **`Creator: {creator_in_channels}` \n"
     response += f"**  •• **`Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
     response += f"**Unread:** {unread} \n"
-    response += f"**Unread Mentions:** {unread_mentions} \n\n"
+    response += f"**Unread Mentions:** {unread_mentions} \n"
+    response += f"**Blocked Users:** {ct}\n\n"
     response += f"**__It Took:__** {stop_time:.02f}s \n"
     await ok.edit(response)
 
@@ -315,7 +317,7 @@ async def _(event):
             .get("result")
             .get("key")
         )
-    q = f"paste-{key}"
+    q = f"paste {key}"
     reply_text = f"• **Pasted to Nekobin :** [Neko](https://nekobin.com/{key})\n• **Raw Url :** : [Raw](https://nekobin.com/raw/{key})"
     try:
         ok = await ultroid_bot.inline_query(asst.me.username, q)
@@ -362,18 +364,18 @@ async def _(event):
         dc_id = "Need a Profile Picture to check this"
         str(e)
     caption = """<b>Exᴛʀᴀᴄᴛᴇᴅ Fʀᴏᴍ Tᴇʟᴇɢʀᴀᴍ's Dᴀᴛᴀʙᴀsᴇ<b>
-    <b>••Tᴇʟᴇɢʀᴀᴍ ID</b>: <code>{}</code>
-    <b>••Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: <a href='tg://user?id={}'>Click Here</a>
-    <b>••Fɪʀsᴛ Nᴀᴍᴇ</b>: <code>{}</code>
-    <b>••Sᴇᴄᴏɴᴅ Nᴀᴍᴇ</b>: <code>{}</code>
-    <b>••Bɪᴏ</b>: <code>{}</code>
-    <b>••Dᴄ ID</b>: <code>{}</code>
-    <b>••Nᴏ. Oғ PғPs</b> : <code>{}</code>
-    <b>••Is Rᴇsᴛʀɪᴄᴛᴇᴅ</b>: <code>{}</code>
-    <b>••Vᴇʀɪғɪᴇᴅ</b>: <code>{}</code>
-    <b>••Is A Bᴏᴛ</b>: <code>{}</code>
-    <b>••Gʀᴏᴜᴘs Iɴ Cᴏᴍᴍᴏɴ</b>: <code>{}</code>
-    """.format(
+<b>••Tᴇʟᴇɢʀᴀᴍ ID</b>: <code>{}</code>
+<b>••Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: <a href='tg://user?id={}'>Click Here</a>
+<b>••Fɪʀsᴛ Nᴀᴍᴇ</b>: <code>{}</code>
+<b>••Sᴇᴄᴏɴᴅ Nᴀᴍᴇ</b>: <code>{}</code>
+<b>••Bɪᴏ</b>: <code>{}</code>
+<b>••Dᴄ ID</b>: <code>{}</code>
+<b>••Nᴏ. Oғ PғPs</b> : <code>{}</code>
+<b>••Is Rᴇsᴛʀɪᴄᴛᴇᴅ</b>: <code>{}</code>
+<b>••Vᴇʀɪғɪᴇᴅ</b>: <code>{}</code>
+<b>••Is A Bᴏᴛ</b>: <code>{}</code>
+<b>••Gʀᴏᴜᴘs Iɴ Cᴏᴍᴍᴏɴ</b>: <code>{}</code>
+""".format(
         user_id,
         user_id,
         first_name,
@@ -386,6 +388,14 @@ async def _(event):
         replied_user.user.bot,
         common_chats,
     )
+    chk = is_gbanned(user_id)
+    if chk:
+        r = get_gban_reason(user_id)
+        caption += "<b>••Gʟᴏʙᴀʟʟʏ Bᴀɴɴᴇᴅ</b>: <code>True</code>"
+        if r:
+            caption += f"<b>Rᴇᴀsᴏɴ</b>: <code>{r}</code>"
+    else:
+        caption += "<b>••Gʟᴏʙᴀʟʟʏ Bᴀɴɴᴇᴅ</b>: <code>False</code>"
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
         message_id_to_reply = event.message.id
