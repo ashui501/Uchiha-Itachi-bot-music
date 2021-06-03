@@ -64,7 +64,7 @@ async def _(e):
         )
     except no_admin:
         return await eod(xx, "`I'm not an admin`", time=10)
-    await eod(xx, f"Link:- {r.link}")
+    await eor(xx, f"Link:- {r.link}")
 
 
 @ultroid_cmd(
