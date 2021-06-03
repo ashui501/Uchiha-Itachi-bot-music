@@ -101,7 +101,7 @@ async def warn(e):
     user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
     await eor(
         e,
-        f"**WARNING :** {count+1}/{number}\n**To :**{user}\n\n**Reason** : {reason}\n\n**⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️**",
+        f"**WARNING :** {count+1}/{number}\n**To :**{user}\n\n**Reason** :\n✵ {reason}\n\n**⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️**",
     )
 
 
@@ -123,7 +123,7 @@ async def rwarn(e):
     reset_warn(e.chat_id, user)
     ok = await ultroid_bot.get_entity(user)
     user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
-    await eor(e, f"Cleared All Warns of {user}.")
+    await eor(e, f"v Cleared All Warns of {user}.")
 
 
 @ultroid_cmd(pattern="warns ?(.*)", groups_only=True, admins_only=True)
