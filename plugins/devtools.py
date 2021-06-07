@@ -37,13 +37,14 @@ from . import *
     pattern="sysinfo$",
 )
 async def _(e):
-    await eor(e, "`Sending...`")
+    await eod(e, "`Sending...`", time=5)
     x, y = await bash("neofetch|sed 's/\x1B\\[[0-9;\\?]*[a-zA-Z]//g' >> neo.txt")
     with open("neo.txt", "r") as neo:
         p = (neo.read()).replace("\n\n", "")
     ok = Carbon(code=p)
     haa = await ok.save("neofetch")
-    await e.client.send_file(e.chat_id, haa)
+    reply = await event.get_reply_message()
+    await e.client.send_file(e.chat_id, haa, reply_to=reply)
     remove("neofetch.jpg")
     remove("neo.txt")
 
