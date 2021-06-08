@@ -43,7 +43,7 @@ async def _(e):
         p = (neo.read()).replace("\n\n", "")
     ok = Carbon(code=p)
     haa = await ok.save("neofetch")
-    reply = await event.get_reply_message()
+    reply = await e.get_reply_message()
     await e.client.send_file(e.chat_id, haa, reply_to=reply)
     remove("neofetch.jpg")
     remove("neo.txt")
