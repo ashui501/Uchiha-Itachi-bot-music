@@ -30,7 +30,7 @@ gugirl = "https://telegra.ph/file/0df54ae4541abca96aa11.jpg"
 yeah = "https://telegra.ph/file/e3c67885e16a194937516.jpg"
 ps = "https://telegra.ph/file/de0b8d9c858c62fae3b6e.jpg"
 ultpic = "https://telegra.ph/file/b2da137de76fc5cd85ffa.jpg"
-
+xkcdpic = "https://telegra.ph/file/040b5ab6e50e438fc215e.jpg"
 ofox_api = OrangeFoxAPI()
 
 api1 = base64.b64decode("QUl6YVN5QXlEQnNZM1dSdEI1WVBDNmFCX3c4SkF5NlpkWE5jNkZV").decode(
@@ -42,6 +42,64 @@ api2 = base64.b64decode("QUl6YVN5QkYwenhMbFlsUE1wOXh3TVFxVktDUVJxOERnZHJMWHNn").
 api3 = base64.b64decode("QUl6YVN5RGRPS253blB3VklRX2xiSDVzWUU0Rm9YakFLSVFWMERR").decode(
     "ascii"
 )
+
+@in_pattern("xkcd")
+@in_owner
+async def _(e):
+    try:
+        quer = e.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        kkkk = e.builder.article(
+            title="xkcd",
+            description="Random Meme",
+            thumb=wb(xkcdpic, 0, "image/jpeg", []),
+            text="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ X𐌺𑀝𑀥**\n\nYou didn't search any query",
+            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="xkcd ", same_peer=True),
+        )
+        await e.answer([kkkk])
+        return
+    xkcd_id = None
+    if quer:
+        if quer.isdigit():
+            xkcd_id = quer
+        else:
+            xkcd_search_url = "https://relevantxkcd.appspot.com/process?"
+            queryresult = requests.get(
+                xkcd_search_url, params={"action": "xkcd", "query": quote(quer)}
+            ).text
+            xkcd_id = queryresult.split(" ")[2].lstrip("\n")
+    if xkcd_id is None:
+        xkcd_url = "https://xkcd.com/info.0.json"
+    else:
+        xkcd_url = "https://xkcd.com/{}/info.0.json".format(xkcd_id)
+    r = requests.get(xkcd_url)
+    if r.ok:
+        data = r.json()
+        year = data.get("year")
+        month = data["month"].zfill(2)
+        day = data["day"].zfill(2)
+        xkcd_link = "https://xkcd.com/{}".format(data.get("num"))
+        safe_title = data.get("safe_title")
+        data.get("transcript")
+        alt = data.get("alt")
+        img = data.get("img")
+        data.get("title")
+        output_str = """
+[XKCD]({})
+Title: {}
+Alt: {}
+Day: {}
+Month: {}
+Year: {}""".format(
+            xkcd_link, safe_title, alt, day, month, year
+        )
+        lul_k = builder.photo(file=img, text=output_str)
+        await e.answer([lul_k])
+    else:
+        resultm = builder.article(
+            title="- No Results :/ -", text=f"No Results Found.\n(C) CɪᴘʜᴇʀX"
+        )
+        await e.answer([resultm])
 
 @in_pattern("bin")
 @in_owner
