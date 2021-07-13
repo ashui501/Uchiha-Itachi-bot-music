@@ -96,7 +96,7 @@ async def assistant(event):
 
 @callback("trans")
 async def trans(event):
-    await asst.send_message(event.chat_id, "How to use:\n1) `/tr LangaugeCode | text to translate` \n2) `/tr Language Code` as reply to a message \n\nHere is the list of [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10)", link_preview=False)
+    await asst.send_message(event.chat_id, "✨ How to use:\n1⃣ `/tr LangaugeCode text` \n2⃣ `/tr Language Code` as reply to a message \n\nHere is the list of [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10)", link_preview=False)
 
 @callback("list")
 async def list(event):
