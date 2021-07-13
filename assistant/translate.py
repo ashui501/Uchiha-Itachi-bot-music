@@ -24,14 +24,14 @@ async def _(event):
     try:
         tt = translator.translate(text, dest=lan)
         output_str = f"""**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({tt.src})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ (lan})**:\n`{{tt.text}`"""
-        if len(output_str) >= 4096:
-            url = "https://del.dog/documents"
-            r = requests.post(url, data=output_str.encode("UTF-8")).json()
-            url2 = f"https://del.dog/{r['key']}"
-            output_str = (
-                f"Translated text was too big, so I've pasted it [Here]({url2})"
-            )
-        await asst.send_message(event.chat_id, output_str, link_preview=False)
+        #if len(output_str) >= 4096:
+            #url = "https://del.dog/documents"
+            #r = requests.post(url, data=output_str.encode("UTF-8")).json()
+            #url2 = f"https://del.dog/{r['key']}"
+            #output_str = (
+            #    f"Translated text was too big, so I've pasted it [Here]({url2})"
+            #)
+        await event.reply(output_str)
     except Exception:
         await asst.send_message(event.chat_id, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.", link_preview=False)
         
