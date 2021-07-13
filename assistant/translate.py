@@ -19,11 +19,11 @@ async def _(event):
         text = txt
         lan = input or "en"
     else:
-        return await event.reply("1⃣ `/tr` [Language Code](https://telegra.ph/CɪᴘʜᴇʀX-03-10) as reply to a message\2⃣ `/tr` <target LangCode> <text> ~ Ex: /tr ko hello", link_preview=False)
+        return await event.reply("1⃣ /tr [Language Code](https://telegra.ph/CɪᴘʜᴇʀX-03-10) as reply to a message\n2⃣ /tr <target LangCode> <text> ~ Ex: /tr ko hello", link_preview=False)
     translator = Translator()
     try:
         tt = translator.translate(text, dest=lan)
-        output_str = f"""**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲃⲟⲧ**\n**Ⲋⲟυʀⲥⲉ ({tt.src})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({tt.text})**:\n`{lan}`"""
+        output_str = f"""**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({tt.src})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ (lan})**:\n`{{tt.text}`"""
         if len(output_str) >= 4096:
             url = "https://del.dog/documents"
             r = requests.post(url, data=output_str.encode("UTF-8")).json()
