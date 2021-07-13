@@ -1,8 +1,6 @@
-import emoji
 import requests
-from google_trans_new import google_translator
-from googletrans import LANGUAGES
-from langdetect import detect
+from googletrans import Translator
+
 
 from . import *
 
@@ -20,21 +18,15 @@ async def _(event):
             event.chat_id, "`/tr LanguageCode` as reply to a message"
         )
         return
-    text = emoji.demojize(text.strip())
-    lan = lan.strip()
-    translator = google_translator()
-    translated = translator.translate(text, lang_tgt=lan)
-    lmao = detect(text)
-    after_tr_text = lmao
-    source_lan = LANGUAGES[after_tr_text]
-    transl_lan = LANGUAGES[lan]
-    output_str = f"""**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲃⲟⲧ**
-**Ⲋⲟυʀⲥⲉ ({source_lan})**:
-`{text}`
-
-**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({transl_lan})**:
-`{translated}`"""
+    translator = Translator()
     try:
+        tt = translator.translate(text, dest=lan)
+        output_str = f"""**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲃⲟⲧ**
+    **Ⲋⲟυʀⲥⲉ ({tt.src})**:
+    `{text}`
+
+    **Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({transl_lan})**:
+    `{lan}`"""
         if len(output_str) >= 4096:
             url = "https://del.dog/documents"
             r = requests.post(url, data=output_str.encode("UTF-8")).json()
@@ -45,7 +37,6 @@ async def _(event):
         await asst.send_message(event.chat_id, output_str)
     except Exception:
         await asst.send_message(event.chat_id, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.")
-        
         
         
         
