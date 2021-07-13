@@ -96,11 +96,11 @@ async def assistant(event):
 
 @callback("trans")
 async def trans(event):
-    await asst.send_message(event.chat_id, "How to use:\n1) `/tr LangaugeCode | text to translate` \n2) `/tr Language Code` as reply to a message \n\nHere is the list of [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10)")
+    await asst.send_message(event.chat_id, "How to use:\n1) `/tr LangaugeCode | text to translate` \n2) `/tr Language Code` as reply to a message \n\nHere is the list of [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10)", link_preview=False)
 
 @callback("list")
 async def list(event):
-    await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆LynX Group Manager ~ [Bot Link](https://t.me/LynXGroupManagerRobot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot), link_preview=False")
+    await asst.send_message(event.chat_id, "⚜️ Here is the list of bots made by CɪᴘʜᴇʀX ⚜️\n\n🎆CɪᴘʜᴇʀX Assistant ~ [Bot Link](https://t.me/CipherXBot)\n\n🎆File to Link Generator ~ [Bot Link](https://t.me/FiletoLinkTelegramBot)\n\n🎆Rename with Custom Thumbnail ~ [Bot Link](https://t.me/RenameTelegramBot)\n\n🎆LynX Group Manager ~ [Bot Link](https://t.me/LynXGroupManagerRobot)\n\n🎆Future Technology Chat Bot ~ [Bot Link](https://t.me/FutureTechnologyChatBot)", link_preview=False)
 
 @callback("chat")
 async def chat(event):
