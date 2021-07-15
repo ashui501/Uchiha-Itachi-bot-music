@@ -43,10 +43,11 @@ async def _(e):
             time=3
         )
     else:
-        await eor(
+        await eod(
             e,
             f'<code>CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ </code><strong>up-to-date</strong>',
             parse_mode="html",
+            time=5
             link_preview=False,
         )
 
