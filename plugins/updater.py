@@ -47,7 +47,7 @@ async def _(e):
             e,
             f'<code>CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ </code><strong>up-to-date</strong>',
             parse_mode="html",
-            time=5
+            time=5, 
             link_preview=False,
         )
 
