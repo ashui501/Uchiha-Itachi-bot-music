@@ -94,6 +94,7 @@ async def logo_gen(event):
     flnme = f"cipherx.png"
     img.save(flnme, "png")
     await xx.edit("`☑️`")
+    await xx.edit("`✅`")
     if os.path.exists(flnme):
         tt = time.time()
         #up = await uploader(flnme, flnme, tt, xx, "𐌵ρᥣ᧐ᥲɗiᥒg...")
