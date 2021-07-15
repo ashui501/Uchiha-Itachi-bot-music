@@ -40,7 +40,7 @@ async def _(e):
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
             link_preview=False,
-            time=5
+            time=3
         )
     else:
         await eor(
