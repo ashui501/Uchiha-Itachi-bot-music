@@ -40,14 +40,14 @@ async def _(e):
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
             link_preview=False,
-            time=3
+            time=3, 
         )
     else:
         await eod(
             e,
             f'<code>CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ : \n</code><strong>｡⌬｡ up-to-date ｡⌬｡</strong>',
             parse_mode="html",
-            time=5, 
+            time=10, 
             link_preview=False,
         )
 
