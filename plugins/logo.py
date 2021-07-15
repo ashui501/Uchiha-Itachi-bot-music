@@ -93,13 +93,14 @@ async def logo_gen(event):
     )
     flnme = f"cipherx.png"
     img.save(flnme, "png")
-    #await xx.edit("`Done!`")
+    await xx.edit("`Done!`")
     if os.path.exists(flnme):
-        tt = time.time()
+        #tt = time.time()
         #up = await uploader(flnme, flnme, tt, xx, "𐌵ρᥣ᧐ᥲɗiᥒg...")
         await ultroid.send_file(
             event.chat_id,
             file=flnme,
+            reply_to=event.reply_to_msg_id
             caption=f"𑀉᧐g᧐ ⲙᥲɗᥱ δy CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ",
             foce_document=True,
         )
