@@ -28,7 +28,7 @@ from . import *
 
 @ultroid_cmd(pattern="logo ?(.*)")
 async def logo_gen(event):
-    xx = await eor(event, get_string("..."))
+    xx = await eor(event, "...")
     name = event.pattern_match.group(1)
     if not name:
         await eod(xx, "`Give a name too!`")
@@ -93,7 +93,7 @@ async def logo_gen(event):
     )
     flnme = f"cipherx.png"
     img.save(flnme, "png")
-    await xx.edit("`Done!`")
+    #await xx.edit("`Done!`")
     if os.path.exists(flnme):
         #tt = time.time()
         #up = await uploader(flnme, flnme, tt, xx, "𐌵ρᥣ᧐ᥲɗiᥒg...")
