@@ -45,7 +45,7 @@ async def _(e):
     else:
         await eor(
             e,
-            f'<code>CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ </code><strong>up-to-date</strong><code> with </code><strong><a href="https://github.com/CipherX1-ops/Megatron/tree/{branch}">[{branch}]</a></strong>',
+            f'<code>CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ </code><strong>up-to-date</strong>',
             parse_mode="html",
             link_preview=False,
         )
