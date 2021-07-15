@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -22,7 +22,6 @@
 
 """
 
-import glob
 import os
 import time
 
@@ -34,7 +33,7 @@ async def zipp(event):
     reply = await event.get_reply_message()
     t = time.time()
     if not reply:
-        await eor(event, "Reply to any media/Document.")
+        await eod(event, "Reply to any media/Document.", time=5)
         return
     xx = await eor(event, "`Processing...`")
     if reply.media:
@@ -68,7 +67,7 @@ async def unzipp(event):
     reply = await event.get_reply_message()
     t = time.time()
     if not reply:
-        await eor(event, "Reply to any media/Document.")
+        await eod(event, "Reply to any media/Document.", time=5)
         return
     xx = await eor(event, "`Processing...`")
     if reply.media:
@@ -76,7 +75,7 @@ async def unzipp(event):
             file = reply.media.document
             mime_type = file.mime_type
             if "application" not in mime_type:
-                return await xx.edit("`Reply to zipped File`")
+                return await xx.edit("`Reply To zipped File`")
             image = await downloader(
                 reply.file.name, reply.media.document, xx, t, "Downloading..."
             )
@@ -91,30 +90,18 @@ async def unzipp(event):
         os.system("rm -rf unzip")
         os.mkdir("unzip")
     await bash(f"7z x {file} -aoa -ounzip")
-    ok = glob.glob("unzip/*")
-    k = []
+    ok = get_all_files("unzip")
     for x in ok:
-        if os.path.isdir(x):
-            k.append(x)
-            break
-    if k:
-        await xx.edit(
-            "Your Unzipped File Saved in `unzip` folder.\nDo `{i}ls unzip` and browse storage\nUse `{i}ul <path>` To upload.".format(
-                i=HNDLR
-            )
+        k = time.time()
+        xxx = await uploader(x, x, k, xx, "Uploading...")
+        await ultroid_bot.send_file(
+            event.chat_id,
+            xxx,
+            force_document=True,
+            thumb="resources/extras/cipherx.jpg",
+            caption=f"`{xxx.name}`",
         )
-    else:
-        for x in ok:
-            k = time.time()
-            xxx = await uploader(x, x, k, xx, "Uploading...")
-            await ultroid_bot.send_file(
-                event.chat_id,
-                xxx,
-                force_document=True,
-                thumb="resources/extras/cipherx.jpg",
-                caption=f"`{xxx.name}`",
-            )
-        await xx.delete()
+    await xx.delete()
 
 
 @ultroid_cmd(pattern="addzip$")
@@ -137,7 +124,7 @@ async def azipp(event):
         else:
             file = await event.download_media(reply.media, "zip/")
     await xx.edit(
-        f"Downloaded `{file}` succesfully\nNow Reply to Other Files to Add And Zip all at once"
+        f"Downloaded `{file}` succesfully\nNow Reply to Other Files to Add and Zip all at once"
     )
 
 
@@ -145,7 +132,7 @@ async def azipp(event):
 async def do_zip(event):
     if not os.path.isdir("zip"):
         return await eor(
-            event, "First All Files Via {i}addzip then do Zip to zip all files at one."
+            event, "First All Files via {i}addzip then doZip to zip all files at one."
         )
     xx = await eor(event, "`processing`")
     await bash(f"zip -r cipherx.zip zip/*")
@@ -160,6 +147,3 @@ async def do_zip(event):
     os.system("rm -rf zip")
     os.remove("cipherx.zip")
     await xx.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
