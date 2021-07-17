@@ -1,4 +1,3 @@
-import requests
 from googletrans import Translator
 
 from . import *
@@ -12,6 +11,7 @@ async def _(event):
     if len(event.text) > 3:
         if not event.text[3] == " ":
             return
+    await event.get_input_chat()
     input = event.text[4:6]
     txt = event.text[7:]
     if event.reply_to_msg_id:
