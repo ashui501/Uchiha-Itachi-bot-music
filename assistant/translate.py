@@ -1,12 +1,13 @@
 import requests
 from googletrans import Translator
 
-
 from . import *
 
 @asst_cmd("tr") 
 async def _(event):
-    if not event.is_private or not event.is_group:
+    if not event.is_private:
+        return
+    if not event.is_group:
         return
     if len(event.text) > 3:
         if not event.text[3] == " ":
