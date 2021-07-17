@@ -22,7 +22,7 @@ async def _(event):
         text = txt
         lan = input or "en"
     else:
-        return await event.reply("1⃣ /tr [Language Code](https://telegra.ph/CɪᴘʜᴇʀX-03-10) as reply to a message\n2⃣ /tr <target LangCode> <text> ~ Ex: /tr ko hello", link_preview=False)
+        return await asst.send_message(event.chat_id, "1⃣ /tr [Language Code](https://telegra.ph/CɪᴘʜᴇʀX-03-10) as reply to a message\n2⃣ /tr <target LangCode> <text> ~ Ex: /tr ko hello", link_preview=False)
     translator = Translator()
     try:
         tt = translator.translate(text, dest=lan)
@@ -34,7 +34,7 @@ async def _(event):
             #output_str = (
             #    f"Translated text was too big, so I've pasted it [Here]({url2})"
             #)
-        await event.reply(output_str)
+        await asst.send_message(event.chat_id, output_str)
     except Exception:
         await asst.send_message(event.chat_id, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.", link_preview=False)
         
