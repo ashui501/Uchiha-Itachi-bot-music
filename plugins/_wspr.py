@@ -22,7 +22,7 @@ from telethon.tl.types import UserStatusRecently as rec
 from . import *
 
 snap = {}
-buddhhu = []
+buddhhu = {}
 
 
 @ultroid_cmd(
@@ -32,8 +32,7 @@ async def _(e):
     if e.reply_to_msg_id:
         okk = (await e.get_reply_message()).sender_id
         try:
-            zyx = await ultroid_bot(gu(id=okk))
-            put = zyx.user.username
+            put = okk
         except ValueError as ex:
             return await eor(e, str(ex))
         except AttributeError:
@@ -42,7 +41,7 @@ async def _(e):
         put = e.pattern_match.group(1)
     if put:
         try:
-            results = await ultroid_bot.inline_query(asst.me.username, f"msg {put}")
+            results = await e.client.inline_query(asst.me.username, f"msg {put}")
         except rep:
             return await eor(
                 e,
@@ -57,16 +56,19 @@ async def _(e):
 
 
 @in_pattern("msg")
+@in_owner
 async def _(e):
     vvv = e.text
     zzz = vvv.split(" ", maxsplit=1)
     try:
         ggg = zzz[1]
         sed = ggg.split(" wspr ", maxsplit=1)
-        query = sed[0]
+        query = sed[0].replace(" ", "")
+        if query.isdigit():
+            query = int(query)
     except IndexError:
         return
-    meme = e.query.user_id
+    iuser = e.query.user_id
     try:
         desc = sed[1]
     except IndexError:
@@ -77,6 +79,7 @@ async def _(e):
             name = logi.user.first_name
             ids = logi.user.id
             username = logi.user.username
+            mention = f"[{name}](tg://user?id={ids})"
             x = logi.user.status
             bio = logi.about
             if isinstance(x, on):
@@ -93,11 +96,16 @@ async def _(e):
                 status = "Can't Tell"
             text = f"**Ⲛⲁⲙⲉ:**    `{name}`\n"
             text += f"**ⲒⲆ:**    `{ids}`\n"
-            text += f"**Ⳙⲋⲉʀⲛⲁⲙⲉ:**    `{username}`\n"
+            if username:
+                text += f"**Ⳙⲋⲉʀⲛⲁⲙⲉ:**    `{username}`\n"
+                url = f"https://t.me/{username}"
+            else:
+                text += f"**Mention:**    `{mention}`\n"
+                url = f"tg://user?id={ids}"
             text += f"**Ⲋⲧⲁⲧυⲋ:**    `{status}`\n"
             text += f"**Ⲁⲃⲟυⲧ:**    `{bio}`"
             button = [
-                Button.url("Privᴀᴛᴇ", url=f"t.me/{username}"),
+                Button.url("Privᴀᴛᴇ", url=url"),
                 Button.switch_inline(
                     "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr Hello 👋", same_peer=True
                 ),
@@ -118,8 +126,8 @@ async def _(e):
         try:
             logi = await ultroid_bot.get_entity(query)
             button = [
-                Button.inline("Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", data=f"dd_{logi.id}"),
-                Button.inline("Dᴇlᴇᴛᴇ Mᴇssᴀgᴇ", data=f"del"),
+                Button.inline("Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", data=f"dd_{e.id}"),
+                Button.inline("Dᴇlᴇᴛᴇ Mᴇssᴀgᴇ", data=f"del_{e.id}"),
             ]
             us = logi.username
             sur = e.builder.article(
@@ -128,9 +136,8 @@ async def _(e):
                 text=get_string("wspr_1").format(us),
                 buttons=button,
             )
-            buddhhu.append(meme)
-            buddhhu.append(logi.id)
-            snap.update({logi.id: desc})
+            buddhhu.update({e.id: [logi.id, iuser]})
+            snap.update({e.id: desc})
         except ValueError:
             sur = e.builder.article(
                 title="Ⲧⲩⲣⲉ Ⲩⲟυʀ Ⲙⲉⲋⲋⲁⳋⲉ", text=f"ᴛʏᴘᴇ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ"
@@ -145,21 +152,22 @@ async def _(e):
 )
 async def _(e):
     ids = int(e.pattern_match.group(1).decode("UTF-8"))
-    if e.sender_id in buddhhu:
-        await e.answer(snap[ids], alert=True)
+    if buddhhu.get(ids):
+        if e.sender_id in buddhhu[ids]:
+            await e.answer(snap[ids], alert=True)
+        else:
+            await e.answer("Not For You", alert=True)
     else:
         await e.answer("Dᴏn'ᴛ sᴩy ᴀᴛ CɪᴘʜᴇʀX ᴩrivᴀᴛᴇ ʍᴇssᴀgᴇ ʙiᴛᴄh 😒", alert=True)
 
 
-@callback("del")
+@callback("re.compile("del_(.*)")")
 async def _(e):
-    if e.sender_id in buddhhu:
-        for k in buddhhu:
-            try:
-                del snap[k]
-                buddhhu.clear()
-            except KeyError:
-                pass
+    ids = int(e.pattern_match.group(1).decode("UTF-8"))
+    if buddhhu.get(ids):
+        if e.sender_id in buddhhu[ids]:
+            buddhhu.pop(ids)
+            snap.pop(ids)
             try:
                 await e.edit(get_string("wspr_2"))
             except np:
