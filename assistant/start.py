@@ -74,57 +74,57 @@ async def ultroid(event):
             u = await event.client.get_entity(event.chat_id)
             if not udB.get("STARTMSG"):
                 if udB.get("PMBOT") == "True":
-                ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
-            await event.reply(
-                f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
-                buttons=[
-                    [
-                        Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
+                    ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
+                await event.reply(
+                    f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
+                    buttons=[
+                        [
+                            Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
+                        ],
+                        [
+                            Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                        ],
+                        [
+                            Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
+                        ],
+                        [
+                            Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
+                        ],
+                        [
+                            Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="tlans"),
+                        ],
+                        [
+                            Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
+                        ],
                     ],
-                    [
-                        Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                )
+            else:
+                u = await event.client.get_entity(event.chat_id)
+                me = f"[{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})"
+                mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
+                await event.reply(
+                    Redis("STARTMSG").format(me=me, mention=mention),
+                    buttons=[
+                        [
+                            Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
+                        ],
+                        [
+                            Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
+                        ],
+                        [
+                            Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
+                        ],
+                        [
+                            Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
+                        ],
+                        [
+                            Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="tlans"),
+                        ],
+                        [
+                            Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
+                        ],
                     ],
-                    [
-                        Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
-                    ],
-                    [
-                        Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
-                    ],
-                    [
-                        Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="tlans"),
-                    ],
-                    [
-                        Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
-                    ],
-                ],
-            )
-        else:
-            u = await event.client.get_entity(event.chat_id)
-            me = f"[{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})"
-            mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
-            await event.reply(
-                Redis("STARTMSG").format(me=me, mention=mention),
-                buttons=[
-                    [
-                        Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
-                    ],
-                    [
-                        Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
-                    ],
-                    [
-                        Button.inline("✵Grᴏuᴩ/Chᴀnnᴇl ʍᴀnᴀgᴇr Hᴇlᴩ✵", data="group"),
-                    ],
-                    [
-                        Button.inline("✵CɪᴘʜᴇʀX Sᴇrvᴇr Ping✵", data="ping"),
-                    ],
-                    [
-                        Button.inline("✵Tᴇxᴛ Trᴀnslᴀᴛᴏr✵", data="tlans"),
-                    ],
-                    [
-                        Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
-                    ],
-                ],
-            )
+                )
         else:
             name = get_display_name(event.sender_id)
             if event.pattern_match.group(1) == "set":
