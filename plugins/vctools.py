@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -14,9 +14,6 @@
 • `{i}stopvc`
     Stop Group Call in a group.
 
-• `{i}playvc`
-    Start Voice Chat Bot to receive Commands.
-
 • `{i}vcinvite`
     Invite all members of group in Group Call.
     (You must be joined)
@@ -27,13 +24,10 @@
 • `{i}rmvcaccess <id/username/reply to msg>`
     Remove access of Voice Chat Bot.
 
-• **Voice Chat Bot Commands**
-   `/play ytsearch : song-name`
-   `/play youtube link`
-   `/current`
-   `/skip`
-   `/exitVc`
+• `{i}listvcaccess`
+    Get The List of People having vc access.
 """
+
 
 from cython.functions.vc_sudos import add_vcsudo, del_vcsudo, get_vcsudos, is_vcsudo
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat
@@ -67,19 +61,6 @@ async def _(e):
         await eor(e, "`Voice Chat Stopped...`")
     except Exception as ex:
         await eor(e, f"`{str(ex)}`")
-
-
-@ultroid_cmd(
-    pattern="playvc$",
-)
-async def _(e):
-    zz = await eor(e, "`VC bot started...`")
-    er, out = await bash("npm start")
-    LOGS.info(er)
-    LOGS.info(out)
-    vcdyno("on")
-    if er:
-        await zz.edit(f"Failed {er}\n\n{out}")
 
 
 @ultroid_cmd(
@@ -149,7 +130,7 @@ async def _(e):
         except ValueError as ex:
             return await eod(xx, f"`{str(ex)}`", time=5)
     else:
-        return await eod(xx, "`Reply to user's message or add it's id/username...`", time=3)
+        return await eod(xx, "`Reply to user's msg or add it's id/username...`", time=3)
     if not is_vcsudo(userid):
         return await eod(
             xx,
@@ -199,15 +180,3 @@ async def _(e):
         )
     except Exception as ex:
         return await eod(xx, f"`{str(ex)}`", time=5)
-
-@asst_cmd("exitVc")
-async def evc(e):
-    if e.sender.id == ultroid_bot.uid:
-        vcdyno("off")
-    elif is_sudo(e.sender.id):
-        vcdyno("off")
-    elif is_vcsudo(e.sender.id):
-        vcdyno("off")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
