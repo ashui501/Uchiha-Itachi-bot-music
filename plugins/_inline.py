@@ -13,16 +13,19 @@ from os import remove
 from platform import python_version as PyVer
 
 from git import Repo
+from cython.dB.core import *
 from cython import __version__ as UltVer
+from pyUltroid.misc import owner_and_sudos
 from support import *
 from telethon import Button, __version__
-from telethon.tl.types import InputWebDocument
+from telethon.tl.types import InputBotInlineResult, InputWebDocument
 
 from . import *
 
 # ================================================#
 notmine = f"This bot is for {OWNER_NAME}"
 ULTROID_PIC = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
+TLINK = "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
 helps = get_string("inline_1")
 
 add_ons = udB.get("ADDONS")
@@ -30,18 +33,39 @@ if add_ons == "True" or add_ons is None:
     zhelps = get_string("inline_2")
 else:
     zhelps = get_string("inline_3")
-if udB.get("INLINE_PIC"):
-    _file_to_replace = udB.get("INLINE_PIC")
+C_PIC = udB.get("INLINE_PIC")
+
+if C_PIC:
+    _file_to_replace = C_PIC
+    TLINK = C_PIC
 else:
     _file_to_replace = "resources/extras/cipherx.jpg"
-# ============================================#
+
+# --------------------BUTTONS--------------------#
+
+_main_help_menu = [
+    [
+        Button.inline("• Pʟᴜɢɪɴs", data="hrrrr"),
+        Button.inline("• Aᴅᴅᴏɴs", data="frrr"),
+    ],
+    [
+        Button.inline("Oᴡɴᴇʀ•ᴛᴏᴏʟꜱ", data="ownr"),
+        Button.inline("Iɴʟɪɴᴇ•Pʟᴜɢɪɴs", data="inlone"),
+    ],
+    [
+        Button.url("⚙️Sᴇᴛᴛɪɴɢs⚙️", url=f"https://t.me/{asst.me.username}?start=set"),
+    ],
+    [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
+]
+
+# --------------------BUTTONS--------------------#
 
 @in_pattern("")
 @in_owner
 async def e(o):
     if len(o.text) == 0:
         b = o.builder
-        uptime = grt(time.time() - start_time)
+        uptime = time_formatter((time.time() - start_time) * 1000)
         header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
         ALIVEMSG = """
 **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n
@@ -92,8 +116,6 @@ async def inline_handler(event):
     for x in LIST.values():
         for y in x:
             z.append(y)
-    cmd = len(z)
-    bnn = asst.me.username
     #_file_to_replace = await ultroid_bot.upload_file("resources/extras/CipherX.mp4")
     result = event.builder.photo(
         file=_file_to_replace,
@@ -102,37 +124,23 @@ async def inline_handler(event):
             OWNER_NAME,
             len(PLUGINS),
             len(ADDONS),
-            cmd,
+            len(z),
         ),
-        buttons=[
-            [
-                Button.inline("• Pʟᴜɢɪɴs", data="hrrrr"),
-                Button.inline("• Aᴅᴅᴏɴs", data="frrr"),
-            ],
-            [
-                Button.inline("Oᴡɴᴇʀ•ᴛᴏᴏʟꜱ", data="ownr"),
-                Button.inline("Iɴʟɪɴᴇ•Pʟᴜɢɪɴs", data="inlone"),
-            ],
-            [
-                Button.url("⚙️Sᴇᴛᴛɪɴɢs⚙️", url=f"https://t.me/{bnn}?start=set"),
-            ],
-            [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
-        ],
+        buttons=_main_help_menu,
     )
-    await event.answer([result])
+    await event.answer([result], gallery=True)
 
-
-@in_pattern("paste")
+@in_pattern("haste")
 @in_owner
 async def _(event):
     ok = event.text.split(" ")[1]
-    link = "https://nekobin.com/"
+    link = "https://hastebin.dog/"
     result = event.builder.article(
         title="Paste",
-        text="Pᴀsᴛᴇᴅ Tᴏ Nᴇᴋᴏʙɪɴ!",
+        text="Pᴀsᴛᴇᴅ Tᴏ Hᴀsᴛᴇʙɪɴ!",
         buttons=[
             [
-                Button.url("✵NᴇᴋᴏBin✵", url=f"{link}{ok}"),
+                Button.url("✵Hᴀsᴛᴇʙɪɴ✵", url=f"{link}{ok}"),
                 Button.url("✵Rᴀw✵", url=f"{link}raw/{ok}"),
             ],
         ],
@@ -214,13 +222,13 @@ async def _(event):
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    pin = f"🌋Pɪɴɢ = {ms}ms"
+    pin = f"🌋Pɪɴɢ = {ms} microseconds"
     await event.answer(pin, cache_time=0, alert=True)
 
 
 @callback("upp")
 async def _(event):
-    uptime = grt(time.time() - start_time)
+    uptime = time_formatter((time.time() - start_time) * 1000)
     pin = f"✵Uᴘᴛɪᴍᴇ = {uptime}"
     await event.answer(pin, cache_time=0, alert=True)
 
@@ -290,6 +298,11 @@ async def _(e):
             ),
         ],
         [
+            Button.switch_inline(
+                "EBᴏᴏᴋs Uᴘʟᴏᴀᴅᴇʀ",
+                query="ebooks ",
+                same_peer=True,
+            ),
             Button.inline(
                 "« Bᴀᴄᴋ",
                 data="open",
@@ -407,37 +420,18 @@ async def backr(event):
 @callback("open")
 @owner
 async def opner(event):
-    bnn = asst.me.username
-    buttons = [
-        [
-            Button.inline("• Pʟᴜɢɪɴs ", data="hrrrr"),
-            Button.inline("• Aᴅᴅᴏɴs", data="frrr"),
-        ],
-        [
-            Button.inline("Oᴡɴᴇʀ•Tᴏᴏʟꜱ", data="ownr"),
-            Button.inline("Iɴʟɪɴᴇ•Pʟᴜɢɪɴs", data="inlone"),
-        ],
-        [
-            Button.url(
-                "⚙️Sᴇᴛᴛɪɴɢs⚙️",
-                url=f"https://t.me/{bnn}?start={ultroid_bot.me.id}",
-            ),
-        ],
-        [Button.inline("••Cʟᴏꜱᴇ••", data="close")],
-    ]
     z = []
     for x in LIST.values():
         for y in x:
             z.append(y)
-    cmd = len(z) + 10
     await event.edit(
         get_string("inline_4").format(
             OWNER_NAME,
             len(PLUGINS),
             len(ADDONS),
-            cmd,
+            len(z),
         ),
-        buttons=buttons,
+        buttons=_main_help_menu,
         link_preview=False,
     )
 
@@ -484,7 +478,7 @@ async def on_plug_in_callback_query_handler(event):
         ],
     ]
     try:
-        if event.query.user_id in sed:
+        if str(event.query.user_id) in owner_and_sudos():
             await event.edit(
                 reply_pop_up_alert,
                 buttons=buttons,
@@ -543,7 +537,7 @@ async def on_plug_in_callback_query_handler(event):
         ],
     ]
     try:
-        if event.query.user_id in sed:
+        if str(event.query.user_id) in owner_and_sudos():
             await event.edit(
                 reply_pop_up_alert,
                 buttons=buttons,
