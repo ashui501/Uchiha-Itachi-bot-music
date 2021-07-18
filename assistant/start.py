@@ -5,14 +5,12 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-import time
-import shutil
-import psutil
 from datetime import datetime
 
+from pytz import timezone as tz
 from cython.functions.asst_fns import *
-from cython.misc._decorators import sed
-from telethon import Button, events
+from cython.misc import owner_and_sudos
+from telethon import events
 from telethon.utils import get_display_name
 
 from plugins import *
@@ -20,30 +18,65 @@ from plugins import *
 from . import *
 
 
-@asst_cmd("start")
-async def assistant(event):
-    if event.is_group and event.sender_id in sed:
+_settings = [
+    [
+        Button.inline("API Kᴇʏs", data="apiset"),
+        Button.inline("Pᴍ Bᴏᴛ", data="chatbot"),
+    ],
+    [
+        Button.inline("Aʟɪᴠᴇ", data="alvcstm"),
+        Button.inline("PᴍPᴇʀᴍɪᴛ", data="ppmset"),
+    ],
+    [Button.inline("Fᴇᴀᴛᴜʀᴇs", data="otvars")],
+    [Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="vcb")],
+    [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
+]
+
+_start = [
+    [
+        Button.inline("Lᴀɴɢᴜᴀɢᴇ 🌐", data="lang"),
+        Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter"),
+    ],
+    [
+        Button.inline("Sᴛᴀᴛs ✨", data="stat"),
+        Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ 📻", data="bcast"),
+    ],
+    [Button.inline("TɪᴍᴇZᴏɴᴇ 🌎", data="tz")],
+]
+
+@callback("closeit")
+async def closet(lol):
+    await lol.delete()
+    
+
+@asst_cmd("start ?(.*)")
+async def ultroid(event):
+    if not event.is_group or event.is_private:
+        return
+    if event.is_group and str(event.sender_id) in owner_and_sudos():
         bnn = (await asst.get_me()).username
         return await event.reply(
             "`Click the button below to see my full commands`",
             buttons=[Button.url("⚙️Sᴛᴀʀᴛ⚙️", url=f"https://t.me/{bnn}?start=set")],
         )
     else:
-        if not is_added(event.sender_id) and event.sender_id not in sed:
+        if (
+            not is_added(event.sender_id)
+            and str(event.sender_id) not in owner_and_sudos()
+        ):
             add_user(event.sender_id)
             await asst.send_message(
                 OWNER_ID,
                 f"Bot started by [{event.sender_id}](tg://user?id={event.sender_id})",
             )
-        ok = ""
-        if event.is_private and event.sender_id in sed:
-            return
-        u = await event.client.get_entity(event.chat_id)
-        if not udB.get("STARTMSG"):
-            if udB.get("PMBOT") == "True":
+        if str(event.sender_id) not in owner_and_sudos():
+            ok = ""
+            u = await event.client.get_entity(event.chat_id)
+            if not udB.get("STARTMSG"):
+                if udB.get("PMBOT") == "True":
                 ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
             await event.reply(
-                f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {OWNER_NAME}!\n\n{ok}",
+                f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
                 buttons=[
                     [
                         Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
@@ -92,6 +125,18 @@ async def assistant(event):
                     ],
                 ],
             )
+        else:
+            name = get_display_name(event.sender_id)
+            if event.pattern_match.group(1) == "set":
+                await event.reply(
+                    "Choose from the below options -",
+                    buttons=_settings,
+                )
+            else:
+                await event.reply(
+                    get_string("ast_3").format(name),
+                    buttons=_start,
+                )
             
 
 @callback("tlans")
@@ -125,33 +170,8 @@ async def users(event):
     await asst.send_message(event.chat_id, grabon)
 
 
-@asst_cmd("start ?(.*)")
-@owner
-async def ultroid(event):
-    if event.pattern_match.group(1):
-        return
-    if event.is_group:
-        return
-    name = event.sender.first_name
-    if event.sender.last_name:
-        name += f" {event.sender.last_name}"
-    await asst.send_message(
-        event.chat_id,
-        get_string("ast_3").format(name),
-        buttons=[
-            [
-                Button.inline("Language 🌐", data="lang"),
-                Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter"),
-            ],
-            [
-                Button.inline("Sᴛᴀᴛs ✨", data="stat"),
-                Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ 📻", data="bcast"),
-            ],
-        ],
-    )
 
 
-# aah, repeat the codes..
 @callback("mainmenu")
 @owner
 async def ultroid(event):
@@ -159,16 +179,7 @@ async def ultroid(event):
         return
     await event.edit(
         get_string("ast_3").format(OWNER_NAME),
-        buttons=[
-            [
-                Button.inline("Language 🌐", data="lang"),
-                Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter"),
-            ],
-            [
-                Button.inline("Sᴛᴀᴛs ✨", data="stat"),
-                Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ 📻", data="bcast"),
-            ],
-        ],
+        buttons=_start,
     )
 
 
@@ -186,8 +197,6 @@ Total Users - {}""".format(
 @callback("bcast")
 @owner
 async def bdcast(event):
-    if not is_fullsudo(event.sender_id):
-        return await event.edit("`This Command is Sudo Restricted.`")
     ok = get_all_users()
     await event.edit(f"Broadcast to {len(ok)} users.")
     async with event.client.conversation(OWNER_ID) as conv:
@@ -226,37 +235,39 @@ Failed for {fail} user(s).""",
 async def setting(event):
     await event.edit(
         "Choose from the below options -",
-        buttons=[
-            [
-                Button.inline("API Kᴇʏs", data="apiset"),
-                Button.inline("Pᴍ Bᴏᴛ", data="chatbot"),
-            ],
-            [
-                Button.inline("Aʟɪᴠᴇ", data="alvcstm"),
-                Button.inline("PᴍPᴇʀᴍɪᴛ", data="ppmset"),
-            ],
-            [Button.inline("Fᴇᴀᴛᴜʀᴇs", data="otvars")],
-            [Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="vcb")],
-            [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
-        ],
+        buttons=_settings,
     )
 
-@asst_cmd("start set")
+
+@callback("tz")
 @owner
-async def set(event):
-    await event.reply(
-        "Choose from the below options -",
-        buttons=[
-            [
-                Button.inline("API Kᴇʏs", data="apiset"),
-                Button.inline("Pᴍ Bᴏᴛ", data="chatbot"),
-            ],
-            [
-                Button.inline("Aʟɪᴠᴇ", data="alvcstm"),
-                Button.inline("PᴍPᴇʀᴍɪᴛ", data="ppmset"),
-            ],
-            [Button.inline("Fᴇᴀᴛᴜʀᴇs", data="otvars")],
-            [Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="vcb")],
-            [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
-        ],
-    )
+async def timezone_(event):
+    await event.delete()
+    pru = event.sender_id
+    var = "TIMEZONE"
+    name = "Timezone"
+    async with event.client.conversation(pru) as conv:
+        await conv.send_message(
+            "Send Your TimeZone From This List [Check From Here](http://www.timezoneconverter.com/cgi-bin/findzone.tzc)"
+        )
+        response = conv.wait_event(events.NewMessage(chats=pru))
+        response = await response
+        themssg = response.message.message
+        if themssg == "/cancel":
+            return await conv.send_message(
+                "Cancelled!!",
+                buttons=get_back_button("mainmenu"),
+            )
+        else:
+            try:
+                tz(themssg)
+                await setit(event, var, themssg)
+                await conv.send_message(
+                    f"{name} changed to {themssg}\n",
+                    buttons=get_back_button("mainmenu"),
+                )
+            except BaseException:
+                await conv.send_message(
+                    "Wrong TimeZone, Try again",
+                    buttons=get_back_button("mainmenu"),
+                )
