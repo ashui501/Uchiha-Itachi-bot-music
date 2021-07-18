@@ -44,7 +44,7 @@ async def _(e):
     ok = Carbon(code=p)
     haa = await ok.save("neofetch")
     reply = await e.get_reply_message()
-    await e.client.send_file(e.chat_id, haa, reply_to=reply)
+    await e.client.send_file(e.chat_id, haa, reply_to=reply, caption="**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ 𐍃ᥱr᥎ᥱr Iᥒf᧐**")
     await xxx.delete()
     remove("neofetch.jpg")
     remove("neo.txt")
