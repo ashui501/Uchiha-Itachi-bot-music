@@ -40,7 +40,7 @@ from platform import python_version as pyver
 import heroku3
 import requests
 from git import Repo
-from cython import __version__ as UltVer
+from cython.version import __version__ as UltVer
 from telethon import __version__, events
 from telethon.errors.rpcerrorlist import ChatSendMediaForbiddenError
 
