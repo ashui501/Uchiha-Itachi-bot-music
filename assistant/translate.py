@@ -6,7 +6,7 @@ from telethon import events
 from plugins import *
 from . import *
 
-@asst_cmd("tr|/tr@CipherXBot") 
+@asst_cmd("tr$") 
 async def _(event):
     if len(event.text) > 3:
         if not event.text[3] == " ":
