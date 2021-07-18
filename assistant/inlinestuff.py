@@ -9,7 +9,6 @@ import base64
 from random import choice
 from re import compile as re_compile
 from re import findall
-from urllib.request import urlopen
 
 import requests
 import json
@@ -19,6 +18,8 @@ from play_scraper import search
 from search_engine_parser import GoogleSearch, YahooSearch
 from telethon import Button
 from telethon.tl.types import InputWebDocument as wb
+
+from plugins._inline import SUP_BUTTONS
 
 from . import *
 from . import humanbytes as hb
@@ -622,3 +623,63 @@ async def clip(e):
     await e.answer(
         hm, gallery=True, switch_pm="Clipart Searcher", switch_pm_param="start"
     )
+
+
+
+@in_pattern("ebooks")
+@in_owner
+async def clip(e):
+    try:
+        quer = e.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        await e.answer(
+            [], switch_pm="Enter Query to Look for EBook", switch_pm_param="start"
+        )
+        return
+    quer = quer.replace(" ", "+")
+    sear = f"http://www.gutenberg.org/ebooks/search/?query={quer}&submit_search=Go%21"
+    magma = requests.get(sear).content
+    bs = BeautifulSoup(magma, "html.parser", from_encoding="utf-8")
+    out = bs.find_all("img")
+    Alink = bs.find_all("a", "link")
+    if len(out) == 0:
+        return await e.answer(
+            [], switch_pm="No Results Found !", switch_pm_param="start"
+        )
+    buil = e.builder
+    dont_take = [
+        "Authors",
+        "Did you mean",
+        "Sort Alpha",
+        "Sort by",
+        "Subjects",
+        "Bookshelves",
+    ]
+    hm = []
+    titles = []
+    for num in Alink:
+        try:
+            rt = num.find("span", "title").text
+            if not rt.startswith(tuple(dont_take)):
+                titles.append(rt)
+        except BaseException:
+            pass
+    for rs in range(len(out)):
+        if "/cache/epub" in out[rs]["src"]:
+            link = out[rs]["src"]
+            num = link.split("/")[3]
+            link = "https://gutenberg.org" + link.replace("small", "medium")
+            file = wb(link, 0, "image/jpeg", [])
+            hm.append(
+                buil.article(
+                    title=titles[rs],
+                    type="photo",
+                    description="GutenBerg Search",
+                    thumb=file,
+                    content=file,
+                    include_media=True,
+                    text=f"**• CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ Ebook Search**\n\n->> `{titles[rs]}`",
+                    buttons=Button.inline("Get as Doc", data=f"ebk_{num}"),
+                )
+            )
+    await e.answer(hm, switch_pm="Ebooks Search", switch_pm_param="start")
