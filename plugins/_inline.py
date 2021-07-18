@@ -14,7 +14,7 @@ from platform import python_version as PyVer
 
 from git import Repo
 from cython.dB.core import *
-from cython import __version__ as UltVer
+from cython.version import __version__ as UltVer
 from pyUltroid.misc import owner_and_sudos
 from support import *
 from telethon import Button, __version__
