@@ -105,11 +105,13 @@ async def _(e):
             text += f"**Ⲋⲧⲁⲧυⲋ:**    `{status}`\n"
             text += f"**Ⲁⲃⲟυⲧ:**    `{bio}`"
             button = [
-                Button.url("Privᴀᴛᴇ", url=url"),
+                Button.url("Privᴀᴛᴇ", url=url),
                 Button.switch_inline(
-                    "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ", query=f"msg {query} wspr Hello 👋", same_peer=True
+                    "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ",
+                    query=f"msg {query} wspr Hello 👋",
+                    same_peer=True,
                 ),
-            ]
+            ]            
             sur = e.builder.article(
                 title=f"{name}",
                 description=desc,
