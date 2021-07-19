@@ -171,9 +171,11 @@ async def on_afk(event):
 
 @ultroid_cmd(pattern=r"afk ?(.*)")
 async def _(event):
-    if not is_fullsudo(event.sender_id):
-        return await eor(event, "`This Command is Sudo Restricted.`")
+    if not event.out and not is_fullsudo(event.sender_id):
+        return await eor(event, "`This Command is Full Sudo Restricted.`")
     reply = await event.get_reply_message()
+    if event.client._bot:
+        return await eor(event, "Master, I'm a Bot, I can't go AFK :(")
     global USER_AFK
     global afk_time
     global last_afk_message
@@ -255,6 +257,3 @@ async def _(event):
                 await ultroid_bot.send_message(LOG, f"AFK mode to On")
         except BaseException:
             pass
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
