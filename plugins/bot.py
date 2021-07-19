@@ -117,12 +117,10 @@ async def lol(ult):
             await eor(ult, als, link_preview=False)
 
 
-@ultroid_bot.on(events.NewMessage(pattern=re.escape(f"{HNDLR}ping"))) 
+@ultroid_cmd(
+    pattern="ping$",
+)
 async def _(event):
-    if event.fwd_from:
-        return
-    if not event.out and not is_sudo(event.sender_id):
-        return
     start = dt.now()
     x = await eor(event, "`𝙿𝙸𝙽𝙶`")
     end = dt.now()
@@ -147,26 +145,12 @@ async def restartbt(ult):
     else:
         await bash("pkill python3 && python3 -m cython")
 
-@ultroid_cmd(pattern="shutdown")
-async def shutdownbot(ult):
-    try:
-        dyno = ult.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        dyno = None
-    if dyno:
-        if dyno not in ["userbot", "vcbot", "web", "worker"]:
-            await eor(ult, "Invalid Dyno Type specified !")
-            return
-        await shutdown(ult, dyno)
-    else:
-        await shutdown(ult)
+
         
-@ultroid_bot.on(events.NewMessage(pattern=re.escape(f"{HNDLR}logs")))
-async def _(event):
-    if event.fwd_from:
-        return
-    if not event.out and not is_sudo(event.sender_id):
-        return
+@ultroid_cmd(
+    pattern="logs",
+)
+async def get_logs(event):
     try:
         opt = event.text.split(" ", maxsplit=1)[1]
     except IndexError:
@@ -176,7 +160,7 @@ async def _(event):
     elif opt == "sys":
         await def_logs(event)
     else:
-        await def_logs(event)
+        await def_logs(event) 
 
 
 async def heroku_logs(event):
