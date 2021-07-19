@@ -58,7 +58,7 @@ except BaseException:
     HEROKU_APP_NAME = None
 
 
-@@ultroid_cmd(
+@ultroid_cmd(
     pattern="alive$",
 )
 async def lol(ult):
@@ -218,7 +218,7 @@ async def def_logs(ult):
         ult.chat_id,
         file="cipherx.log",
         thumb="resources/extras/cipherx.jpg",
-        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ.**\nPasted [here]({url})",
+        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here]({url})",
     )
     await xx.edit("Done")
     await xx.delete()
