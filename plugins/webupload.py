@@ -48,7 +48,7 @@ async def _(event):
         else:
             return await eod(xx, "`Reply to media file`", time=5)
     try:
-        results = await ultroid_bot.inline_query(
+        results = await event.client.inline_query(
             asst.me.username,
             f"fl2lnk {file_name}"
         )
@@ -66,6 +66,3 @@ async def _(event):
     await results[0].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
     await xx.delete()
     await event.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
