@@ -34,14 +34,14 @@ async def evalJs(
     scriptFile.close()
     os.system(f"node ./src/ecmaHelper/eval.d.js")
     if os.path.exists("./src/ecmaHelper/evalJs.result.d.txt"):
-        await ultroid_bot.send_file(
+        await event.client.send_file(
             event.chat_id,
             "./src/ecmaHelper/evalJs.result.d.txt",
             force_document=True,
             caption=f"**☞ Ⲉⳳⲁⳑ Ⳗⲋ\n\n• Ⲥⲟⲙⲙⲁⲛⲇ:**\n`{command}` \n\n**• Ⲧⲓⲙⲉ Ⲧⲁⲕⲉⲛ:**\n`{time.time() - startTime:.2f}s` \n\n**• Rⲉⲋυⳑⲧ:**\n`[Info]: Ⳙⲣⳑⲟⲁⲇⲉⲇ Ϝⲓⳑⲉ Ϝⲟʀ Ⲃⲉⲧⲧⲉʀ Ⳳⲓⲋυⲁⳑⲓⲋⲁⲧⲓⲟⲛ Ⲟϝ Ⲓⲛⲇⲉⲛⲧⲋ.`",
         )
     else:
-        await ultroid_bot.send_file(
+        await event.client.send_file(
             event.chat_id,
             "./src/ecmaHelper/evalJs.result.d.txt",
             force_document=True,
@@ -79,6 +79,3 @@ async def evaluateJs(event):
                 startTime=start,
             )
         ).start()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
