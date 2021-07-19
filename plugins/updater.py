@@ -24,7 +24,6 @@ if CL:
 
 @ultroid_cmd(pattern="update$")
 async def _(e):
-    await eor(e, "`Checking for updates...`")
     m = await updater()
     branch = (Repo.init()).active_branch
     if m:
@@ -40,6 +39,7 @@ async def _(e):
         else:
             Link = f"https://t.me/c/{x.chat.id}/{x.id}"
         await eod(
+            e,
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
             time=3,
