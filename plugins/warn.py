@@ -114,14 +114,14 @@ async def rwarn(e):
         try:
             user = e.text.split()[1]
             if user.startswith("@"):
-                ok = await ultroid_bot.get_entity(user)
+                ok = await e.client.get_entity(user)
                 user = ok.id
             else:
                 user = int(user)
         except BaseException:
             return await eor(e, "Reply To user")
     reset_warn(e.chat_id, user)
-    ok = await ultroid_bot.get_entity(user)
+    ok = await e.client.get_entity(user)
     user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
     await eor(e, f"v Cleared All Warns of {user}.")
 
@@ -135,7 +135,7 @@ async def twarns(e):
         try:
             user = e.text.split()[1]
             if user.startswith("@"):
-                ok = await ultroid_bot.get_entity(user)
+                ok = await e.client.get_entity(user)
                 user = ok.id
             else:
                 user = int(user)
@@ -143,7 +143,7 @@ async def twarns(e):
             return await eod(e, "Reply To A User")
     c, r = warns(e.chat_id, user)
     if c and r:
-        ok = await ultroid_bot.get_entity(user)
+        ok = await e.client.get_entity(user)
         user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
         r = r.split("|$|")
         text = f"User {user} Got {c} Warns.\n\n"
@@ -172,6 +172,3 @@ async def warnset(e):
         )
     else:
         await eod(e, "`Incorrect Format`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
