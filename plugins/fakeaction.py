@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -19,6 +19,9 @@
 
 • `{i}fgame <time/in secs>`
     `Show Fake Game Playing Action in current chat. `
+
+• `{i}stopaction`
+   `Stop any ongoing Chat Action going in Chat.`
 """
 
 from . import *
@@ -96,4 +99,8 @@ async def _(e):
         await asyncio.sleep(t)
 
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+@ultroid_cmd(pattern="stopaction")
+async def do_it(e):
+    async with e.client.action(e.chat_id, "cancel"):
+        pass
+    await e.reply("Fake Action Stopped.")
