@@ -10,7 +10,8 @@
 
 • `{i}pdf <page num> <reply to pdf file>`
     Extract and Send page as a Image.(note-: For Extraction all pages just use .pdf)
-
+    You Can use multi pages too like `{i}pdf 1-7`
+    
 • `{i}pdtext <page num> <reply to pdf file>`
     Extract Text From the Pdf.(note-: For Extraction all text just use .pdtext)
 
@@ -35,6 +36,8 @@ import PIL
 from imutils.perspective import four_point_transform
 from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 from skimage.filters import threshold_local
+
+from telethon.errors.rpcerrorlist import PhotoSaveFileInvalidError
 
 from . import *
 
@@ -80,18 +83,29 @@ async def pdfseimg(event):
         shutil.rmtree("pdf")
         os.mkdir("pdf")
         await xx.delete()
-    if msg:
+    elif "-" in msg:
+        ok = int(msg.split("-")[-1]) - 1
+        for o in range(ok):
+            pw = PdfFileWriter()
+            pw.addPage(pdf.getPage(o))
+            with open(os.path.join("ult.png"), "wb") as f:
+                pw.write(f)
+            await event.reply(
+                file="ult.png",
+            )
+            os.remove("ult.png")
+        os.remove(pdfp)
+    elif msg:
         o = int(msg) - 1
         pw = PdfFileWriter()
         pw.addPage(pdf.getPage(o))
         with open(os.path.join("ult.png"), "wb") as f:
             pw.write(f)
         os.remove(pdfp)
-        await event.client.send_file(
-            event.chat_id,
-            "ult.png",
-            reply_to=event.reply_to_msg_id,
-        )
+        try:
+            await event.reply(file="ult.png")
+        except PhotoSaveFileInvalidError:
+            await event.reply(file="ult.png", force_document=True)
         os.remove("ult.png")
 
 
@@ -135,8 +149,8 @@ async def pdfsetxt(event):
         os.remove(text)
         os.remove(dl)
         return
-    if "_" in msg:
-        u, d = msg.split("_")
+    if "-" in msg:
+        u, d = msg.split("-")
         a = PdfFileReader(dl)
         str = ""
         for i in range(int(u) - 1, int(d)):
@@ -282,7 +296,7 @@ async def savepdf(event):
         os.remove("o.png")
     elif ultt.endswith(".pdf"):
         a = dani_ck("pdf/scan.pdf")
-        await ultroid_bot.download_media(ok, a)
+        await event.client.download_media(ok, a)
         await eor(
             event,
             f"Done, Now Reply Another Image/pdf if completed then use {hndlr}pdsend to merge and send all as pdf",
@@ -318,6 +332,3 @@ async def sendpdf(event):
     os.remove(ok)
     shutil.rmtree("pdf/")
     os.makedirs("pdf/")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
