@@ -46,15 +46,12 @@ from hachoir.parser import createParser
 
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 from telethon.tl.types import DocumentAttributeVideo as video
-from telethon.tl.types import User
 from telethon.utils import pack_bot_file_id
 
 from . import *
 from . import humanbytes as hb
     
-@ultroid_cmd(
-    pattern="tr",
-)
+@ultroid_cmd(pattern="tr", type=["official", "manager"], ignore_dualmode=True)
 async def _(event):
     if len(event.text) > 3:
         if not event.text[3] == " ":
@@ -79,9 +76,7 @@ async def _(event):
     except Exception as exc:
         await eod(xx, str(exc), time=10)
 
-@ultroid_cmd(
-    pattern="id ?(.*)",
-)
+@ultroid_cmd(pattern="id ?(.*)", type=["official", "manager"], ignore_dualmode=True)
 async def _(event):
     if event.reply_to_msg_id:
         await event.get_input_chat()
@@ -119,14 +114,11 @@ async def _(event):
 
 @ultroid_cmd(
     pattern="bots ?(.*)",
+    groups_only=True,
+    type=["official", "manager"],
+    ignore_dualmode=True,
 )
 async def _(ult):
-    await ult.edit("`...`")
-    if ult.is_private:
-        user = await ult.get_chat()
-        if not user.bot:
-            return await ult.edit("`Seariously ?`")
-
     mentions = "**Bots in this Chat**: \n"
     input_str = ult.pattern_match.group(1)
     to_write_chat = await ult.get_input_chat()
@@ -136,12 +128,12 @@ async def _(ult):
     else:
         mentions = f"**Bots in **{input_str}: \n"
         try:
-            chat = await ultroid_bot.get_entity(input_str)
+            chat = await ult.client.get_entity(input_str)
         except Exception as e:
             await eor(ult, str(e))
             return None
     try:
-        async for x in ultroid_bot.iter_participants(
+        async for x in ult.client.iter_participants(
             chat, filter=ChannelParticipantsBots
         ):
             if isinstance(x.participant, ChannelParticipantAdmin):
@@ -353,8 +345,6 @@ async def _(e):
     pattern="sg ?(.*)",
 )
 async def lastname(steal):
-    if BOT_MODE:
-        return await eor(steal, "`You cant Use This command in BOT_MODE...`")
     mat = steal.pattern_match.group(1)
     if not (steal.is_reply or mat):
         await eor(steal, "`Use this command with reply or give Username/id...`")
@@ -366,12 +356,9 @@ async def lastname(steal):
         user_id = message.sender.id
     chat = "@SangMataInfo_bot"
     id = f"/search_id {user_id}"
-    check = await ultroid_bot.get_entity(user_id)
-    if not isinstance(check, User) or check.bot:
-        return await eor(steal, "Reply to Actual User's Message !")
     lol = await eor(steal, "`Processing...`")
     try:
-        async with ultroid_bot.conversation(chat) as conv:
+        async with steal.client.conversation(chat) as conv:
             try:
                 msg = await conv.send_message(id)
                 response = await conv.get_response()
@@ -380,7 +367,11 @@ async def lastname(steal):
             except YouBlockedUserError:
                 await lol.edit("Please unblock @sangmatainfo_bot and try again")
                 return
-            if response.text.startswith("No records found"):
+            if (
+                response.text.startswith("No records found")
+                or respond.text.startswith("No records found")
+                or responds.text.startswith("No records found")
+            ):
                 await lol.edit("No records found for this user")
                 await steal.client.delete_messages(conv.chat_id, [msg.id, response.id])
                 return
@@ -400,6 +391,3 @@ async def lastname(steal):
             )
     except TimeoutError:
         return await lol.edit("Error: @SangMataInfo_bot is not responding!.")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
