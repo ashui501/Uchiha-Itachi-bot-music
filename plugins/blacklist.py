@@ -24,11 +24,8 @@ from cython.functions.blacklist_db import *
 from . import *
 
 
-@ultroid_cmd(pattern="addblacklist ?(.*)")
+@ultroid_cmd(pattern="addblacklist ?(.*)", admins_only=True)
 async def af(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You are Not Admin Here`")
     wrd = e.pattern_match.group(1)
     chat = e.chat_id
     if not (wrd):
@@ -40,11 +37,8 @@ async def af(e):
     await eor(e, f"Done : `{wrd}` Blacklisted here.")
 
 
-@ultroid_cmd(pattern="rmblacklist ?(.*)")
+@ultroid_cmd(pattern="rmblacklist ?(.*)", admins_only=True)
 async def rf(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You are Not Admin Here`")
     wrd = e.pattern_match.group(1)
     chat = e.chat_id
     if not wrd:
@@ -56,11 +50,8 @@ async def rf(e):
     await eor(e, f"Done : `{wrd}` Removed from Blacklist.")
 
 
-@ultroid_cmd(pattern="listblacklist")
+@ultroid_cmd(pattern="listblacklist$", admins_only=True)
 async def lsnote(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You are not Admin Here`")
     x = list_blacklist(e.chat_id)
     if x:
         sd = "Blacklist Found in this Chat are\n\n"
@@ -80,5 +71,3 @@ async def bl(e):
             if z in yy:
                 await e.delete()
                 break
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
