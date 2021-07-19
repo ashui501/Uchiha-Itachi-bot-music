@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -7,10 +7,13 @@
 
 """
 ✘ Commands Available -
+
 • `{i}getaddons <raw link to code>`
     Load Plugins from the given raw link.
 """
+
 import requests
+from cython.utils import load_addons
 
 from . import *
 
@@ -38,13 +41,10 @@ async def get_the_addons_lol(event):
     shortname = name_of_it.split(".")[0]
     try:
         load_addons(shortname)
-        await eod(xx, f"**Sᴜᴄᴄᴇssғᴜʟʟʏ Lᴏᴀᴅᴇᴅ** `{shortname}`", time=3)
+        await eod(xx, f"**Sᴜᴄᴄᴇssғᴜʟʟʏ Lᴏᴀᴅᴇᴅ** `{shortname}`")
     except Exception as e:
         await eod(
             xx,
             f"**Could not load** `{shortname}` **because of the following error.**\n`{str(e)}`",
             time=3,
         )
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
