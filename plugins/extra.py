@@ -1,10 +1,9 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -12,15 +11,14 @@
     Delete the replied message.
 
 • `{i}edit <new message>`
-    Edit your last message or replied message.
+    Edit your last message or replied msg.
 
 • `{i}copy <reply to message>`
     Copy replied message / media.
 
 • `{i}reply`
-    Reply the last sent message to replied user.
+    Reply the last sent msg to replied user.
 """
-
 import asyncio
 
 from telethon.events import NewMessage as NewMsg
@@ -50,12 +48,8 @@ async def delete_it(delme):
         try:
             await msg_src.delete()
             await delme.delete()
-        except BaseException:
-            await eod(
-                delme,
-                f"Couldn't delete the message.\n\n**ERROR:**\n`{str(e)}`",
-                time=5,
-            )
+        except Exception as e:
+            await eod(delme, f"Couldn't delete the message.\n\n**ERROR:**\n`{str(e)}`")
 
 
 @ultroid_cmd(
@@ -68,10 +62,10 @@ async def copy(e):
             await eor(e, reply.text)
         else:
             await reply.reply(reply)
-            if e.sender_id == ultroid_bot.uid:
+            if e.out:
                 await e.delete()
     else:
-        await eod(e, "`Reply to any message`")
+        await eod(e, "`Reply To any message`")
 
 
 @ultroid_cmd(
@@ -90,7 +84,7 @@ async def editer(edit):
             pass
     else:
         i = 1
-        async for message in ultroid_bot.iter_messages(chat, ultroid_bot.uid):
+        async for message in edit.client.iter_messages(chat, ultroid_bot.uid):
             if i == 2:
                 await message.edit(string)
                 await edit.delete()
@@ -113,6 +107,3 @@ async def _(e):
         )
     else:
         await e.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
