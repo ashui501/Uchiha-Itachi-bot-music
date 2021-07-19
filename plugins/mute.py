@@ -1,25 +1,24 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
 • `{i}mute <reply to msg/ user id>`
     Mute user in current chat.
-   
+
 • `{i}unmute <reply to msg/ user id>`
     Unmute user in current chat.
-   
+
 • `{i}dmute <reply to msg/ user id>`
     Mute user in current chat by deleting msgs.
-   
+
 • `{i}undmute <reply to msg/ use id>`
     Unmute dmuted user in current chat.
-   
+
 • `{i}tmute <time> <reply to msg/ use id>`
     s- seconds
     m- minutes
@@ -27,8 +26,6 @@
     d- days
     Mute user in current chat with time.
 """
-
-
 from cython.functions.all import ban_time
 from cython.functions.mute_db import is_muted, mute, unmute
 from telethon import events
@@ -39,6 +36,8 @@ from . import *
 @ultroid_bot.on(events.NewMessage(incoming=True))
 async def watcher(event):
     if is_muted(f"{event.sender_id}_{event.chat_id}"):
+        await event.delete()
+    if event.via_bot and is_muted(f"{event.via_bot_id}_{event.chat_id}"):
         await event.delete()
 
 
@@ -72,9 +71,7 @@ async def startmute(event):
             pass
         else:
             return await eor(xx, "`No proper admin rights...`", time=5)
-    elif "creator" in vars(chat):
-        pass
-    elif private:
+    elif "creator" in vars(chat) or private:
         pass
     else:
         return await eod(xx, "`No proper admin rights...`", time=5)
@@ -88,7 +85,7 @@ async def startmute(event):
 
 
 @ultroid_cmd(
-    pattern="undmute ?(.*)",
+    pattern="undmute ?(.*)", type=["official", "manager"], ignore_dualmode=True
 )
 async def endmute(event):
     xx = await eor(event, "`Unmuting...`")
@@ -123,6 +120,8 @@ async def endmute(event):
 @ultroid_cmd(
     pattern="tmute",
     groups_only=True,
+    type=["official", "manager"],
+    ignore_dualmode=True,
 )
 async def _(e):
     xx = await eor(e, "`Muting...`")
@@ -156,8 +155,11 @@ async def _(e):
     try:
         bun = await ban_time(xx, tme)
         await e.client.edit_permissions(
-            chat.id, userid, until_date=bun, send_messages=False
-       )
+            chat.id,
+            userid,
+            until_date=bun,
+            send_messages=False,
+        )
         await eod(
             xx,
             f"`Successfully Muted` [{name}](tg://user?id={userid}) `in {chat.title} for {tme}`",
@@ -170,6 +172,8 @@ async def _(e):
 @ultroid_cmd(
     pattern="unmute ?(.*)",
     groups_only=True,
+    type=["official", "manager"],
+    ignore_dualmode=True,
 )
 async def _(e):
     xx = await eor(e, "`Unmuting...`")
@@ -192,7 +196,10 @@ async def _(e):
         return await eod(xx, "`Reply to someone or use its id...`", time=3)
     try:
         await e.client.edit_permissions(
-            chat.id, userid, until_date=None, send_messages=True
+            chat.id,
+            userid,
+            until_date=None,
+            send_messages=True,
         )
         await eod(
             xx,
@@ -206,6 +213,8 @@ async def _(e):
 @ultroid_cmd(
     pattern="mute ?(.*)",
     groups_only=True,
+    type=["official", "manager"],
+    ignore_dualmode=True,
 )
 async def _(e):
     xx = await eor(e, "`Muting...`")
@@ -230,15 +239,14 @@ async def _(e):
         return await eod(xx, "`I can't mute myself.`", time=3)
     try:
         await e.client.edit_permissions(
-            chat.id, userid, until_date=None, send_messages=False
+            chat.id,
+            userid,
+            until_date=None,
+            send_messages=False,
         )
         await eod(
             xx,
             f"`Successfully Muted` [{name}](tg://user?id={userid}) `in {chat.title}`",
-            time=5,
         )
     except BaseException as m:
         await eod(xx, f"`{str(m)}`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
