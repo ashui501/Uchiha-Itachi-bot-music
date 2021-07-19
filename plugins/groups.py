@@ -1,12 +1,14 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
+
+• `{i}setgpic <reply to Photo>`
+    Set Profile photo of Group.
 
 • `{i}unbanall`
     Unban all Members of a group.
@@ -14,9 +16,7 @@
 • `{i}rmusers`
     Remove users specifically.
 """
-
-
-from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.functions.channels import EditBannedRequest, EditPhotoRequest
 from telethon.tl.types import (
     ChannelParticipantsKicked,
     ChatBannedRights,
@@ -31,14 +31,33 @@ from telethon.tl.types import (
 from . import *
 
 
+@ultroid_cmd(pattern="setgpic$", groups_only=True, admins_only=True)
+async def _(ult):
+    if not ult.is_reply:
+        return await eod(ult, "`Reply to a Media..`")
+    reply_message = await ult.get_reply_message()
+    try:
+        replfile = await reply_message.download_media()
+    except AttributeError:
+        return await eor(ult, "Reply to a Photo..")
+    file = await ult.client.upload_file(replfile)
+    mediain = mediainfo(reply_message.media)
+    try:
+        if "pic" in mediain:
+            await ult.client(EditPhotoRequest(ult.chat_id, file))
+        else:
+            return await eod(ult, "`Invalid MEDIA Type !`")
+        await eod(ult, "`Group Photo has Successfully Changed !`")
+    except Exception as ex:
+        await eod(ult, "Error occured.\n`{}`".format(str(ex)))
+    os.remove(replfile)
+
+
 @ultroid_cmd(
     pattern="unbanall$",
     groups_only=True,
 )
 async def _(event):
-    if not event.out:
-        if not is_fullsudo(event.sender_id):
-            return await eod(event, "`This Command is Sudo Restricted.`")
     xx = await eor(event, "Searching Participant Lists.")
     p = 0
     (await event.get_chat()).title
@@ -60,9 +79,6 @@ async def _(event):
     groups_only=True,
 )
 async def _(event):
-    if not event.out:
-        if not is_fullsudo(event.sender_id):
-            return await eod(event, "`This Command is Sudo Restricted.`")
     xx = await eor(event, "Searching Participant Lists.")
     input_str = event.pattern_match.group(1)
     if input_str:
@@ -211,6 +227,3 @@ async def _(event):
         required_string += f"**••Empty**  `Name with deleted Account`\n"
         required_string += f"**••None**  `Last Seen A Long Time Ago`\n"
     await eod(xx, required_string)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
