@@ -1,17 +1,15 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
 • `{i}mediainfo <reply to media>`
    To get info about it.
 """
-
 import os
 import time
 from datetime import datetime as dt
@@ -47,7 +45,7 @@ async def mi(e):
         )
         naam = dl.name
     else:
-        naam = await ultroid_bot.download_media(r.media)
+        naam = await r.download_media()
     out, er = await bash(f"mediainfo '{naam}' --Output=HTML")
     urll = make_html_telegraph("Mediainfo", "CipherX", out)
     if er:
@@ -56,6 +54,3 @@ async def mi(e):
         f"**[{xx}]({url})**\n\n[More Explained Info]({urll})", link_preview=False
     )
     os.remove(naam)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
