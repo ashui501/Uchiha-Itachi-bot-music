@@ -19,6 +19,9 @@
 
 • `{i}kang <reply to image/sticker>`
     Kang the sticker (add to your pack).
+    
+• `{i}packkang <pack name>`
+    Kang the Complete sticker set (with custom name).
 
 • `{i}round <reply to any media>`
     To extract round sticker.
@@ -39,7 +42,8 @@ from os import remove
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw
-from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
+from telethon import utils
+from telethon.errors import ChatSendStickersForbiddenError, PackShortNameOccupiedError
 from telethon.tl.types import (
     DocumentAttributeFilename,
     DocumentAttributeSticker,
@@ -86,7 +90,7 @@ async def waifu(animu):
     waifus = [32,33,37,40,41,42,58,20]
     finalcall = "#" + (str(random.choice(waifus)))
     try:
-        sticcers = await ultroid_bot.inline_query(
+        sticcers = await animu.client.inline_query(
             "stickerizerbot", f"{finalcall}{(deEmojify(text))}"
         )
         await sticcers[0].click(
@@ -96,8 +100,6 @@ async def waifu(animu):
             hide_via=True,
         )
         await xx.delete()
-    except ChatSendInlineForbiddenError:
-        await xx.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
         await xx.edit("Sorry boss, I can't send Sticker Here !!")
 
@@ -135,11 +137,78 @@ async def uconverter(event):
     os.remove(file)
     await xx.delete()
 
+@ultroid_cmd(pattern="packkang")
+async def pack_kangish(_):
+    _e = await _.get_reply_message()
+    if not _e:
+        return await eor(_, "`Reply to Sticker.`")
+    if len(_.text) > 9:
+        _packname = _.text.split(" ", maxsplit=1)[1]
+    else:
+        _packname = "CipherX Kang Pack"
+    if _e and _e.media and _e.media.document.mime_type == "image/webp":
+        _id = _e.media.document.attributes[1].stickerset.id
+        _hash = _e.media.document.attributes[1].stickerset.access_hash
+        _get_stiks = await _.client(
+            functions.messages.GetStickerSetRequest(
+                stickerset=types.InputStickerSetID(id=_id, access_hash=_hash)
+            )
+        )
+        stiks = []
+        for i in _get_stiks.documents:
+            x = utils.get_input_document(i)
+            stiks.append(
+                types.InputStickerSetItem(
+                    document=x,
+                    emoji=(i.attributes[1]).alt,
+                )
+            )
+        try:
+            eval(udB.get("PACKKANG"))
+        except BaseException:
+            udB.set("PACKKANG", "{}")
+        ok = eval(udB.get("PACKKANG"))
+        try:
+            pack = ok[_.sender_id] + 1
+        except BaseException:
+            pack = 1
+        try:
+            _r_e_s = await asst(
+                functions.stickers.CreateStickerSetRequest(
+                    user_id=_.sender_id,
+                    title=_packname,
+                    short_name=f"u{_.sender_id}_{pack}_by_{(await tgbot.get_me()).username}",
+                    stickers=stiks,
+                )
+            )
+            ok.update({_.sender_id: pack})
+            udB.set("PACKKANG", str(ok))
+        except PackShortNameOccupiedError:
+            time.sleep(1)
+            pack += 1
+            _r_e_s = await asst(
+                functions.stickers.CreateStickerSetRequest(
+                    user_id=_.sender_id,
+                    title=_packname,
+                    short_name=f"u{_.sender_id}_{pack}_by_{(await tgbot.get_me()).username}",
+                    stickers=stiks,
+                )
+            )
+            ok.update({_.sender_id: pack})
+            udB.set("PACKKANG", str(ok))
+        await eor(
+            _,
+            f"Pack Kanged Successfully.\nKanged Pack: [link](https://t.me/addstickers/{_r_e_s.set.short_name})",
+        )
+    else:
+        await eor(_, "Unsupported File")
+
 
 @ultroid_cmd(
     pattern="kang",
 )
 async def hehe(args):
+    ultroid_bot = args.client
     xx = await eor(args, "`Processing...`")
     user = await ultroid_bot.get_me()
     if not user.username:
@@ -191,8 +260,9 @@ async def hehe(args):
 
     if photo:
         splat = args.text.split()
-        emoji = "🏵"
         pack = 1
+        if not emoji:
+            emoji = "🏵"
         if len(splat) == 3:
             pack = splat[2]  # User sent ultroid_both
             emoji = splat[1]
@@ -510,6 +580,3 @@ async def ultiny(event):
     await xx.delete()
     os.remove(file)
     os.remove(ik)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
