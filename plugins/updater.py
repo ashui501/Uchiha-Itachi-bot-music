@@ -16,12 +16,6 @@ from telethon.tl.functions.channels import ExportMessageLinkRequest as GetLink
 
 from . import *
 
-ULTPIC = "resources/extras/cipherx.jpg"
-CL = udB.get("INLINE_PIC")
-if CL:
-    ULTPIC = CL
-
-
 @ultroid_cmd(pattern="update$")
 async def _(e):
     m = await updater()
@@ -29,18 +23,18 @@ async def _(e):
     if m:
         x = await ultroid_bot.asst.send_file(
             int(udB.get("LOG_CHANNEL")),
-            ULTPIC,
+            "resources/extras/inline.jpg",
             caption="• **Update Available** •",
             force_document=False,
             buttons=Button.inline("Changelogs", data="changes"),
         )
-        Link = (await ultroid_bot(GetLink(x.chat_id, x.id))).link
+        Link = (await ultroid_bot(GetLink(x.peer_id.channel_id, x.id))).link
         await eod(
             e,
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
+            time=3,
             link_preview=False,
-            time=3, 
         )
     else:
         await eod(
@@ -58,7 +52,7 @@ async def updava(event):
     await event.delete()
     await ultroid_bot.asst.send_file(
         int(udB.get("LOG_CHANNEL")),
-        ULTPIC,
+        "resources/extras/cipherx.jpg",
         caption="• **Update Available** •",
         force_document=False,
         buttons=Button.inline("Changelogs", data="changes"),
