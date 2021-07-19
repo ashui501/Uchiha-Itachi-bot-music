@@ -9,7 +9,7 @@
 ✘ Commands Available
 
 • `{i}alive`
-    Check if your bot is working.
+    Check if CɪᴘʜᴇʀX bot is working.
 
 • `{i}ping`
     Check CɪᴘʜᴇʀX Server response time.
@@ -18,7 +18,7 @@
     View all plugin names.
 
 • `{i}restart`
-    To restart your bot.
+    To restart CɪᴘʜᴇʀX bot.
 
 • `{i}logs (sys)`
     Get the full terminal logs.
@@ -27,12 +27,9 @@
    Get the latest 100 lines of heroku logs.
 
 • `{i}shutdown`
-    Turn off your CɪᴘʜᴇʀX bot.
+    Turn off CɪᴘʜᴇʀX bot.
 """
 
-import asyncio
-import os
-import re
 import time
 from datetime import datetime as dt
 from platform import python_version as pyver
@@ -40,8 +37,8 @@ from platform import python_version as pyver
 import heroku3
 import requests
 from git import Repo
-from cython.version import __version__ as UltVer
-from telethon import __version__, events
+from cython import __version__ as UltVer
+from telethon import __version__
 from telethon.errors.rpcerrorlist import ChatSendMediaForbiddenError
 
 from . import *
@@ -61,7 +58,7 @@ except BaseException:
     HEROKU_APP_NAME = None
 
 
-@ultroid_cmd(
+@@ultroid_cmd(
     pattern="alive$",
 )
 async def lol(ult):
@@ -117,6 +114,7 @@ async def lol(ult):
             await eor(ult, als, link_preview=False)
 
 
+
 @ultroid_cmd(
     pattern="ping$",
 )
@@ -141,12 +139,29 @@ async def cmds(event):
 )
 async def restartbt(ult):
     if Var.HEROKU_API:
-       await restart(ult)
+        await restart(ult)
     else:
         await bash("pkill python3 && python3 -m cython")
 
 
-        
+@ultroid_cmd(pattern="shutdown")
+async def shutdownbot(ult):
+    if not ult.out:
+        if not is_fullsudo(ult.sender_id):
+            return await eod(ult, "`This Command is Sudo Restricted.`")
+    try:
+        dyno = ult.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        dyno = None
+    if dyno:
+        if dyno not in ["userbot", "vcbot", "web", "worker"]:
+            await eor(ult, "Invalid Dyno Type specified !")
+            return
+        await shutdown(ult, dyno)
+    else:
+        await shutdown(ult)
+
+
 @ultroid_cmd(
     pattern="logs",
 )
@@ -160,7 +175,7 @@ async def get_logs(event):
     elif opt == "sys":
         await def_logs(event)
     else:
-        await def_logs(event) 
+        await def_logs(event)
 
 
 async def heroku_logs(event):
@@ -187,6 +202,7 @@ async def heroku_logs(event):
     )
     os.remove("CipherX-Host.log")
 
+
 async def def_logs(ult):
     xx = await eor(ult, "`Processing...`")
     with open("cipherx.log") as f:
@@ -202,11 +218,10 @@ async def def_logs(ult):
         ult.chat_id,
         file="cipherx.log",
         thumb="resources/extras/cipherx.jpg",
-        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here]({url})",
+        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ.**\nPasted [here]({url})",
     )
     await xx.edit("Done")
     await xx.delete()
-    
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
