@@ -4,13 +4,13 @@
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
+
 • `{i}gadget <search query>`
     Gadget Search from Telegram.
-"""
 
+"""
 import requests
 from bs4 import BeautifulSoup as bs
 
@@ -21,7 +21,7 @@ from . import *
 async def mobs(e):
     mat = e.pattern_match.group(1)
     if not mat:
-        await eor(e, "Please Give a Mobile Name to look for...")
+        await eor(e, "Please Give a Mobile Name to look for.")
     query = mat.replace(" ", "%20")
     jwala = f"https://gadgets.ndtv.com/search?searchtext={query}"
     c = requests.get(jwala).content
@@ -42,12 +42,9 @@ async def mobs(e):
             ty = fp.findNext()
             out += f"- **{ty.text}** - `{ty.findNext().text}`\n"
         out += "_"
-        await ultroid_bot.send_file(e.chat_id, file=imu, caption=out)
-        if e.sender_id == ultroid_bot.uid:
+        await e.reply(out, file=imu)
+        if e.out:
             await bt.delete()
     except Exception as a:
         print(a)
         await eor(e, "No Results Found")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
