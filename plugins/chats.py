@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -38,8 +38,6 @@ from . import *
     groups_only=True,
 )
 async def _(e):
-    if BOT_MODE:
-        return await eor(e, "You Cant Use This Command in BOT_MODE")
     xx = await eor(e, "`Processing...`")
     try:
         await e.client(DeleteChannelRequest(e.chat_id))
@@ -55,6 +53,8 @@ async def _(e):
 @ultroid_cmd(
     pattern="getlink$",
     groups_only=True,
+    type=["official", "manager"],
+    ignore_dualmode=True,
 )
 async def _(e):
     xx = await eor(e, "`Processing...`")
@@ -63,16 +63,14 @@ async def _(e):
             ExportChatInviteRequest(e.chat_id),
         )
     except no_admin:
-        return await eod(xx, "`I'm not an admin`", time=10)
-    await eor(xx, f"Link:- {r.link}")
+        return await eod(xx, "`I m not an admin`", time=10)
+    await eod(xx, f"Link:- {r.link}")
 
 
 @ultroid_cmd(
     pattern="create (b|g|c)(?: |$)(.*)",
 )
 async def _(e):
-    if BOT_MODE:
-        return await eor(e, "You Cant use this Command in BOT_MODE")
     type_of_group = e.pattern_match.group(1)
     group_name = e.pattern_match.group(2)
     xx = await eor(e, "`Processing...`")
@@ -86,7 +84,7 @@ async def _(e):
             )
             created_chat_id = r.chats[0].id
             await e.client(
-               DeleteChatUserRequest(
+                DeleteChatUserRequest(
                     chat_id=created_chat_id,
                     user_id="@LynXGroupManagerRobot",
                 ),
@@ -123,6 +121,3 @@ async def _(e):
             )
         except Exception as ex:
             await xx.edit(str(ex))
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
