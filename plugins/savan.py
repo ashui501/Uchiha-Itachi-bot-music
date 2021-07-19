@@ -1,17 +1,16 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
 • `{i}savan <search query>`
-   `search song on saavn`
-"""
+    Download songs from Saavn
 
+"""
 import os
 import time
 from urllib.request import urlretrieve
@@ -22,7 +21,9 @@ from telethon.tl.types import DocumentAttributeAudio
 from . import *
 
 
-@ultroid_cmd(pattern="savan ?(.*)")
+@ultroid_cmd(
+    pattern="savan ?(.*)",
+)
 async def siesace(e):
     song = e.pattern_match.group(1)
     if not song:
@@ -34,21 +35,25 @@ async def siesace(e):
     try:
         k = (r.get(url)).json()[0]
     except IndexError:
-        return await eod(lol, "`Song Not Found. `")
-    title = k["song"]
-    urrl = k["media_url"]
-    img = k["image"]
-    duration = k["duration"]
-    singers = k["singers"]
+        return await eod(lol, "`Song Not Found.. `")
+    except Exception as ex:
+        return await eod(lol, f"`{str(ex)}`")
+    try:
+        title = k["song"]
+        urrl = k["media_url"]
+        img = k["image"]
+        duration = k["duration"]
+        singers = k["primary_artists"]
+    except Exception as ex:
+        return await eod(lol, f"`{str(ex)}`")
     urlretrieve(urrl, title + ".mp3")
     urlretrieve(img, title + ".jpg")
     okk = await uploader(
-        title + ".mp3", title + ".mp3", hmm, lol, "Uploading... " + title + "..."
+        title + ".mp3", title + ".mp3", hmm, lol, "Uploading..." + title + "..."
     )
-    await ultroid_bot.send_file(
-        e.chat_id,
-        okk,
-        caption="`" + title + "`" + "\n`By CɪᴘʜᴇʀX Bot`",
+    await e.reply(
+        file=okk,
+        message="`" + title + "`" + "\n`⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️`",
         attributes=[
             DocumentAttributeAudio(
                 duration=int(duration),
@@ -62,6 +67,3 @@ async def siesace(e):
     await lol.delete()
     os.remove(title + ".mp3")
     os.remove(title + ".jpg")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
