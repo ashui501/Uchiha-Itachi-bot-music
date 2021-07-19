@@ -4,7 +4,6 @@
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available
 
@@ -18,10 +17,9 @@
    add file to batch for batch upload zip
 
 • `{i}dozip`
-   upload batch zip the files you added from `{i}azip`
+   upload batch zip the files u added from `{i}azip`
 
 """
-
 import os
 import time
 
@@ -33,7 +31,7 @@ async def zipp(event):
     reply = await event.get_reply_message()
     t = time.time()
     if not reply:
-        await eod(event, "Reply to any media/Document.", time=5)
+        await eor(event, "Reply to any media/Document.")
         return
     xx = await eor(event, "`Processing...`")
     if reply.media:
@@ -49,7 +47,7 @@ async def zipp(event):
     await bash(f"zip -r {inp} {file}")
     k = time.time()
     xxx = await uploader(inp, inp, k, xx, "Uploading...")
-    await ultroid_bot.send_file(
+    await event.client.send_file(
         event.chat_id,
         xxx,
         force_document=True,
@@ -67,7 +65,7 @@ async def unzipp(event):
     reply = await event.get_reply_message()
     t = time.time()
     if not reply:
-        await eod(event, "Reply to any media/Document.", time=5)
+        await eor(event, "Reply to any media/Document.")
         return
     xx = await eor(event, "`Processing...`")
     if reply.media:
@@ -94,7 +92,7 @@ async def unzipp(event):
     for x in ok:
         k = time.time()
         xxx = await uploader(x, x, k, xx, "Uploading...")
-        await ultroid_bot.send_file(
+        await event.client.send_file(
             event.chat_id,
             xxx,
             force_document=True,
@@ -124,7 +122,7 @@ async def azipp(event):
         else:
             file = await event.download_media(reply.media, "zip/")
     await xx.edit(
-        f"Downloaded `{file}` succesfully\nNow Reply to Other Files to Add and Zip all at once"
+        f"Downloaded `{file}` succesfully\nNow Reply To Other Files To Add And Zip all at once"
     )
 
 
@@ -132,13 +130,13 @@ async def azipp(event):
 async def do_zip(event):
     if not os.path.isdir("zip"):
         return await eor(
-            event, "First All Files via {i}addzip then doZip to zip all files at one."
+            event, "First All Files Via {i}addzip then doZip to zip all files at one."
         )
     xx = await eor(event, "`processing`")
     await bash(f"zip -r cipherx.zip zip/*")
     k = time.time()
     xxx = await uploader("cipherx.zip", "cipherx.zip", k, xx, "Uploading...")
-    await ultroid_bot.send_file(
+    await event.client.send_file(
         event.chat_id,
         xxx,
         force_document=True,
