@@ -29,33 +29,16 @@
 • `{i}shutdown`
     Turn off CɪᴘʜᴇʀX bot.
 """
-
 import time
 from datetime import datetime as dt
 from platform import python_version as pyver
 
-import heroku3
-import requests
 from git import Repo
-from cython import __version__ as UltVer
-from telethon import __version__
+from cython.version import __version__ as UltVer
+from telethon import __version__, events
 from telethon.errors.rpcerrorlist import ChatSendMediaForbiddenError
 
 from . import *
-
-HEROKU_API = None
-HEROKU_APP_NAME = None
-
-try:
-    if Var.HEROKU_API and Var.HEROKU_APP_NAME:
-        HEROKU_API = Var.HEROKU_API
-        HEROKU_APP_NAME = Var.HEROKU_APP_NAME
-        Heroku = heroku3.from_key(Var.HEROKU_API)
-        heroku_api = "https://api.heroku.com"
-        app = Heroku.app(Var.HEROKU_APP_NAME)
-except BaseException:
-    HEROKU_API = None
-    HEROKU_APP_NAME = None
 
 
 @ultroid_cmd(
@@ -114,11 +97,12 @@ async def lol(ult):
             await eor(ult, als, link_preview=False)
 
 
-
-@ultroid_cmd(
-    pattern="ping$",
-)
+@ultroid_bot.on(events.NewMessage(pattern=f"\\{HNDLR}ping$"))
 async def _(event):
+    if event.fwd_from:
+        return
+    if not event.out and not is_sudo(event.sender_id):
+        return
     start = dt.now()
     x = await eor(event, "`𝙿𝙸𝙽𝙶`")
     end = dt.now()
@@ -138,90 +122,34 @@ async def cmds(event):
     pattern="restart$",
 )
 async def restartbt(ult):
+    ok = await eor(ult, "`Restarting...`")
     if Var.HEROKU_API:
-        await restart(ult)
+        await restart(ok)
     else:
         await bash("pkill python3 && python3 -m cython")
 
 
-@ultroid_cmd(pattern="shutdown")
+@ultroid_cmd(pattern="shutdown$")
 async def shutdownbot(ult):
-    if not ult.out:
-        if not is_fullsudo(ult.sender_id):
-            return await eod(ult, "`This Command is Sudo Restricted.`")
-    try:
-        dyno = ult.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        dyno = None
-    if dyno:
-        if dyno not in ["userbot", "vcbot", "web", "worker"]:
-            await eor(ult, "Invalid Dyno Type specified !")
-            return
-        await shutdown(ult, dyno)
-    else:
-        await shutdown(ult)
+    if not ult.out and not is_fullsudo(ult.sender_id):
+        return await eod(ult, "`This Command is Sudo Restricted.`")
+    await shutdown(ult)
 
 
-@ultroid_cmd(
-    pattern="logs",
-)
-async def get_logs(event):
+@ultroid_bot.on(events.NewMessage(pattern=f"\\{HNDLR}logs ?(.*)"))
+@asst.on(events.NewMessage(pattern="^/{HNDLR}logs ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    if not event.out and not is_sudo(event.sender_id):
+        return
     try:
         opt = event.text.split(" ", maxsplit=1)[1]
     except IndexError:
         return await def_logs(event)
     if opt == "heroku":
         await heroku_logs(event)
-    elif opt == "sys":
-        await def_logs(event)
     else:
         await def_logs(event)
-
-
-async def heroku_logs(event):
-    if HEROKU_API is None and HEROKU_APP_NAME is None:
-        return await eor(
-            event, "Please set `HEROKU_APP_NAME` and `HEROKU_API` in vars."
-        )
-    await eor(event, "`Downloading Logs...`")
-    ok = app.get_log()
-    with open("CipherX-Host.log", "w") as log:
-        log.write(ok)
-    key = (
-        requests.post("https://nekobin.com/api/documents", json={"content": ok})
-        .json()
-        .get("result")
-        .get("key")
-    )
-    url = f"https://nekobin.com/{key}"
-    await ultroid.send_file(
-        event.chat_id,
-        file="CipherX-Host.log",
-        thumb="resources/extras/cipherx.jpg",
-        caption=f"**CɪᴘʜᴇʀX Host Logs.**\nPasted [here]({url})",
-    )
-    os.remove("CipherX-Host.log")
-
-
-async def def_logs(ult):
-    xx = await eor(ult, "`Processing...`")
-    with open("cipherx.log") as f:
-        k = f.read()
-    key = (
-        requests.post("https://nekobin.com/api/documents", json={"content": k})
-        .json()
-        .get("result")
-        .get("key")
-    )
-    url = f"https://nekobin.com/{key}"
-    await ultroid.send_file(
-        ult.chat_id,
-        file="cipherx.log",
-        thumb="resources/extras/cipherx.jpg",
-        caption=f"**CɪᴘʜᴇʀX Bᴏᴛ Logs.**\nPasted [here]({url})",
-    )
-    await xx.edit("Done")
-    await xx.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+    if event.out:
+        await event.delete()
