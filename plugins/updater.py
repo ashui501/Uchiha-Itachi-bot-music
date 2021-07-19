@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -16,21 +16,30 @@ from telethon.tl.functions.channels import ExportMessageLinkRequest as GetLink
 
 from . import *
 
+ULTPIC = "resources/extras/cipherx.jpg"
+CL = udB.get("INLINE_PIC")
+if CL:
+    ULTPIC = CL
+
+
 @ultroid_cmd(pattern="update$")
 async def _(e):
+    await eor(e, "`Checking for updates...`")
     m = await updater()
     branch = (Repo.init()).active_branch
     if m:
-        x = await ultroid_bot.asst.send_file(
+        x = await asst.send_file(
             int(udB.get("LOG_CHANNEL")),
-            "resources/extras/cipherx.jpg",
+            ULTPIC,
             caption="• **Update Available** •",
             force_document=False,
             buttons=Button.inline("Changelogs", data="changes"),
         )
-        Link = (await ultroid_bot(GetLink(x.peer_id.channel_id, x.id))).link
+        if not e.client._bot:
+            Link = (await e.client(GetLink(x.chat_id, x.id))).link
+        else:
+            Link = f"https://t.me/c/{x.chat.id}/{x.id}"
         await eod(
-            e,
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
             time=3,
@@ -50,13 +59,10 @@ async def _(e):
 @owner
 async def updava(event):
     await event.delete()
-    await ultroid_bot.asst.send_file(
+    await asst.send_file(
         int(udB.get("LOG_CHANNEL")),
-        "resources/extras/cipherx.jpg",
+        ULTPIC,
         caption="• **Update Available** •",
         force_document=False,
         buttons=Button.inline("Changelogs", data="changes"),
     )
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
