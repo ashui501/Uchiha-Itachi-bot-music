@@ -1,14 +1,17 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
+
 • `{i}save <reply message>`
-    Save that replied message to your saved messages.
+    Save that replied msg to your saved messages box.
+
+• `{i}fsave <reply message>`
+    Forward that replied msg to your saved messages.
 """
 from . import *
 
@@ -18,13 +21,24 @@ async def saf(e):
     x = await e.get_reply_message()
     if not x:
         return await eod(
-            e, "Reply to any message to save it to your saved messages", time=5
+            e, "Reply to Any Message to save it to your saved messages", time=5
         )
-    MLA = e.sender_id
-    if not MLA:
-        MLA = ultroid_bot.uid
-    await ultroid_bot.send_message(MLA, x)
-    await eod(e, "Message saved to Your Pm/Saved Messages.", time=5)
+    if e.out:
+        await e.client.send_message("me", x)
+    else:
+        await e.client.send_message(e.sender_id, x)
+    await eod(e, "Message saved to your Pm/Saved Messages.", time=5)
 
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+@ultroid_cmd(pattern="fsave$")
+async def saf(e):
+    x = await e.get_reply_message()
+    if not x:
+        return await eod(
+            e, "Reply to Any Message to save it to your saved messages", time=5
+        )
+    if e.out:
+        await x.forward_to("me")
+    else:
+        await x.forward_to(e.sender_id)
+    await eod(e, "Message saved to your Pm/Saved Messages.", time=5)
