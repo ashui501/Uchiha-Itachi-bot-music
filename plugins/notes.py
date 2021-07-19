@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -11,7 +11,7 @@
 • `{i}addnote <word><reply to a message>`
     add note in the used chat with replied message and choosen word.
 
-• `{i}rmnote <word>`
+• `{i}remnote <word>`
     Remove the note from used chat.
 
 • `{i}listnote`
@@ -30,11 +30,8 @@ from telethon.utils import pack_bot_file_id
 from . import *
 
 
-@ultroid_cmd(pattern="addnote ?(.*)")
+@ultroid_cmd(pattern="addnote ?(.*)", admins_only=True)
 async def an(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You are not Admin Here.", time=5)
     wrd = (e.pattern_match.group(1)).lower()
     wt = await e.get_reply_message()
     chat = e.chat_id
@@ -45,7 +42,7 @@ async def an(e):
     if wt and wt.media:
         wut = mediainfo(wt.media)
         if wut.startswith(("pic", "gif")):
-            dl = await bot.download_media(wt.media)
+            dl = await wt.download_media()
             variable = uf(dl)
             os.remove(dl)
             m = "https://telegra.ph" + variable[0]
@@ -53,7 +50,7 @@ async def an(e):
             if wt.media.document.size > 8 * 1000 * 1000:
                 return await eod(x, "`Unsupported Media`")
             else:
-                dl = await bot.download_media(wt.media)
+                dl = await wt.download_media()
                 variable = uf(dl)
                 os.remove(dl)
                 m = "https://telegra.ph" + variable[0]
@@ -68,11 +65,8 @@ async def an(e):
     await eor(e, f"Done Note : `#{wrd}` saved.")
 
 
-@ultroid_cmd(pattern="rmnote ?(.*)")
+@ultroid_cmd(pattern="remnote ?(.*)", admins_only=True)
 async def rn(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You are not Admin Here.", time=5)
     wrd = (e.pattern_match.group(1)).lower()
     chat = e.chat_id
     if not wrd:
@@ -83,14 +77,11 @@ async def rn(e):
     await eor(e, f"Done Note: `#{wrd}` Removed.")
 
 
-@ultroid_cmd(pattern="listnote$")
+@ultroid_cmd(pattern="listnote$", admins_only=True)
 async def lsnote(e):
-    if e.is_group:
-        if not e._chat.admin_rights:
-            return await eod(e, "`You Are Not Admin Here.", time=5)
     x = list_note(e.chat_id)
     if x:
-        sd = "Notes Found in this Chat are\n\n"
+        sd = "Notes Found In This Chats Are\n\n"
         await eor(e, sd + x)
     else:
         await eor(e, "No Notes Found Here")
@@ -112,6 +103,3 @@ async def notes(e):
             msg = k["msg"]
             media = k["media"]
             await e.reply(msg, file=media)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
