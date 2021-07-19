@@ -1,16 +1,17 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
+
 ✘ Commands Available -
+
 •`{i}wglitch <replt to media>`
     gives a glitchy gif.
-"""
 
+"""
 import os
 
 from . import *
@@ -25,15 +26,10 @@ async def _(e):
     if not wut.startswith(("pic", "sticker")):
         return await eor(e, "`Unsupported Media`")
     xx = await eor(e, "`Gliching...`")
-    ok = await bot.download_media(reply.media)
-    cmd = f"glitch_me gif --line_count 100 -f 10 -d 50 '{ok}' cipherx.gif"
+    ok = await e.client.download_media(reply.media)
+    cmd = f"glitch_me gif --line_count 200 -f 10 -d 50 '{ok}' ult.gif"
     stdout, stderr = await bash(cmd)
-    await ultroid_bot.send_file(
-        e.chat_id, "cipherx.gif", force_document=False, reply_to=reply
-    )
+    await e.reply(file="ult.gif", force_document=False)
     await xx.delete()
     os.remove(ok)
-    os.remove("cipherx.gif")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+    os.remove("ult.gif")
