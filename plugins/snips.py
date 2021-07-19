@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -7,14 +7,18 @@
 
 """
 ✘ Commands Available -
+
 • `{i}addsnip <word><reply to a message>`
     add the used word as snip relating to replied message.
-• `{i}rmsnip <word>`
+
+• `{i}remsnip <word>`
     Remove the snip word..
+
 • `{i}listsnip`
     list all snips.
+
 • Use :
-    type `$(ur snip word)` get setted reply.
+    type `$(your snip word)` get setted reply.
 """
 import os
 
@@ -36,7 +40,7 @@ async def an(e):
     if wt and wt.media:
         wut = mediainfo(wt.media)
         if wut.startswith(("pic", "gif")):
-            dl = await bot.download_media(wt.media)
+            dl = await wt.download_media()
             variable = uf(dl)
             os.remove(dl)
             m = "https://telegra.ph" + variable[0]
@@ -44,7 +48,7 @@ async def an(e):
             if wt.media.document.size > 8 * 1000 * 1000:
                 return await eod(x, "`Unsupported Media`")
             else:
-                dl = await bot.download_media(wt.media)
+                dl = await wt.download_media()
                 variable = uf(dl)
                 os.remove(dl)
                 m = "https://telegra.ph" + variable[0]
@@ -74,14 +78,16 @@ async def rs(e):
 async def lsnote(e):
     x = list_snip()
     if x:
-        sd = "Snips Found in This Chat are\n\n"
+        sd = "SNIPS Found :\n\n"
         await eor(e, sd + x)
     else:
         await eor(e, "No Snips Found Here")
 
 
-@ultroid_bot.on(events.NewMessage(outgoing=True))
+@ultroid_bot.on(events.NewMessage())
 async def notes(e):
+    if not e.out and not str(e.sender_id) in sudoers():
+        return
     xx = (e.text).lower()
     if not xx.startswith("$"):
         return
@@ -100,6 +106,3 @@ async def notes(e):
             else:
                 await ultroid_bot.send_message(e.chat_id, msg, file=media)
                 await e.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
