@@ -29,11 +29,9 @@ from . import *
 dictionary = PyDictionary()
 
 
-@ultroid_cmd(
-    pattern="meaning",
-)
+@ultroid_cmd(pattern="meaning", type=["official", "manager"], ignore_dualmode=True)
 async def mean(event):
-    evid = event.message.id
+    event.message.id
     xx = await eor(event, get_string("com_1"))
     wrd = event.text.split(" ", maxsplit=1)[1]
     ok = dictionary.meaning(wrd)
@@ -49,9 +47,8 @@ async def mean(event):
     if len(x) > 4096:
         with io.BytesIO(str.encode(x)) as fle:
             fle.name = f"{wrd}-meanings.txt"
-            await ultroid_bot.send_file(
-                event.chat_id,
-                out_file,
+            await event.reply(
+                file=out_file,
                 force_document=True,
                 allow_cache=False,
                 caption=f"Meanings of {wrd}",
@@ -79,7 +76,7 @@ async def mean(event):
         if len(x) > 4096:
             with io.BytesIO(str.encode(x)) as fle:
                 fle.name = f"{wrd}-synonyms.txt"
-                await ultroid_bot.send_file(
+                await event.client.send_file(
                     event.chat_id,
                     out_file,
                     force_document=True,
@@ -111,7 +108,7 @@ async def mean(event):
         if len(x) > 4096:
             with io.BytesIO(str.encode(x)) as fle:
                 fle.name = f"{wrd}-antonyms.txt"
-                await ultroid_bot.send_file(
+                await event.client.send_file(
                     event.chat_id,
                     out_file,
                     force_document=True,
@@ -140,6 +137,3 @@ async def _(event):
         )
     except asyncurban.WordNotFoundError:
         await xx.edit(f"**No result found for** `{word}`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
