@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -15,7 +15,7 @@
 • `{i}checkfsub`
     Check/Get Active ForceSub Setting of Used Chat.
 
-• `{i}rmfsub`
+• `{i}remfsub`
     Remove ForceSub from Used Chat !
 
     Note - You Need to be Admin in Both Channel/Chats
@@ -26,35 +26,12 @@
 import re
 
 from cython.functions.forcesub_db import *
-from telethon import events
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.custom import Button
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.functions.messages import ExportChatInviteRequest
 
 from . import *
-
-
-@ultroid_bot.on(events.ChatAction())
-async def forcesub(ult):
-    if not udB.get("FORCESUB"):
-        return
-    if not (ult.user_joined or ult.user_added):
-        return
-    if not get_forcesetting(ult.chat_id):
-        return
-    user = await ult.get_user()
-    if user.bot:
-        return
-    joinchat = get_forcesetting(ult.chat_id)
-    try:
-        await ultroid_bot(GetParticipantRequest(int(joinchat), user.id))
-    except UserNotParticipantError:
-        await ultroid_bot.edit_permissions(ult.chat_id, user.id, send_messages=False)
-        res = await ultroid_bot.inline_query(
-            asst.me.username, f"fsub {user.id}_{joinchat}"
-        )
-        await res[0].click(ult.chat_id, reply_to=ult.action_message.id)
 
 
 @ultroid_cmd(pattern="fsub ?(.*)", admins_only=True, groups_only=True)
@@ -70,7 +47,7 @@ async def addfor(e):
         except BaseException:
             return await eod(e, "Give Correct Channel Username or id")
     try:
-        match = (await ultroid_bot.get_entity(ch)).id
+        match = (await e.client.get_entity(ch)).id
     except BaseException:
         return await eod(e, "Give Correct Channel Username or id")
     if not str(match).startswith("-100"):
@@ -79,7 +56,7 @@ async def addfor(e):
     await eor(e, "Added ForceSub in This Chat !")
 
 
-@ultroid_cmd(pattern="rmfsub$")
+@ultroid_cmd(pattern="remfsub$")
 async def remor(e):
     res = rem_forcesub(e.chat_id)
     if not res:
@@ -92,7 +69,7 @@ async def getfsr(e):
     res = get_forcesetting(e.chat_id)
     if not res:
         return await eod(e, "ForceSub is Not Active In This Chat !")
-    cha = await ultroid_bot.get_entity(int(res))
+    cha = await e.client.get_entity(int(res))
     await eor(e, f"**ForceSub Status** : `Active`\n- **{cha.title}** `({res})`")
 
 
@@ -101,12 +78,12 @@ async def getfsr(e):
 async def fcall(e):
     match = e.pattern_match.group(1)
     spli = match.split("_")
-    user = await ultroid_bot.get_entity(int(spli[0]))
-    cl = await ultroid_bot.get_entity(int(spli[1]))
+    user = await e.client.get_entity(int(spli[0]))
+    cl = await e.client.get_entity(int(spli[1]))
     text = f"Hi [{user.first_name}](tg://user?id={user.id}), You Need to Join"
     text += f" {cl.title} in order to Chat in this Group."
     if not cl.username:
-        el = (await ultroid_bot(ExportChatInviteRequest(cl))).link
+        el = (await e.client(ExportChatInviteRequest(cl))).link
     else:
         el = "https://t.me/" + cl.username
     res = [
@@ -132,12 +109,9 @@ async def diesoon(e):
         await ultroid_bot(GetParticipantRequest(int(spli[1]), int(spli[0])))
     except UserNotParticipantError:
         return await e.answer(
-            "Please Join This Channel !\nThen Click This Button !\n\n⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️", alert=True
+            "Please Join That Channel !\nThen Click This Button\n\n⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️", alert=True
         )
     await ultroid_bot.edit_permissions(
         e.chat_id, int(spli[0]), send_messages=True, until_date=None
     )
-    await e.edit("Thanks For Joining ❤️ ")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+    await e.edit("Thanks For Joining")
