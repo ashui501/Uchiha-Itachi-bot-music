@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -7,15 +7,19 @@
 
 """
 ✘ Commands Available -
+
 • `{i}addfilter <word><reply to a message>`
     add the used word as filter relating to replied message.
-• `{i}rmfilter <word>`
+
+• `{i}remfilter <word>`
     Remove the filtered user..
-• `{i}listfilters`
+
+• `{i}listfilter`
     list all filters.
 """
 
 import os
+import re
 
 from cython.functions.filter_db import *
 from telegraph import upload_file as uf
@@ -35,14 +39,14 @@ async def af(e):
     if wt and wt.media:
         wut = mediainfo(wt.media)
         if wut.startswith(("pic", "gif")):
-            dl = await bot.download_media(wt.media)
+            dl = await wt.download_media()
             variable = uf(dl)
             m = "https://telegra.ph" + variable[0]
         elif wut == "video":
             if wt.media.document.size > 8 * 1000 * 1000:
                 return await eod(x, "`Unsupported Media`")
             else:
-                dl = await bot.download_media(wt.media)
+                dl = await wt.download_media()
                 variable = uf(dl)
                 os.remove(dl)
                 m = "https://telegra.ph" + variable[0]
@@ -57,21 +61,21 @@ async def af(e):
     await eor(e, f"Done : Filter `{wrd}` Saved.")
 
 
-@ultroid_cmd(pattern="rmfilter ?(.*)")
+@ultroid_cmd(pattern="remfilter ?(.*)")
 async def rf(e):
     wrd = (e.pattern_match.group(1)).lower()
     chat = e.chat_id
     if not wrd:
-        return await eor(e, "`Give the filter to remove.`")
+        return await eor(e, "`Give the filter to remove...`")
     rem_filter(int(chat), wrd)
     await eor(e, f"Done : Filter `{wrd}` Removed.")
 
 
-@ultroid_cmd(pattern="listfilters$")
+@ultroid_cmd(pattern="listfilter$")
 async def lsnote(e):
     x = list_filter(e.chat_id)
     if x:
-        sd = "Filters Found in This Chat are:\n\n"
+        sd = "Filters Found In This Chats Are\n\n"
         await eor(e, sd + x)
     else:
         await eor(e, "No Filters Found Here")
@@ -85,25 +89,11 @@ async def fl(e):
     chat = e.chat_id
     x = get_filter(int(chat))
     if x:
-        if " " in xx:
-            xx = xx.split(" ")
-            kk = ""
-            for c in xx:
-                if c in x:
-                    k = get_reply(int(chat), c)
-                    if k:
-                        kk = k
-            if kk:
-                msg = k["msg"]
-                media = k["media"]
-                await e.reply(msg, file=media)
-
-        else:
-            k = get_reply(chat, xx)
-            if k:
-                msg = k["msg"]
-                media = k["media"]
-                await e.reply(msg, file=media)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+        for c in x:
+            pat = r"( |^|[^\w])" + re.escape(c) + r"( |$|[^\w])"
+            if re.search(pat, xx):
+                k = get_reply(int(chat), c)
+                if k:
+                    msg = k["msg"]
+                    media = k["media"]
+                    await e.reply(msg, file=media)
