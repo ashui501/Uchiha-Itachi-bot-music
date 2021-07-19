@@ -18,7 +18,6 @@
 import glob
 import os
 import random
-import time
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterPhotos
@@ -51,9 +50,8 @@ async def logo_gen(event):
             pics.append(i)
         id_ = random.choice(pics)
         bg_ = await id_.download_media()
-        fpath_ = "./resources/fonts/"
-        f = random.choice(os.listdir(fpath_))
-        font_ = fpath_ + f
+        fpath_ = glob.glob("resources/fonts/*")
+        font_ = random.choice(fpath_)
     if not bg_:
         pics = []
         async for i in ultroid.iter_messages(
@@ -96,14 +94,12 @@ async def logo_gen(event):
     await xx.edit("`☑️`")
     await xx.edit("`✅`")
     if os.path.exists(flnme):
-        tt = time.time()
-        #up = await uploader(flnme, flnme, tt, xx, "𐌵ρᥣ᧐ᥲɗiᥒg...")
-        await ultroid.send_file(
+        await event.client.send_file(
             event.chat_id,
             file=flnme,
             reply_to=event.reply_to_msg_id, 
             caption=f"𑀉᧐g᧐ ⲙᥲɗᥱ δy CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ",
-            foce_document=True,
+            force_document=False,
         )
         os.remove(flnme)
         await xx.delete()
@@ -112,6 +108,3 @@ async def logo_gen(event):
     if os.path.exists(font_):
         if not font_.startswith("resources/fonts"):
             os.remove(font_)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
