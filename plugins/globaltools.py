@@ -26,10 +26,10 @@
     Globally Kick User.
 
 • `{i}gcast <Message>`
-    Globally Send that message in all groups.
+    Globally Send that msg in all grps.
 
 • `{i}gucast <Message>`
-    Globally Send that message in all your Chat Users.
+    Globally Send that msg in all Ur Chat Users.
 
 •`{i}gpromote <reply to user> <channel/group/all> <rank>`
     globally promote user where you are admin.
@@ -50,12 +50,10 @@ from telethon.tl.types import ChatAdminRights
 from . import *
 
 
-@ultroid_cmd(
-    pattern="gpromote ?(.*)",
-)
+@ultroid_cmd(pattern="gpromote ?(.*)")
 async def _(e):
     if not e.out and not is_fullsudo(e.sender_id):
-        return await eod(e, "`This Command is Sudo Restricted.`")
+        return await eod(e, "`This Command Is Sudo Restricted.`")
     x = e.pattern_match.group(1)
     if not x:
         return await eod(e, "`Incorrect Format`")
@@ -227,12 +225,10 @@ async def _(e):
         return await eor(ev, f"Promoted {name.first_name} in Total : {c} {key} chats.")
 
 
-@ultroid_cmd(
-    pattern="gdemote ?(.*)",
-)
+@ultroid_cmd(pattern="gdemote ?(.*)")
 async def _(e):
     if not e.out and not is_fullsudo(e.sender_id):
-        return await eod(e, "`This Command is Sudo Restricted.`")
+        return await eod(e, "`This Command Is Sudo Restricted.`")
     x = e.pattern_match.group(1)
     if not x:
         return await eod(e, "`Incorrect Format`")
@@ -404,17 +400,24 @@ async def _(e):
     pattern="ungban ?(.*)",
 )
 async def _(e):
-    if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
     xx = await eor(e, "`UnGbanning...`")
-    if e.reply_to_msg_id:
+    if e.is_private:
+        userid = (await e.get_chat()).id
+    elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
     elif e.pattern_match.group(1):
-        userid = await get_user_id(e.pattern_match.group(1))
-    elif e.is_private:
-        userid = (await e.get_chat()).id
+        if (e.pattern_match.group(1)).isdigit():
+            try:
+                userid = (await e.client.get_entity(int(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
+        else:
+            try:
+                userid = (await e.client.get_entity(str(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
     else:
-        return await eod(xx, "`Reply to some message or add their id.`", time=5)
+        return await eod(xx, "`Reply to some msg or add their id.`", time=5)
     name = (await e.client.get_entity(userid)).first_name
     chats = 0
     if not is_gbanned(userid):
@@ -438,10 +441,16 @@ async def _(e):
 )
 async def _(e):
     if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
+        return await eor(e, "`This Command Is Sudo Restricted.`")
     xx = await eor(e, "`Gbanning...`")
     reason = ""
-    if e.reply_to_msg_id:
+    if e.is_private:
+        userid = (await e.get_chat()).id
+        try:
+            reason = e.text.split(" ", maxsplit=1)[1]
+        except IndexError:
+            reason = ""
+    elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
         try:
             reason = e.text.split(" ", maxsplit=1)[1]
@@ -449,15 +458,18 @@ async def _(e):
             reason = ""
     elif e.pattern_match.group(1):
         usr = e.text.split(" ", maxsplit=2)[1]
-        userid = await get_user_id(usr)
+        if (e.pattern_match.group(1)).isdigit():
+            try:
+                userid = (await e.client.get_entity(int(usr))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
+        else:
+            try:
+                userid = (await e.client.get_entity(str(usr))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
         try:
             reason = e.text.split(" ", maxsplit=2)[2]
-        except IndexError:
-            reason = ""
-    elif e.is_private:
-        userid = (await e.get_chat()).id
-        try:
-            reason = e.text.split(" ", maxsplit=1)[1]
         except IndexError:
             reason = ""
     else:
@@ -467,7 +479,7 @@ async def _(e):
     if userid == ultroid_bot.uid:
         return await eod(xx, "`I can't gban myself.`", time=3)
     if str(userid) in DEVLIST:
-        return await eod(xx, "`I can't gban my Developer.`", time=3)
+        return await eod(xx, "`I can't gban my Developers.`", time=3)
     if is_gbanned(userid):
         return await eod(
             xx,
@@ -494,13 +506,13 @@ async def _(e):
 )
 async def gcast(event):
     if not event.out and not is_fullsudo(event.sender_id):
-        return await eor(event, "`This Command is Sudo Restricted.`")
+        return await eor(event, "`This Command Is Sudo Restricted.`")
     xx = event.pattern_match.group(1)
     if not xx:
         return eor(event, "`Give some text to Globally Broadcast`")
     tt = event.text
     msg = tt[6:]
-    kk = await eor(event, "`Globally Broadcasting Message...`")
+    kk = await eor(event, "`Globally Broadcasting Msg...`")
     er = 0
     done = 0
     async for x in ultroid_bot.iter_dialogs():
@@ -519,13 +531,13 @@ async def gcast(event):
 )
 async def gucast(event):
     if not event.out and not is_fullsudo(event.sender_id):
-        return await eor(event, "`This Command is Sudo Restricted.`")
+        return await eor(event, "`This Command Is Sudo Restricted.`")
     xx = event.pattern_match.group(1)
     if not xx:
         return eor(event, "`Give some text to Globally Broadcast`")
     tt = event.text
     msg = tt[7:]
-    kk = await eor(event, "`Globally Broadcasting Message...`")
+    kk = await eor(event, "`Globally Broadcasting Msg...`")
     er = 0
     done = 0
     async for x in ultroid_bot.iter_dialogs():
@@ -543,23 +555,30 @@ async def gucast(event):
     pattern="gkick ?(.*)",
 )
 async def gkick(e):
-    if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
     xx = await eor(e, "`Gkicking...`")
-    if e.reply_to_msg_id:
+    if e.is_private:
+        userid = (await e.get_chat()).id
+    elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
     elif e.pattern_match.group(1):
-        userid = await get_user_id(e.pattern_match.group(1))
-    elif e.is_private:
-        userid = (await e.get_chat()).id
+        if (e.pattern_match.group(1)).isdigit():
+            try:
+                userid = (await e.client.get_entity(int(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
+        else:
+            try:
+                userid = (await e.client.get_entity(str(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
     else:
-        return await eod(xx, "`Reply to some message or add their id.`", time=5)
+        return await eod(xx, "`Reply to some msg or add their id.`", time=5)
     name = (await e.client.get_entity(userid)).first_name
     chats = 0
     if userid == ultroid_bot.uid:
         return await eod(xx, "`I can't gkick myself.`", time=3)
     if str(userid) in DEVLIST:
-        return await eod(xx, "`I can't gkick my Developer.`", time=3)
+        return await eod(xx, "`I can't gkick my Developers.`", time=3)
     async for gkick in e.client.iter_dialogs():
         if gkick.is_group or gkick.is_channel:
             try:
@@ -575,22 +594,31 @@ async def gkick(e):
 )
 async def _(e):
     if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
+        return await eor(e, "`This Command Is Sudo Restricted.`")
     xx = await eor(e, "`Gmuting...`")
-    if e.reply_to_msg_id:
+    if e.is_private:
+        userid = (await e.get_chat()).id
+    elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
     elif e.pattern_match.group(1):
-        userid = await get_user_id(e.pattern_match.group(1))
-    elif e.is_private:
-        userid = (await e.get_chat()).id
+        if (e.pattern_match.group(1)).isdigit():
+            try:
+                userid = (await e.client.get_entity(int(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
+        else:
+            try:
+                userid = (await e.client.get_entity(str(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
     else:
-        return await eod(xx, "`Reply to some message or add their id.`", tome=5)
+        return await eod(xx, "`Reply to some msg or add their id.`", tome=5)
     name = (await e.client.get_entity(userid)).first_name
     chats = 0
     if userid == ultroid_bot.uid:
         return await eod(xx, "`I can't gmute myself.`", time=3)
     if str(userid) in DEVLIST:
-        return await eod(xx, "`I can't gmute my Developer.`", time=3)
+        return await eod(xx, "`I can't gmute my Developers.`", time=3)
     if is_gmuted(userid):
         return await eod(xx, "`User is already gmuted.`", time=4)
     async for onmute in e.client.iter_dialogs():
@@ -608,17 +636,24 @@ async def _(e):
     pattern="ungmute ?(.*)",
 )
 async def _(e):
-    if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
     xx = await eor(e, "`UnGmuting...`")
-    if e.reply_to_msg_id:
+    if e.is_private:
+        userid = (await e.get_chat()).id
+    elif e.reply_to_msg_id:
         userid = (await e.get_reply_message()).sender_id
     elif e.pattern_match.group(1):
-        userid = await get_user_id(e.pattern_match.group(1))
-    elif e.is_private:
-        userid = (await e.get_chat()).id
+        if (e.pattern_match.group(1)).isdigit():
+            try:
+                userid = (await e.client.get_entity(int(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
+        else:
+            try:
+                userid = (await e.client.get_entity(str(e.pattern_match.group(1)))).id
+            except ValueError as err:
+                return await eod(xx, f"{str(err)}", time=5)
     else:
-        return await eod(xx, "`Reply to some message or add their id.`", time=5)
+        return await eod(xx, "`Reply to some msg or add their id.`", time=5)
     name = (await e.client.get_entity(userid)).first_name
     chats = 0
     if not is_gmuted(userid):
@@ -657,12 +692,8 @@ async def _(e):
                     pass
 
 
-@ultroid_cmd(
-    pattern="listgban",
-)
+@ultroid_cmd(pattern="listgban")
 async def list_gengbanned(event):
-    if not event.out and not is_fullsudo(event.sender_id):
-        return await eor(event, "`This Command is Sudo Restricted.`")
     users = gbanned_user()
     x = await eor(event, get_string("com_1"))
     msg = ""
@@ -694,12 +725,8 @@ async def list_gengbanned(event):
         await x.edit(gbanned_users)
 
 
-@ultroid_cmd(
-    pattern="gstat ?(.*)",
-)
+@ultroid_cmd(pattern="gstat ?(.*)")
 async def gstat_(e):
-    if not e.out and not is_fullsudo(e.sender_id):
-        return await eor(e, "`This Command is Sudo Restricted.`")
     xx = await eor(e, get_string("com_1"))
     if e.is_private:
         userid = (await e.get_chat()).id
@@ -717,7 +744,7 @@ async def gstat_(e):
             except ValueError as err:
                 return await eod(xx, f"{str(err)}", time=5)
     else:
-        return await eod(xx, "`Reply to some message or add their id.`", time=5)
+        return await eod(xx, "`Reply to some msg or add their id.`", time=5)
     name = (await e.client.get_entity(userid)).first_name
     msg = "**" + name + " is "
     is_banned = is_gbanned(userid)
