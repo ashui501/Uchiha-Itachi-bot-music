@@ -1,10 +1,9 @@
 # Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
+# Copyright (C) 2021 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -37,15 +36,20 @@ async def autopic(e):
         return await eod(e, get_string("autopic_2").format(search))
     await eor(e, get_string("autopic_3").format(search))
     udB.set("AUTOPIC", "True")
+    ST = udB.get("SLEEP_TIME")
+    if ST:
+        SLEEP_TIME = int(ST)
+    else:
+        SLEEP_TIME = 1221
     while True:
-        ge = udB.get("AUTOPIC")
-        if not ge == "True":
-            return
         for lie in clls:
+            ge = udB.get("AUTOPIC")
+            if not ge == "True":
+                return
             au = "https://unsplash.com" + lie["href"]
-            et = await ultroid_bot(getweb(au))
+            et = await e.client(getweb(au))
             try:
-                kar = await ultroid_bot.download_media(et.webpage.photo)
+                kar = await e.client.download_media(et.webpage.photo)
             except AttributeError:
                 ct = r.get(au).content
                 bsc = bs(ct, "html.parser", from_encoding="utf-8")
@@ -53,19 +57,16 @@ async def autopic(e):
                 li = ft[0]["src"]
                 kar = "autopic.png"
                 urllib.request.urlretrieve(li, kar)
-            file = await ultroid_bot.upload_file(kar)
-            await ultroid_bot(UploadProfilePhotoRequest(file))
+            file = await e.client.upload_file(kar)
+            await e.client(UploadProfilePhotoRequest(file))
             os.remove(kar)
-            await asyncio.sleep(1100)
+            await asyncio.sleep(SLEEP_TIME)
 
 
 @ultroid_cmd(pattern="stoppic$")
 async def stoppo(ult):
     gt = udB.get("AUTOPIC")
     if not gt == "True":
-        return await eod(ult, "`Autopic was not in used !!`")
+        return await eod(ult, "AUTOPIC was not in used !!")
     udB.set("AUTOPIC", "None")
-    await eod(ult, "`Autopic Stopped !!`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+    await eod(ult, "AUTOPIC Stopped !!")
