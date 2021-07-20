@@ -1062,7 +1062,7 @@ async def pmofff(event):
 @owner
 async def chbot(event):
     await event.edit(
-        f"From This Feature U can chat with ppls Via ur Assistant Bot.\n[More info](https://t.me/UltroidUpdates/2)",
+        f"From This Feature you can chat with ppls via your Assistant Bot.",
         buttons=[
             [Button.inline("Cʜᴀᴛ Bᴏᴛ  Oɴ", data="onchbot")],
             [Button.inline("Cʜᴀᴛ Bᴏᴛ  Oғғ", data="ofchbot")],
