@@ -19,8 +19,6 @@ from search_engine_parser import GoogleSearch, YahooSearch
 from telethon import Button
 from telethon.tl.types import InputWebDocument as wb
 
-from plugins._inline import SUP_BUTTONS
-
 from . import *
 from . import humanbytes as hb
 
