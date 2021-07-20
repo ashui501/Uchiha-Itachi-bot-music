@@ -772,7 +772,7 @@ async def alvcs(event):
 @callback("pmtype")
 @owner
 async def pmtyp(e):
-    await event.edit(
+    await e.edit(
         "Select the type of PMPermit needed.",
         buttons=[
             [Button.inline("Inline", data="inpm_in")],
