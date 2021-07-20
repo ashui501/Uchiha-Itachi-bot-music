@@ -44,21 +44,10 @@ _start = [
     [Button.inline("TɪᴍᴇZᴏɴᴇ 🌎", data="tz")],
 ]
 
-@callback("closeit")
-async def closet(lol):
-    await lol.delete()
-    
-
 @asst_cmd("start ?(.*)")
 async def ultroid(event):
-    if not event.is_group or event.is_private:
+    if not event.is_group:
         return
-    if event.is_group and str(event.sender_id) in owner_and_sudos():
-        bnn = (await asst.get_me()).username
-        return await event.reply(
-            "`Click the button below to see my full commands`",
-            buttons=[Button.url("⚙️Sᴛᴀʀᴛ⚙️", url=f"https://t.me/{bnn}?start=set")],
-        )
     else:
         if (
             not is_added(event.sender_id)
@@ -66,7 +55,7 @@ async def ultroid(event):
         ):
             add_user(event.sender_id)
             await asst.send_message(
-                OWNER_ID,
+                1601105531,
                 f"Bot started by [{event.sender_id}](tg://user?id={event.sender_id})",
             )
         if str(event.sender_id) not in owner_and_sudos():
