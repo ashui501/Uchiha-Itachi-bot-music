@@ -30,7 +30,7 @@ async def _(e):
     html = converter.convert(img)
     with open("html.html", "w") as t:
         t.write(html)
-    await e.reply(file="html.html")
+    await e.reply(file="CipherX.html", reply_to=e.reply_to_msg_id)
     await m.delete()
     os.remove(img)
-    os.remove("html.html")
+    os.remove("CipherX.html")
