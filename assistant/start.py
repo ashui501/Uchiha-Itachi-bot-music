@@ -46,7 +46,7 @@ _start = [
 
 @asst_cmd("start ?(.*)")
 async def ultroid(event):
-    if not event.is_group:
+    if event.is_group:
         return
     else:
         if (
@@ -65,7 +65,7 @@ async def ultroid(event):
                 if udB.get("PMBOT") == "True":
                     ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
                 await event.reply(
-                    f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
+                    f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ [{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})!\n\n{ok}",
                     buttons=[
                         [
                             Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
@@ -88,14 +88,13 @@ async def ultroid(event):
                     ],
                 )
             else:
-                u = await event.client.get_entity(event.chat_id)
                 me = f"[{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})"
                 mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
                 await event.reply(
                     Redis("STARTMSG").format(me=me, mention=mention),
                     buttons=[
                         [
-                            Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyGuardX"),
+                            Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
                         ],
                         [
                             Button.inline("✵Chᴀᴛ wiᴛh CɪᴘʜᴇʀX✵", data="chat"),
@@ -126,7 +125,7 @@ async def ultroid(event):
                     get_string("ast_3").format(name),
                     buttons=_start,
                 )
-            
+
 
 @callback("tlans")
 async def tlans(event):
