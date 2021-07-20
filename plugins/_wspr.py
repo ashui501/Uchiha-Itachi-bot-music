@@ -163,7 +163,7 @@ async def _(e):
         await e.answer("Dᴏn'ᴛ sᴩy ᴀᴛ CɪᴘʜᴇʀX ᴩrivᴀᴛᴇ ʍᴇssᴀgᴇ ʙiᴛᴄh 😒", alert=True)
 
 
-@callback("re.compile("del_(.*)")")
+@callback(re.compile("del_(.*)"))
 async def _(e):
     ids = int(e.pattern_match.group(1).decode("UTF-8"))
     if buddhhu.get(ids):
