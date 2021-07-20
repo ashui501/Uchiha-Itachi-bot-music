@@ -52,7 +52,7 @@ async def rem_chatBot(event):
 
 @ultroid_cmd(pattern="listai")
 async def lister(event):
-    users = get_all_added()
+    users = get_all_added(chat)
     if udB.get("CHATBOT_USERS") is None:
         return await eod(event, "`No user has AI added.`")
     msg = ""
