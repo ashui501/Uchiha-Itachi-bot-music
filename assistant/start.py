@@ -65,7 +65,7 @@ async def ultroid(event):
                 if udB.get("PMBOT") == "True":
                     ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
                 await event.reply(
-                    f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ [{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})!\n\n{ok}",
+                    f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
                     buttons=[
                         [
                             Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
