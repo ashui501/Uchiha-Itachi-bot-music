@@ -39,7 +39,7 @@ async def eupload(event):
             file=f"https://www.gutenberg.org/files/{match}/{match}-pdf.pdf"
         )
     except BaseException:
-        book = "Ultroid-Book.epub"
+        book = "CipherX-Book.epub"
         urllib.request.urlretrieve(
             "https://www.gutenberg.org/ebooks/132.epub.images", book
         )
