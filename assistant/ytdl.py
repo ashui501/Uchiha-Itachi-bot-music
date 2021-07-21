@@ -101,7 +101,7 @@ async def _(e):
     )
     _text = "`Select Your Format.`"
     if not _buttons:
-        _text = "`Error downloading from YouTube.\nTry Restarting bot.`"
+        _text = "`Error downloading from YouTube.\nTry Restarting CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ.`"
     await e.edit(_text, buttons=_buttons)
 
 
@@ -139,7 +139,7 @@ async def _(event):
         os.rename(f"{ytdl_data['id']}.mp3", f"{title}.mp3")
         c_time = time.time()
         file = await uploader(
-            f"{title}.mp3", f"{title}.mp3", c_time, event, "Uploading " + title + "..."
+            f"{title}.mp3", f"{title}.mp3", c_time, event, "Uploading..." + title + "..."
         )
         attributes = [
             DocumentAttributeAudio(
