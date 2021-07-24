@@ -52,7 +52,7 @@ class IncrementalByteCellArray:
         self.data_pointer = 0
 
     def __getitem__(self, item):
-        logging.debug(f'Get cell: {self.data_pointer}')
+        #logging.critical(f'Get cell: {self.data_pointer}')
 
         cell_amount = len(self.byte_cells)
         if item > cell_amount - 1:
@@ -61,7 +61,7 @@ class IncrementalByteCellArray:
         return self.byte_cells[item]
 
     def __setitem__(self, key: int, value: int):
-        logging.debug(f'Set cell {key} to {value}')
+        #logging.critical(f'Set cell {key} to {value}')
 
         cell_amount = len(self.byte_cells)
         if key > cell_amount - 1:
@@ -77,7 +77,7 @@ class IncrementalByteCellArray:
 
     def extend(self, size: int):
         self.byte_cells += [0] * size
-        logging.debug(f'Extended byte cells by {size}, new size: {len(self.byte_cells)}')
+        #logging.critical(f'Extended byte cells by {size}, new size: {len(self.byte_cells)}')
 
     def increment(self):
         new_val = (self.get() + 1) % 256
@@ -128,7 +128,7 @@ class BrainfuckInterpreter:
     def _interpret(self):
         instruction = self._commands[self.instruction_pointer]
 
-        logging.info(f'Instruction: {instruction} | Pos: {self.instruction_pointer}')
+        #logging.critical(f'Instruction: {instruction} | Pos: {self.instruction_pointer}')
 
         if instruction == '>':
             self.cells.data_pointer += 1
@@ -147,7 +147,7 @@ class BrainfuckInterpreter:
                 try:
                     loop_end = self._look_forward()
                 except ValueError:
-                    logging.warning(f'No closing bracket for loop found on index: {self.instruction_pointer}')
+                    #logging.critical(f'No closing bracket for loop found on index: {self.instruction_pointer}')
                     raise
 
                 self.instruction_pointer = loop_end
@@ -158,7 +158,7 @@ class BrainfuckInterpreter:
                 try:
                     opening_bracket_index = self._opening_bracket_indexes.pop(-1)
                 except IndexError:
-                    logging.warning(f'No opening bracket for loop on index: {self.instruction_pointer}')
+                    #logging.critical(f'No opening bracket for loop on index: {self.instruction_pointer}')
                     raise
 
                 self.instruction_pointer = opening_bracket_index - 1
