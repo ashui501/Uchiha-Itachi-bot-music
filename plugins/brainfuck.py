@@ -185,7 +185,7 @@ def bf(text):
     pattern="bf",
 )
 async def _(event):        
-    input = event.text.split(" ", maxsplit=1)[1]
+    input = event.text[4:]
     if not input:
         if event.reply_to_msg_id:
             previous_message = await event.get_reply_message()
@@ -199,7 +199,7 @@ async def _(event):
     pattern="rbf",
 )
 async def _(event):
-    input = event.text.split(" ", maxsplit=1)[1]
+    input = event.text[5:]
     if not input:
         if event.reply_to_msg_id:
             previous_message = await event.get_reply_message()
