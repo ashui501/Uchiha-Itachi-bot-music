@@ -8,9 +8,9 @@ FROM programmingerror/ultroid:b0.1
 ENV TZ=Asia/Tehran
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN git clone https://github.com/CipherX1-ops/Megatron.git /root/CipherX1-ops/
+RUN git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/
 
-WORKDIR /root/CipherX1-ops/
+WORKDIR /root/ToxygenX/
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
