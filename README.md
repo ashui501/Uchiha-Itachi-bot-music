@@ -25,7 +25,7 @@ A stable pluggable Telegram bot, based on Telethon.
 ## Deploy to Heroku
 - Get your `API_ID` and `API_HASH` from [here](https://my.telegram.org/) and click the below button!  <br />  
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ToxygenX/Megatron) 
 
 ## Deploy Locally
 - Get your `API_ID` and `API_HASH` from [here](https://my.telegram.org/)
