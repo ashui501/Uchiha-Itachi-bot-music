@@ -46,8 +46,8 @@ A stable pluggable Telegram bot, based on Telethon.
 - Run the bot:   
 `bash resources/startup/startup.sh`
 
-Made with 💕 by CɪᴘʜᴇʀX
+Made with 💕 by CoderX
 # Credits
 * [Lonami](https://github.com/LonamiWebs/) for [Telethon](https://github.com/LonamiWebs/Telethon)
 
-* Based on Ultroid Bot
+* This is a test platform. Don't moan that it's a kang in support chat. 
