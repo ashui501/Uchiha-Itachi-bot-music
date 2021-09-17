@@ -1,1 +1,1 @@
-web: bash resources/startup/startup.sh
+web: python -m Megatron
