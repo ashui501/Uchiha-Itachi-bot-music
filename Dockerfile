@@ -12,6 +12,7 @@ RUN git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/
 
 WORKDIR /root/ToxygenX/
 
+RUN pip3 install -U pip
 RUN pip3 install --no-cache-dir -r requirements.txt
 RUN pip3 install --no-cache-dir -r resources/extras/local-requirements.txt
 
