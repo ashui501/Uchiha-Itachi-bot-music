@@ -3,7 +3,7 @@
 # This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
 # PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>
 
-FROM programmingerror/ultroid:b0.1
+FROM kalilinux/kali-rolling
 
 ENV TZ=Asia/Tehran
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
