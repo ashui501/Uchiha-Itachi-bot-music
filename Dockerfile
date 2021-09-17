@@ -11,7 +11,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/
 
 WORKDIR /root/ToxygenX/
-RUN chmod 777 /LynX
+RUN chmod 777 /ToxygenX
 RUN apt-get update -y
 RUN apt-get install -y wget curl bash git neofetch sudo software-properties-common ffmpeg
 
