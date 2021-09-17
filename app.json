@@ -25,6 +25,14 @@
             "description": "Your session string. Can be added now, or after deploy. (The bot will NOT work without a session string!!)",
             "value": ""
         },
+        "BOT_TOKEN": {
+            "description": "Your bot token",
+            "value": ""
+        },
+        "LOG_CHANNEL": {
+            "description": "Your Log Chanel ID",
+            "value": ""
+        },
         "REDIS_URI": {
             "description": "Redis endpoint URL, from redislabs.com",
             "value": ""
