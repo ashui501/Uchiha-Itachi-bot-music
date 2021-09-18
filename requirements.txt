@@ -4,3 +4,4 @@ git+https://github.com/buddhhu/ofox.git
 moviepy
 selenium
 googletrans==4.0.0rc1
+ffmpeg-python
