@@ -19,7 +19,7 @@ RUN pip3 install -U pip
 #COPY requirements.txt .
 RUN pip3 install --no-cache-dir -U -r requirements.txt
 #COPY resources/extras/local-requirements.txt .
-#RUN cd resources/extras && pip3 install --no-cache-dir -U -r local-requirements.txt
+RUN pip3 install --no-cache-dir -U -r resources/extras/local-requirements.txt
 
 #COPY . .
 
