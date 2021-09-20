@@ -1,6 +1,5 @@
 git+https://github.com/CipherX1-ops/CythonX.git
 https://github.com/New-dev0/Telethon/archive/Crunch.zip
-git+https://github.com/buddhhu/ofox.git
 moviepy
 selenium
 googletrans==4.0.0rc1
