@@ -13,7 +13,6 @@ from re import findall
 import requests
 import json
 from bs4 import BeautifulSoup
-from orangefoxapi import OrangeFoxAPI
 from play_scraper import search
 from search_engine_parser import GoogleSearch, YahooSearch
 from telethon import Button
@@ -24,13 +23,11 @@ from . import humanbytes as hb
 
 binpic = "https://telegra.ph/file/be4dd7375ef2313a43c41.jpg"
 ippic = "https://telegra.ph/file/807e012dbe2789c0648ee.jpg"
-ofox = "https://telegra.ph/file/231f0049fcd722824f13b.jpg"
 gugirl = "https://telegra.ph/file/0df54ae4541abca96aa11.jpg"
 yeah = "https://telegra.ph/file/e3c67885e16a194937516.jpg"
 ps = "https://telegra.ph/file/de0b8d9c858c62fae3b6e.jpg"
 ultpic = "https://telegra.ph/file/b2da137de76fc5cd85ffa.jpg"
 xkcdpic = "https://telegra.ph/file/040b5ab6e50e438fc215e.jpg"
-ofox_api = OrangeFoxAPI()
 
 api1 = base64.b64decode("QUl6YVN5QXlEQnNZM1dSdEI1WVBDNmFCX3c4SkF5NlpkWE5jNkZV").decode(
     "ascii"
@@ -263,61 +260,6 @@ async def _(e):
         ),
     ] 
     await e.answer(but)
-
-
-@in_pattern("ofox")
-@in_owner
-async def _(e):
-    try:
-        match = e.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        kkkk = e.builder.article(
-            title="Enter Device Codename",
-            thumb=wb(ofox, 0, "image/jpeg", []),
-            text="**OFᴏx🦊Rᴇᴄᴏᴠᴇʀʏ**\n\nYou didn't search anything",
-            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="ofox ", same_peer=True),
-        )
-        await e.answer([kkkk])
-    a = ofox_api.releases(codename=match)
-    c = ofox_api.devices(codename=match)
-    if len(a.data) > 0:
-        fox = []
-        for b in a.data:
-            ver = b.version
-            release = b.type
-            size = hb(b.size)
-            for z in c.data:
-                fullname = z.full_name
-                code = z.codename
-                link = f"https://orangefox.download/device/{code}"
-                text = f"**••OʀᴀɴɢᴇFᴏx Rᴇᴄᴏᴠᴇʀʏ Fᴏʀ•[•]({ofox})** {fullname}\n"
-                text += f"**••Cᴏᴅᴇɴᴀᴍᴇ••** {code}\n"
-                text += f"**••Bᴜɪʟᴅ Tʏᴘᴇ••** {release}\n"
-                text += f"**••Vᴇʀsɪᴏɴ••** {ver}\n"
-                text += f"**••Sɪᴢᴇ••** {size}\n"
-                fox.append(
-                    await e.builder.article(
-                        title=f"{fullname}",
-                        description=f"{ver}\n{release}",
-                        text=text,
-                        thumb=wb(ofox, 0, "image/jpeg", []),
-                        link_preview=True,
-                        buttons=[
-                            Button.url("Dᴏᴡɴʟᴏᴀᴅ", url=f"{link}"),
-                            Button.switch_inline(
-                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="ofox ", same_peer=True
-                            ),
-                        ],
-                    )
-                )
-        await e.answer(
-            fox, switch_pm="OrangeFox Recovery Search", switch_pm_param="start"
-        )
-    else:
-        await e.answer(
-            [], switch_pm="OrangeFox Recovery Search.", switch_pm_param="start"
-        )
-        await e.answer([sed])
 
 
 @in_pattern("file ?(.*)")
