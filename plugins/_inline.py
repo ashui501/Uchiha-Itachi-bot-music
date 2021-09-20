@@ -275,18 +275,6 @@ async def _(e):
         ],
         [
             Button.switch_inline(
-                "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
-                query="clipart ",
-                same_peer=True,
-            ),
-            Button.switch_inline(
-                "OʀᴀɴɢᴇFᴏx🦊",
-                query="ofox ",
-                same_peer=True,
-            ),
-        ],
-        [
-            Button.switch_inline(
                 "Ⲃⲓⲛ Ⲥⲏⲉⲥⲕⲉʀ",
                 query="bin ",
                 same_peer=True,
@@ -303,6 +291,13 @@ async def _(e):
                 query="ebooks ",
                 same_peer=True,
             ),
+            Button.switch_inline(
+                "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
+                query="clipart ",
+                same_peer=True,
+            ),
+        ],
+        [
             Button.inline(
                 "« Bᴀᴄᴋ",
                 data="open",
