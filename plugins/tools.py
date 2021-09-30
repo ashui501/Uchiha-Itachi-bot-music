@@ -37,7 +37,7 @@
 import os
 import time
 from googletrans import Translator
-from asyncio.exceptions import TimeoutError
+from asyncio import TimeoutError
 from pathlib import Path
 
 import cv2
@@ -389,5 +389,5 @@ async def lastname(steal):
                 conv.chat_id,
                 [msg.id, responds.id, respond.id, response.id],
             )
-    except TimeoutError:
+    except asyncio.TimeoutError:
         return await lol.edit("Error: @SangMataInfo_bot is not responding!.")
