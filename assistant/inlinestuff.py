@@ -170,7 +170,6 @@ async def _(e):
     
 
 @in_pattern("ip")
-@in_owner
 async def _(e):
     try:
         quer = e.text.split(" ", maxsplit=1)[1]
