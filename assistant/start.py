@@ -66,6 +66,7 @@ async def ultroid(event):
                     ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
                 await event.reply(
                     f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
+                    file=udB.get("STARTMEDIA"),
                     buttons=[
                         [
                             Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
@@ -92,6 +93,7 @@ async def ultroid(event):
                 mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
                 await event.reply(
                     Redis("STARTMSG").format(me=me, mention=mention),
+                    file=udB.get("STARTMEDIA"),
                     buttons=[
                         [
                             Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
