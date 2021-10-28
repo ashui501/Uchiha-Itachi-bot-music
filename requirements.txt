@@ -1,7 +1,3 @@
 git+https://github.com/CipherX1-ops/CythonX.git
-https://github.com/New-dev0/Telethon/archive/Crunch.zip
-moviepy
-selenium
-googletrans==4.0.0rc1
-ffmpeg-python
-requests
+https://github.com/New-dev0/Telethon/archive/Tarzan.zip
+pytgcalls==3.0.0.dev19
