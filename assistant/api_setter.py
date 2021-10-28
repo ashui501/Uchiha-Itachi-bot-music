@@ -1,18 +1,12 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+from telethon import events
 
 from . import *
 
 # main menu for api setting
 
 
-@callback("apiset")
-@owner
-async def apiset(event):
+@callback("apiset", owner=True)
+async def apiset(event: events.CallbackQuery):
     await event.edit(
         get_string("ast_1"),
         buttons=[
@@ -24,9 +18,8 @@ async def apiset(event):
     )
 
 
-@callback("rmbg")
-@owner
-async def rmbgapi(event):
+@callback("rmbg", owner=True)
+async def rmbgapi(event: events.CallbackQuery):
     await event.delete()
     pru = event.sender_id
     var = "RMBG_API"
@@ -41,17 +34,15 @@ async def rmbgapi(event):
                 "Cancelled!!",
                 buttons=get_back_button("apiset"),
             )
-        else:
-            await setit(event, var, themssg)
-            await conv.send_message(
-                f"{name} changed to {themssg}",
-                buttons=get_back_button("apiset"),
-            )
+        await setit(event, var, themssg)
+        await conv.send_message(
+            f"{name} changed to {themssg}",
+            buttons=get_back_button("apiset"),
+        )
 
 
-@callback("dapi")
-@owner
-async def rmbgapi(event):
+@callback("dapi", owner=True)
+async def rmbgapi(event: events.CallbackQuery):
     await event.delete()
     pru = event.sender_id
     var = "DEEP_API"
@@ -66,17 +57,15 @@ async def rmbgapi(event):
                 "Cancelled!!",
                 buttons=get_back_button("apiset"),
             )
-        else:
-            await setit(event, var, themssg)
-            await conv.send_message(
-                f"{name} changed to {themssg}",
-                buttons=get_back_button("apiset"),
-            )
+        await setit(event, var, themssg)
+        await conv.send_message(
+            f"{name} changed to {themssg}",
+            buttons=get_back_button("apiset"),
+        )
 
 
-@callback("oapi")
-@owner
-async def rmbgapi(event):
+@callback("oapi", owner=True)
+async def rmbgapi(event: events.CallbackQuery):
     await event.delete()
     pru = event.sender_id
     var = "OCR_API"
@@ -91,9 +80,8 @@ async def rmbgapi(event):
                 "Cancelled!!",
                 buttons=get_back_button("apiset"),
             )
-        else:
-            await setit(event, var, themssg)
-            await conv.send_message(
-                f"{name} changed to {themssg}",
-                buttons=get_back_button("apiset"),
-            )
+        await setit(event, var, themssg)
+        await conv.send_message(
+            f"{name} changed to {themssg}",
+            buttons=get_back_button("apiset"),
+        )
