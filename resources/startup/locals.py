@@ -70,27 +70,20 @@ def start():
     print("\n\nHere are the things you've entered.\nKindly check.")
     print(all_done)
     isitdone = input("\n\nIs it all correct? [y/n]")
-    if isitdone == "y":
-        # https://github.com/TeamUltroid/Ultroid/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
+    if isitdone == "y" or isitdone != "n":
+        # https://github.com/ToxygenX/Megatron/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
         f = open(".env", "w")
         f.write(all_done)
-        f.close
-    elif isitdone == "n":
+    else:
         print("Oh, let's redo these then -_-")
         start()
-    else:
-        # https://github.com/TeamUltroid/Ultroid/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
-        f = open(".env", "w")
-        f.write(all_done)
-        f.close
     clear_screen()
-    print("\nCongrats. All done!\nTime to start the CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ!")
+    print("\nCongrats. All done!\nTime to start the bot!")
     print("\nInstalling requirements... This might take a while...")
-    os.system("pip3 install -r requirements.txt")
-    os.system("pip3 install -r resources/extras/local-requirements.txt")
+    os.system("pip3 install -r --no-cache-dir resources/startup/requirements.txt")
     clear_screen()
     print(a)
-    print("\nStarting CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ...")
+    print("\nStarting Megatron...")
     os.system("python3 -m cython")
 
 
@@ -102,11 +95,7 @@ def do_input(var):
 
 def clear_screen():
     # clear screen
-    if os.name == "posix":
-        _ = os.system("clear")
-    else:
-        # for windows platfrom
-        _ = os.system("cls")
+    _ = os.system("clear") if os.name == "posix" else os.system("cls")
 
 
 def check_for_py():
@@ -134,9 +123,8 @@ def check_for_py():
 
 def gen_session():
     print("\nProcessing...")
-    # https://github.com/CipherX1-ops/Megatron/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
+    # https://github.com/ToxygenX/Megatron/main/resources/startup/locals.py#L35
     os.system("python3 resources/session/ssgen.py")
-    return
 
 
 start()
