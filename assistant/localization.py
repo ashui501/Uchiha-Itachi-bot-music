@@ -1,22 +1,15 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import re
 
-from . import *
+from . import Button, callback, get_back_button, get_languages, language, udB
 
 
-@callback("lang")
-@owner
+@callback("lang", owner=True)
 async def setlang(event):
     languages = get_languages()
     tultd = [
         Button.inline(
-            f"{languages[ult]['natively']} [{ult.lower()}]", data=f"set_{ult}"
+            f"{languages[ult]['natively']} [{ult.lower()}]",
+            data=f"set_{ult}",
         )
         for ult in languages
     ]
@@ -27,12 +20,12 @@ async def setlang(event):
     await event.edit("List Of Available Languages.", buttons=buttons)
 
 
-@callback(re.compile(b"set_(.*)"))
-@owner
+@callback(re.compile(b"set_(.*)"), owner=True)
 async def settt(event):
     lang = event.data_match.group(1).decode("UTF-8")
     languages = get_languages()
-    udB.set("language", f"{lang}")
+    language[0] = lang
+    udB.delete("language") if lang == "en" else udB.set("language", lang)
     await event.edit(
         f"Your language has been set to {languages[lang]['natively']} [{lang}].",
         buttons=get_back_button("lang"),
