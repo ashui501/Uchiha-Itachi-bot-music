@@ -2,7 +2,7 @@ import os
 import re
 import time
 
-from pyUltroid.functions.helper import (
+from cython.functions.helper import (
     bash,
     download_file,
     fast_download,
