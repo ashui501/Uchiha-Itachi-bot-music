@@ -1,29 +1,28 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
-
 import os
 import re
 import time
-from urllib.request import urlretrieve
 
-from numerize import numerize
-from cython.functions.all import *
+from pyUltroid.functions.helper import (
+    bash,
+    download_file,
+    fast_download,
+    numerize,
+    time_formatter,
+    uploader,
+)
+from cython.functions.ytdl import dler, get_buttons, get_data
 from telethon import Button
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from telethon.tl.types import InputWebDocument as wb
-from youtube_dl import YoutubeDL
 from youtubesearchpython import VideosSearch
+
+from . import callback, in_pattern
 
 ytt = "https://telegra.ph/file/afd04510c13914a06dd03.jpg"
 _yt_base_url = "https://www.youtube.com/watch?v="
 
 
-@in_pattern("yt")
+@in_pattern("yt", owner=True)
 async def _(event):
     try:
         string = event.text.split(" ", maxsplit=1)[1]
@@ -49,9 +48,23 @@ async def _(event):
         link = _yt_base_url + ids
         title = v["title"]
         duration = v["duration"]
+        views = v["viewCount"]["short"]
+        publisher = v["channel"]["name"]
+        published_on = v["publishedTime"]
+        description = (
+            v["descriptionSnippet"][0]["text"]
+            if v.get("descriptionSnippet")
+            and len(v["descriptionSnippet"][0]["text"]) < 500
+            else "None"
+        )
         thumb = f"https://i.ytimg.com/vi/{ids}/hqdefault.jpg"
-        text = f"**•Tɪᴛʟᴇ•** `{title}`\n\n**••[Lɪɴᴋ]({link})••**\n\n**••Dᴜʀᴀᴛɪᴏɴ••** `{duration}`\n\n\n"
-        desc = f"Title : {title}\nDuration : {duration}"
+        text = f"<strong>Title:- <a href={link}>{title}</a></strong>\n"
+        text += f"<strong>Duration:-</strong> <code>{duration}</code>\n"
+        text += f"<strong>Views:- </strong> <code>{views}</code>\n"
+        text += f"<strong>Publisher:- </strong> <code>{publisher}</code>\n"
+        text += f"<strong>Published:- </strong> <code>{published_on}</code>\n"
+        text += f"<strong>Description:- </strong> <code>{description}</code>"
+        desc = f"{title}\n{duration}"
         file = wb(thumb, 0, "image/jpeg", [])
         results.append(
             await event.builder.article(
@@ -62,6 +75,7 @@ async def _(event):
                 content=file,
                 text=text,
                 include_media=True,
+                parse_mode="html",
                 buttons=[
                     [
                         Button.inline("Audio", data=f"ytdl_audio_{ids}"),
@@ -89,8 +103,8 @@ async def _(event):
     re.compile(
         "ytdl_(.*)",
     ),
+    owner=True,
 )
-@owner
 async def _(e):
     _e = e.pattern_match.group(1).decode("UTF-8")
     _lets_split = _e.split("_", maxsplit=1)
@@ -109,8 +123,8 @@ async def _(e):
     re.compile(
         "ytdownload_(.*)",
     ),
+    owner=True,
 )
-@owner
 async def _(event):
     url = event.pattern_match.group(1).decode("UTF-8")
     lets_split = url.split("_", maxsplit=1)
@@ -128,12 +142,18 @@ async def _(event):
             "quiet": True,
             "logtostderr": False,
         }
-        ytdl_data = await dler(event, link)
-        YoutubeDL(opts).download([link])
+        ytdl_data = await dler(event, link, opts, True)
         title = ytdl_data["title"]
-        artist = ytdl_data["uploader"]
-        views = numerize.numerize(ytdl_data["view_count"])
-        urlretrieve(f"https://i.ytimg.com/vi/{vid_id}/hqdefault.jpg", f"{title}.jpg")
+        if ytdl_data.get("artist"):
+            artist = ytdl_data["artist"]
+        elif ytdl_data.get("creator"):
+            artist = ytdl_data["creator"]
+        elif ytdl_data.get("channel"):
+            artist = ytdl_data["channel"]
+        views = numerize(ytdl_data["view_count"])
+        await download_file(
+            f"https://i.ytimg.com/vi/{vid_id}/hqdefault.jpg", f"{title}.jpg"
+        )
         thumb = f"{title}.jpg"
         duration = ytdl_data["duration"]
         os.rename(f"{ytdl_data['id']}.mp3", f"{title}.mp3")
@@ -159,13 +179,19 @@ async def _(event):
             "logtostderr": False,
             "quiet": True,
         }
-        ytdl_data = await dler(event, link)
-        YoutubeDL(opts).download([link])
+        ytdl_data = await dler(event, link, opts, True)
         title = ytdl_data["title"]
-        artist = ytdl_data["uploader"]
-        views = numerize.numerize(ytdl_data["view_count"])
-        urlretrieve(f"https://i.ytimg.com/vi/{vid_id}/hqdefault.jpg", f"{title}.jpg")
-        thumb = f"{title}.jpg"
+        if ytdl_data.get("artist"):
+            artist = ytdl_data["artist"]
+        elif ytdl_data.get("creator"):
+            artist = ytdl_data["creator"]
+        elif ytdl_data.get("channel"):
+            artist = ytdl_data["channel"]
+        views = numerize(ytdl_data["view_count"])
+        thumb = await fast_download(
+            f"https://i.ytimg.com/vi/{vid_id}/hqdefault.jpg", filename=f"{title}.jpg"
+        )
+        hi, wi = ytdl_data["height"], ytdl_data["width"]
         duration = ytdl_data["duration"]
         try:
             os.rename(f"{ytdl_data['id']}.mp4", f"{title}.mp4")
@@ -173,11 +199,9 @@ async def _(event):
             try:
                 os.rename(f"{ytdl_data['id']}.mkv", f"{title}.mp4")
             except FileNotFoundError:
-                os.rename(f"{ytdl_data['id']}.webm", f"{title}.mp4")
+                os.rename(f"{ytdl_data['id']}.mp4.webm", f"{title}.mp4")
         except Exception as ex:
             return await event.edit(str(ex))
-        wi, _ = await bash(f'mediainfo "{title}.mp4" | grep "Width"')
-        hi, _ = await bash(f'mediainfo "{title}.mp4" | grep "Height"')
         c_time = time.time()
         file = await uploader(
             f"{title}.mp4", f"{title}.mp4", c_time, event, "Uploading..." + title + "..."
@@ -185,8 +209,8 @@ async def _(event):
         attributes = [
             DocumentAttributeVideo(
                 duration=int(duration),
-                w=int(wi.split(":")[1].split()[0]),
-                h=int(hi.split(":")[1].split()[0]),
+                w=wi,
+                h=hi,
                 supports_streaming=True,
             ),
         ]
@@ -201,4 +225,4 @@ async def _(event):
         attributes=attributes,
         thumb=thumb,
     )
-    os.system(f'rm "{title}"*')
+    await bash(f'rm "{title}"*')
