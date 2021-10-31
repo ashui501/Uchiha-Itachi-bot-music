@@ -122,9 +122,6 @@ inline_3: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ Hᴇʟᴘ Mᴇɴᴜ✨\n
 inline_4: "**✨{} Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ✨\n\n✵ Mᴀɪɴ Mᴇɴᴜ\n\n✵ Pʟᴜɢɪɴs ~ {}\n✵ Aᴅᴅᴏɴs ~ {}\n✵ Tᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {}**"
 inline_5: "**≼≼≼Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ≽≽≽**"
 inline_6: "**Voice Chat Help Menu for {}**\n**Available Commands:** `{}`\n\n(c) wspr_3: "Add some id or username too"
-wspr_4: "User {} Not Found\nSearch Again"
-wspr_5: "You Can't do this"
-CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ"
 inline_7: "Do .help {} to get the list of commands."
 inline_8: "Click the below button to update!"
 inline_9: "You Are Already On Latest Version"
@@ -138,7 +135,7 @@ wspr_1: "@{} CɪᴘʜᴇʀX Ⲋⲉⲥʀⲉⲧ ⲙⲉⲋⲋⲁⳋⲉ ϝⲟʀ ⲩ�
 wspr_2: "Mᴇssᴀgᴇ dᴇlᴇᴛᴇd"
 wspr_3: "Add some id or username too"
 wspr_4: "User {} Not Found\nSearch Again"
-wspr_5: "You Can't do this"
+wspr_5: "Yᴏu ᴀrᴇ nᴏᴛ ᴀllᴏwᴇd ᴛᴏ dᴏ ᴛhis 😒"
 
 # afk
 afk_1: "**No Longer Afk**\n\nWas away for ~ `{}`"
