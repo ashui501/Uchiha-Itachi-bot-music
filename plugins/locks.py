@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Commands Available -
 
@@ -14,10 +8,10 @@
     UNLOCK the Used Setting in Used Group.
 
 """
-from cython.functions.all import lucks, unlucks
+from cython.functions.admins import lock_unlock
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 
-from . import *
+from . import eor, ultroid_cmd
 
 
 @ultroid_cmd(
@@ -25,16 +19,14 @@ from . import *
     groups_only=True,
     admins_only=True,
     type=["official", "manager"],
-    ignore_dualmode=True,
 )
 async def lockho(e):
     mat = e.pattern_match.group(1)
     if not mat:
-        return await eod(e, "`Give some Proper Input...`")
-    try:
-        ml = lucks(mat)
-    except BaseException:
-        return await eod(e, "`Incorrect Input`")
+        return await eor(e, "`Give some Proper Input..`", time=5)
+    ml = lock_unlock(mat)
+    if not ml:
+        return await eor(e, "`Incorrect Input`", time=5)
     await e.client(EditChatDefaultBannedRightsRequest(e.chat_id, ml))
     await eor(e, f"Locked - `{mat}` ! ")
 
@@ -44,15 +36,13 @@ async def lockho(e):
     groups_only=True,
     admins_only=True,
     type=["official", "manager"],
-    ignore_dualmode=True,
 )
 async def unlckho(e):
     mat = e.pattern_match.group(1)
     if not mat:
-        return await eod(e, "`Give some Proper Input...`")
-    try:
-        ml = unlucks(mat)
-    except BaseException:
-        return await eod(e, "`Incorrect Input`")
+        return await eor(e, "`Give some Proper Input..`", time=5)
+    ml = lock_unlock(mat, lock=False)
+    if not ml:
+        return await eor(e, "`Incorrect Input`", time=5)
     await e.client(EditChatDefaultBannedRightsRequest(e.chat_id, ml))
     await eor(e, f"Unlocked - `{mat}` ! ")
