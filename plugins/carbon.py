@@ -1,23 +1,20 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
 • `{i}carbon <text/reply to msg/reply to document>`
     Carbonise the text with default settings.
+
 • `{i}rcarbon <text/reply to msg/reply to document>`
     Carbonise the text, with random bg colours.
+
+• `{i}ccarbon <color ><text/reply to msg/reply to document>`
+    Carbonise the text, with custom bg colours.
 """
 import random
-import requests
+
 from carbonnow import Carbon
 
-from . import *
+from . import eor, get_string, inline_mention, os, ultroid_cmd
 
 all_col = [
     "Black",
@@ -172,60 +169,26 @@ all_col = [
 
 
 @ultroid_cmd(
-    pattern="carbon",
+    pattern="(rc|c)arbon",
 )
 async def crbn(event):
     xxxx = await eor(event, get_string("com_1"))
+    te = event.text
+    col = random.choice(all_col) if te[1] == "r" else None
     if event.reply_to_msg_id:
         temp = await event.get_reply_message()
         if temp.media:
             b = await event.client.download_media(temp)
-            a = open(b)
-            code = a.read()
-            a.close()
+            with open(b) as a:
+                code = a.read()
             os.remove(b)
         else:
             code = temp.message
     else:
-        code = event.text.split(" ", maxsplit=1)[1]
-    webs = requests.get("https://carbonara.vercel.app/api/cook")
-    if webs.status_code == 502:
-        return await eor(
-            event, "`Temporary Server Error has Occured !\nPlease Try Again Later`"
-        )
-    carbon = Carbon(base_url="https://carbonara.vercel.app/api/cook", code=code)
-    xx = await carbon.memorize("CipherX")
-    await xxxx.delete()
-    await event.reply(
-        f"Carbonised by {inline_mention(event.sender)}",
-        file=xx,
-        reply_to=event.message.reply_to_msg_id,
-    )
-
-
-@ultroid_cmd(
-    pattern="rcarbon",
-)
-async def crbn(event):
-    xxxx = await eor(event, "Processing...")
-    if event.reply_to_msg_id:
-        temp = await event.get_reply_message()
-        if temp.media:
-            b = await event.client.download_media(temp)
-            a = open(b)
-            code = a.read()
-            a.close()
-            os.remove(b)
-        else:
-            code = temp.message
-    else:
-        code = event.text.split(" ", maxsplit=1)[1]
-    col = random.choice(all_col)
-    webs = requests.get("https://carbonara.vercel.app/api/cook")
-    if webs.status_code == 502:
-        return await eor(
-            event, "`Temporary Server Error has Occured !\nPlease Try Again Later`"
-        )
+        try:
+            code = event.text.split(" ", maxsplit=1)[1]
+        except IndexError:
+            return await eor(xxxx, get_string("carbon_2"))
     carbon = Carbon(
         base_url="https://carbonara.vercel.app/api/cook", code=code, background=col
     )
@@ -234,5 +197,42 @@ async def crbn(event):
     await event.reply(
         f"Carbonised by {inline_mention(event.sender)}",
         file=xx,
-        reply_to=event.message.reply_to_msg_id,
+    )
+
+
+@ultroid_cmd(
+    pattern="ccarbon ?(.*)",
+)
+async def crbn(event):
+    match = event.pattern_match.group(1)
+    if not match:
+        return await eor(event, get_string("carbon_3"))
+    msg = await eor(event, get_string("com_1"))
+    if event.reply_to_msg_id:
+        temp = await event.get_reply_message()
+        if temp.media:
+            b = await event.client.download_media(temp)
+            with open(b) as a:
+                code = a.read()
+            os.remove(b)
+        else:
+            code = temp.message
+    else:
+        try:
+            match = match.split(" ", maxsplit=1)
+            code = match[1]
+            match = match[0]
+        except IndexError:
+            return await eor(msg, get_string("carbon_2"))
+    carbon = Carbon(
+        base_url="https://carbonara.vercel.app/api/cook", code=code, background=match
+    )
+    try:
+        xx = await carbon.memorize("CipherX")
+    except Exception as er:
+        return await msg.edit(str(er))
+    await msg.delete()
+    await event.reply(
+        f"Carbonised by {inline_mention(event.sender)}",
+        file=xx,
     )
