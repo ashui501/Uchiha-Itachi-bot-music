@@ -1,25 +1,13 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
 • {i}unsplash <search query> ; <no of pics>
     Unsplash Image Search.
-
 """
 
+from cython.functions.misc import unsplashsearch
 
-import urllib
-
-import requests as r
-from bs4 import BeautifulSoup as bs
-
-from . import *
+from . import download_file, eor, get_string, os, ultroid_cmd
 
 
 @ultroid_cmd(pattern="unsplash ?(.*)")
@@ -33,24 +21,16 @@ async def searchunsl(ult):
     else:
         num = 5
         query = match
-    tep = await eor(ult, "`Processing... `")
-    res = autopicsearch(query)
-    if len(res) == 0:
-        return await eod(ult, "No Results Found !")
-    qas = res[:num]
-    dir = "resources/downloads"
-    CL = []
-    nl = 0
-    for rp in qas:
-        li = "https://unsplash.com" + rp["href"]
-        ct = r.get(li).content
-        bst = bs(ct, "html.parser", from_encoding="utf-8")
-        ft = bst.find_all("img", "_2UpQX")[0]["src"]
-        Hp = dir + "img" + f"{nl}.png"
-        urllib.request.urlretrieve(ft, Hp)
+    tep = await eor(ult, get_string("com_1"))
+    res = await unsplashsearch(query, limit=num)
+    if not res:
+        return await eor(ult, get_string("unspl_1"), time=5)
+    dir = "resources/downloads/"
+    CL, nl = [], 0
+    for rp in res:
+        Hp = await download_file(rp, f"{dir}img-{nl}.png")
         CL.append(Hp)
         nl += 1
-    await ult.client.send_file(
-        ult.chat_id, CL, caption=f"Uploaded {len(qas)} Images\n", album=True
-    )
+    await ult.client.send_file(ult.chat_id, CL, caption=f"Uploaded {len(res)} Images!")
     await tep.delete()
+    [os.remove(img) for img in CL]
