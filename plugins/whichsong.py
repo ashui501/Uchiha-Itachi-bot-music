@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -16,31 +9,27 @@ from os import remove
 
 from shazamio import Shazam
 
-from . import *
+from . import eor, get_string, mediainfo, ultroid_cmd
 
 shazam = Shazam()
 
 
 @ultroid_cmd(pattern="whichsong$")
 async def song_recog(event):
-    if not event.reply_to_msg_id:
-        return await eod(event, "`Reply to a song file to recognize it!`", time=10)
-    xx = await eor(event, get_string("com_1"))
     reply = await event.get_reply_message()
-    t_ = mediainfo(reply.media)
-    if t_ != "audio":
-        return await eod(xx, "`Please use as reply to an audio file.`", time=5)
-    await xx.edit("`Downloading...`")
+    if not (reply and mediainfo(reply.media) == "audio"):
+        return await eor(event, get_string("whs_1"), time=5)
+    xx = await eor(event, get_string("com_5"))
     path_to_song = "./temp/shaazam_cache/unknown.mp3"
     await reply.download_media(path_to_song)
-    await xx.edit("`Trying to identify the song....`")
+    await xx.edit(get_string("whs_2"))
     try:
         res = await shazam.recognize_song(path_to_song)
     except Exception as e:
-        return await eod(xx, str(e), time=10)
+        return await eor(xx, str(e), time=10)
+    remove(path_to_song)
     try:
         x = res["track"]
+        await xx.edit(get_string("whs_4").format(x["title"]))
     except KeyError:
-        return await eod(xx, "`Couldn't identify song :(`", time=5)
-    await xx.edit(f"**Song Recognised!**\nName: __{x['title']}__")
-    remove(path_to_song)
+        return await eor(xx, get_string("whs_3"), time=5)
