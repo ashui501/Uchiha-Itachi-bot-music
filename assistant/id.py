@@ -3,7 +3,7 @@ from telethon.utils import pack_bot_file_id
 from plugins import *
 from . import *
 
-@asst_cmd("id")
+@asst_cmd(pattern="id")
 async def _(event):
     if event.reply_to_msg_id:
         await event.get_input_chat()
