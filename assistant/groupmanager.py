@@ -51,7 +51,7 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
-@asst_cmd("ban") 
+@asst_cmd(pattern="ban") 
 async def ban(event):
     noob = event.sender_id
     userids = []
@@ -95,7 +95,7 @@ async def ban(event):
         await event.reply(f"Banned  `{str(user.id)}` !")
 
 
-@asst_cmd("unban") 
+@asst_cmd(pattern="unban") 
 async def nothanos(event):
     userids = []
     noob = event.sender_id
@@ -126,7 +126,7 @@ async def nothanos(event):
         return
 
 
-@asst_cmd("promote") 
+@asst_cmd(pattern="promote") 
 async def promote(event):
     userids = []
     noob = event.sender_id
@@ -174,7 +174,7 @@ async def promote(event):
         await event.reply("No Permission To Promote 🤭")
         return
 
-@asst_cmd("demote") 
+@asst_cmd(pattern="demote") 
 async def demote(event):
     userids = []
     noob = event.sender_id
@@ -222,7 +222,7 @@ async def demote(event):
         return
     await event.reply("`Demoted this retard Successfully!`")
 
-@asst_cmd("gpin") 
+@asst_cmd(pattern="gpin") 
 async def pin(event):
     userids = []
     noob = event.sender_id
