@@ -88,3 +88,6 @@ async def get_var(event):
             else:
                 msg += f"• `{i}`" + "\n"
         await x.edit(f"**Ⳑⲓⲋⲧ ⲟϝ Rⲉⲇⲓⲋ Ⲕⲉⲩⲋ :**\n{msg}")
+
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
