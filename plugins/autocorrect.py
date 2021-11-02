@@ -1,48 +1,38 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available
+
 • `{i}autocorrect`
     To on/off Autocorrect Feature.
+
 """
 
+import string
+
 from gingerit.gingerit import GingerIt
-from googletrans import Translator
+from google_trans_new import google_translator
 from telethon import events
 
-from . import *
-
-tr = Translator()
+from . import HNDLR, Redis, eor, get_string, udB, ultroid_bot, ultroid_cmd
 
 
-@ultroid_cmd(pattern="autocorrect")
+@ultroid_cmd(pattern="autocorrect", fullsudo=True)
 async def acc(e):
-    if not is_fullsudo(e.sender_id):
-        return await eod(ult, "`This Command Is Sudo Restricted.`")
     if Redis("AUTOCORRECT") != "True":
         udB.set("AUTOCORRECT", "True")
-        await eod(e, "Autocorrect Feature On")
-    else:
-        udB.delete("AUTOCORRECT")
-        await eod(e, "Autocorrect Feature Off")
+        return await eor(e, get_string("act_1"), time=5)
+    udB.delete("AUTOCORRECT")
+    await eor(e, get_string("act_2"), time=5)
 
 
-@ultroid_bot.on(events.NewMessage(outgoing=True))
+@ultroid_bot.on(events.NewMessage(outgoing=True, func=lambda x: x.text))
 async def gramme(event):
     if Redis("AUTOCORRECT") != "True":
         return
     t = event.text
-    tt = tr.translate(t)
-    if t.startswith((HNDLR, ".", "?", "#", "_", "*", "'", "@", "[", "(", "+")):
+    if t[0] == HNDLR or t[0].lower() not in string.ascii_lowercase or t.endswith(".."):
         return
-    if t.endswith(".."):
-        return
-    if tt.src != "en":
+    tt = google_translator().detect(t)
+    if tt[0] != "en":
         return
     xx = GingerIt()
     x = xx.parse(t)
