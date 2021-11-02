@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -19,9 +12,9 @@ import os
 
 import requests
 from ProfanityDetector import detector
-from cython.functions.nsfw_db import *
+from cython.dB.nsfw_db import is_nsfw, nsfw_chat, rem_nsfw
 
-from . import *
+from . import HNDLR, eor, events, udB, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addnsfw ?(.*)", admins_only=True)
@@ -31,9 +24,7 @@ async def addnsfw(e):
             e, f"Get Api from deepai.org and Add It `{HNDLR}setredis DEEP_API your-api`"
         )
     action = e.pattern_match.group(1)
-    if not action:
-        action = "mute"
-    elif ("ban" or "kick" or "mute") not in action:
+    if not action or ("ban" or "kick" or "mute") not in action:
         action = "mute"
     nsfw_chat(e.chat_id, action)
     await eor(e, "Added This Chat To Nsfw Filter")
