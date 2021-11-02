@@ -1,11 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
-"""
 ✘ Commands Available -
 
 • `{i}setflood <integer>`
@@ -18,21 +10,26 @@
     Get flood limit of a chat.
 """
 
-
 import re
 
-from cython.functions.antiflood_db import (
-    get_flood,
-    get_flood_limit,
-    rem_flood,
-    set_flood,
-)
+from cython.dB import DEVLIST
+from cython.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
+from cython.functions.admins import admin_check
 from telethon.events import NewMessage as NewMsg
 
-from . import *
+from . import (
+    Button,
+    Redis,
+    asst,
+    callback,
+    eod,
+    eor,
+    get_string,
+    ultroid_bot,
+    ultroid_cmd,
+)
 
 _check_flood = {}
-
 
 if Redis("ANTIFLOOD") is not (None or ""):
 
@@ -52,9 +49,9 @@ if Redis("ANTIFLOOD") is not (None or ""):
                 _check_flood[event.chat_id] = {event.sender_id: count}
         else:
             _check_flood[event.chat_id] = {event.sender_id: count}
-        if await check_if_admin(event) or event.sender.bot:
+        if await admin_check(event) or event.sender.bot:
             return
-        if str(event.sender_id) in DEVLIST:
+        if event.sender_id in DEVLIST:
             return
         if _check_flood[event.chat_id][event.sender_id] >= int(
             get_flood_limit(event.chat_id)
@@ -65,7 +62,7 @@ if Redis("ANTIFLOOD") is not (None or ""):
                     event.chat_id, event.sender_id, send_messages=False
                 )
                 del _check_flood[event.chat_id]
-                await event.reply("#AntiFlood\n\n`You have been muted.`")
+                await event.reply(f"#AntiFlood\n\n{get_string('antiflood_3')}")
                 await asst.send_message(
                     int(Redis("LOG_CHANNEL")),
                     f"#Antiflood\n\n`Muted `[{name}](tg://user?id={event.sender_id})` in {chat}`",
@@ -97,25 +94,21 @@ async def unmuting(e):
 @ultroid_cmd(
     pattern="setflood ?(\\d+)",
     admins_only=True,
-    ignore_dualmode=True,
 )
 async def setflood(e):
-    input = e.pattern_match.group(1)
-    if not input:
-        return await eod(e, "`What?`")
-    if not input.isdigit():
-        return await eod(e, "`Invalid Input`")
-    m = set_flood(e.chat_id, input)
+    input_ = e.pattern_match.group(1)
+    if not input_:
+        return await eor(e, "`What?`", time=5)
+    if not input_.isdigit():
+        return await eor(e, get_string("com_3"), time=5)
+    m = set_flood(e.chat_id, input_)
     if m:
-        return await eod(
-            e, f"`Successfully Updated Antiflood Settings to {input} in this chat.`"
-        )
+        return await eod(e, get_string("antiflood_4").format(input_))
 
 
 @ultroid_cmd(
     pattern="remflood$",
     admins_only=True,
-    ignore_dualmode=True,
 )
 async def remove_flood(e):
     hmm = rem_flood(e.chat_id)
@@ -124,17 +117,16 @@ async def remove_flood(e):
     except BaseException:
         pass
     if hmm:
-        return await eod(e, "`Antiflood Settings Disabled`")
-    await eod(e, "`No flood limits in this chat.`")
+        return await eor(e, get_string("antiflood_1"), time=5)
+    await eor(e, get_string("antiflood_2"), time=5)
 
 
 @ultroid_cmd(
     pattern="getflood$",
     admins_only=True,
-    ignore_dualmode=True,
 )
 async def getflood(e):
     ok = get_flood_limit(e.chat_id)
     if ok:
-        return await eod(e, f"`Flood limit for this chat is {ok}.`")
-    await eod(e, "`No flood limits in this chat.`")
+        return await eor(e, get_string("antiflood_5").format(ok), time=5)
+    await eor(e, get_string("antiflood_2"), time=5)
