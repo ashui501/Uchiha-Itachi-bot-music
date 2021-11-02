@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -21,22 +14,22 @@
    List the currently AI added users.
 """
 
-from cython.functions.all import get_chatbot_reply
-from cython.functions.chatBot_db import *
+from cython.dB.chatBot_db import add_chatbot, get_all_added, rem_chatbot
+from cython.functions.tools import get_chatbot_reply
+
+from . import eod, eor, get_string, inline_mention, ultroid_cmd
 
 
 @ultroid_cmd(pattern="repai")
 async def im_lonely_chat_with_me(event):
-    if event.reply_to_msg_id:
+    if event.reply_to:
         message = (await event.get_reply_message()).message
     else:
         try:
             message = event.text.split(" ", 1)[1]
         except IndexError:
-            return await eod(
-                event, "Give a message or Reply to a User's Message.", time=10
-            )
-    reply_ = get_chatbot_reply(event, message=message)
+            return await eod(event, get_string("tban_1"), time=10)
+    reply_ = await get_chatbot_reply(message=message)
     await eor(event, reply_)
 
 
@@ -52,37 +45,39 @@ async def rem_chatBot(event):
 
 @ultroid_cmd(pattern="listai")
 async def lister(event):
-    users = get_all_added(chat)
-    if udB.get("CHATBOT_USERS") is None:
-        return await eod(event, "`No user has AI added.`")
-    msg = ""
+    users = get_all_added(event.chat_id)
+    if not users:
+        return await eor(event, get_string("chab_2"), time=5)
+    msg = "**Total List Of AI Enabled Users In This Chat :**\n\n"
     for i in users:
         try:
             user = await event.client.get_entity(int(i))
             user = inline_mention(user)
         except BaseException:
             user = f"`{i}`"
-        msg += "- {}\n".format(user)
+        msg += "• {}\n".format(user)
     await eor(event, msg, link_preview=False)
 
 
 async def chat_bot_fn(event, type_):
-    if event.reply_to_msg_id:
+    if event.reply_to:
         user = (await event.get_reply_message()).sender
     else:
-        temp = event.text.split(" ", 1)
+        temp = event.text.split(maxsplit=1)
         try:
-            usr = temp[1]
-        except IndexError:
-            return await eod(
-                event,
-                "Reply to a user or give me his id/username to add an AI ChatBot!",
-            )
-        user = await event.client.get_entity(usr)
+            user = await event.client.get_entity(temp[1])
+        except BaseException:
+            if event.is_private:
+                user = event.chat
+            else:
+                return await eod(
+                    event,
+                    get_string("chab_1"),
+                )
     if type_ == "add":
-        add_chatbot(event.chat.id, user.id)
+        add_chatbot(event.chat_id, user.id)
     if type_ == "remov":
-        rem_chatbot(event.chat.id, user.id)
+        rem_chatbot(event.chat_id, user.id)
     await eor(
-        event, f"**ChatBot:**\n{type_}ed [{user.first_name}](tg://user?id={user.id})`"
+        event, f"**ChatBot:**\n{type_}ed [{user.first_name}](tg://user?id={user.id})"
     )
