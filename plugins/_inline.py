@@ -6,6 +6,7 @@ from os import remove
 from platform import python_version as PyVer
 from git import Repo
 from cython.dB._core import HELP, LIST
+from cython.version import __version__ as UltVer
 from cython.functions.helper import gen_chlog, time_formatter, updater
 from cython.misc import CMD_HELP, owner_and_sudos
 from cython.misc._assistant import callback, in_pattern
@@ -13,7 +14,7 @@ from telethon import Button, __version__
 from telethon.tl.types import InputWebDocument, Message
 from telethon.utils import resolve_bot_file_id
 
-from . import HNDLR, INLINE_PIC, LOGS, OWNER_NAME, asst, get_string, start_time, udB
+from . import HNDLR, INLINE_PIC, LOGS, OWNER_NAME, asst, get_string, start_time, udB, ultroid_version
 from ._help import _main_help_menu
 
 # ================================================#
@@ -24,8 +25,6 @@ helps = get_string("inline_1")
 
 uptime = time_formatter((time.time() - start_time) * 1000)
 header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
-ultroid_version = "2.01"
-UltVer = "10.2021"
 ALIVEMSG = """
 **CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n
 **{}**
