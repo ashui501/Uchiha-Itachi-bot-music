@@ -1,6 +1,7 @@
 import os
-
 import requests
+
+from . import HNDLR, eor, events, udB, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="detect$", outgoing=True)
