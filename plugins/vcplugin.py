@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available -
 
@@ -13,6 +6,9 @@
 
 • `{i}stopvc`
     Stop Group Call in a group.
+
+• `{i}playvc`
+    Start Voice Chat Bot to receive Commands.
 
 • `{i}vcinvite`
     Invite all members of group in Group Call.
@@ -24,10 +20,14 @@
 • `{i}rmvcaccess <id/username/reply to msg>`
     Remove access of Voice Chat Bot.
 
-• `{i}listvcaccess`
-    Get The List of People having vc access.
-"""
+• **Voice Chat Bot Commands**
+   `/play ytsearch : song-name`
+   `/play youtube link`
+   `/current`
+   `/skip`
+   `/exitVc`
 
+"""
 
 from cython.functions.vc_sudos import add_vcsudo, del_vcsudo, get_vcsudos, is_vcsudo
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat
@@ -59,8 +59,22 @@ async def _(e):
     try:
         await e.client(stopvc(await get_call(e)))
         await eor(e, "`Voice Chat Stopped...`")
+        vcdyno("off")
     except Exception as ex:
         await eor(e, f"`{str(ex)}`")
+
+
+@ultroid_cmd(
+    pattern="playvc$",
+)
+async def _(e):
+    zz = await eor(e, "`VC bot started...`")
+    er, out = await bash("npm start")
+    LOGS.info(er)
+    LOGS.info(out)
+    vcdyno("on")
+    if er:
+        await zz.edit(f"Failed {er}\n\n{out}")
 
 
 @ultroid_cmd(
@@ -180,3 +194,16 @@ async def _(e):
         )
     except Exception as ex:
         return await eod(xx, f"`{str(ex)}`", time=5)
+
+
+@asst_cmd("exitVc")
+async def evc(e):
+    if e.sender.id == ultroid_bot.uid:
+        vcdyno("off")
+    elif is_sudo(e.sender.id):
+        vcdyno("off")
+    elif is_vcsudo(e.sender.id):
+        vcdyno("off")
+
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
