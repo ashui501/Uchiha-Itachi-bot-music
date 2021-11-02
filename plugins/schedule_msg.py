@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Commands Available -
 
@@ -14,13 +8,13 @@
 """
 from datetime import timedelta
 
-from . import *
+from cython.functions.admins import ban_time
+
+from . import eor, ultroid_cmd
 
 
-@ultroid_cmd(pattern="schedule ?(.*)")
+@ultroid_cmd(pattern="schedule ?(.*)", fullsudo=True)
 async def _(e):
-    if not e.out and not is_fullsudo(e.sender_id):
-        return await eod(e, "`This Command is Full Sudo Restricted`")
     x = e.pattern_match.group(1)
     xx = await e.get_reply_message()
     if x and not xx:
@@ -30,26 +24,26 @@ async def _(e):
             await e.client.send_message(
                 e.chat_id, k, schedule=timedelta(seconds=int(y))
             )
-            await eod(e, "`Scheduled msg Succesfully`")
+            await eor(e, get_string("schdl_1"), time=5)
         else:
             try:
                 z = await ban_time(e, y)
                 await e.client.send_message(e.chat_id, k, schedule=z)
-                await eod(e, "`Scheduled msg Succesfully`")
+                await eor(e, get_string("schdl_1"), time=5)
             except BaseException:
-                await eod(e, "`Incorrect Format`")
+                await eor(e, get_string("schdl_2"), time=5)
     elif xx and x:
         if x.isdigit():
             await e.client.send_message(
                 e.chat_id, xx, schedule=timedelta(seconds=int(x))
             )
-            await eod(e, "`Scheduled msg Succesfully`")
+            await eor(e, get_string("schdl_1"), time=5)
         else:
             try:
                 z = await ban_time(e, x)
                 await e.client.send_message(e.chat_id, xx, schedule=z)
-                await eod(e, "`Scheduled msg Succesfully`")
+                await eor(e, get_string("schdl_1"), time=5)
             except BaseException:
-                await eod(e, "`Incorrect Format`")
+                await eor(e, get_string("schdl_2"), time=5)
     else:
-        return await eod(e, "`Incorrect Format`")
+        return await eor(e, get_string("schdl_2"), time=5)
