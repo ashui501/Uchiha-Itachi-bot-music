@@ -3,6 +3,8 @@ import shutil
 import psutil
 from datetime import datetime
 
+from . import * 
+
 Lastupdate = time.time()
 
 @asst_cmd(pattern="ping$")
