@@ -1,17 +1,10 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 ✘ Commands Available
 
 •`{i}addecho <reply to anyone>`
    Start Auto Echo message of Replied user.
 
-•`{i}rmecho <reply to anyone>`
+•`{i}remecho <reply to anyone>`
    Turn It off
 
 •`{i}listecho <reply to anyone>`
@@ -19,10 +12,10 @@
 
 """
 
-from cython.functions.echo_db import *
+from cython.dB.echo_db import add_echo, check_echo, list_echo, rem_echo
 from telethon.utils import get_display_name
 
-from . import *
+from . import LOGS, eor, events, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addecho ?(.*)")
@@ -34,21 +27,21 @@ async def echo(e):
         try:
             user = e.text.split()[1]
             if user.startswith("@"):
-                ok = await ultroid_bot.get_entity(user)
+                ok = await e.client.get_entity(user)
                 user = ok.id
             else:
                 user = int(user)
         except BaseException:
-            return await eod(e, "Reply to a user.")
+            return await eor(e, "Reply To A user.", time=5)
     if check_echo(e.chat_id, user):
-        return await eod(e, "Echo already activated for this user.")
+        return await eor(e, "Echo already activated for this user.", time=5)
     add_echo(e.chat_id, user)
-    ok = await ultroid_bot.get_entity(user)
+    ok = await e.client.get_entity(user)
     user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
     await eor(e, f"Activated Echo For {user}.")
 
 
-@ultroid_cmd(pattern="rmecho ?(.*)")
+@ultroid_cmd(pattern="remecho ?(.*)")
 async def rm(e):
     r = await e.get_reply_message()
     if r:
@@ -57,15 +50,15 @@ async def rm(e):
         try:
             user = e.text.split()[1]
             if user.startswith("@"):
-                ok = await ultroid_bot.get_entity(user)
+                ok = await e.client.get_entity(user)
                 user = ok.id
             else:
                 user = int(user)
         except BaseException:
-            return await eod(e, "Reply to a user.")
+            return await eor(e, "Reply To A User.", time=5)
     if check_echo(e.chat_id, user):
         rem_echo(e.chat_id, user)
-        ok = await ultroid_bot.get_entity(user)
+        ok = await e.client.get_entity(user)
         user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
         return await eor(e, f"Deactivated Echo For {user}.")
     await eor(e, "Echo not activated for this user")
@@ -75,8 +68,8 @@ async def rm(e):
 async def okk(e):
     if check_echo(e.chat_id, e.sender_id):
         try:
-            ok = await bot.get_messages(e.chat_id, ids=e.id)
-            return await ultroid_bot.send_message(e.chat_id, ok)
+            ok = await e.client.get_messages(e.chat_id, ids=e.id)
+            return await e.client.send_message(e.chat_id, ok)
         except Exception as er:
             LOGS.info(er)
 
@@ -87,12 +80,9 @@ async def lstecho(e):
     if k:
         user = "**Activated Echo For Users:**\n\n"
         for x in k:
-            ok = await ultroid_bot.get_entity(int(x))
+            ok = await e.client.get_entity(int(x))
             kk = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
             user += "•" + kk + "\n"
         await eor(e, user)
     else:
-        await eod(e, "`List is Empty, For echo`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
+        await eor(e, "`List is Empty, For echo`", time=5)
