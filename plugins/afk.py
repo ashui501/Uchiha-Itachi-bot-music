@@ -1,3 +1,4 @@
+"""
 ✘ Commands Available -
 
 • `{i}afk <optional reason>`
