@@ -93,7 +93,7 @@ async def warn(e):
     user = inline_mention(ok)
     await eor(
         e,
-        f"**WARNING :** {count+1}/{number}\n**To :**{user}\n\n**Reason** :\n✵ {reason}",
+        f"**WARNING :-** {count+1}/{number}\n**To :- **{user}\n\n**Reason :-**\n✵ {reason}\n\n**⚜️ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️**",
     )
 
 
