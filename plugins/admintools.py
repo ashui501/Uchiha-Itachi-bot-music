@@ -293,9 +293,9 @@ async def fastpurger(purg):
         ):
             await msg.delete()
             p += 0
-        return await eor(purg, f"Purged {p} Messages! ", time=5)
+        return await eod(purg, f"Purged {p} Messages! ", time=3)
     if not purg.reply_to_msg_id:
-        return await eor(purg, get_string("purge_1"), time=10)
+        return await eod(purg, get_string("purge_1"), time=3)
     try:
         await purg.client.delete_messages(
             purg.chat_id, [a for a in range(purg.reply_to_msg_id, purg.id + 1)]
@@ -316,7 +316,7 @@ async def fastpurgerme(purg):
         try:
             nnt = int(num)
         except BaseException:
-            await eor(purg, get_string("com_3"), time=5)
+            await eod(purg, get_string("com_3"), time=3)
             return
         mp = 0
         async for mm in purg.client.iter_messages(
@@ -324,7 +324,7 @@ async def fastpurgerme(purg):
         ):
             await mm.delete()
             mp += 1
-        await eor(purg, f"Purged {mp} Messages!", time=5)
+        await eod(purg, f"Purged {mp} Messages!", time=3)
         return
     chat = await purg.get_input_chat()
     msgs = []
@@ -333,7 +333,7 @@ async def fastpurgerme(purg):
         return await eod(
             purg,
             "`Reply to a message to purge from or use it like ``purgeme <num>`",
-            time=10,
+            time=5,
         )
     async for msg in purg.client.iter_messages(
         chat,
@@ -352,6 +352,7 @@ async def fastpurgerme(purg):
     await eod(
         purg,
         "__Fast purge complete!__\n**Purged** `" + str(count) + "` **messages.**",
+        time=3
     )
 
 
@@ -363,14 +364,15 @@ async def _(e):
         return await eod(
             e,
             get_string("purgeall_1"),
+            time=5
         )
 
     name = (await e.get_reply_message()).sender
     try:
         await e.client(DeleteUserHistoryRequest(e.chat_id, name.id))
-        await eor(e, get_string("purgeall_2").format(name.first_name), time=5)
+        await eod(e, get_string("purgeall_2").format(name.first_name), time=3)
     except Exception as er:
-        return await eor(e, str(er), time=5)
+        return await eod(e, str(er), time=3)
 
 
 @ultroid_cmd(pattern="pinned", type=["official", "manager"], groups_only=True)
