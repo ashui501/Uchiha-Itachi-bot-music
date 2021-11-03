@@ -1,10 +1,4 @@
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
+import time
 from datetime import datetime
 from pytz import timezone as tz
 
@@ -150,17 +144,14 @@ async def list(event):
 async def chat(event):
     await asst.send_message(event.chat_id, "Send your message please. I'll see and answer you whenever get online\n\n✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ✨")
 
-Lastupdate = time.time()
 
 @callback("ping")
 async def _(event):
-    start = datetime.now()
-    end = datetime.now()
-    ms = (end - start).microseconds / 1000
-    await asst.send_message(
-        event.chat_id,
-        f"**█▀█ █ █▄░█ █▀▀ █ \n█▀▀ █ █░▀█ █▄█ ▄**\n\n ➲CɪᴘʜᴇʀX Ⲋⲉʀⳳⲉʀ Ⲣⲓⲛⳋ~`{ms}ms`",
-    )
+    start = time.time()
+    x = await event.respond("𝙿𝙸𝙽𝙶")
+    end = round((time.time() - start) * 1000)
+    uptime = time_formatter((time.time() - start_time) * 1000)
+    await x.edit(get_string("ping").format(end, uptime))
 
     
 @callback("group")
