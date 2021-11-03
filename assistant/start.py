@@ -59,7 +59,7 @@ async def ultroid(event):
             await event.client.send_message(
                 int(udB["LOG_CHANNEL"]), msg, buttons=buttons
             )
-    if (event.sender_id != OWNER_ID) and not is_fullsudo(event.sender_id):
+    if not is_fullsudo(event.sender_id): 
         ok = ""
         u = await event.client.get_entity(event.chat_id)
         if not udB.get("STARTMSG"):
