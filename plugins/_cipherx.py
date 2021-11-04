@@ -12,10 +12,14 @@ REPOMSG = """
 
 RP_BUTTONS = [
     [Button.url(get_string("bot_3"), "https://xhamsterlive.com")],
-    [Button.url("Ⲋυⲣⲣⲟʀⲧ Ⲥⲏⲁⲛⲛⲉⳑ", "t.me/FutureTechnologyOfficial")],
+    [Button.url("Ⲋυⲣⲣⲟʀⲧ", "t.me/FutureTechnologyOfficial")],
 ]
 
-MEDIA
+BTS =[
+    [Button.url("• Rⲉⲣⲟ •­", "https://xhamsterlive.com")], 
+    [Button.url("• Ⲋυⲣⲣⲟʀⲧ •­", "t.me/FutureTechnologyOfficial")], 
+]
+ 
 
 ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**
 
@@ -31,7 +35,7 @@ async def repify(e):
         #q = await e.client.inline_query(asst.me.username, "")
         #await q[0].click(e.chat_id)
         #return await e.delete()
-        await e.reply("REPOMSG, file=udB.get("STARTMEDIA"), buttons=[[Button.url("• Rⲉⲣⲟ •­", "https://xhamsterlive.com"), Button.url("• Ⲋυⲣⲣⲟʀⲧ •­", "t.me/FutureTechnologyOfficial")]])
+        await e.reply("REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
     except (
         ChatSendInlineForbiddenError,
         ChatSendMediaForbiddenError,
