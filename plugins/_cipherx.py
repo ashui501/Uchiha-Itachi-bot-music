@@ -4,7 +4,7 @@ from telethon.errors import (
     ChatSendMediaForbiddenError,
 )
 
-from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
+from . import udB, STARTMEDIA, LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
 
 REPOMSG = """
 • **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ** • 
