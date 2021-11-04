@@ -25,7 +25,6 @@ async def _(event):
         lan = input or "en"
     else:
         return await event.edit(event.chat_id, "1⃣ /tr [Language Code](https://telegra.ph/CɪᴘʜᴇʀX-03-10) as reply to a message\n2⃣ /tr <target LangCode> <text> ~ Ex: /tr ko hello", link_preview=False)
-        )
     translator = google_translator()
     try:
         tt = translator.translate(text, lang_tgt=lan)
