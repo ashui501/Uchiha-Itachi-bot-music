@@ -24,7 +24,7 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 
 @ultroid_cmd(
     pattern="repo$",
-    type=["official", "manager"],
+    type=["official", "manager", "assistant"],
 )
 async def repify(e):
     await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
