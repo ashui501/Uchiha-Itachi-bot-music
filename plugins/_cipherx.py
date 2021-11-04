@@ -7,15 +7,15 @@ from telethon.errors import (
 from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
 
 REPOMSG = """
-• **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ** •\n
-• Repo - [Click Here](https://xhamsterlive.com)
-• Support - @FutureTechnologyOfficial
+• **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ** • 
 """
 
 RP_BUTTONS = [
     [Button.url(get_string("bot_3"), "https://xhamsterlive.com")],
-    [Button.url("Support Channel", "t.me/FutureTechnologyOfficial")],
+    [Button.url("Ⲋυⲣⲣⲟʀⲧ Ⲥⲏⲁⲛⲛⲉⳑ", "t.me/FutureTechnologyOfficial")],
 ]
+
+MEDIA
 
 ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**
 
@@ -24,13 +24,14 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 
 @ultroid_cmd(
     pattern="repo$",
-    type=["official", "manager"],
+    type=["official", "manager", "assistant"],
 )
 async def repify(e):
     try:
-        q = await e.client.inline_query(asst.me.username, "")
-        await q[0].click(e.chat_id)
-        return await e.delete()
+        #q = await e.client.inline_query(asst.me.username, "")
+        #await q[0].click(e.chat_id)
+        #return await e.delete()
+        await e.reply("REPOMSG, file=udB.get("STARTMEDIA"), buttons=[[Button.url("• Rⲉⲣⲟ •­", "https://xhamsterlive.com"), Button.url("• Ⲋυⲣⲣⲟʀⲧ •­", "t.me/FutureTechnologyOfficial")]])
     except (
         ChatSendInlineForbiddenError,
         ChatSendMediaForbiddenError,
