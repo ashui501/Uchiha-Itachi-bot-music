@@ -1,10 +1,4 @@
-from telethon.errors import (
-    BotMethodInvalidError,
-    ChatSendInlineForbiddenError,
-    ChatSendMediaForbiddenError,
-)
-
-from . import udB, LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
+from . import *
 
 REPOMSG = """
 • **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ** • 
@@ -32,19 +26,9 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 )
 async def repify(e):
     try:
-        #q = await e.client.inline_query(asst.me.username, "")
-        #await q[0].click(e.chat_id)
-        #return await e.delete()
         await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
-    except (
-        ChatSendInlineForbiddenError,
-        ChatSendMediaForbiddenError,
-        BotMethodInvalidError,
-    ):
-        pass
     except Exception as er:
         LOGS.info("Error while repo command : " + str(er))
-    await eor(e, REPOMSG)
 
 
 @ultroid_cmd(pattern="cipher$")
