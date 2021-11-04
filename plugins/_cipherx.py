@@ -35,7 +35,7 @@ async def repify(e):
         #q = await e.client.inline_query(asst.me.username, "")
         #await q[0].click(e.chat_id)
         #return await e.delete()
-        await e.reply("REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
+        await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
     except (
         ChatSendInlineForbiddenError,
         ChatSendMediaForbiddenError,
