@@ -10,8 +10,10 @@ RP_BUTTONS = [
 ]
 
 BTS =[
-    [Button.url("• Rⲉⲣⲟ •­", "https://xhamsterlive.com")], 
-    [Button.url("• Ⲋυⲣⲣⲟʀⲧ •­", "t.me/FutureTechnologyOfficial")], 
+    [
+        Button.url("• Rⲉⲣⲟ •­", "https://xhamsterlive.com"), 
+        Button.url("• Ⲋυⲣⲣⲟʀⲧ •­", "t.me/FutureTechnologyOfficial"),
+    ], 
 ]
  
 
@@ -22,14 +24,11 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 
 @ultroid_cmd(
     pattern="repo$",
-    type=["official", "manager", "assistant"],
+    type=["official", "manager"],
 )
 async def repify(e):
-    try:
-        await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
-    except Exception as er:
-        LOGS.info("Error while repo command : " + str(er))
-
+    await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=BTS) 
+    
 
 @ultroid_cmd(pattern="cipher$")
 async def useUltroid(rs):
