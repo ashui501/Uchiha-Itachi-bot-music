@@ -8,7 +8,7 @@ from telethon.utils import pack_bot_file_id
  
 from strings.strings import get_string
 from . import *
-from .. import * 
+from ..plugins import * 
 
 @asst_cmd(pattern="tr$") 
 async def _(event):
