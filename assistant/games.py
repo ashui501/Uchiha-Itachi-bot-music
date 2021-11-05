@@ -34,7 +34,7 @@ aki_photo = "https://telegra.ph/file/3cc8825c029fd0cab9edc.jpg"
 
 
 @ultroid_cmd(
-    pattern="akinator", type=["official", "assistant"], from_users=owner_and_sudos()
+    pattern="akinator", type=["official", "assistant", "manager"], admins_only=True 
 )
 async def doit(e):
     sta = akinator.Akinator()
@@ -120,7 +120,7 @@ async def eiagx(e):
 
 
 @ultroid_cmd(
-    pattern="startgame", type=["official", "assistant"], from_users=owner_and_sudos()
+    pattern="startgame", type=["official", "assistant", "manager"], admins_only=True
 )
 async def magic(event):
     buttons = [
@@ -290,7 +290,7 @@ async def pollish(eve):
 
 
 @ultroid_cmd(
-    pattern="cancel", type=["official", "assistant"], func=lambda x: TRIVIA_CHATS.get(x.chat_id) 
+    pattern="cancel", type=["official", "assistant", "manager"], func=lambda x: TRIVIA_CHATS.get(x.chat_id) 
 )
 async def cancelish(event):
     chat = TRIVIA_CHATS.get(event.chat_id)
