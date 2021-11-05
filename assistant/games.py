@@ -119,7 +119,9 @@ async def eiagx(e):
 # ----------------------- Main Command ------------------- #
 
 
-@asst_cmd(pattern="startgame", owner=True)
+@ultroid_cmd(
+    pattern="startgame", type=["official", "assistant"], from_users=owner_and_sudos()
+)
 async def magic(event):
     buttons = [
         [Button.inline("Trivia Quiz", "trzia")],
@@ -287,7 +289,9 @@ async def pollish(eve):
         TRIVIA_CHATS[chat][user] += 1
 
 
-@asst_cmd("cancel", owner=True, func=lambda x: TRIVIA_CHATS.get(x.chat_id))
+@ultroid_cmd(
+    pattern="cancel", type=["official", "assistant"], func=lambda x: TRIVIA_CHATS.get(x.chat_id)) 
+)
 async def cancelish(event):
     chat = TRIVIA_CHATS.get(event.chat_id)
     chat.update({"cancel": True})
