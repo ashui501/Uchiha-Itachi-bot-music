@@ -29,6 +29,7 @@ import glob
 import io
 import os
 import time
+import requests
 from asyncio.exceptions import TimeoutError as AsyncTimeout
 
 import cv2
@@ -65,11 +66,18 @@ async def _(event):
     try:
         tt = translator.translate(text, lang_tgt=lan)
         fr = translator.detect(text)
-        output_str = f"Trᴀnslᴀᴛᴇd** Frᴏʍ {fr} Tᴏ {lan} by CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ\n{tt}"
+        output_str = f"**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({fr})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({lan})**:\n`{tt.text}`"
+        if len(output_str) >= 4096:
+            url = "https://del.dog/documents"
+            r = requests.post(url, data=output_str.encode("UTF-8")).json()
+            url2 = f"https://del.dog/{r['key']}"
+            output_str = (
+                f"Translated text was too big, so I've pasted it [Here]({url2})"
+            )
         await eor(event, output_str)
     except Exception as exc:
-        await eor(event, str(exc), time=5)
-
+        await eor(event, "Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.", link_preview=False, time=5)
+       
 
 @ultroid_cmd(
     pattern="id ?(.*)",
