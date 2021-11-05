@@ -2,7 +2,7 @@ import base64
 from datetime import datetime
 from random import choice
 from re import compile as re_compile
-
+from play_scraper import search
 import requests
 import json
 from bs4 import BeautifulSoup as bs
