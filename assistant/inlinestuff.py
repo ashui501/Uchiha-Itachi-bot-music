@@ -421,16 +421,15 @@ async def _(e):
     try:
         quer = e.text.split(" ", maxsplit=1)[1]
     except IndexError:
-        await e.answer(
+        return await e.answer(
             [], switch_pm="Mod Apps Search. Enter app name!", switch_pm_param="start"
         )
     page = 1
     start = (page - 1) * 3 + 1
     da = choice([api1, api2, api3])
     url = f"https://www.googleapis.com/customsearch/v1?key={da}&cx=25b3b50edb928435b&q={quer}&start={start}"
-    data = requests.get(url).json()
+    data = await async_searcher(url, re_json=True)
     search_items = data.get("items")
-    search(quer)
     modss = []
     for a in search_items:
         title = a.get("title")
