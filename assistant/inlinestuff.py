@@ -2,7 +2,6 @@ import base64
 from datetime import datetime
 from random import choice
 from re import compile as re_compile
-from play_scraper import search
 import requests
 import json
 from bs4 import BeautifulSoup as bs
@@ -105,8 +104,7 @@ async def _(e):
         )
         await e.answer([kkkk])
     url = f"https://bins-su-api.vercel.app/api/{quer}"
-    data = json.loads(requests.get(url).text) 
-    search(quer)
+    data = json.loads(requests.get(url).text)
     results = data["result"]
     messages = data["message"]
     types = data["data"]["type"]
@@ -175,8 +173,7 @@ async def _(e):
         )
         await e.answer([kkkk])
     url = f"http://ip-api.com/json/{quer}"
-    data = json.loads(requests.get(url).text) 
-    search(quer)
+    data = json.loads(requests.get(url).text)
     stat = data["status"]
     count = data["country"]
     countc = data["countryCode"]
