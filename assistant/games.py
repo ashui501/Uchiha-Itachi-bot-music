@@ -290,7 +290,7 @@ async def pollish(eve):
 
 
 @ultroid_cmd(
-    pattern="cancel", type=["official", "assistant", "manager"], func=lambda x: TRIVIA_CHATS.get(x.chat_id) 
+    pattern="cancel", admins_only=True, type=["official", "assistant", "manager"], func=lambda x: TRIVIA_CHATS.get(x.chat_id) 
 )
 async def cancelish(event):
     chat = TRIVIA_CHATS.get(event.chat_id)
