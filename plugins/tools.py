@@ -45,7 +45,7 @@ from . import humanbytes as hb
 from . import ultroid_cmd, uploader
 
 
-@ultroid_cmd(pattern="tr", type=["official", "manager"])
+@ultroid_cmd(pattern="tr", type=["official", "manager", "assistant"])
 async def _(event):
     if len(event.text) > 3 and event.text[3] != " ":
         return
@@ -66,7 +66,7 @@ async def _(event):
     try:
         tt = translator.translate(text, lang_tgt=lan)
         fr = translator.detect(text)
-        output_str = f"**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({fr})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({lan})**:\n`{tt.text}`"
+        output_str = f"**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({fr})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({lan})**:\n`{tt}`"
         if len(output_str) >= 4096:
             url = "https://del.dog/documents"
             r = requests.post(url, data=output_str.encode("UTF-8")).json()
@@ -81,7 +81,7 @@ async def _(event):
 
 @ultroid_cmd(
     pattern="id ?(.*)",
-    type=["official", "manager"],
+    type=["official", "manager", "assistant"],
 )
 async def _(event):
     if event.reply_to_msg_id:
@@ -101,7 +101,7 @@ async def _(event):
         else:
             await eor(
                 event,
-                "**Chat ID:**  `{}`\n**User ID:**  `{}`\n**Msg ID:**  `{}`".format(
+                "**Chat ID:**  `{}`\n**User ID:**  `{}`\n**Message ID:**  `{}`".format(
                     str(event.chat_id), str(r_msg.sender_id), str(r_msg.id)
                 ),
             )
@@ -117,7 +117,7 @@ async def _(event):
     else:
         await eor(
             event,
-            "**Current Chat ID:**  `{}`\n**Msg ID:**  `{}`".format(
+            "**Current Chat ID:**  `{}`\n**Message ID:**  `{}`".format(
                 str(event.chat_id), str(event.id)
             ),
         )
