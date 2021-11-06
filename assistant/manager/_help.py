@@ -3,9 +3,9 @@ from . import *
 START = """
 🪅 **Help Menu** 🪅
 
-✘  /start : Check I'm Alive or not.
+✘  /start : Start the bot 
 ✘  /help : Get This Message.
-✘  /repo : Get Bot's Repo.
+✘  /repo : Get Repo.
 
 🧑‍💻 Join **@FutureTechnologyOfficial**
 """
@@ -36,11 +36,11 @@ UTILITIES = """
 
 • /info (reply/username/id) : get detailed info of user.
 • /id : get chat/user id.
-• /tr : Translate Languages..
+• /tr : Translate Languages.
 
 • /paste (reply file/text) : paste content on Spaceb.in
 • /meaning (text) : Get Meaning of that Word.
-• /google (query) : Search Something on Google..
+• /go (query) : Search Something on Google.
 
 • /suggest (query/reply) : Creates a Yes / No Poll.
 """
@@ -67,7 +67,7 @@ MISC = """
 ✘  **Misc**  ✘
 
 • /joke : Get Random Jokes.
-• /decide : Decide Something..
+• /decide : Decide Something.
 """
 
 STRINGS = {"Admintools": ADMINTOOLS, "locks": LOCKS, "Utils": UTILITIES, "Misc": MISC}
