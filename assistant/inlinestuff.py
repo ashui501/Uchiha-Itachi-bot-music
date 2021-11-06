@@ -2,8 +2,6 @@ import base64
 from datetime import datetime
 from random import choice
 from re import compile as re_compile
-import requests
-import json
 from bs4 import BeautifulSoup as bs
 from cython.functions.misc import google_search
 from cython.functions.tools import async_searcher, dloader, get_ofox
@@ -104,7 +102,7 @@ async def _(e):
         )
         await e.answer([kkkk])
     url = f"https://bins-su-api.vercel.app/api/{quer}"
-    data = json.loads(requests.get(url).text)
+    data = await async_searcher(url, re_json=True) 
     results = data["result"]
     messages = data["message"]
     types = data["data"]["type"]
@@ -173,7 +171,7 @@ async def _(e):
         )
         await e.answer([kkkk])
     url = f"http://ip-api.com/json/{quer}"
-    data = json.loads(requests.get(url).text)
+    data = await async_searcher(url, re_json=True) 
     stat = data["status"]
     count = data["country"]
     countc = data["countryCode"]
