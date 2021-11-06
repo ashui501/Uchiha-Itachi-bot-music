@@ -331,7 +331,7 @@ async def _(event):
 
 @ultroid_cmd(
     pattern="info ?(.*)",
-    type=["official", "manager"],
+    type=["official", "manager", "assistant"],
 )
 async def _(event):
     xx = await eor(event, get_string("com_1"))
@@ -492,7 +492,7 @@ async def rmbg(event):
 
 
 @ultroid_cmd(
-    pattern="telegraph ?(.*)",
+    pattern="telegraph ?(.*)", type=["official", "manager", "assistant"]
 )
 async def telegraphcmd(event):
     match = event.pattern_match.group(1) or "CɪᴘʜᴇʀX"
@@ -510,7 +510,7 @@ async def telegraphcmd(event):
         if "document" not in dar:
             try:
                 nn = "https://telegra.ph" + uf(getit)[0]
-                amsg = f"Uploaded to [Telegraph]({nn}) !"
+                amsg = f"Uploaded to [Telegraph]({nn})"
             except Exception as e:
                 amsg = f"Error : {e}"
             os.remove(getit)
@@ -523,7 +523,7 @@ async def telegraphcmd(event):
     await eor(event, f"Pasted to Telegraph : [Telegraph]({war})")
 
 
-@ultroid_cmd(pattern="json$")
+@ultroid_cmd(pattern="json$", type=["official", "manager", "assistant"])
 async def _(event):
     the_real_message = None
     reply_to_id = None
