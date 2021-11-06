@@ -4,7 +4,7 @@
 • `{i}saavn <search query>`
     Download songs from Saavn.
 
-• `{i}google <query>`
+• `{i}go <query>`
     For doing google search.
 
 • `{i}github <username>`
@@ -81,8 +81,8 @@ async def gitsearch(event):
 
 
 @ultroid_cmd(
-    pattern="google ?(.*)",
-    type=["official", "manager"],
+    pattern="go ?(.*)",
+    type=["official", "manager", "assistant"],
 )
 async def google(event):
     inp = event.pattern_match.group(1)
