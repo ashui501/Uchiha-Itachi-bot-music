@@ -34,7 +34,7 @@ aki_photo = "https://telegra.ph/file/3cc8825c029fd0cab9edc.jpg"
 
 
 @ultroid_cmd(
-    pattern="akinator", type=["official", "assistant", "manager"], admins_only=True 
+    pattern="akinator", type=["official", "manager"], admins_only=True 
 )
 async def doit(e):
     sta = akinator.Akinator()
@@ -120,7 +120,7 @@ async def eiagx(e):
 
 
 @ultroid_cmd(
-    pattern="startgame", type=["official", "assistant", "manager"], admins_only=True
+    pattern="startgame", type=["official", "manager"], admins_only=True
 )
 async def magic(event):
     buttons = [
@@ -153,7 +153,7 @@ async def delete_it(event):
 @callback(re.compile("ctdown(.*)"), owner=True)
 async def ct_spam(e):
     n = e.data_match.group(1).decode("utf-8")
-    await e.answer(f"Wait {n} seconds..", alert=True)
+    await e.answer(f"Wait {n} seconds...", alert=True)
 
 
 @callback(re.compile("trzia(.*)"), owner=True)
@@ -188,7 +188,7 @@ async def choose_cata(event):
     elif match[0] == "c":
         m = match[1:]
         buttons = [[Button.inline(str(i), f"trziat{m}_{i}") for i in range(10, 70, 20)]]
-        text = "Choose Number of Questions.."
+        text = "Choose Number of Questions..."
     elif match[0] == "t":
         m_ = match[1:]
         buttons = [
