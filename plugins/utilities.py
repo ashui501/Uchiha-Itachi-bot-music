@@ -282,7 +282,7 @@ async def stats(
     await ok.edit(response)
 
 
-@ultroid_cmd(pattern="paste( (.*)|$)", type=["official", "manager"])
+@ultroid_cmd(pattern="paste( (.*)|$)", type=["official", "manager", "assistant"])
 async def _(event):
     xx = await eor(event, "` 《 Pasting... 》 `")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
