@@ -842,7 +842,7 @@ async def _admin_tools(event):
     
 @callback(re.compile(b"dontspamnigga"))
 async def _talk(e):
-    from_user = (await e.get_chat()).id
+    from_user = (e.get_sender()).id
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
@@ -854,7 +854,7 @@ async def _talk(e):
     
 @callback(re.compile(b"whattalk"))
 async def _talk(e):
-    from_user = (await e.get_chat()).id
+    from_user = (e.get_sender()).id
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
@@ -864,7 +864,7 @@ async def _talk(e):
     
 @callback(re.compile(b"askme"))
 async def _ask(e):
-    from_user = (await e.get_chat()).id
+    from_user = (e.get_sender()).id
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
