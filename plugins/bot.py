@@ -94,13 +94,11 @@ async def alive(event):
 async def lol(ult):
     pic = udB.get("ALIVE_PIC")
     uptime = time_formatter((time.time() - start_time) * 1000)
-    header = udB.get("ALIVE_TEXT") or get_string("bot_1")
     y = Repo().active_branch
     xx = Repo().remotes[0].config_reader.get("url")
     rep = xx.replace(".git", f"/tree/{y}")
     kk = f" `[{y}]({rep})` "
     als = (get_string("alive_1")).format(
-        header,
         OWNER_NAME,
         ultroid_version,
         UltVer,
@@ -140,13 +138,11 @@ async def is_on(ult):
         return
     pic = udB.get("ALIVE_PIC")
     uptime = time_formatter((time.time() - start_time) * 1000)
-    header = udB.get("ALIVE_TEXT") or get_string("bot_1")
     y = Repo().active_branch
     xx = Repo().remotes[0].config_reader.get("url")
     rep = xx.replace(".git", f"/tree/{y}")
     kk = f" `[{y}]({rep})` "
     als = (get_string("alive_1")).format(
-        header,
         OWNER_NAME,
         ultroid_version,
         UltVer,
@@ -235,13 +231,11 @@ async def _(event):
 async def inline_alive(ult):
     pic = udB.get("ALIVE_PIC")
     uptime = time_formatter((time.time() - start_time) * 1000)
-    header = udB.get("ALIVE_TEXT") or get_string("bot_1")
     y = Repo().active_branch
     xx = Repo().remotes[0].config_reader.get("url")
     rep = xx.replace(".git", f"/tree/{y}")
     kk = f" `[{y}]({rep})` "
     als = (get_string("alive_1")).format(
-        header,
         OWNER_NAME,
         ultroid_version,
         UltVer,
