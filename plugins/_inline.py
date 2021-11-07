@@ -20,7 +20,7 @@ from ._help import _main_help_menu
 # ================================================#
 notmine = f"This bot is for {OWNER_NAME}"
 
-TLINK = INLINE_PIC or "https://telegra.ph/file/167a0b85048b04129bd3b.jpg"
+TLINK = INLINE_PIC or "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4"
 helps = get_string("inline_1")
 
 uptime = time_formatter((time.time() - start_time) * 1000)
@@ -82,9 +82,9 @@ async def inline_alive(o):
             buttons=SUP_BUTTONS,
             title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
             description="(c) CɪᴘʜᴇʀX",
-            url=TLINK,
+            #url=TLINK,
             thumb=WEB0,
-            content=InputWebDocument(TLINK, 0, "image/jpg", []),
+            content=InputWebDocument(TLINK, 0, "gif", []),
         )
     ]
     await o.answer(RES, switch_pm="👥 CɪᴘʜᴇʀX Pᴏrᴛᴀl", switch_pm_param="start")
