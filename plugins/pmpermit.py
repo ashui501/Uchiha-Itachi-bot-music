@@ -847,7 +847,8 @@ async def _talk(e):
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
     else:
-        await ultroid_bot(BlockRequest(from_user))
+        uid = int(e.data_match.group(1).decode("UTF-8"))
+        await ultroid_bot(BlockRequest(uid))
         text2 = "You Have Chosed A Prohibited Option. Therefore, You Have Been Blocked and Reported to Telegram Agency.\n(C) CɪᴘʜᴇʀX"
         await e.answer(text2, alert=True)
 
