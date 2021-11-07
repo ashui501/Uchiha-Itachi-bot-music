@@ -163,7 +163,7 @@ async def _(event):
 async def users(event):
     await event.delete()
     #grabon = "🎆 Here Are Some Commands for group/channel management\n➤ /start ~ Check if I'm Alive \n➤ /ping ~ Ping CɪᴘʜᴇʀX Server Response Time\n➤ /tr <lang-code>\n➤ /id ~ Shows ID of User/Media/Chat\n➤ /ban ~ Works in Group , Bans a User \n➤ /unban ~ Works in Group , Unbans a User\n➤ /promote ~ Promotes A User \n➤ /demote ~ Demotes A User \n➤ /gpin ~ Pins a Message\n(c)✨ CɪᴘʜᴇʀX Ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ ✨"
-    await asst.send_message(event.chat_id, START, buttons=BTTS)
+    await asst.send_message(event.chat_id, START, buttons=get_buttons())
 
 
 @callback("mainmenu", owner=True, func=lambda x: not x.is_group)
