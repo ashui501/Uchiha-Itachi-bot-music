@@ -62,7 +62,7 @@ upage = 0
 SUP_BUTTONS = [
     [
         Button.url("• CɪᴘʜᴇʀX Ⲃⲟⲧ •", url="t.me/CipherXBot"),
-        Button.url("• Ⲋυⲣⲣⲟʀⲧ Ⲥⲏⲁⲛⲛⲉⳑ •", url="t.me/FutureTechnologyOfficial"),
+        Button.url("• Ⲋυⲣⲣⲟʀⲧ •", url="t.me/FutureTechnologyOfficial"),
     ],
 ]
 
@@ -72,11 +72,11 @@ SUP_BUTTONS = [
 @in_pattern(owner=True, func=lambda x: not x.text)
 async def inline_alive(o):
     WEB0 = InputWebDocument(
-        "https://telegra.ph/file/167a0b85048b04129bd3b.jpg", 0, "image/jpg", []
+        "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4", 0, "video/mp4", []
     )
     RES = [
-        await o.builder.article(
-            type="photo",
+        await event.builder.document(
+            type="gif",
             text=ALIVEMSG,
             include_media=True,
             buttons=SUP_BUTTONS,
@@ -105,7 +105,7 @@ async def inline_handler(event):
         len(z),
     )
     if INLINE_PIC:
-        result = await event.builder.photo(
+        result = await event.builder.document(
             file=INLINE_PIC,
             link_preview=False,
             text=text,
