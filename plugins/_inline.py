@@ -85,7 +85,7 @@ async def inline_alive(o):
             #url=TLINK,
             #thumb=WEB0,
             file=INLINE_PIC, 
-            content=InputWebDocument(TLINK, 0, "gif", []),
+            #content=InputWebDocument(TLINK, 0, "gif", []),
         )
     ]
     await o.answer(RES, switch_pm="👥 CɪᴘʜᴇʀX Pᴏrᴛᴀl", switch_pm_param="start")
