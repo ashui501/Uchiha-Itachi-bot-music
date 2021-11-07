@@ -24,10 +24,10 @@ TLINK = INLINE_PIC or "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4"
 helps = get_string("inline_1")
 
 uptime = time_formatter((time.time() - start_time) * 1000)
-header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I'm alive."
+
 ALIVEMSG = """
-**CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ**\n
-**{}**
+**• CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ •**\n
+✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
 ✵ **Ⲟⲱⲛⲉʀ** - `{}`         
 ✵ **Ⲃⲟⲧ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
 ✵ **Ⳑⲓⲃʀⲁʀⲩ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
@@ -37,7 +37,6 @@ ALIVEMSG = """
 ✵ **Ⲃʀⲁⲛⲥⲏ** - `{}`         
 ✵ ✨ CɪᴘʜᴇʀX is ᴛhᴇ Bᴇsᴛ ✨
 """.format(
-            header,
             OWNER_NAME,
             ultroid_version,
             UltVer,
@@ -69,7 +68,7 @@ SUP_BUTTONS = [
 # --------------------BUTTONS--------------------#
 
 
-@in_pattern(owner=True, func=lambda x: not x.text)
+@in_pattern(func=lambda x: not x.text)
 async def inline_alive(o):
     WEB0 = InputWebDocument(
         "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4", 0, "video/mp4", []
