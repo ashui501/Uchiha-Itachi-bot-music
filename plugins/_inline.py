@@ -26,7 +26,7 @@ helps = get_string("inline_1")
 uptime = time_formatter((time.time() - start_time) * 1000)
 
 ALIVEMSG = """
-**• CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ •**\n
+**• CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ •**
 ✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵
 ✵ **Ⲟⲱⲛⲉʀ** - `{}`         
 ✵ **Ⲃⲟⲧ Ⳳⲉʀⲋⲓⲟⲛ** - `{}` 
