@@ -75,7 +75,7 @@ async def inline_alive(o):
         "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4", 0, "video/mp4", []
     )
     RES = [
-        await event.builder.document(
+        await o.builder.document(
             type="gif",
             text=ALIVEMSG,
             include_media=True,
@@ -106,6 +106,8 @@ async def inline_handler(event):
     )
     if INLINE_PIC:
         result = await event.builder.document(
+            type="gif",
+            include_media=True,
             file=INLINE_PIC,
             link_preview=False,
             text=text,
