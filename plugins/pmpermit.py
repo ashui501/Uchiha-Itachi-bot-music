@@ -766,7 +766,16 @@ async def in_pm_ans(event):
         [
             Button.inline("Warns", data=f"admin_only{from_user}"),
             Button.inline(wrns, data=f"don_{wrns}"),
-        ]
+        ],
+        [
+            Button.inline("✓ I'm Here for Asking Something ✓", data="askme"),
+        ],
+        [
+            Button.inline("✓ I'm Here for Talking with CɪᴘʜᴇʀX ✓", data="whattalk"),
+        ],
+        [
+            Button.inline("✘ I'm Here for Spamming ✘", data="dontspamnigga"),
+        ],
     ]
     include_media = True
     mime_type, res = None, None
@@ -833,20 +842,19 @@ async def _admin_tools(event):
     
 @callback(re.compile(b"dontspamnigga"))
 async def _talk(e):
-    from_user = int(e.pattern_match.group(1))
+    from_user = int(e.data_match.group(1).decode("UTF-8"))
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
     else:
-        uid = int(e.data_match.group(1).decode("UTF-8"))
-        await ultroid_bot(BlockRequest(uid))
+        await ultroid_bot(BlockRequest(from_user))
         text2 = "You Have Chosed A Prohibited Option. Therefore, You Have Been Blocked and Reported to Telegram Agency.\n(C) CɪᴘʜᴇʀX"
         await e.answer(text2, alert=True)
 
     
 @callback(re.compile(b"whattalk"))
 async def _talk(e):
-    from_user = int(e.pattern_match.group(1))
+    from_user = int(e.data_match.group(1).decode("UTF-8"))
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
@@ -856,7 +864,7 @@ async def _talk(e):
     
 @callback(re.compile(b"askme"))
 async def _ask(e):
-    from_user = int(e.pattern_match.group(1))
+    from_user = int(e.data_match.group(1).decode("UTF-8"))
     if from_user == OWNER_ID:
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
