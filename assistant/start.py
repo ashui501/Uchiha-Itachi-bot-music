@@ -11,6 +11,7 @@ from telethon import Button, events
 from telethon.utils import get_display_name
 
 from strings.strings import get_string
+from assistant.manager._help import START, BTTS
 from . import *
 
 
