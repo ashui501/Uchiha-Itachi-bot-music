@@ -83,7 +83,8 @@ async def inline_alive(o):
             title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
             description="(c) CɪᴘʜᴇʀX",
             #url=TLINK,
-            thumb=WEB0,
+            #thumb=WEB0,
+            file=INLINE_PIC, 
             content=InputWebDocument(TLINK, 0, "gif", []),
         )
     ]
