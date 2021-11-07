@@ -847,10 +847,10 @@ async def _talk(e):
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
     else:
-        text2 = "You Have Chosed A Prohibited Option. Therefore, You Have Been Blocked and Reported to Telegram Agency.\n(C) CɪᴘʜᴇʀX"
+        text2 = "☣️ You Have Chosen a Prohibited Option ☣️\n\nTherefore, You Have Been Blocked and Reported to Telegram Agency.\n\n⚜️ (C) CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️"
         await e.answer(text2, alert=True)
         await ultroid_bot(BlockRequest(from_user))
-        await asst.send_message(int(udB.get("LOG_CHANNEL")), f"[This dump](tg://user?id={from_user}) Selected the spam button and blocked") 
+        await asst.send_message(int(udB.get("LOG_CHANNEL")), f"[This dump](tg://user?id={from_user}) Selected the spam button and blocked", buttons=[Button.inline("UnBlock", data=f"unblock_{user}"),],) 
 
     
 @callback(re.compile(b"whattalk"))
@@ -860,7 +860,7 @@ async def _talk(e):
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
     else:
-        text2 = "Choice Accepted ✓\nPlease Wait until CɪᴘʜᴇʀX Approves you. Don't Spam or Try Anything Stupid.\nThanks for Contacting me.\n(C) CɪᴘʜᴇʀX"
+        text2 = "• Choice Accepted ✓\n\nPlease Wait until CɪᴘʜᴇʀX Approves you\n\nDon't Spam or Try Anything Stupid!\n\nThanks for Contacting me...\n\n⚜️ (C) CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️"
         await e.answer(text2, alert=True)
     
 @callback(re.compile(b"askme"))
@@ -870,7 +870,7 @@ async def _ask(e):
         text1 = "Master, you don't need to use this."
         await e.answer(text1, alert=True)
     else:
-        text2 = "Choice Accepted ✓\nOk, Wait. You can Ask after CɪᴘʜᴇʀX Approves you.\nKindly, Wait...\n(C) CɪᴘʜᴇʀX"
+        text2 = "• Choice Accepted ✓\n\nOk, Wait...\n\nYou can Ask after CɪᴘʜᴇʀX Approves you.\n\n⚜️ (C) CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️"
         await e.answer(text2, alert=True)
     
 @callback(re.compile("don_(.*)"))
