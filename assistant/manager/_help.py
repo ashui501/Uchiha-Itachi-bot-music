@@ -93,7 +93,7 @@ def get_buttons():
 @asst_cmd(pattern="help")
 async def helpish(event):
     if not event.is_private:
-        url = f"https://t.me/{asst.me.username}?start=help"
+        url = "https://t.me/CipherXBot?start=help"
         return await event.reply(
             "Contact me in PM for help!", buttons=Button.url("Click me for Help", url)
         )
