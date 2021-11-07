@@ -850,7 +850,7 @@ async def _talk(e):
         text2 = "☣️ You Have Chosen a Prohibited Option ☣️\n\nTherefore, You Have Been Blocked and Reported to Telegram Agency.\n\n⚜️ (C) CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ⚜️"
         await e.answer(text2, alert=True)
         await ultroid_bot(BlockRequest(from_user))
-        await asst.send_message(int(udB.get("LOG_CHANNEL")), f"[This dump](tg://user?id={from_user}) Selected the spam button and blocked", buttons=[Button.inline("UnBlock", data=f"unblock_{user}"),],) 
+        await asst.send_message(int(udB.get("LOG_CHANNEL")), f"[This dump](tg://user?id={from_user}) Selected the spam button and blocked", buttons=[Button.inline("UnBlock", data=f"unblock_{from_user}"),],) 
 
     
 @callback(re.compile(b"whattalk"))
