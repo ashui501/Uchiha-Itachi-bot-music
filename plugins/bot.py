@@ -189,7 +189,7 @@ heroku_api = Var.HEROKU_API
     fullsudo=True,
 )
 async def restartbt(ult):
-    ok = await eor(ult, get_string("bot_5"))
+    ok = await eod(ult, get_string("bot_5"), time=5)
     call_back()
     if heroku_api:
         return await restart(ok)
