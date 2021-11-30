@@ -56,6 +56,7 @@ from . import (
     callback,
     def_logs,
     eor,
+    eod, 
     get_string,
     heroku_logs,
     in_pattern,
