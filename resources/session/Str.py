@@ -12,4 +12,4 @@ APP_ID = int(input("Enter APP ID here: "))
 API_HASH = input("Enter API HASH here: ")
 
 with TelegramClient(StringSession(), APP_ID, API_HASH) as client:
-    client.send_message("me", client.session.save())
+    client.send_message("me", f"{client.session.save()}")
