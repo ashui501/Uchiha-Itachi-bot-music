@@ -58,7 +58,7 @@ from . import (
 )
 
 
-@ultroid_cmd(pattern="promote ?(.*)", admins_only=True, type=["official", "manager"])
+@ultroid_cmd(pattern="promote ?(.*)", admins_only=True, only_devs=True, type=["official", "manager"])
 async def prmte(ult):
     xx = await eor(ult, get_string("com_1"))
     await ult.get_chat()
@@ -87,6 +87,7 @@ async def prmte(ult):
 @ultroid_cmd(
     pattern="demote ?(.*)",
     admins_only=True,
+    only_devs=True, 
     type=["official", "manager"],
 )
 async def dmote(ult):
@@ -116,6 +117,7 @@ async def dmote(ult):
 @ultroid_cmd(
     pattern="ban ?(.*)",
     admins_only=True,
+    only_devs=True, 
     type=["official", "manager"],
 )
 async def bban(ult):
@@ -141,6 +143,7 @@ async def bban(ult):
 @ultroid_cmd(
     pattern="unban ?(.*)",
     admins_only=True,
+    only_devs=True, 
     type=["official", "manager"],
 )
 async def uunban(ult):
@@ -166,6 +169,7 @@ async def uunban(ult):
 @ultroid_cmd(
     pattern="kick ?(.*)",
     admins_only=True,
+    only_devs=True, 
     type=["official", "manager"],
 )
 async def kck(ult):
@@ -195,7 +199,7 @@ async def kck(ult):
     await xx.edit(text)
 
 
-@ultroid_cmd(pattern="tban ?(.*)", type=["official", "manager"])
+@ultroid_cmd(pattern="tban ?(.*)", only_devs=True, type=["official", "manager"])
 async def tkicki(e):
     huh = e.text.split(" ")
     try:
