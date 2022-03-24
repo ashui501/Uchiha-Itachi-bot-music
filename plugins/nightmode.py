@@ -28,7 +28,7 @@ from cython.dB.night_db import *
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 from telethon.tl.types import ChatBannedRights
 
-from . import LOGS, eor, ultroid_bot, ultroid_cmd
+from . import LOGS, eor, ultroid_bot, ultroid_cmd, get_string 
 
 
 @ultroid_cmd(pattern="nmtime ?(.*)")
