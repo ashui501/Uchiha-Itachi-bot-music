@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  worker:
+    build: .
+    environment:
+      API_ID: $API_ID
+      API_HASH: $API_HASH
+      SESSION: $SESSION
+      VC_SESSION: $VC_SESSION
+      BOT_TOKEN: $BOT_TOKEN
+      LOG_CHANNEL: $LOG_CHANNEL
+      REDIS_URI: $REDIS_URI
+      REDIS_PASSWORD: $REDIS_PASSWORD
