@@ -94,7 +94,7 @@ async def gen_sample(e):
         await e.client.send_file(
             e.chat_id,
             mmmm,
-            thumb="resources/extras/ultroid.jpg",
+            thumb="resources/extras/cipherx.jpg",
             caption=caption,
             attributes=attributes,
             force_document=False,
