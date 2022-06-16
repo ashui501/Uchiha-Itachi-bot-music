@@ -142,7 +142,7 @@ async def list(event):
     await event.delete()
     await asst.send_file(
         event.chat_id,
-        text="⚜️ Here is the list of public bots made by CɪᴘʜᴇʀX ⚜️", 
+        caption="⚜️ Here is the list of public bots made by CɪᴘʜᴇʀX ⚜️", 
         file="resources/extras/intro.mp4",
         buttons=[
             [
