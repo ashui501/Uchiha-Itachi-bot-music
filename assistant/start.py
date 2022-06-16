@@ -143,7 +143,7 @@ async def list(event):
     await asst.send_file(
         event.chat_id,
         caption="⚜️ Here is the list of public bots made by CɪᴘʜᴇʀX ⚜️", 
-        file="resources/extras/intro.mp4",
+        file=udB.get("intro"),
         buttons=[
             [
                 Button.url("࿋ Assistant ࿋", url="https://t.me/CipherXBot"),
