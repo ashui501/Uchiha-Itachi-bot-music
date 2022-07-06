@@ -9,16 +9,18 @@ FROM theteamultroid/ultroid:main
 # set timezone
 ENV TZ=Asia/Tehran
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 
-    # cloning the repo and installing requirements.
-    && git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/ \
-    && pip3 install --no-cache-dir -r root/ToxygenX/requirements.txt \
-    && pip3 install --no-cache-dir -r root/ToxygenX/resources/startup/optional-requirements.txt \
-    && pip3 uninstall av -y && pip3 install av --no-binary av
+# cloning the repo and installing requirements.
+RUN git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/ 
+RUN pip3 install --no-cache-dir -r root/ToxygenX/requirements.txt 
+RUN pip3 install --no-cache-dir -r root/ToxygenX/resources/startup/optional-requirements.txt 
+RUN pip3 uninstall av -y 
+RUN pip3 install av --no-binary av
+RUN pip3 install -q --no-cache-dir yt-dlp
 
 # changing workdir
-WORKDIR /root/ToxygenX/
+WORKDIR "/root/ToxygenX/" 
 
 # start the bot
 CMD ["bash", "resources/startup/startup.sh"]
