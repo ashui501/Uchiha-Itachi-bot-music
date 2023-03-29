@@ -11,9 +11,9 @@ from telethon.tl.functions.messages import GetFullChatRequest, SetHistoryTTLRequ
 from telethon.tl.types import InputMessagesFilterPinned
 from telethon.utils import get_display_name
 
-from cython.dB import DEVLIST
-from cython.fns.admins import ban_time
-from cython.fns.info import get_uinfo
+from CythonX.dB import DEVLIST
+from CythonX.fns.admins import ban_time
+from CythonX.fns.info import get_uinfo
 
 from . import HNDLR, LOGS, eod, eor, get_string, inline_mention, types, ultroid_cmd
 
