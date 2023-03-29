@@ -1,28 +1,15 @@
-# Mᴇgᴀᴛrᴏn Bot
-# Copyright (C) 2020 Mᴇgᴀᴛrᴏn 
-# This file is a part of < https://github.com/CipherX1-ops/Megatron/ >
-# PLease read the GNU Affero General Public License in <https://www.github.com/CipherX1-ops/Megatron/blob/main/LICENSE/>
-
-
 FROM theteamultroid/ultroid:main
 
 # set timezone
-ENV TZ=Asia/Tehran
+ENV TZ=Asia/Kolkata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
+COPY installer.sh .
 
-# cloning the repo and installing requirements.
-RUN git clone https://github.com/ToxygenX/Megatron.git /root/ToxygenX/ 
-RUN pip3 install --no-cache-dir -r root/ToxygenX/resources/startup/optional-requirements.txt 
-RUN pip3 uninstall av -y 
-RUN pip3 install av --no-binary av
-RUN pip3 install --no-cache-dir https://github.com/New-dev0/Telethon/archive/PlayTime.zip
-RUN pip3 install --no-cache-dir git+https://github.com/ToxygenX/CythonX.git@main 
-RUN pip3 install --no-cache-dir pytgcalls==3.0.0.dev21
-RUN pip3 install -q --no-cache-dir yt-dlp
+RUN bash installer.sh
 
 # changing workdir
-WORKDIR "/root/ToxygenX/" 
+WORKDIR "/root/ToxygenX"
 
-# start the bot
-CMD ["bash", "resources/startup/startup.sh"]
+# start the bot.
+CMD ["bash", "startup"]
