@@ -3,49 +3,59 @@ import os
 import time
 from random import choice
 
-from cython import *
-from cython.dB import ULTROID_IMAGES
-from cython.functions.helper import *
-from cython.functions.info import *
-from cython.functions.misc import *
-from cython.functions.tools import *
-from cython.misc._assistant import asst_cmd, callback, in_pattern
-from cython.misc._decorators import ultroid_cmd
-from cython.misc._wrappers import eod, eor
-from cython.version import __version__, ultroid_version
+import requests
 from telethon import Button, events
-from telethon.tl import functions, types
+from telethon.tl import functions, types  # pylint:ignore
 
-from strings import get_string
+from cython import *
+from cython._misc._assistant import asst_cmd, callback, in_pattern
+from cython._misc._decorators import ultroid_cmd
+from cython._misc._wrappers import eod, eor
+from cython.dB import DEVLIST, ULTROID_IMAGES
+from cython.fns.helper import *
+from cython.fns.misc import *
+from cython.fns.tools import *
+from cython.startup._database import _BaseDatabase as Database
+from cython.version import __version__, ultroid_version
+from strings import get_help, get_string
 
-Redis = udB.get
-client = bot = ultroid_bot
+udB: Database
 
-OWNER_NAME = ultroid_bot.me.first_name
-OWNER_ID = ultroid_bot.me.id
-LOG_CHANNEL = int(udB.get("LOG_CHANNEL"))
-INLINE_PIC = udB.get("INLINE_PIC") or choice(ULTROID_IMAGES)
-if INLINE_PIC == "False":
-    INLINE_PIC = None
+Redis = udB.get_key
+con = TgConverter
+quotly = Quotly()
+OWNER_NAME = ultroid_bot.full_name
+OWNER_ID = ultroid_bot.uid
+
+ultroid_bot: UltroidClient
+asst: UltroidClient
+
+LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
+
+
+def inline_pic():
+    INLINE_PIC = udB.get_key("INLINE_PIC")
+    if INLINE_PIC is None:
+        INLINE_PIC = choice(ULTROID_IMAGES)
+    elif INLINE_PIC == False:
+        INLINE_PIC = None
+    return INLINE_PIC
+
+
 Telegraph = telegraph_client()
 
 List = []
 Dict = {}
+InlinePlugin = {}
 N = 0
-
+cmd = ultroid_cmd
 STUFF = {}
 
 # Chats, which needs to be ignore for some cases
 # Considerably, there can be many
 # Feel Free to Add Any other...
 
-NOSPAM_CHAT = [
-    -1001327032795,  # UltroidSupport
-    -1001387666944,  # PyrogramChat
-    -1001109500936,  # TelethonChat
-    -1001050982793,  # Python
-    -1001256902287,  # DurovsChat
-]
+NOSPAM_CHAT = []
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
