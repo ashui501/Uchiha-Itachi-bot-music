@@ -2,10 +2,16 @@
 ✘ Commands Available -
 
 • `{i}wspr <username>`
-    Send secret message.
+    Send secret message..
+
+• `{i}q <color-optional>`
+• `{i}q @username`
+• `{i}q r <color-optional>`
+• `{i}q count` : `multiple quotes`
+    Create quotes..
 
 • `{i}sticker <query>`
-    Search Stickers as Per ur Wish.
+    Search Stickers as Per ur Wish..
 
 • `{i}getaudio <reply to an audio>`
     Download Audio To put in ur Desired Video/Gif.
@@ -23,26 +29,28 @@ import os
 import time
 from datetime import datetime as dt
 from random import choice
-from shutil import rmtree
 
 import pytz
 from bs4 import BeautifulSoup as bs
-from cython.functions.google_image import googleimagesdownload
-from cython.functions.tools import metadata
 from telethon.tl.types import DocumentAttributeVideo
 
+from CythonX.fns.tools import get_google_images, metadata
+
 from . import (
+    HNDLR,
+    ULTConfig,
     async_searcher,
     bash,
     downloader,
     eod,
-    eor,
     get_string,
     mediainfo,
+    quotly,
     ultroid_bot,
     ultroid_cmd,
     uploader,
 )
+from .beautify import all_col
 
 File = []
 
@@ -56,16 +64,17 @@ async def daudtoid(e):
     r = await e.get_reply_message()
     if not mediainfo(r.media).startswith(("audio", "video")):
         return await eod(e, get_string("spcltool_1"))
-    xxx = await eor(e, get_string("com_1"))
-    dl = r.file.name
+    xxx = await e.eor(get_string("com_1"))
+    dl = r.file.name or "input.mp4"
     c_time = time.time()
     file = await downloader(
-        "resources/downloads/" + dl,
+        f"resources/downloads/{dl}",
         r.media.document,
         xxx,
         c_time,
-        "Downloading " + dl + "...",
+        f"Downloading {dl}...",
     )
+
     File.append(file.name)
     await xxx.edit(get_string("spcltool_2"))
 
@@ -79,30 +88,25 @@ async def adaudroid(e):
     r = await e.get_reply_message()
     if not mediainfo(r.media).startswith("video"):
         return await eod(e, get_string("spcltool_3"))
-    if not File or os.path.exists(File[0]):
-        return await e.edit("`First reply an audio with .aw`")
-    xxx = await eor(e, get_string("com_1"))
-    dl = r.file.name
+    if not (File and os.path.exists(File[0])):
+        return await e.edit(f"`First reply an audio with {HNDLR}addaudio`")
+    xxx = await e.eor(get_string("com_1"))
+    dl = r.file.name or "input.mp4"
     c_time = time.time()
     file = await downloader(
-        "resources/downloads/" + dl,
+        f"resources/downloads/{dl}",
         r.media.document,
         xxx,
         c_time,
-        "Downloading..." + dl + "...",
+        f"Downloading {dl}...",
     )
+
     await xxx.edit(get_string("spcltool_5"))
     await bash(
         f'ffmpeg -i "{file.name}" -i "{File[0]}" -shortest -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 output.mp4'
     )
     out = "output.mp4"
-    mmmm = await uploader(
-        out,
-        out,
-        time.time(),
-        xxx,
-        "Uploading..." + out + "...",
-    )
+    mmmm = await uploader(out, out, time.time(), xxx, f"Uploading {out}...")
     data = await metadata(out)
     width = data["width"]
     height = data["height"]
@@ -115,7 +119,7 @@ async def adaudroid(e):
     await e.client.send_file(
         e.chat_id,
         mmmm,
-        thumb="resources/extras/cipherx.jpg",
+        thumb=ULTConfig.thumb,
         attributes=attributes,
         force_document=False,
         reply_to=e.reply_to_msg_id,
@@ -128,32 +132,30 @@ async def adaudroid(e):
 
 
 @ultroid_cmd(
-    pattern=r"dob ?(.*)",
+    pattern=r"dob( (.*)|$)",
 )
 async def hbd(event):
-    if not event.pattern_match.group(1):
-        return await eor(event, get_string("spcltool_6"))
+    match = event.pattern_match.group(1).strip()
+    if not match:
+        return await event.eor(get_string("spcltool_6"))
     if event.reply_to_msg_id:
         kk = await event.get_reply_message()
-        nam = await event.client.get_entity(kk.from_id)
+        nam = await kk.get_sender()
         name = nam.first_name
     else:
         name = ultroid_bot.me.first_name
-    zn = pytz.timezone("Asia/Tehran")
+    zn = pytz.timezone("Asia/Kolkata")
     abhi = dt.now(zn)
-    n = event.text
-    q = n[5:]
-    kk = q.split("/")
+    kk = match.split("/")
     p = kk[0]
     r = kk[1]
     s = kk[2]
     day = int(p)
     month = r
-    paida = q
     try:
-        jn = dt.strptime(paida, "%d/%m/%Y")
+        jn = dt.strptime(match, "%d/%m/%Y")
     except BaseException:
-        return await eor(event, get_string("spcltool_6"))
+        return await event.eor(get_string("spcltool_6"))
     jnm = zn.localize(jn)
     zinda = abhi - jnm
     barsh = (zinda.total_seconds()) / (365.242 * 24 * 3600)
@@ -168,7 +170,7 @@ async def hbd(event):
     mi = int(pehl)
     sec = (pehl - mi) * 60
     slive = int(sec)
-    y = int(s) + int(saal) + 1
+    y = int(s) + saal + 1
     m = int(r)
     brth = dt(y, m, day)
     cm = dt(abhi.year, brth.month, brth.day)
@@ -181,9 +183,7 @@ async def hbd(event):
         hp = f"{okk} Days Left 🥳"
     elif dan > 0:
         hp = f"{ish} Days Left 🥳"
-    if month == "12":
-        sign = "Sagittarius" if (day < 22) else "Capricorn"
-    elif month == "01":
+    if month == "01":
         sign = "Capricorn" if (day < 20) else "Aquarius"
     elif month == "02":
         sign = "Aquarius" if (day < 19) else "Pisces"
@@ -202,13 +202,15 @@ async def hbd(event):
     elif month == "09":
         sign = "Virgo" if (day < 23) else "Libra"
     elif month == "10":
-        sign = "Libra" if (day < 23) else "Scorpion"
+        sign = "Libra" if (day < 23) else "Scorpio"
     elif month == "11":
         sign = "Scorpio" if (day < 22) else "Sagittarius"
-    sign = f"{sign}"
-    params = (("sign", sign), ("today", day))
+    elif month == "12":
+        sign = "Sagittarius" if (day < 22) else "Capricorn"
     json = await async_searcher(
-        "https://aztro.sameerkumar.website/", post=True, params=params, re_json=True
+        f"https://aztro.sameerkumar.website/?sign={sign}&day=today",
+        post=True,
+        re_json=True,
     )
     dd = json.get("current_date")
     ds = json.get("description")
@@ -222,7 +224,7 @@ async def hbd(event):
         f"""
     Name -: {name}
 
-D.O.B -:  {paida}
+D.O.B -:  {match}
 
 Lived -:  {saal}yr, {mahina}m, {din}d, {ghanta}hr, {mi}min, {slive}sec
 
@@ -243,16 +245,17 @@ Zodiac -: {sign}
     )
 
 
-@ultroid_cmd(pattern="sticker ?(.*)")
+@ultroid_cmd(pattern="sticker( (.*)|$)")
 async def _(event):
-    x = event.pattern_match.group(1)
+    x = event.pattern_match.group(1).strip()
     if not x:
-        return await eor(event, "`Give something to search`")
-    uu = await eor(event, get_string("com_1"))
+        return await event.eor("`Give something to search`")
+    uu = await event.eor(get_string("com_1"))
     z = bs(
-        await async_searcher("https://combot.org/telegram/stickers?q=" + x),
+        await async_searcher(f"https://combot.org/telegram/stickers?q={x}"),
         "html.parser",
     )
+
     packs = z.find_all("div", "sticker-pack__header")
     sticks = {
         c.a["href"]: c.find("div", {"class": "sticker-pack__title"}).text for c in packs
@@ -266,22 +269,77 @@ async def _(event):
     await uu.edit(a, parse_mode="html")
 
 
-@ultroid_cmd(pattern="wall ?(.*)")
+@ultroid_cmd(pattern="wall( (.*)|$)")
 async def wall(event):
-    inp = event.pattern_match.group(1)
+    inp = event.pattern_match.group(1).strip()
     if not inp:
-        return await eor(event, "`Give me something to search...`")
-    nn = await eor(event, get_string("com_1"))
+        return await event.eor("`Give me something to search..`")
+    nn = await event.eor(get_string("com_1"))
     query = f"hd {inp}"
-    gi = googleimagesdownload()
-    args = {
-        "keywords": query,
-        "limit": 10,
-        "format": "jpg",
-        "output_directory": "./resources/downloads/",
-    }
-    gi.download(args)
-    xx = choice(os.listdir(os.path.abspath(f"./resources/downloads/{query}/")))
-    await event.client.send_file(event.chat_id, f"./resources/downloads/{query}/{xx}")
-    rmtree(f"./resources/downloads/{query}/")
+    images = await get_google_images(query)
+    for z in range(5):
+        await event.client.send_file(event.chat_id, file=images[z]["original"])
     await nn.delete()
+
+
+@ultroid_cmd(pattern="q( (.*)|$)", manager=True, allow_pm=True)
+async def quott_(event):
+    match = event.pattern_match.group(1).strip()
+    if not event.is_reply:
+        return await event.eor("`Reply to Message..`")
+    msg = await event.eor(get_string("com_1"))
+    reply = await event.get_reply_message()
+    replied_to, reply_ = None, None
+    if match:
+        spli_ = match.split(maxsplit=1)
+        if (spli_[0] in ["r", "reply"]) or (
+            spli_[0].isdigit() and int(spli_[0]) in range(1, 21)
+        ):
+            if spli_[0].isdigit():
+                if not event.client._bot:
+                    reply_ = await event.client.get_messages(
+                        event.chat_id,
+                        min_id=event.reply_to_msg_id - 1,
+                        reverse=True,
+                        limit=int(spli_[0]),
+                    )
+                else:
+                    id_ = reply.id
+                    reply_ = []
+                    for msg_ in range(id_, id_ + int(spli_[0])):
+                        msh = await event.client.get_messages(event.chat_id, ids=msg_)
+                        if msh:
+                            reply_.append(msh)
+            else:
+                replied_to = await reply.get_reply_message()
+            try:
+                match = spli_[1]
+            except IndexError:
+                match = None
+    user = None
+    if not reply_:
+        reply_ = reply
+    if match:
+        match = match.split(maxsplit=1)
+    if match:
+        if match[0].startswith("@") or match[0].isdigit():
+            try:
+                match_ = await event.client.parse_id(match[0])
+                user = await event.client.get_entity(match_)
+            except ValueError:
+                pass
+            match = match[1] if len(match) == 2 else None
+        else:
+            match = match[0]
+    if match == "random":
+        match = choice(all_col)
+    try:
+        file = await quotly.create_quotly(
+            reply_, bg=match, reply=replied_to, sender=user
+        )
+    except Exception as er:
+        return await msg.edit(str(er))
+    message = await reply.reply("Quotly by Ultroid", file=file)
+    os.remove(file)
+    await msg.delete()
+    return message
