@@ -1,9 +1,7 @@
-"""
-✘ Commands Available -
+from . import get_help
 
-•`{i}calc` - Inline Calculator
+__doc__ = get_help("help_calculator")
 
-"""
 import re
 
 from . import Button, asst, callback, get_string, in_pattern, udB, ultroid_cmd
@@ -39,7 +37,7 @@ lst.append([Button.inline("=", data="calc=")])
 
 @ultroid_cmd(pattern="calc")
 async def icalc(e):
-    udB.delete("calc")
+    udB.del_key("calc")
     if e.client._bot:
         return await e.reply(get_string("calc_1"), buttons=lst)
     results = await e.client.inline_query(asst.me.username, "calc")
@@ -79,20 +77,20 @@ async def _(e):
         if CALC.get(user):
             get = CALC[user]
         if get:
-            CALC.update({user: get + "/100"})
-            await e.answer(str(get + "/100"))
+            CALC.update({user: f"{get}/100"})
+            await e.answer(str(f"{get}/100"))
     elif x == "÷":
         if CALC.get(user):
             get = CALC[user]
         if get:
-            CALC.update({user: get + "/"})
-            await e.answer(str(get + "/"))
+            CALC.update({user: f"{get}/"})
+            await e.answer(str(f"{get}/"))
     elif x == "x":
         if CALC.get(user):
             get = CALC[user]
         if get:
-            CALC.update({user: get + "*"})
-            await e.answer(str(get + "*"))
+            CALC.update({user: f"{get}*"})
+            await e.answer(str(f"{get}*"))
     elif x == "=":
         if CALC.get(user):
             get = CALC[user]
