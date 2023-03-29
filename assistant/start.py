@@ -1,31 +1,44 @@
-import time
 from datetime import datetime
+
 from pytz import timezone as tz
-
-from cython.dB.asst_fns import *
-from cython.dB.sudos import is_fullsudo
-from cython.functions.helper import inline_mention
-from cython.misc import owner_and_sudos
-
 from telethon import Button, events
+from telethon.errors.rpcerrorlist import MessageDeleteForbiddenError
 from telethon.utils import get_display_name
 
-from strings.strings import get_string
-from assistant.manager._help import *
+from CythonX._misc import SUDO_M, owner_and_sudos
+from CythonX.dB.base import KeyManager
+from CythonX.fns.helper import inline_mention
+from strings import get_string
+
 from . import *
+
+Owner_info_msg = udB.get_key("BOT_INFO_START")
+custom_info = True
+if Owner_info_msg is None:
+    custom_info = False
+    Owner_info_msg = f"""
+**Owner** - {OWNER_NAME}
+**OwnerID** - `{OWNER_ID}`
+
+**Message Forwards** - {udB.get_key("PMBOT")}
+
+**CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ v{ultroid_version}, powered by @CipherXBot**
+"""
 
 
 _settings = [
     [
-        Button.inline("API Kᴇʏs", data="apiset"),
-        Button.inline("Pᴍ Bᴏᴛ", data="chatbot"),
+        Button.inline("API Kᴇʏs", data="cbs_apiset"),
+        Button.inline("Pᴍ Bᴏᴛ", data="cbs_chatbot"),
     ],
     [
-        Button.inline("Aʟɪᴠᴇ", data="alvcstm"),
-        Button.inline("PᴍPᴇʀᴍɪᴛ", data="ppmset"),
+        Button.inline("Aʟɪᴠᴇ", data="cbs_alvcstm"),
+        Button.inline("PᴍPᴇʀᴍɪᴛ", data="cbs_ppmset"),
     ],
-    [Button.inline("Fᴇᴀᴛᴜʀᴇs", data="otvars")],
-    [Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="vcb")],
+    [
+        Button.inline("Fᴇᴀᴛᴜʀᴇs", data="cbs_otvars"),
+        Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="cbs_vcb"),
+    ],
     [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
 ]
 
@@ -41,24 +54,42 @@ _start = [
     [Button.inline("TɪᴍᴇZᴏɴᴇ 🌎", data="tz")],
 ]
 
-@asst_cmd(pattern="start ?(.*)", forwards=False, func=lambda x: not x.is_group)
+
+@callback("closeit")
+async def closet(lol):
+    try:
+        await lol.delete()
+    except MessageDeleteForbiddenError:
+        await lol.answer("MESSAGE_TOO_OLD", alert=True)
+
+
+@asst_cmd(pattern="start( (.*)|$)", forwards=False, func=lambda x: not x.is_group)
 async def ultroid(event):
-    if not is_added(event.sender_id) and str(event.sender_id) not in owner_and_sudos():
-        add_user(event.sender_id)
-        kak_uiw = udB.get("OFF_START_LOG")
-        if not kak_uiw or kak_uiw != "True":
-            msg = f"{inline_mention(event.sender)} `[{event.sender_id}]` started [Bot](@{asst.me.username})."
+    args = event.pattern_match.group(1).strip()
+    keym = KeyManager("BOT_USERS", cast=list)
+    if not keym.contains(event.sender_id) and event.sender_id not in owner_and_sudos():
+        keym.add(event.sender_id)
+        kak_uiw = udB.get_key("OFF_START_LOG")
+        if not kak_uiw or kak_uiw != True:
+            msg = f"{inline_mention(event.sender)} `[{event.sender_id}]` started your [Assistant bot](@{asst.me.username})."
             buttons = [[Button.inline("Info", "itkkstyo")]]
             if event.sender.username:
-                buttons[0].append(Button.url("User", "t.me/" + event.sender.username))
+                buttons[0].append(
+                    Button.mention(
+                        "User", await event.client.get_input_entity(event.sender_id)
+                    )
+                )
             await event.client.send_message(
-                int(udB["OWNER_ID"]), msg, buttons=buttons
+                udB.get_key("LOG_CHANNEL"), msg, buttons=buttons
             )
-    if not is_fullsudo(event.sender_id): 
+    if event.sender_id not in SUDO_M.fullsudos:
         ok = ""
-        u = await event.client.get_entity(event.chat_id)
-        if not udB.get("STARTMSG"):
-            if udB.get("PMBOT") == "True":
+        me = inline_mention(ultroid_bot.me)
+        mention = inline_mention(event.sender)
+        if args and args != "set":
+            await get_stored_file(event, args)
+        if not udB.get_key("STARTMSG"):
+            if udB.get_key("PMBOT"):
                 ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
             await event.reply(
                 f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
@@ -85,11 +116,9 @@ async def ultroid(event):
                 ],
             )
         else:
-            me = f"[{ultroid_bot.me.first_name}](tg://user?id={ultroid_bot.uid})"
-            mention = f"[{get_display_name(u)}](tg://user?id={u.id})"
             await event.reply(
-                udB.get("STARTMSG").format(me=me, mention=mention),
-                file=udB.get("STARTMEDIA"),
+                udB.get_key("STARTMSG").format(me=me, mention=mention),
+                file=udB.get_key("STARTMEDIA"),
                 buttons=[
                     [
                         Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
@@ -110,32 +139,34 @@ async def ultroid(event):
                         Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
                     ],
                 ],
+                if Owner_info_msg
+                else None,
             )
     else:
-        name = get_display_name(event.sender_id)
-        if event.pattern_match.group(1) == "set":
+        name = get_display_name(event.sender)
+        if args == "set":
             await event.reply(
                 "Choose from the below options -",
                 buttons=_settings,
             )
+        elif args:
+            await get_stored_file(event, args)
         else:
             await event.reply(
                 get_string("ast_3").format(name),
                 buttons=_start,
             )
-            
-                
+
+
 @callback("itkkstyo", owner=True)
 async def ekekdhdb(e):
-    text = f"When New Visitor will visit your Assistant Bot. You will get this log message!\n\nTo Disable : {HNDLR}setredis OFF_START_LOG True"
+    text = f"When New Visitor will visit your Assistant Bot. You will get this log message!\n\nTo Disable : {HNDLR}setdb OFF_START_LOG True"
     await e.answer(text, alert=True)
-    
-    
+
 @callback("tlans")
 async def tlans(event):
     await event.delete()
     await asst.send_message(event.chat_id, "✨ How to use:\n1⃣ `/tr LangaugeCode text` \n2⃣ `/tr Language Code` as reply to a message \n\nHere is the list of [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10)", link_preview=False)
-
     
 @callback("list")
 async def list(event):
@@ -187,8 +218,8 @@ async def users(event):
     await event.delete()
     #grabon = "🎆 Here Are Some Commands for group/channel management\n➤ /start ~ Check if I'm Alive \n➤ /ping ~ Ping CɪᴘʜᴇʀX Server Response Time\n➤ /tr <lang-code>\n➤ /id ~ Shows ID of User/Media/Chat\n➤ /ban ~ Works in Group , Bans a User \n➤ /unban ~ Works in Group , Unbans a User\n➤ /promote ~ Promotes A User \n➤ /demote ~ Demotes A User \n➤ /gpin ~ Pins a Message\n(c)✨ CɪᴘʜᴇʀX Ⲃⲟⲧ Ⲉⲭⲥⳑυⲋⲓⳳⲉ ✨"
     await asst.send_message(event.chat_id, START, buttons=get_buttons())
-
-
+    
+    
 @callback("mainmenu", owner=True, func=lambda x: not x.is_group)
 async def ultroid(event):
     await event.edit(
@@ -196,10 +227,10 @@ async def ultroid(event):
         buttons=_start,
     )
 
-    
+
 @callback("stat", owner=True)
 async def botstat(event):
-    ok = len(get_all_users())
+    ok = len(udB.get_key("BOT_USERS") or [])
     msg = """CɪᴘʜᴇʀX Assistant - Stats
 Total Users - {}""".format(
         ok,
@@ -209,8 +240,9 @@ Total Users - {}""".format(
 
 @callback("bcast", owner=True)
 async def bdcast(event):
-    ok = get_all_users()
-    await event.edit(f"• Broadcast to {len(ok)} users.")
+    keym = KeyManager("BOT_USERS", cast=list)
+    total = keym.count()
+    await event.edit(f"• Broadcast to {total} users.")
     async with event.client.conversation(OWNER_ID) as conv:
         await conv.send_message(
             "Enter your broadcast message.\nUse /cancel to stop the broadcast.",
@@ -220,11 +252,11 @@ async def bdcast(event):
             return await conv.send_message("Cancelled!!")
         success = 0
         fail = 0
-        await conv.send_message(f"Starting a broadcast to {len(ok)} users...")
+        await conv.send_message(f"Starting a broadcast to {total} users...")
         start = datetime.now()
-        for i in ok:
+        for i in keym.get():
             try:
-                await asst.send_message(int(i), response.message)
+                await asst.send_message(int(i), response)
                 success += 1
             except BaseException:
                 fail += 1
@@ -233,7 +265,7 @@ async def bdcast(event):
         await conv.send_message(
             f"""
 **Broadcast completed in {time_taken} seconds.**
-Total Users in Bot - {len(ok)}
+Total Users in Bot - {total}
 **Sent to** : `{success} users.`
 **Failed for** : `{fail} user(s).`""",
         )
