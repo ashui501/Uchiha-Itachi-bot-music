@@ -1,11 +1,18 @@
+# Ultroid - UserBot
+# Copyright (C) 2021-2022 TeamUltroid
+#
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+
 from . import *
 
 START = """
 🪅 **Help Menu** 🪅
 
-✘  /start : Start the bot 
+✘  /start : Check I am Alive or not.
 ✘  /help : Get This Message.
-✘  /repo : Get Repo.
+✘  /repo : Get Bot's Repo..
 
 🧑‍💻 Join **@FutureTechnologyOfficial**
 """
@@ -36,11 +43,12 @@ UTILITIES = """
 
 • /info (reply/username/id) : get detailed info of user.
 • /id : get chat/user id.
-• /tr : Translate Languages.
+• /tr : Translate Languages..
+• /q : Create Quotes.
 
 • /paste (reply file/text) : paste content on Spaceb.in
 • /meaning (text) : Get Meaning of that Word.
-• /go (query) : Search Something on Google.
+• /google (query) : Search Something on Google..
 
 • /suggest (query/reply) : Creates a Yes / No Poll.
 """
@@ -67,12 +75,16 @@ MISC = """
 ✘  **Misc**  ✘
 
 • /joke : Get Random Jokes.
-• /decide : Decide Something.
+• /decide : Decide Something..
+
+**✘ Stickertools ✘**
+• /kang : add sticker to your pack.
+• /listpack : get all of yours pack..
 """
 
 STRINGS = {"Admintools": ADMINTOOLS, "locks": LOCKS, "Utils": UTILITIES, "Misc": MISC}
 
-MNGE = udB.get("MNGR_EMOJI") or "•"
+MNGE = udB.get_key("MNGR_EMOJI") or "•"
 
 
 def get_buttons():
@@ -81,11 +93,11 @@ def get_buttons():
     while keys:
         BT = []
         for i in list(keys)[:2]:
-            text = MNGE + " " + i + " " + MNGE
-            BT.append(Button.inline(text, "hlp_" + i))
+            text = f"{MNGE} {i} {MNGE}"
+            BT.append(Button.inline(text, f"hlp_{i}"))
             del keys[i]
         BTTS.append(BT)
-    url = "https://t.me/" + asst.me.username + "?startgroup=true"
+    url = f"https://t.me/{asst.me.username}?startgroup=true"
     BTTS.append([Button.url("Add me to Group", url)])
     return BTTS
 
@@ -93,16 +105,15 @@ def get_buttons():
 @asst_cmd(pattern="help")
 async def helpish(event):
     if not event.is_private:
-        url = "https://t.me/CipherXBot?start=help"
+        url = f"https://t.me/{asst.me.username}?start=start"
         return await event.reply(
             "Contact me in PM for help!", buttons=Button.url("Click me for Help", url)
         )
     if str(event.sender_id) in owner_and_sudos() and (
-        udB.get("DUAL_MODE") and (udB.get("DUAL_HNDLR") == "/")
+        udB.get_key("DUAL_MODE") and (udB.get_key("DUAL_HNDLR") == "/")
     ):
         return
-    BTTS = get_buttons()
-    await event.reply(START, buttons=BTTS)
+    await event.reply(START, buttons=get_buttons())
 
 
 @callback("mngbtn", owner=True)
@@ -119,5 +130,5 @@ async def home_aja(e):
 
 @callback(re.compile("hlp_(.*)"))
 async def do_something(event):
-    match = event.pattern_match.group(1).decode("utf-8")
+    match = event.pattern_match.group(1).strip().decode("utf-8")
     await event.edit(STRINGS[match], buttons=Button.inline("<< Back", "mnghome"))
