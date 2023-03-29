@@ -26,7 +26,10 @@
 """
 import os
 
-from cython.dB.greetings_db import (
+from telegraph import upload_file as uf
+from telethon.utils import pack_bot_file_id
+
+from CythonX.dB.greetings_db import (
     add_goodbye,
     add_thanks,
     add_welcome,
@@ -37,9 +40,7 @@ from cython.dB.greetings_db import (
     must_thank,
     remove_thanks,
 )
-from cython.functions.tools import create_tl_btn, format_btn, get_msg_button
-from telegraph import upload_file as uf
-from telethon.utils import pack_bot_file_id
+from CythonX.fns.tools import create_tl_btn, format_btn, get_msg_button
 
 from . import HNDLR, eor, get_string, mediainfo, ultroid_cmd
 from ._inline import something
@@ -49,23 +50,27 @@ Note = "\n\nNote: `{mention}`, `{group}`, `{count}`, `{name}`, `{fullname}`, `{u
 
 @ultroid_cmd(pattern="setwelcome", groups_only=True)
 async def setwel(event):
-    x = await eor(event, get_string("com_1"))
+    x = await event.eor(get_string("com_1"))
     r = await event.get_reply_message()
     btn = format_btn(r.buttons) if (r and r.buttons) else None
+    try:
+        text = event.text.split(maxsplit=1)[1]
+    except IndexError:
+        text = r.text if r else None
     if r and r.media:
         wut = mediainfo(r.media)
         if wut.startswith(("pic", "gif")):
             dl = await r.download_media()
             variable = uf(dl)
             os.remove(dl)
-            m = "https://telegra.ph" + variable[0]
+            m = f"https://graph.org{variable[0]}"
         elif wut == "video":
             if r.media.document.size > 8 * 1000 * 1000:
                 return await eor(x, get_string("com_4"), time=5)
             dl = await r.download_media()
             variable = uf(dl)
             os.remove(dl)
-            m = "https://telegra.ph" + variable[0]
+            m = f"https://graph.org{variable[0]}"
         elif wut == "web":
             m = None
         else:
@@ -78,10 +83,9 @@ async def setwel(event):
         else:
             add_welcome(event.chat_id, None, m, btn)
         await eor(x, get_string("grt_1"))
-    elif r and r.text:
-        txt = r.text
+    elif text:
         if not btn:
-            txt, btn = get_msg_button(r.text)
+            txt, btn = get_msg_button(text)
         add_welcome(event.chat_id, txt, None, btn)
         await eor(x, get_string("grt_1"))
     else:
@@ -91,18 +95,17 @@ async def setwel(event):
 @ultroid_cmd(pattern="clearwelcome$", groups_only=True)
 async def clearwel(event):
     if not get_welcome(event.chat_id):
-        return await eor(event, get_string("grt_4"), time=5)
+        return await event.eor(get_string("grt_4"), time=5)
     delete_welcome(event.chat_id)
-    await eor(event, get_string("grt_5"), time=5)
+    await event.eor(get_string("grt_5"), time=5)
 
 
 @ultroid_cmd(pattern="getwelcome$", groups_only=True)
 async def listwel(event):
     wel = get_welcome(event.chat_id)
     if not wel:
-        return await eor(event, get_string("grt_4"), time=5)
-    msgg = wel["welcome"]
-    med = wel["media"]
+        return await event.eor(get_string("grt_4"), time=5)
+    msgg, med = wel["welcome"], wel["media"]
     if wel.get("button"):
         btn = create_tl_btn(wel["button"])
         return await something(event, msgg, med, btn)
@@ -112,23 +115,27 @@ async def listwel(event):
 
 @ultroid_cmd(pattern="setgoodbye", groups_only=True)
 async def setgb(event):
-    x = await eor(event, get_string("com_1"))
+    x = await event.eor(get_string("com_1"))
     r = await event.get_reply_message()
     btn = format_btn(r.buttons) if (r and r.buttons) else None
+    try:
+        text = event.text.split(maxsplit=1)[1]
+    except IndexError:
+        text = r.text if r else None
     if r and r.media:
         wut = mediainfo(r.media)
         if wut.startswith(("pic", "gif")):
             dl = await r.download_media()
             variable = uf(dl)
             os.remove(dl)
-            m = "https://telegra.ph" + variable[0]
+            m = f"https://graph.org{variable[0]}"
         elif wut == "video":
             if r.media.document.size > 8 * 1000 * 1000:
                 return await eor(x, get_string("com_4"), time=5)
             dl = await r.download_media()
             variable = uf(dl)
             os.remove(dl)
-            m = "https://telegra.ph" + variable[0]
+            m = f"https://graph.org{variable[0]}"
         elif wut == "web":
             m = None
         else:
@@ -141,10 +148,9 @@ async def setgb(event):
         else:
             add_goodbye(event.chat_id, None, m, btn)
         await eor(x, "`Goodbye note saved`")
-    elif r and r.text:
-        txt = r.text
+    elif text:
         if not btn:
-            txt, btn = get_msg_button(r.text)
+            txt, btn = get_msg_button(text)
         add_goodbye(event.chat_id, txt, None, btn)
         await eor(x, "`Goodbye note saved`")
     else:
@@ -154,16 +160,16 @@ async def setgb(event):
 @ultroid_cmd(pattern="cleargoodbye$", groups_only=True)
 async def clearwgb(event):
     if not get_goodbye(event.chat_id):
-        return await eor(event, get_string("grt_6"), time=5)
+        return await event.eor(get_string("grt_6"), time=5)
     delete_goodbye(event.chat_id)
-    await eor(event, "`Goodbye Note Deleted`", time=5)
+    await event.eor("`Goodbye Note Deleted`", time=5)
 
 
 @ultroid_cmd(pattern="getgoodbye$", groups_only=True)
 async def listgd(event):
     wel = get_goodbye(event.chat_id)
     if not wel:
-        return await eor(event, get_string("grt_6"), time=5)
+        return await event.eor(get_string("grt_6"), time=5)
     msgg = wel["goodbye"]
     med = wel["media"]
     if wel.get("button"):
@@ -175,8 +181,8 @@ async def listgd(event):
 
 @ultroid_cmd(pattern="thankmembers (on|off)", groups_only=True)
 async def thank_set(event):
-    type_ = event.pattern_match.group(1)
-    if not type_:
+    type_ = event.pattern_match.group(1).strip()
+    if not type_ or type_ == "":
         await eor(
             event,
             f"**Current Chat Settings:**\n**Thanking Members:** `{must_thank(event.chat_id)}`\n\nUse `{HNDLR}thankmembers on` or `{HNDLR}thankmembers off` to toggle current settings!",
