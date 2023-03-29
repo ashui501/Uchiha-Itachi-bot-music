@@ -7,6 +7,9 @@
 • `{i}stopvc`
     Stop Group Call in a group.
 
+• `{i}vctitle <title>`
+    Change the title Group call.
+
 • `{i}vcinvite`
     Invite all members of group in Group Call.
     (You must be joined)
@@ -15,15 +18,16 @@
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat
 from telethon.tl.functions.phone import CreateGroupCallRequest as startvc
 from telethon.tl.functions.phone import DiscardGroupCallRequest as stopvc
+from telethon.tl.functions.phone import EditGroupCallTitleRequest as settitle
 from telethon.tl.functions.phone import GetGroupCallRequest as getvc
 from telethon.tl.functions.phone import InviteToGroupCallRequest as invitetovc
 
-from . import eor, ultroid_cmd
+from . import get_string, ultroid_cmd
 
 
 async def get_call(event):
     mm = await event.client(getchat(event.chat_id))
-    xx = await event.client(getvc(mm.full_chat.call))
+    xx = await event.client(getvc(mm.full_chat.call, limit=1))
     return xx.call
 
 
@@ -40,9 +44,9 @@ def user_list(l, n):
 async def _(e):
     try:
         await e.client(stopvc(await get_call(e)))
-        await eor(e, "`Voice Chat Stopped...`")
+        await e.eor(get_string("vct_4"))
     except Exception as ex:
-        await eor(e, f"`{ex}`")
+        await e.eor(f"`{ex}`")
 
 
 @ultroid_cmd(
@@ -50,7 +54,7 @@ async def _(e):
     groups_only=True,
 )
 async def _(e):
-    ok = await eor(e, "`Inviting Members to Voice Chat...`")
+    ok = await e.eor(get_string("vct_3"))
     users = []
     z = 0
     async for x in e.client.iter_participants(e.chat_id):
@@ -63,7 +67,7 @@ async def _(e):
             z += 6
         except BaseException:
             pass
-    await ok.edit(f"`Invited {z} users`")
+    await ok.edit(get_string("vct_5").format(z))
 
 
 @ultroid_cmd(
@@ -74,6 +78,22 @@ async def _(e):
 async def _(e):
     try:
         await e.client(startvc(e.chat_id))
-        await eor(e, "`Voice Chat Started...`")
+        await e.eor(get_string("vct_1"))
     except Exception as ex:
-        await eor(e, f"`{ex}`")
+        await e.eor(f"`{ex}`")
+
+
+@ultroid_cmd(
+    pattern="vctitle(?: |$)(.*)",
+    admins_only=True,
+    groups_only=True,
+)
+async def _(e):
+    title = e.pattern_match.group(1).strip()
+    if not title:
+        return await e.eor(get_string("vct_6"), time=5)
+    try:
+        await e.client(settitle(call=await get_call(e), title=title.strip()))
+        await e.eor(get_string("vct_2").format(title))
+    except Exception as ex:
+        await e.eor(f"`{ex}`")
