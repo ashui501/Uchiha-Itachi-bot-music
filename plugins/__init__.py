@@ -7,16 +7,16 @@ import requests
 from telethon import Button, events
 from telethon.tl import functions, types  # pylint:ignore
 
-from cython import *
-from cython._misc._assistant import asst_cmd, callback, in_pattern
-from cython._misc._decorators import ultroid_cmd
-from cython._misc._wrappers import eod, eor
-from cython.dB import DEVLIST, ULTROID_IMAGES
-from cython.fns.helper import *
-from cython.fns.misc import *
-from cython.fns.tools import *
-from cython.startup._database import _BaseDatabase as Database
-from cython.version import __version__, ultroid_version
+from CythonX import *
+from CythonX._misc._assistant import asst_cmd, callback, in_pattern
+from CythonX._misc._decorators import ultroid_cmd
+from CythonX._misc._wrappers import eod, eor
+from CythonX.dB import DEVLIST, ULTROID_IMAGES
+from CythonX.fns.helper import *
+from CythonX.fns.misc import *
+from CythonX.fns.tools import *
+from CythonX.startup._database import _BaseDatabase as Database
+from CythonX.version import __version__, ultroid_version
 from strings import get_help, get_string
 
 udB: Database
