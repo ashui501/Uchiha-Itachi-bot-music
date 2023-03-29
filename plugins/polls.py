@@ -14,20 +14,20 @@
 """
 from telethon.tl.types import InputMediaPoll, Poll, PollAnswer
 
-from . import eor, get_string, ultroid_cmd
+from . import get_string, ultroid_cmd
 
 
 @ultroid_cmd(
-    pattern="poll ?(.*)",
+    pattern="poll( (.*)|$)",
 )
 async def uri_poll(e):
     if not e.client._bot and e.is_private:
-        return await eor(e, "`Use this in Group/Channel.`", time=15)
-    match = e.pattern_match.group(1)
+        return await e.eor("`Use this in Group/Channel.`", time=15)
+    match = e.pattern_match.group(1).strip()
     if not match:
-        return await eor(e, "`Give Proper Input...`", time=5)
+        return await e.eor("`Give Proper Input...`", time=5)
     if ";" not in match:
-        return await eor(e, "`Unable to Determine Options.`.", time=5)
+        return await e.eor("`Unable to Determine Options.`.", time=5)
     ques = match.split(";")[0]
     option = match.split(";")[1::]
     publ = None
@@ -41,7 +41,7 @@ async def uri_poll(e):
             karzo = [str(int(ptype.split("_")[1]) - 1).encode()]
             ptype = ptype.split("_")[0]
         if ptype not in ["public", "quiz", "multiple"]:
-            return await eor(e, "`Invalid Poll Type...`", time=5)
+            return await e.eor("`Invalid Poll Type...`", time=5)
         if ptype == "multiple":
             mpp = True
         elif ptype == "public":
@@ -49,12 +49,11 @@ async def uri_poll(e):
         elif ptype == "quiz":
             quizo = True
     if len(option) <= 1:
-        return await eor(e, "`Options Should be More than 1..`", time=5)
-    m = await eor(e, get_string("com_1"))
+        return await e.eor("`Options Should be More than 1..`", time=5)
+    m = await e.eor(get_string("com_1"))
     OUT = [PollAnswer(option[on], str(on).encode()) for on in range(len(option))]
-    await e.client.send_file(
-        e.chat_id,
-        InputMediaPoll(
+    await e.respond(
+        file=InputMediaPoll(
             Poll(20, ques, OUT, multiple_choice=mpp, public_voters=publ, quiz=quizo),
             correct_answers=karzo,
         ),
