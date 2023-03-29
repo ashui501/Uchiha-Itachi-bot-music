@@ -1,24 +1,16 @@
-"""
-✘ Commands Available
+from . import get_help
 
-•`{i}addecho <reply to anyone>`
-   Start Auto Echo message of Replied user.
+__doc__ = get_help("help_echo")
 
-•`{i}remecho <reply to anyone>`
-   Turn It off
 
-•`{i}listecho <reply to anyone>`
-   To Get list.
-
-"""
-
-from cython.dB.echo_db import add_echo, check_echo, list_echo, rem_echo
 from telethon.utils import get_display_name
 
-from . import LOGS, eor, events, ultroid_bot, ultroid_cmd
+from CythonX.dB.echo_db import add_echo, check_echo, list_echo, rem_echo
+
+from . import inline_mention, ultroid_cmd
 
 
-@ultroid_cmd(pattern="addecho ?(.*)")
+@ultroid_cmd(pattern="addecho( (.*)|$)")
 async def echo(e):
     r = await e.get_reply_message()
     if r:
@@ -32,16 +24,16 @@ async def echo(e):
             else:
                 user = int(user)
         except BaseException:
-            return await eor(e, "Reply To A user.", time=5)
+            return await e.eor("Reply To A user.", time=5)
     if check_echo(e.chat_id, user):
-        return await eor(e, "Echo already activated for this user.", time=5)
+        return await e.eor("Echo already activated for this user.", time=5)
     add_echo(e.chat_id, user)
     ok = await e.client.get_entity(user)
-    user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
-    await eor(e, f"Activated Echo For {user}.")
+    user = inline_mention(ok)
+    await e.eor(f"Activated Echo For {user}.")
 
 
-@ultroid_cmd(pattern="remecho ?(.*)")
+@ultroid_cmd(pattern="remecho( (.*)|$)")
 async def rm(e):
     r = await e.get_reply_message()
     if r:
@@ -55,34 +47,23 @@ async def rm(e):
             else:
                 user = int(user)
         except BaseException:
-            return await eor(e, "Reply To A User.", time=5)
+            return await e.eor("Reply To A User.", time=5)
     if check_echo(e.chat_id, user):
         rem_echo(e.chat_id, user)
         ok = await e.client.get_entity(user)
         user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
-        return await eor(e, f"Deactivated Echo For {user}.")
-    await eor(e, "Echo not activated for this user")
-
-
-@ultroid_bot.on(events.NewMessage(incoming=True))
-async def okk(e):
-    if check_echo(e.chat_id, e.sender_id):
-        try:
-            ok = await e.client.get_messages(e.chat_id, ids=e.id)
-            return await e.client.send_message(e.chat_id, ok)
-        except Exception as er:
-            LOGS.info(er)
+        return await e.eor(f"Deactivated Echo For {user}.")
+    await e.eor("Echo not activated for this user")
 
 
 @ultroid_cmd(pattern="listecho$")
 async def lstecho(e):
-    k = list_echo(e.chat_id)
-    if k:
+    if k := list_echo(e.chat_id):
         user = "**Activated Echo For Users:**\n\n"
         for x in k:
             ok = await e.client.get_entity(int(x))
             kk = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
-            user += "•" + kk + "\n"
-        await eor(e, user)
+            user += f"•{kk}" + "\n"
+        await e.eor(user)
     else:
-        await eor(e, "`List is Empty, For echo`", time=5)
+        await e.eor("`List is Empty, For echo`", time=5)
