@@ -1,38 +1,21 @@
-"""
-✘ Commands Available -
+from . import get_help
 
-• `{i}setflood <integer>`
-    Set flood limit in a chat.
+__doc__ = get_help("help_antiflood")
 
-• `{i}remflood`
-    Remove flood limit from a chat.
-
-• `{i}getflood`
-    Get flood limit of a chat.
-"""
 
 import re
 
-from cython.dB import DEVLIST
-from cython.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
-from cython.functions.admins import admin_check
 from telethon.events import NewMessage as NewMsg
 
-from . import (
-    Button,
-    Redis,
-    asst,
-    callback,
-    eod,
-    eor,
-    get_string,
-    ultroid_bot,
-    ultroid_cmd,
-)
+from CythonX.dB import DEVLIST
+from CythonX.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
+from CythonX.fns.admins import admin_check
+
+from . import Button, Redis, asst, callback, eod, get_string, ultroid_bot, ultroid_cmd
 
 _check_flood = {}
 
-if Redis("ANTIFLOOD") is not (None or ""):
+if Redis("ANTIFLOOD"):
 
     @ultroid_bot.on(
         NewMsg(
@@ -43,14 +26,14 @@ if Redis("ANTIFLOOD") is not (None or ""):
         count = 1
         chat = (await event.get_chat()).title
         if event.chat_id in _check_flood.keys():
-            if event.sender_id == [x for x in _check_flood[event.chat_id].keys()][0]:
+            if event.sender_id == list(_check_flood[event.chat_id].keys())[0]:
                 count = _check_flood[event.chat_id][event.sender_id]
                 _check_flood[event.chat_id] = {event.sender_id: count + 1}
             else:
                 _check_flood[event.chat_id] = {event.sender_id: count}
         else:
             _check_flood[event.chat_id] = {event.sender_id: count}
-        if await admin_check(event) or event.sender.bot:
+        if await admin_check(event, silent=True) or getattr(event.sender, "bot", None):
             return
         if event.sender_id in DEVLIST:
             return
@@ -97,13 +80,12 @@ async def unmuting(e):
     admins_only=True,
 )
 async def setflood(e):
-    input_ = e.pattern_match.group(1)
+    input_ = e.pattern_match.group(1).strip()
     if not input_:
-        return await eor(e, "`What?`", time=5)
+        return await e.eor("`What?`", time=5)
     if not input_.isdigit():
-        return await eor(e, get_string("com_3"), time=5)
-    m = set_flood(e.chat_id, input_)
-    if m:
+        return await e.eor(get_string("com_3"), time=5)
+    if m := set_flood(e.chat_id, input_):
         return await eod(e, get_string("antiflood_4").format(input_))
 
 
@@ -118,8 +100,8 @@ async def remove_flood(e):
     except BaseException:
         pass
     if hmm:
-        return await eor(e, get_string("antiflood_1"), time=5)
-    await eor(e, get_string("antiflood_2"), time=5)
+        return await e.eor(get_string("antiflood_1"), time=5)
+    await e.eor(get_string("antiflood_2"), time=5)
 
 
 @ultroid_cmd(
@@ -127,7 +109,6 @@ async def remove_flood(e):
     admins_only=True,
 )
 async def getflood(e):
-    ok = get_flood_limit(e.chat_id)
-    if ok:
-        return await eor(e, get_string("antiflood_5").format(ok), time=5)
-    await eor(e, get_string("antiflood_2"), time=5)
+    if ok := get_flood_limit(e.chat_id):
+        return await e.eor(get_string("antiflood_5").format(ok), time=5)
+    await e.eor(get_string("antiflood_2"), time=5)
