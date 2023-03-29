@@ -1,23 +1,11 @@
-"""
-✘ Commands Available -
+from . import get_help
 
-• `{i}addai <reply to user/give username/userid>`
-   Add a AI ChatBot to reply to that user.
+__doc__ = get_help("help_chatbot")
 
-• `{i}remai <reply to user/give username/userid>`
-   Remove the AI ChatBot.
 
-• `{i}repai <reply to user/give a message>`
-   Reply to the user with a message by an AI.
+from CythonX.fns.tools import get_chatbot_reply
 
-• `{i}listai`
-   List the currently AI added users.
-"""
-
-from cython.dB.chatBot_db import add_chatbot, get_all_added, rem_chatbot
-from cython.functions.tools import get_chatbot_reply
-
-from . import eod, eor, get_string, inline_mention, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, udB, ultroid_cmd
 
 
 @ultroid_cmd(pattern="repai")
@@ -30,7 +18,7 @@ async def im_lonely_chat_with_me(event):
         except IndexError:
             return await eod(event, get_string("tban_1"), time=10)
     reply_ = await get_chatbot_reply(message=message)
-    await eor(event, reply_)
+    await event.eor(reply_)
 
 
 @ultroid_cmd(pattern="addai")
@@ -45,9 +33,10 @@ async def rem_chatBot(event):
 
 @ultroid_cmd(pattern="listai")
 async def lister(event):
-    users = get_all_added(event.chat_id)
+    key = udB.get_key("CHATBOT_USERS") or {}
+    users = key.get(event.chat_id, [])
     if not users:
-        return await eor(event, get_string("chab_2"), time=5)
+        return await event.eor(get_string("chab_2"), time=5)
     msg = "**Total List Of AI Enabled Users In This Chat :**\n\n"
     for i in users:
         try:
@@ -55,29 +44,39 @@ async def lister(event):
             user = inline_mention(user)
         except BaseException:
             user = f"`{i}`"
-        msg += "• {}\n".format(user)
-    await eor(event, msg, link_preview=False)
+        msg += f"• {user}\n"
+    await event.eor(msg, link_preview=False)
 
 
 async def chat_bot_fn(event, type_):
     if event.reply_to:
-        user = (await event.get_reply_message()).sender
+        user_ = (await event.get_reply_message()).sender
     else:
         temp = event.text.split(maxsplit=1)
         try:
-            user = await event.client.get_entity(temp[1])
-        except BaseException:
-            if event.is_private:
-                user = event.chat
-            else:
-                return await eod(
-                    event,
-                    get_string("chab_1"),
-                )
+            user_ = await event.client.get_entity(await event.client.parse_id(temp[1]))
+        except BaseException as er:
+            LOGS.exception(er)
+            user_ = event.chat if event.is_private else None
+    if not user_:
+        return await eod(
+            event,
+            get_string("chab_1"),
+        )
+    key = udB.get_key("CHATBOT_USERS") or {}
+    chat = event.chat_id
+    user = user_.id
     if type_ == "add":
-        add_chatbot(event.chat_id, user.id)
-    if type_ == "remov":
-        rem_chatbot(event.chat_id, user.id)
-    await eor(
-        event, f"**ChatBot:**\n{type_}ed [{user.first_name}](tg://user?id={user.id})"
-    )
+        if key.get(chat):
+            if user not in key[chat]:
+                key[chat].append(user)
+        else:
+            key.update({chat: [user]})
+    elif type_ == "remov":
+        if key.get(chat):
+            if user in key[chat]:
+                key[chat].remove(user)
+            if chat in key and not key[chat]:
+                del key[chat]
+    udB.set_key("CHATBOT_USERS", key)
+    await event.eor(f"**ChatBot:**\n{type_}ed {inline_mention(user_)}")
