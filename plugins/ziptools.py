@@ -21,10 +21,10 @@ import time
 
 from . import (
     HNDLR,
+    ULTConfig,
     asyncio,
     bash,
     downloader,
-    eor,
     get_all_files,
     get_string,
     ultroid_cmd,
@@ -32,14 +32,14 @@ from . import (
 )
 
 
-@ultroid_cmd(pattern="zip ?(.*)")
+@ultroid_cmd(pattern="zip( (.*)|$)")
 async def zipp(event):
     reply = await event.get_reply_message()
     t = time.time()
     if not reply:
-        await eor(event, get_string("zip_1"))
+        await event.eor(get_string("zip_1"))
         return
-    xx = await eor(event, get_string("com_1"))
+    xx = await event.eor(get_string("com_1"))
     if reply.media:
         if hasattr(reply.media, "document"):
             file = reply.media.document
@@ -50,8 +50,10 @@ async def zipp(event):
         else:
             file = await event.download_media(reply)
     inp = file.replace(file.split(".")[-1], "zip")
-    if event.pattern_match.group(1):
-        await bash(f"zip -r --password {event.pattern_match.group(1)} {inp} {file}")
+    if event.pattern_match.group(1).strip():
+        await bash(
+            f"zip -r --password {event.pattern_match.group(1).strip()} {inp} {file}"
+        )
     else:
         await bash(f"zip -r {inp} {file}")
     k = time.time()
@@ -60,7 +62,7 @@ async def zipp(event):
         event.chat_id,
         xxx,
         force_document=True,
-        thumb="resources/extras/cipherx.jpg",
+        thumb=ULTConfig.thumb,
         caption=f"`{xxx.name}`",
         reply_to=reply,
     )
@@ -69,14 +71,15 @@ async def zipp(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="unzip$")
+@ultroid_cmd(pattern="unzip( (.*)|$)")
 async def unzipp(event):
     reply = await event.get_reply_message()
+    file = event.pattern_match.group(1).strip()
     t = time.time()
-    if not reply:
-        await eor(event, get_string("zip_1"))
+    if not ((reply and reply.media) or file):
+        await event.eor(get_string("zip_1"))
         return
-    xx = await eor(event, get_string("com_1"))
+    xx = await event.eor(get_string("com_1"))
     if reply.media:
         if not hasattr(reply.media, "document"):
             return await xx.edit(get_string("zip_3"))
@@ -100,7 +103,7 @@ async def unzipp(event):
             event.chat_id,
             xxx,
             force_document=True,
-            thumb="resources/extras/cipherx.jpg",
+            thumb=ULTConfig.thumb,
             caption=f"`{xxx.name}`",
         )
     await xx.delete()
@@ -110,22 +113,23 @@ async def unzipp(event):
 async def azipp(event):
     reply = await event.get_reply_message()
     t = time.time()
-    if not reply:
-        await eor(event, get_string("zip_1"))
+    if not (reply and reply.media):
+        await event.eor(get_string("zip_1"))
         return
-    xx = await eor(event, get_string("com_1"))
+    xx = await event.eor(get_string("com_1"))
     if not os.path.isdir("zip"):
         os.mkdir("zip")
     if reply.media:
         if hasattr(reply.media, "document"):
             file = reply.media.document
             image = await downloader(
-                "zip/" + reply.file.name,
+                f"zip/{reply.file.name}",
                 reply.media.document,
                 xx,
                 t,
                 get_string("com_5"),
             )
+
             file = image.name
         else:
             file = await event.download_media(reply.media, "zip/")
@@ -134,25 +138,25 @@ async def azipp(event):
     )
 
 
-@ultroid_cmd(pattern="dozip ?(.*)")
+@ultroid_cmd(pattern="dozip( (.*)|$)")
 async def do_zip(event):
     if not os.path.isdir("zip"):
-        return await eor(event, get_string("zip_2").format(HNDLR))
-    xx = await eor(event, get_string("com_1"))
-    if event.pattern_match.group(1):
+        return await event.eor(get_string("zip_2").format(HNDLR))
+    xx = await event.eor(get_string("com_1"))
+    if event.pattern_match.group(1).strip():
         await bash(
-            f"zip -r --password {event.pattern_match.group(1)} ultroid.zip zip/*"
+            f"zip -r --password {event.pattern_match.group(1).strip()} ultroid.zip zip/*"
         )
     else:
-        await bash("zip -r cipherx.zip zip/*")
+        await bash("zip -r ultroid.zip zip/*")
     k = time.time()
-    xxx = await uploader("cipherx.zip", "cipherx.zip", k, xx, get_string("com_6"))
+    xxx = await uploader("ultroid.zip", "ultroid.zip", k, xx, get_string("com_6"))
     await event.client.send_file(
         event.chat_id,
         xxx,
         force_document=True,
-        thumb="resources/extras/cipherx.jpg",
+        thumb=ULTConfig.thumb,
     )
     await bash("rm -rf zip")
-    os.remove("cipherx.zip")
+    os.remove("ultroid.zip")
     await xx.delete()
