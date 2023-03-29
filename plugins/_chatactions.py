@@ -5,14 +5,14 @@ from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.utils import get_display_name
 
-from cython.dB import stickers
-from cython.dB.echo_db import check_echo
-from cython.dB.forcesub_db import get_forcesetting
-from cython.dB.gban_mute_db import is_gbanned
-from cython.dB.greetings_db import get_goodbye, get_welcome, must_thank
-from cython.dB.nsfw_db import is_profan
-from cython.fns.helper import inline_mention
-from cython.fns.tools import async_searcher, create_tl_btn, get_chatbot_reply
+from CythonX.dB import stickers
+from CythonX.dB.echo_db import check_echo
+from CythonX.dB.forcesub_db import get_forcesetting
+from CythonX.dB.gban_mute_db import is_gbanned
+from CythonX.dB.greetings_db import get_goodbye, get_welcome, must_thank
+from CythonX.dB.nsfw_db import is_profan
+from CythonX.fns.helper import inline_mention
+from CythonX.fns.tools import async_searcher, create_tl_btn, get_chatbot_reply
 
 try:
     from ProfanityDetector import detector
