@@ -39,7 +39,7 @@ if run_as_module:
     if udB.ping():
         LOGS.info(f"Connected to {udB.name} Successfully!")
 
-    BOT_MODE = udB.get_key("BOTMODE")
+    BOT_MODE = udB.del_key("BOTMODE")
     DUAL_MODE = udB.get_key("DUAL_MODE")
 
     USER_MODE = udB.get_key("USER_MODE")
