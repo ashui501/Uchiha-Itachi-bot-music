@@ -42,7 +42,6 @@ async def repify(e):
     
 @ultroid_cmd(pattern="cipher$")
 async def useUltroid(rs):
-async def useUltroid(rs):
     button = Button.inline("Start >>", "initft_2")
     msg = await asst.send_message(
         LOG_CHANNEL,
