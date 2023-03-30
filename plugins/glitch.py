@@ -28,9 +28,9 @@ async def _(e):
         ok = await reply.download_media(thumb=-1)
     else:
         return await xx.eor(get_string("com_4"))
-    cmd = f"glitch_me gif --line_count 200 -f 10 -d 50 '{ok}' ult.gif"
+    cmd = f"glitch_me gif --line_count 200 -f 10 -d 50 '{ok}' cipherx.gif"
     await bash(cmd)
-    await e.reply(file="ult.gif", force_document=False)
+    await e.reply(file="cipherx.gif", force_document=False)
     await xx.delete()
     os.remove(ok)
-    os.remove("ult.gif")
+    os.remove("cipherx.gif")
