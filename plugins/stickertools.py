@@ -75,7 +75,7 @@ async def pack_kangish(_):
     elif not (_e and _e.sticker and _e.file.mime_type == "image/webp"):
         return await _.eor(get_string("sts_4"))
     msg = await _.eor(get_string("com_1"))
-    _packname = cmdtext or f"Ultroid Kang Pack By {_.sender_id}"
+    _packname = cmdtext or f"Sticker Pack By {_.sender_id}"
     typee = None
     if not local:
         _id = _e.media.document.attributes[1].stickerset.id
@@ -115,7 +115,7 @@ async def pack_kangish(_):
             )
         )
     try:
-        short_name = "ult_" + _packname.replace(" ", "_") + str(_.id)
+        short_name = "cipherx_" + _packname.replace(" ", "_") + str(_.id)
         _r_e_s = await asst(
             functions.stickers.CreateStickerSetRequest(
                 user_id=_.sender_id,
@@ -128,7 +128,7 @@ async def pack_kangish(_):
         )
     except PeerIdInvalidError:
         return await msg.eor(
-            f"Hey {inline_mention(_.sender)} send `/start` to @{asst.me.username} and later try this command again.."
+            f"Hey {inline_mention(_.sender)} send `/start` to @{asst.me.username} and later try this command again..."
         )
     except BaseException as er:
         LOGS.exception(er)
@@ -173,8 +173,8 @@ async def hehe(args):
         else:
             y = cv2.VideoCapture(xy)
             heh, lol = y.read()
-            cv2.imwrite("ult.webp", lol)
-            photo = "ult.webp"
+            cv2.imwrite("cipherx.webp", lol)
+            photo = "cipherx.webp"
     elif message.file and "tgsticker" in message.file.mime_type:
         await ultroid_bot.download_file(
             message.media.document,
@@ -209,7 +209,7 @@ async def hehe(args):
             else:
                 emoji = splat[1]
 
-        packname = f"ult_{user.id}_{pack}"
+        packname = f"cipherx_{user.id}_{pack}"
         packnick = f"{username}'s Pack {pack}"
         cmd = "/newpack"
         file = io.BytesIO()
@@ -250,7 +250,7 @@ async def hehe(args):
                 t = "50" if (is_anim or is_vid) else "120"
                 while t in x.message:
                     pack += 1
-                    packname = f"ult_{user.id}_{pack}"
+                    packname = f"cipherx_{user.id}_{pack}"
                     packnick = f"{username}'s Pack {pack}"
                     if is_anim:
                         packname += "_anim"
@@ -387,16 +387,16 @@ async def ultdround(event):
     draw.pieslice([0, 0, h, w], 0, 360, fill=255)
     npAlpha = np.array(alpha)
     npImage = np.dstack((npImage, npAlpha))
-    Image.fromarray(npImage).save("ult.webp")
+    Image.fromarray(npImage).save("cipherx.webp")
     await event.client.send_file(
         event.chat_id,
-        "ult.webp",
+        "cipherx.webp",
         force_document=False,
         reply_to=event.reply_to_msg_id,
     )
     await xx.delete()
     os.remove(file)
-    os.remove("ult.webp")
+    os.remove("cipherx.webp")
 
 
 @ultroid_cmd(
@@ -406,9 +406,9 @@ async def ultdestroy(event):
     ult = await event.get_reply_message()
     if not (ult and ult.media and "animated" in mediainfo(ult.media)):
         return await event.eor(get_string("sts_2"))
-    await event.client.download_media(ult, "ultroid.tgs")
+    await event.client.download_media(ult, "cipherx.tgs")
     xx = await event.eor(get_string("com_1"))
-    await bash("lottie_convert.py ultroid.tgs json.json")
+    await bash("lottie_convert.py cipherx.tgs json.json")
     with open("json.json") as json:
         jsn = json.read()
     jsn = (
@@ -427,11 +427,11 @@ async def ultdestroy(event):
         .replace("[9]", "[110]")
     )
     open("json.json", "w").write(jsn)
-    file = await con.animated_sticker("json.json", "ultroid.tgs")
+    file = await con.animated_sticker("json.json", "cipherx.tgs")
     if file:
         await event.client.send_file(
             event.chat_id,
-            file="ultroid.tgs",
+            file="cipherx.tgs",
             force_document=False,
             reply_to=event.reply_to_msg_id,
         )
@@ -456,8 +456,8 @@ async def ultiny(event):
             jsn = json.read()
         jsn = jsn.replace("512", "2000")
         open("json.json", "w").write(jsn)
-        await con.animated_sticker("json.json", "ult.tgs")
-        file = "ult.tgs"
+        await con.animated_sticker("json.json", "cipherx.tgs")
+        file = "cipherx.tgs"
         os.remove("json.json")
     elif ik.endswith((".gif", ".webm", ".mp4")):
         iik = cv2.VideoCapture(ik)
