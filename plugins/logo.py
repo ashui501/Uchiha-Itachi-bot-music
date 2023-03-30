@@ -20,7 +20,7 @@ except ImportError:
 from CythonX.fns.misc import unsplashsearch
 from CythonX.fns.tools import LogoHelper
 
-from . import OWNER_ID, OWNER_NAME, download_file, get_string, mediainfo, ultroid_cmd
+from . import download_file, get_string, mediainfo, ultroid_cmd
 
 
 @ultroid_cmd(pattern="logo( (.*)|$)")
@@ -85,12 +85,13 @@ async def logo_gen(event):
         stroke_width=strke,
         stroke_fill="black",
     )
-    await xx.edit("`Done!`")
+    await xx.edit("`☑️`")
+    await xx.edit("`✅`")
     await event.client.send_file(
         event.chat_id,
         file=name,
-        caption=f"Logo by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
-        force_document=True,
+        caption=f"𑀉᧐g᧐ ⲙᥲɗᥱ δy CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ",
+        force_document=False,
     )
     os.remove(name)
     await xx.delete()
