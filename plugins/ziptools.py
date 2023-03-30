@@ -145,12 +145,12 @@ async def do_zip(event):
     xx = await event.eor(get_string("com_1"))
     if event.pattern_match.group(1).strip():
         await bash(
-            f"zip -r --password {event.pattern_match.group(1).strip()} ultroid.zip zip/*"
+            f"zip -r --password {event.pattern_match.group(1).strip()} cipherx.zip zip/*"
         )
     else:
-        await bash("zip -r ultroid.zip zip/*")
+        await bash("zip -r cipherx.zip zip/*")
     k = time.time()
-    xxx = await uploader("ultroid.zip", "ultroid.zip", k, xx, get_string("com_6"))
+    xxx = await uploader("cipherx.zip", "cipherx.zip", k, xx, get_string("com_6"))
     await event.client.send_file(
         event.chat_id,
         xxx,
@@ -158,5 +158,5 @@ async def do_zip(event):
         thumb=ULTConfig.thumb,
     )
     await bash("rm -rf zip")
-    os.remove("ultroid.zip")
+    os.remove("cipherx.zip")
     await xx.delete()
