@@ -78,7 +78,7 @@ async def pdfseimg(event):
         for num in range(pdf.numPages):
             pw = PdfFileWriter()
             pw.addPage(pdf.getPage(num))
-            fil = os.path.join(f"pdf/ult{num + 1}.png")
+            fil = os.path.join(f"pdf/cipherx{num + 1}.png")
             ok.append(fil)
             with open(fil, "wb") as f:
                 pw.write(f)
@@ -93,25 +93,25 @@ async def pdfseimg(event):
         for o in range(ok):
             pw = PdfFileWriter()
             pw.addPage(pdf.getPage(o))
-            with open(os.path.join("ult.png"), "wb") as f:
+            with open(os.path.join("cipherx.png"), "wb") as f:
                 pw.write(f)
             await event.reply(
-                file="ult.png",
+                file="cipherx.png",
             )
-            os.remove("ult.png")
+            os.remove("cipherx.png")
         os.remove(pdfp)
     else:
         o = int(msg) - 1
         pw = PdfFileWriter()
         pw.addPage(pdf.getPage(o))
-        with open(os.path.join("ult.png"), "wb") as f:
+        with open(os.path.join("cipherx.png"), "wb") as f:
             pw.write(f)
         os.remove(pdfp)
         try:
-            await event.reply(file="ult.png")
+            await event.reply(file="cipherx.png")
         except PhotoSaveFileInvalidError:
-            await event.reply(file="ult.png", force_document=True)
-        os.remove("ult.png")
+            await event.reply(file="cipherx.png", force_document=True)
+        os.remove("cipherx.png")
 
 
 @ultroid_cmd(
