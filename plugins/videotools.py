@@ -83,7 +83,7 @@ async def gen_shots(e):
         pic = glob.glob("ss/*")
         text = f"Uploaded {len(pic)}/{shot} screenshots"
         if not pic:
-            text = "`Failed to Take Screenshots..`"
+            text = "`Failed to Take Screenshots...`"
             pic = None
         await e.respond(text, file=pic)
         await bash("rm -rf ss")
