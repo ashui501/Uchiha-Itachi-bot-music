@@ -37,14 +37,14 @@ async def igif(e):
     xx = await e.eor(get_string("com_1"))
     z = await a.download_media()
     if match == "bw":
-        cmd = f'ffmpeg -i "{z}" -vf format=gray ult.gif -y'
+        cmd = f'ffmpeg -i "{z}" -vf format=gray cipherx.gif -y'
     else:
-        cmd = f'ffmpeg -i "{z}" -vf lutyuv="y=negval:u=negval:v=negval" ult.gif -y'
+        cmd = f'ffmpeg -i "{z}" -vf lutyuv="y=negval:u=negval:v=negval" cipherx.gif -y'
     try:
         await bash(cmd)
-        await e.client.send_file(e.chat_id, "ult.gif", supports_streaming=True)
+        await e.client.send_file(e.chat_id, "cipherx.gif", supports_streaming=True)
         os.remove(z)
-        os.remove("ult.gif")
+        os.remove("cipherx.gif")
         await xx.delete()
     except Exception as er:
         LOGS.info(er)
@@ -104,7 +104,7 @@ async def vtogif(e):
     if int(dur) < 120:
         z = await a.download_media()
         await bash(
-            f'ffmpeg -i {z} -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 ult.gif -y'
+            f'ffmpeg -i {z} -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 cipherx.gif -y'
         )
     else:
         filename = a.file.name
@@ -113,10 +113,10 @@ async def vtogif(e):
         vid = await downloader(filename, a.media.document, xx, tt, get_string("com_5"))
         z = vid.name
         await bash(
-            f'ffmpeg -ss 3 -t 100 -i {z} -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 ult.gif'
+            f'ffmpeg -ss 3 -t 100 -i {z} -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 cipherx.gif'
         )
 
-    await e.client.send_file(e.chat_id, "ult.gif", support_stream=True)
+    await e.client.send_file(e.chat_id, "cipherx.gif", support_stream=True)
     os.remove(z)
-    os.remove("ult.gif")
+    os.remove("cipherx.gif")
     await xx.delete()
