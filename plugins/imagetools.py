@@ -88,17 +88,17 @@ async def _(event):
     image = await reply.download_media()
     img = cv2.VideoCapture(image)
     ret, frame = img.read()
-    cv2.imwrite("ult.jpg", frame)
+    cv2.imwrite("cipherx.jpg", frame)
     if udB.get_key("DEEP_API"):
         key = Redis("DEEP_API")
     else:
         key = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
     r = requests.post(
         "https://api.deepai.org/api/colorizer",
-        files={"image": open("ult.jpg", "rb")},
+        files={"image": open("cipherx.jpg", "rb")},
         headers={"api-key": key},
     )
-    os.remove("ult.jpg")
+    os.remove("cipherx.jpg")
     os.remove(image)
     if "status" in r.json():
         return await event.edit(
@@ -170,13 +170,13 @@ async def ult_tools(event):
         centers = np.uint8(centers)
         ish = centers[labels.flatten()]
         ultroid = ish.reshape(ult.shape)
-    cv2.imwrite("ult.jpg", ultroid)
+    cv2.imwrite("cipherx.jpg", ultroid)
     await ureply.reply(
-        file="ult.jpg",
+        file="cipherx.jpg",
         force_document=False,
     )
     await xx.delete()
-    os.remove("ult.jpg")
+    os.remove("cipherx.jpg")
     os.remove(file)
 
 
@@ -219,18 +219,18 @@ async def ultd(event):
     ms = r.get("message")
     if not r["success"]:
         return await xx.edit(ms)
-    await download_file(ms, "ult.png")
-    img = Image.open("ult.png").convert("RGB")
-    img.save("ult.webp", "webp")
+    await download_file(ms, "cipherx.png")
+    img = Image.open("cipherx.png").convert("RGB")
+    img.save("cipherx.webp", "webp")
     await event.client.send_file(
         event.chat_id,
-        "ult.webp",
+        "cipherx.webp",
         force_document=False,
         reply_to=event.reply_to_msg_id,
     )
     await xx.delete()
-    os.remove("ult.png")
-    os.remove("ult.webp")
+    os.remove("cipherx.png")
+    os.remove("cipherx.webp")
     os.remove(ultt)
 
 
@@ -280,7 +280,7 @@ async def pixelator(event):
     temp = cv2.resize(input_, (w, h), interpolation=cv2.INTER_LINEAR)
     output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     cv2.imwrite("output.jpg", output)
-    await msg.respond("• Pixelated by Ultroid", file="output.jpg")
+    await msg.respond("• Pixelated by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", file="output.jpg")
     await msg.delete()
     os.remove("output.jpg")
     os.remove(image)
