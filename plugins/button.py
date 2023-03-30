@@ -1,19 +1,15 @@
-"""
-✘ Commands Available -
+from . import get_help
 
-• `{i}button <text with button format`
-   create button u can reply to pic also
+__doc__ = get_help("help_button")
 
-Format:- `{i}button Hey There! @UseUltroid 😎.
-[CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ | t.me/CipherXBot][Support | t.me/FutureTechnologyOfficial | same]
-[CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ | t.me/CipherXBot]`
-"""
+import os
 
-from cython.functions.tools import create_tl_btn, get_msg_button
 from telegraph import upload_file as uf
 from telethon.utils import pack_bot_file_id
 
-from . import *
+from CythonX.fns.tools import create_tl_btn, get_msg_button
+
+from . import HNDLR, get_string, mediainfo, ultroid_cmd
 from ._inline import something
 
 
@@ -26,28 +22,28 @@ async def butt(event):
             text = wt.text
         if wt.media:
             wut = mediainfo(wt.media)
-        if wut.startswith(("pic", "gif")):
+        if wut and wut.startswith(("pic", "gif")):
             dl = await wt.download_media()
             variable = uf(dl)
-            media = "https://telegra.ph" + variable[0]
+            media = f"https://graph.org{variable[0]}"
         elif wut == "video":
             if wt.media.document.size > 8 * 1000 * 1000:
-                return await eor(event, get_string("com_4"), time=5)
+                return await event.eor(get_string("com_4"), time=5)
             dl = await wt.download_media()
             variable = uf(dl)
             os.remove(dl)
-            media = "https://telegra.ph" + variable[0]
+            media = f"https://graph.org{variable[0]}"
         else:
-            pack_bot_file_id(wt.media)
-    if not text:
-        text = event.text.split(maxsplit=1)
-        if len(text) <= 1:
-            return await eor(
-                event,
+            media = pack_bot_file_id(wt.media)
+    try:
+        text = event.text.split(maxsplit=1)[1]
+    except IndexError:
+        if not text:
+            return await event.eor(
                 f"**Please give some text in correct format.**\n\n`{HNDLR}help button`",
             )
-        text = text[1]
     text, buttons = get_msg_button(text)
     if buttons:
         buttons = create_tl_btn(buttons)
-    return await something(event, text, None, buttons)
+    await something(event, text, media, buttons)
+    await event.delete()
