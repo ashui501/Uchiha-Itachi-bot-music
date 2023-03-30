@@ -6,6 +6,7 @@ from os import remove
 from git import Repo
 from platform import python_version as PyVer
 from telethon import Button
+from telethon import __version__
 from telethon.tl.types import InputWebDocument, Message
 from telethon.utils import resolve_bot_file_id
 
