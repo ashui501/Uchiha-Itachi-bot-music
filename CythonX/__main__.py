@@ -92,7 +92,7 @@ def main():
         pass
 
     LOGS.info(
-        f"Took {time_formatter((time.time() - start_time)*1000)} to start •ULTROID•"
+        f"Took {time_formatter((time.time() - start_time)*1000)} to start •CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ•"
     )
     LOGS.info(suc_msg)
 
