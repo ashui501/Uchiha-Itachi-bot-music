@@ -75,7 +75,7 @@ from . import humanbytes as hb
 from . import inline_mention, is_url_ok, json_parser, mediainfo, ultroid_cmd
 
 
-@ultroid_cmd(pattern="tr( (.*)|$)", manager=True)
+@ultroid_cmd(pattern="tr( (.*)|$)", manager=True, assistant=True)
 async def _(event):
     input = event.pattern_match.group(1).strip().split(maxsplit=1)
     txt = input[1] if len(input) > 1 else None
@@ -93,16 +93,17 @@ async def _(event):
     lan = input or "en"
     try:
         tt = translate(text, lang_tgt=lan)
-        output_str = f"**TRANSLATED** to {lan}\n{tt}"
+        output_str = f"**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({fr})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({lan})**:\n`{tt}`"
         await event.eor(output_str)
     except Exception as exc:
         LOGS.exception(exc)
-        await event.eor(str(exc), time=5)
+        await event.eor("Something went wrong 🤔\nSee [Language Codes](https://telegra.ph/CɪᴘʜᴇʀX-03-10) and try again.", link_preview=False, time=5)
 
 
 @ultroid_cmd(
     pattern="id( (.*)|$)",
     manager=True,
+    assistant=True
 )
 async def _(event):
     ult = event
@@ -451,5 +452,5 @@ async def magic(event):
     if not response.get("status"):
         return await event.eor(f'**ERROR :** `{response["message"]}`')
     await event.eor(
-        f"• **Ultroid Tiny**\n• Given Url : {url}\n• Shorten Url : {data['response']['tinyUrl']}"
+        f"• **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ Tiny**\n• Given Url : {url}\n• Shorten Url : {data['response']['tinyUrl']}"
     )
