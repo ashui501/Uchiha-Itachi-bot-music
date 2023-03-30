@@ -1,11 +1,3 @@
-# /usr/bin/python3
-# Ultroid - UserBot
-# Copyright (C) 2020 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Please read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 # Standalone file for facilitating local deploys.
 
 import os
@@ -28,11 +20,8 @@ def start():
     print(f"{a}\n\n")
     print("Welcome to CɪᴘʜᴇʀX ᴇxᴄlusivᴇ ʙᴏᴛ, lets start setting up!\n\n")
     print("Cloning the repository...\n\n")
-    try:
-        os.system("rm -rf Megatron")
-    except BaseException:
-        pass
-    os.system("git clone https://github.com/CipherX1-ops/Megatron")
+    os.system("rm -rf Megatron")
+    os.system("git clone https://github.com/ToxygenX/Megatron")
     print("\n\nDone")
     os.chdir("Megatron")
     clear_screen()
@@ -45,9 +34,7 @@ def start():
     )
     if sessionisneeded == "generate":
         gen_session()
-    elif sessionisneeded == "skip":
-        pass
-    else:
+    elif sessionisneeded != "skip":
         print(
             'Please choose "generate" to generate a session string, or "skip" to pass on.\n\nPlease run the script again!',
         )
@@ -62,7 +49,7 @@ def start():
         "REDIS_URI",
         "REDIS_PASSWORD",
     ]
-    all_done = "# Megatron Environment Variables.\n# Do not delete this file.\n\n"
+    all_done = "# Ultroid Environment Variables.\n# Do not delete this file.\n\n"
     for i in varrs:
         all_done += do_input(i)
     clear_screen()
@@ -75,22 +62,31 @@ def start():
         f = open(".env", "w")
         f.write(all_done)
     else:
-        print("Oh, let's redo these then -_-")
+        print("Oh, let's redo these then.")
         start()
     clear_screen()
     print("\nCongrats. All done!\nTime to start the bot!")
     print("\nInstalling requirements... This might take a while...")
-    os.system("pip3 install -r --no-cache-dir resources/startup/requirements.txt")
+    os.system("pip3 install --no-cache-dir -r requirements.txt")
+    ask = input(
+        "Enter 'yes/y' to Install other requirements, required for local deployment."
+    )
+    if ask.lower().startswith("y"):
+        print("Started Installing...")
+        os.system(
+            "pip3 install --no-cache-dir -r resources/startup/optional-requirements.txt"
+        )
+    else:
+        print("Skipped!")
     clear_screen()
     print(a)
     print("\nStarting Megatron...")
-    os.system("python3 -m cython")
+    os.system("sh startup")
 
 
 def do_input(var):
     val = input(f"Enter your {var}: ")
-    to_write = f"{var}={val}\n"
-    return to_write
+    return f"{var}={val}\n"
 
 
 def clear_screen():
