@@ -57,9 +57,7 @@ from . import (
     updater,
 )
 
-
-def ULTPIC():
-    return inline_pic() or choice(ULTROID_IMAGES)
+ULTPIC = inline_pic() or choice(ULTROID_IMAGES)
 
 
 buttons = [
@@ -320,7 +318,7 @@ async def _(e):
     if m:
         x = await asst.send_file(
             udB.get_key("LOG_CHANNEL"),
-            ULTPIC(),
+            ULTPIC,
             caption="• **Update Available** •",
             force_document=False,
             buttons=Button.inline("Changelogs", data="changes"),
@@ -348,7 +346,7 @@ async def updava(event):
     await event.delete()
     await asst.send_file(
         udB.get_key("LOG_CHANNEL"),
-        ULTPIC(),
+        ULTPIC,
         caption="• **Update Available** •",
         force_document=False,
         buttons=Button.inline("Changelogs", data="changes"),
