@@ -138,7 +138,7 @@ async def ultroid(event):
                     [
                         Button.inline("✵CɪᴘʜᴇʀX Bᴏᴛs Lisᴛ✵", data="list"),
                     ],
-                ],
+                ]
                 if Owner_info_msg
                 else None,
             )
