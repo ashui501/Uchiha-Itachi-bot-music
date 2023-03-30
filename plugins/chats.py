@@ -70,7 +70,7 @@ async def _(e):
     if match:
         split = match.split(maxsplit=1)
         request = split[0] in ["r", "request"]
-        title = "Created by Ultroid"
+        title = "Created by @CipherXBot"
         if len(split) > 1:
             match = split[1]
             spli = match.split(maxsplit=1)
@@ -198,7 +198,7 @@ async def _(ult):
     elif reply.document and reply.document.thumbs:
         replfile = await reply.download_media(thumb=-1)
     else:
-        return await ult.eor("Reply to a Photo or Video..")
+        return await ult.eor("Reply to a Photo or Video...")
     mediain = mediainfo(reply.media)
     if "animated" in mediain:
         replfile = await con.convert(replfile, convert_to="mp4")
@@ -235,7 +235,7 @@ async def _(ult):
 
 @ultroid_cmd(pattern="unbanall$", manager=True, admins_only=True, require="ban_users")
 async def _(event):
-    xx = await event.eor("Searching Participant Lists.")
+    xx = await event.eor("Searching Participant Lists...")
     p = 0
     title = (await event.get_chat()).title
     async for i in event.client.iter_participants(
