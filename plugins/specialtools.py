@@ -144,7 +144,7 @@ async def hbd(event):
         name = nam.first_name
     else:
         name = ultroid_bot.me.first_name
-    zn = pytz.timezone("Asia/Kolkata")
+    zn = pytz.timezone("Asia/Tehran")
     abhi = dt.now(zn)
     kk = match.split("/")
     p = kk[0]
@@ -339,7 +339,7 @@ async def quott_(event):
         )
     except Exception as er:
         return await msg.edit(str(er))
-    message = await reply.reply("Quotly by Ultroid", file=file)
+    message = await reply.reply("Quotly by CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ", file=file)
     os.remove(file)
     await msg.delete()
     return message
