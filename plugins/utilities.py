@@ -10,6 +10,9 @@
 
 • `{i}stats` : See your profile stats.
 
+• `{i}bcal <equation>`
+    A simple calculator.
+    
 • `{i}paste` - `Include long text / Reply to text file.`
 
 • `{i}info <username/userid/chatid>`
@@ -269,10 +272,61 @@ async def _(event):
         LOGS.exception(e)
         await xx.edit(reply_text)
 
+        
+@ultroid_cmd(
+    pattern="bcal",
+)
+async def _(event):
+    x = await eor(event, get_string("com_1"))
+    cmd = event.text.split(" ", maxsplit=1)[1]
+    event.message.id
+    if event.reply_to_msg_id:
+        event.reply_to_msg_id
+    wtf = f"print({cmd})"
+    old_stderr = sys.stderr
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = io.StringIO()
+    redirected_error = sys.stderr = io.StringIO()
+    stdout, stderr, exc = None, None, None
+    try:
+        await aexec(wtf, event)
+    except Exception:
+        exc = traceback.format_exc()
+    stdout = redirected_output.getvalue()
+    stderr = redirected_error.getvalue()
+    sys.stdout = old_stdout
+    sys.stderr = old_stderr
+    evaluation = ""
+    if exc:
+        evaluation = exc
+    elif stderr:
+        evaluation = stderr
+    elif stdout:
+        evaluation = stdout
+    else:
+        evaluation = "`Something went wrong`"
+
+    final_output = """
+**ⲈQⳘⲀⲦⲒⲞⲚ**:
+`{}`
+**ⲊⲞⳐⳘⲦⲒⲞⲚ**:
+`{}`
+""".format(
+        cmd,
+        evaluation,
+    )
+    await x.edit(final_output)
+
+
+async def aexec(code, event):
+    exec(f"async def __aexec(event): " + "".join(f"\n {l}" for l in code.split("\n")))
+    return await locals()["__aexec"](event)
+        
 
 @ultroid_cmd(
     pattern="info( (.*)|$)",
     manager=True,
+    assistant=True
 )
 async def _(event):
     if match := event.pattern_match.group(1).strip():
@@ -329,7 +383,7 @@ async def _(event):
         dc_id = user.photo.dc_id
     else:
         dc_id = "Need a Profile Picture to check this"
-    caption = """<b>Exᴛʀᴀᴄᴛᴇᴅ Dᴀᴛᴀ Fʀᴏᴍ Tᴇʟᴇɢʀᴀᴍ's Dᴀᴛᴀʙᴀsᴇ<b>
+    caption = """<b>Exᴛʀᴀᴄᴛᴇᴅ Dᴀᴛᴀ Fʀᴏᴍ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ Dᴀᴛᴀʙᴀsᴇ<b>
 <b>••Tᴇʟᴇɢʀᴀᴍ ID</b>: <code>{}</code>
 <b>••Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: <a href='tg://user?id={}'>Click Here</a>
 <b>••Fɪʀsᴛ Nᴀᴍᴇ</b>: <code>{}</code>
@@ -451,7 +505,7 @@ async def abs_rmbg(event):
     zz = Image.open(out)
     if zz.mode != "RGB":
         zz.convert("RGB")
-    wbn = check_filename("ult-rmbg.webp")
+    wbn = check_filename("cipherx-rmbg.webp")
     zz.save(wbn, "webp")
     await event.client.send_file(
         event.chat_id,
@@ -467,10 +521,12 @@ async def abs_rmbg(event):
 
 @ultroid_cmd(
     pattern="telegraph( (.*)|$)",
+    assistant=True,
+    manager=True
 )
 async def telegraphcmd(event):
     xx = await event.eor(get_string("com_1"))
-    match = event.pattern_match.group(1).strip() or "Ultroid"
+    match = event.pattern_match.group(1).strip() or "CipherX"
     reply = await event.get_reply_message()
     if not reply:
         return await xx.eor("`Reply to Message.`")
@@ -505,7 +561,11 @@ async def telegraphcmd(event):
     )
 
 
-@ultroid_cmd(pattern="json( (.*)|$)")
+@ultroid_cmd(
+    pattern="json( (.*)|$)",
+    assistant=True,
+    manager=True
+)
 async def _(event):
     reply_to_id = None
     match = event.pattern_match.group(1).strip()
@@ -539,7 +599,7 @@ async def _(event):
             pass
     if len(msg) > 4096:
         with io.BytesIO(str.encode(msg)) as out_file:
-            out_file.name = "json-ult.txt"
+            out_file.name = "json-cipherx.txt"
             await event.client.send_file(
                 event.chat_id,
                 out_file,
@@ -696,7 +756,7 @@ async def get_restriced_msg(event):
     chat, msg = get_chat_and_msgid(match)
     if not (chat and msg):
         return await event.eor(
-            f"{get_string('gms_1')}!\nEg: `https://t.me/TeamUltroid/3 or `https://t.me/c/1313492028/3`"
+            f"{get_string('gms_1')}!\nEg: `https://t.me/FutureTechnologyOfficial/3 or `https://t.me/c/1313492028/3`"
         )
     try:
         message = await event.client.get_messages(chat, ids=msg)
