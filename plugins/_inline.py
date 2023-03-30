@@ -85,7 +85,7 @@ async def inline_alive(o):
         "https://telegra.ph/file/9847d2c66379f4da3b29d.mp4", 0, "video/mp4", []
     )
     RES = [
-        await o.builder.article(
+        await o.builder.document(
             type="gif",
             text=ALIVEMSG,
             include_media=True,
