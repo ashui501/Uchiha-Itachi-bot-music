@@ -92,7 +92,7 @@ async def inline_alive(o):
             buttons=SUP_BUTTONS,
             title="✵ CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ ✵",
             description="(c) CɪᴘʜᴇʀX",
-            file=INLINE_PIC,
+            file=inline_pic(),
             #url=TLINK,
             #thumb=WEB0,
             #content=InputWebDocument(TLINK, 0, "image/jpg", []),
