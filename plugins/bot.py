@@ -326,17 +326,17 @@ async def _(e):
         Link = x.message_link
         await eod(
             xx,
-            time=3,
             f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
             parse_mode="html",
+            time=3,
             link_preview=False,
         )
     else:
         await eod(
             xx,
-            time=3,
             f'<code>CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ : \n</code><strong>｡⌬｡ up-to-date ｡⌬｡</strong>',
             parse_mode="html",
+            time=3,
             link_preview=False,
         )
 
