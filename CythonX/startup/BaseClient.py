@@ -123,8 +123,8 @@ class UltroidClient(TelegramClient):
                         except FileNotFoundError:
                             pass
                     return files["raw_file"], time.time() - start_time
-        from pyUltroid.fns.FastTelethon import upload_file
-        from pyUltroid.fns.helper import progress
+        from CythonX.fns.FastTelethon import upload_file
+        from CythonX.fns.helper import progress
 
         raw_file = None
         while not raw_file:
