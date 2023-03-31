@@ -42,6 +42,7 @@ from ..version import ultroid_version as ult_ver
 from . import SUDO_M, owner_and_sudos
 from ._wrappers import eod
 
+ASSISTANT = udB.get_key("ASSISTANT")
 MANAGER = udB.get_key("MANAGER")
 TAKE_EDITS = udB.get_key("TAKE_EDITS")
 black_list_chats = udB.get_key("BLACKLIST_CHATS")
@@ -274,6 +275,40 @@ def ultroid_cmd(
                     blacklist_chats=blacklist_chats,
                 ),
             )
+            
+        if assistant and ASSISTANT:
+            async def assistant_cmd(ult):
+                if not ult.is_private:
+                    return
+                try:
+                    await dec(ult)
+                except Exception as er:
+                    if chat := udB.get_key("ASSISTANT_LOG"):
+                        text = f"**#ASSISTANT_LOG\n\nChat:** `{get_display_name(ult.chat)}` `{ult.chat_id}`"
+                        text += f"\n**Replied :** `{ult.is_reply}`\n**Command :** {ult.text}\n\n**Error :** `{er}`"
+                        try:
+                            return await asst.send_message(
+                                chat, text, link_preview=False
+                            )
+                        except Exception as er:
+                            LOGS.exception(er)
+                    LOGS.info(f"• ASSISTANT [{ult.chat_id}]:")
+                    LOGS.exception(er)
+
+            if pattern:
+                cmd = compile_pattern(pattern, "/")
+            asst.add_event_handler(
+                assistant_cmd,
+                NewMessage(
+                    pattern=cmd,
+                    forwards=False,
+                    incoming=True,
+                    func=func,
+                    chats=chats,
+                    blacklist_chats=blacklist_chats,
+                ),
+            )
+            
         if DUAL_MODE and not (manager and DUAL_HNDLR == "/"):
             if pattern:
                 cmd = compile_pattern(pattern, DUAL_HNDLR)
