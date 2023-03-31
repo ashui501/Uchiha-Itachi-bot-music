@@ -4,7 +4,7 @@ from telethon.errors import (
     ChatSendMediaForbiddenError,
 )
 
-from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
+from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd, inline_pic
 
 REPOMSG = """
 • **CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ** • 
@@ -28,7 +28,11 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 )
 async def repify(e):
     try:
-        await e.reply(REPOMSG, file=udB.get("STARTMEDIA"), buttons=RP_BUTTONS) 
+        await e.reply(
+            REPOMSG,
+            file=inline_pic(), 
+            buttons=RP_BUTTONS,
+        ) 
     except (
         ChatSendInlineForbiddenError,
         ChatSendMediaForbiddenError,
