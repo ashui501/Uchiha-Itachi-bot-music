@@ -277,8 +277,10 @@ def ultroid_cmd(
             )
             
         if assistant and ASSISTANT:
+            allow_all = kwargs.get("allow_all", True)
+            allow_pm = kwargs.get("allow_pm", True)
             async def assistant_cmd(ult):
-                if not ult.is_private:
+                if not allow_all and allow_pm and ult.is_private:
                     return
                 try:
                     await dec(ult)
