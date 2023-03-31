@@ -93,7 +93,7 @@ async def ultroid(event):
                 ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
             await event.reply(
                 f"Ⲏⲉⲩ {mention}, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
-                file=udB.get("STARTMEDIA"),
+                file=udB.get_key("STARTMEDIA"),
                 buttons=[
                     [
                         Button.url("✵Jᴏin Chᴀnnᴇl✵", url="https://t.me/FutureTechnologyOfficial"),
