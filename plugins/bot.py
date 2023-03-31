@@ -128,7 +128,6 @@ async def lol(ult):
     else:
         parse = "md"
         als = (get_string("alive_1")).format(
-            header,
             OWNER_NAME,
             f"{ultroid_version} [{HOSTED_ON}]",
             UltVer,
