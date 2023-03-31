@@ -93,6 +93,7 @@ async def _(event):
     lan = input or "en"
     try:
         tt = translate(text, lang_tgt=lan)
+        fr = translate.detect(text)
         output_str = f"**Ⲧʀⲁⲛⲋⳑⲁⲧⲉⲇ ⲃⲩ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**\n\n**Ⲋⲟυʀⲥⲉ ({fr})**:\n`{text}`\n\n**Ⲧʀⲁⲛⲋⳑⲁⲧⲓⲟⲛ ({lan})**:\n`{tt}`"
         await event.eor(output_str)
     except Exception as exc:
