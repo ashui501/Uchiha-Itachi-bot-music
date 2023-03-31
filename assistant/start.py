@@ -92,7 +92,7 @@ async def ultroid(event):
             if udB.get_key("PMBOT"):
                 ok = "✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵✵"
             await event.reply(
-                f"Ⲏⲉⲩ [{get_display_name(u)}](tg://user?id={u.id}), ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
+                f"Ⲏⲉⲩ {mention}, ⲧⲏⲓⲋ ⲓⲋ Ⲋυⲣⲉʀ Ⲧⲉⲥⲏⲛⲟⳑⲟⳋⲩ Ⲁⲋⲋⲓⲋⲧⲁⲛⲧ ⲟϝ {ultroid_bot.me.first_name}!\n\n{ok}",
                 file=udB.get("STARTMEDIA"),
                 buttons=[
                     [
