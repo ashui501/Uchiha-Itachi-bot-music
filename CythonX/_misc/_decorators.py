@@ -61,7 +61,7 @@ def compile_pattern(data, hndlr):
 
 
 def ultroid_cmd(
-    pattern=None, manager=False, ultroid_bot=ultroid_bot, asst=asst, **kwargs
+    pattern=None, assistant=False, manager=False, ultroid_bot=ultroid_bot, asst=asst, **kwargs
 ):
     owner_only = kwargs.get("owner_only", False)
     groups_only = kwargs.get("groups_only", False)
