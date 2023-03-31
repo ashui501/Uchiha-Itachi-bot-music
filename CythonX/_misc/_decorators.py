@@ -258,7 +258,10 @@ def ultroid_cmd(
                                 chat, text, link_preview=False
                             )
                         except Exception as er:
-                            LOGS.exception(er)
+                            if er == ValueError:
+                                pass
+                            else:
+                                LOGS.exception(er)
                     LOGS.info(f"• MANAGER [{ult.chat_id}]:")
                     if er == ValueError:
                         pass
@@ -294,7 +297,10 @@ def ultroid_cmd(
                                 chat, text, link_preview=False
                             )
                         except Exception as er:
-                            LOGS.exception(er)
+                            if er == ValueError:
+                                pass
+                            else:
+                                LOGS.exception(er)
                     LOGS.info(f"• ASSISTANT [{ult.chat_id}]:")
                     if er == ValueError:
                         pass
