@@ -48,7 +48,7 @@ async def useUltroid(rs):
         LOG_CHANNEL,
         ULTSTRING,
         file="https://telegra.ph/file/167a0b85048b04129bd3b.jpg",
-        buttons=button,
+        buttons=RP_BUTTONS,
     )
     if not (rs.chat_id == LOG_CHANNEL and rs.client._bot):
         await eor(rs, f"**[Click Here]({msg.message_link})**")
