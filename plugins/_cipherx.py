@@ -24,6 +24,7 @@ ULTSTRING = """🎇 **Thanks for Deploying CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓ�
 @ultroid_cmd(
     pattern="repo$",
     manager=True,
+    assistant=True
 )
 async def repify(e):
     try:
