@@ -8,8 +8,9 @@ from telethon.utils import get_display_name
 from CythonX._misc import SUDO_M, owner_and_sudos
 from CythonX.dB.base import KeyManager
 from CythonX.fns.helper import inline_mention
-from strings import get_string
 
+from strings import get_string
+from assistant.manager._help import *
 from . import *
 
 Owner_info_msg = udB.get_key("BOT_INFO_START")
