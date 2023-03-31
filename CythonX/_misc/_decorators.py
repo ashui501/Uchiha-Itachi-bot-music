@@ -260,7 +260,10 @@ def ultroid_cmd(
                         except Exception as er:
                             LOGS.exception(er)
                     LOGS.info(f"• MANAGER [{ult.chat_id}]:")
-                    LOGS.exception(er)
+                    if er = ValueError:
+                        pass
+                    else:
+                        LOGS.exception(er)
 
             if pattern:
                 cmd = compile_pattern(pattern, "/")
@@ -277,10 +280,8 @@ def ultroid_cmd(
             )
             
         if assistant and ASSISTANT:
-            allow_all = kwargs.get("allow_all", True)
-            allow_pm = kwargs.get("allow_pm", True)
             async def assistant_cmd(ult):
-                if not allow_all and allow_pm and ult.is_private:
+                if not ult.is_private:
                     return
                 try:
                     await dec(ult)
@@ -295,7 +296,10 @@ def ultroid_cmd(
                         except Exception as er:
                             LOGS.exception(er)
                     LOGS.info(f"• ASSISTANT [{ult.chat_id}]:")
-                    LOGS.exception(er)
+                    if er = ValueError:
+                        pass
+                    else:
+                        LOGS.exception(er)
 
             if pattern:
                 cmd = compile_pattern(pattern, "/")
