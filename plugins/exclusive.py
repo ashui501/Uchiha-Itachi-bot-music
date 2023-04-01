@@ -739,7 +739,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@ultroid_bot.on("joon")
+@ultroid_cmd.on("joon")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("J")
@@ -765,7 +765,7 @@ async def _(event):
         await event.edit("Joooooooooon")
 
 
-@ultroid_bot.on("bigoof")
+@ultroid_cmd.on("bigoof")
 async def _(event):
     if event.fwd_from:
         return
@@ -788,7 +788,7 @@ async def _(event):
         await event.edit(animation_chars[i % 40])
 
 
-@ultroid_bot.on("ok")
+@ultroid_cmd.on("ok")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("ok")
@@ -874,7 +874,7 @@ async def meme(event):
     await asyncio.sleep(sleepValue)
 
 
-@ultroid_bot.on("think")
+@ultroid_cmd.on("think")
 async def _(event):
     if event.fwd_from:
         return
@@ -967,7 +967,7 @@ async def _(event):
             await event.edit(animation_chars[i % 27])
 
 
-@ultroid_bot.on(pattern=r"police")
+@ultroid_cmd.on(pattern=r"police")
 async def _(event):
     if event.fwd_from:
         return
@@ -993,7 +993,7 @@ async def _(event):
         await event.edit(animation_chars[i % 64])
 
 
-@ultroid_bot.on("gangestar ?(.*)")
+@ultroid_cmd.on("gangestar ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("Everybody")
@@ -1300,7 +1300,7 @@ async def _(event):
         deq.rotate(1)
 
 
-@ultroid_bot.on("her ?(.*)")
+@ultroid_cmd.on("her ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -1368,7 +1368,7 @@ async def _(event):
         await event.edit(animation_chars[i % 100])
 
 
-@ultroid_bot.on("cheart ?(.*)")
+@ultroid_cmd.on("cheart ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("❤️")
@@ -1408,7 +1408,7 @@ async def _(event):
         await event.edit("💝")
 
 
-@ultroid_bot.on("finger ?(.*)")
+@ultroid_cmd.on("finger ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("🖕🏻")
@@ -1448,7 +1448,7 @@ async def _(event):
         await event.edit("🖕🏼")
 
 
-@ultroid_bot.on("billy ?(.*)")
+@ultroid_cmd.on("billy ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("👍")
@@ -1472,7 +1472,7 @@ async def _(event):
         await event.edit("👍🏻")
 
 
-@ultroid_bot.on("agree ?(.*)")
+@ultroid_cmd.on("agree ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("👌")
@@ -1585,7 +1585,7 @@ async def _(event):
         deq.rotate(1)
 
 
-@ultroid_bot.on("heart$")
+@ultroid_cmd.on("heart$")
 async def _(event):
     if event.fwd_from:
         return
@@ -1707,7 +1707,7 @@ async def _(message):
                 return
 
 
-@ultroid_bot.on("good ?(.*)")
+@ultroid_cmd.on("good ?(.*)")
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit(
@@ -2097,7 +2097,7 @@ async def _(event):
             await event.edit(animation_chars[i % 100])
 
 
-@ultroid_bot.on(pattern=r"lmoon")
+@ultroid_cmd.on(pattern=r"lmoon")
 async def test(event):
     if event.fwd_from:
         return
@@ -2106,7 +2106,7 @@ async def test(event):
     )
 
 
-@ultroid_bot.on(pattern=r"town")
+@ultroid_cmd.on(pattern=r"town")
 async def test(event):
     if event.fwd_from:
         return
@@ -2243,7 +2243,7 @@ async def _(event):
     await event.edit("-------------✈")
 
 
-@ultroid_bot.on(pattern="lalol")
+@ultroid_cmd.on(pattern="lalol")
 async def _(event):
     if event.fwd_from:
         return
@@ -2252,7 +2252,7 @@ async def _(event):
     )
 
 
-@ultroid_bot.on(pattern=r"lit")
+@ultroid_cmd.on(pattern=r"lit")
 async def lit(event):
     if event.fwd_from:
         return
@@ -2798,7 +2798,7 @@ async def lit(event):
     )
 
 
-@ultroid_bot.on(pattern=r"my")
+@ultroid_cmd.on(pattern=r"my")
 async def my(event):
     if event.fwd_from:
         return
@@ -2957,7 +2957,7 @@ async def my(event):
     await event.edit("❤️🧡💛💚💙💜\n🧡💛💚💙💜❤️\n💛💚💙💜❤️🧡\n💚💙💜❤️🧡💛\n💙💜❤️🧡💛💚\n💜❤️🧡💛💚💙")
 
 
-@ultroid_bot.on(pattern=r"my")
+@ultroid_cmd.on(pattern=r"my")
 async def my(event):
     if event.fwd_from:
         return
@@ -3296,7 +3296,7 @@ async def my(event):
     await event.edit("💜❤️🧡💛💚💙\n💜❤️🧡💛💚💙\n💜❤️🧡💛💚💙\n💜❤️🧡💛💚💙\n💜❤️🧡💛💚💙\n💜❤️🧡💛💚💙")
 
     
-@ultroid_bot.on(pattern=r"hi")
+@ultroid_cmd.on(pattern=r"hi")
 async def hi(event):
     if event.fwd_from:
         return
@@ -3421,7 +3421,7 @@ async def hi(event):
     await event.edit("💕💕𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖 𝒂𝒍𝒍 𝒇𝒓𝒊𝒆𝒏𝒅𝒔💕💕")
 
 
-@ultroid_bot.on(pattern=r"figcar")
+@ultroid_cmd.on(pattern=r"figcar")
 async def car(event):
     if event.fwd_from:
         return
@@ -3430,14 +3430,14 @@ async def car(event):
     )
 
 
-@ultroid_bot.on(pattern=r"figkiller")
+@ultroid_cmd.on(pattern=r"figkiller")
 async def killer(event):
     if event.fwd_from:
         return
     await event.edit("_/﹋\_\n" "(҂`_´)\n" "<,︻╦╤─ ҉ - -\n" "_/﹋\_\n")
 
 
-@ultroid_bot.on(pattern=r"tgm")
+@ultroid_cmd.on(pattern=r"tgm")
 async def tgm(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3453,7 +3453,7 @@ async def tgm(e):
         )
 
 
-@ultroid_bot.on(pattern=r"emam")
+@ultroid_cmd.on(pattern=r"emam")
 async def emam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3471,7 +3471,7 @@ async def emam(e):
         )
 
 
-@ultroid_bot.on(pattern=r"tgn")
+@ultroid_cmd.on(pattern=r"tgn")
 async def tgn(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3487,7 +3487,7 @@ async def tgn(e):
         )
 
 
-@ultroid_bot.on(pattern=r"tnx")
+@ultroid_cmd.on(pattern=r"tnx")
 async def tnx(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3501,7 +3501,7 @@ async def tnx(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figgm")
+@ultroid_cmd.on(pattern=r"figgm")
 async def gm(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3515,7 +3515,7 @@ async def gm(e):
         )
 
 
-@ultroid_bot.on(pattern=r"fighi")
+@ultroid_cmd.on(pattern=r"fighi")
 async def fighi(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3528,7 +3528,7 @@ async def fighi(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figgn")
+@ultroid_cmd.on(pattern=r"figgn")
 async def gn(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3542,7 +3542,7 @@ async def gn(e):
         )
 
 
-@ultroid_bot.on(pattern=r"sponge")
+@ultroid_cmd.on(pattern=r"sponge")
 async def sponge(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3580,7 +3580,7 @@ GAMBAR_TITIT = """
 # ===========================================
 
 
-@ultroid_bot.on(pattern=r"dick")
+@ultroid_cmd.on(pattern=r"dick")
 async def emoji_penis(e):
     emoji = e.pattern_match.group(1)
     titid = GAMBAR_TITIT
@@ -3589,7 +3589,7 @@ async def emoji_penis(e):
     await e.edit(titid)
 
 
-@ultroid_bot.on(pattern=r"figlol")
+@ultroid_cmd.on(pattern=r"figlol")
 async def figlol(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3600,7 +3600,7 @@ async def figlol(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figlmao")
+@ultroid_cmd.on(pattern=r"figlmao")
 async def figlmao(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3611,7 +3611,7 @@ async def figlmao(e):
         )
 
 
-@ultroid_bot.on(pattern=r"fighello")
+@ultroid_cmd.on(pattern=r"fighello")
 async def fighello(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3619,7 +3619,7 @@ async def fighello(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figno")
+@ultroid_cmd.on(pattern=r"figno")
 async def figno(e):
 
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -3633,7 +3633,7 @@ async def figno(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figtrump")
+@ultroid_cmd.on(pattern=r"figtrump")
 async def figtrump(e):
 
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -3656,7 +3656,7 @@ async def figtrump(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figputin")
+@ultroid_cmd.on(pattern=r"figputin")
 async def figputin(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3679,7 +3679,7 @@ async def figputin(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figchina")
+@ultroid_cmd.on(pattern=r"figchina")
 async def figchina(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3702,7 +3702,7 @@ async def figchina(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figthink")
+@ultroid_cmd.on(pattern=r"figthink")
 async def figthink(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3724,7 +3724,7 @@ async def figthink(e):
         )
 
 
-@ultroid_bot.on(pattern=r"figdick")
+@ultroid_cmd.on(pattern=r"figdick")
 async def figdick(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3747,7 +3747,7 @@ async def figdick(e):
             "⠀⠀⠈⠛⠯⣿⡯⠟⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
         )
 
-@ultroid_bot.on(pattern=r"fighappyfrog")
+@ultroid_cmd.on(pattern=r"fighappyfrog")
 async def fighappyfrog(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3768,7 +3768,7 @@ async def fighappyfrog(e):
             "⠄⠻⣦⣀⣀⣀⣀⣀⣤⣤⣤⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋\n"
         )
 
-@ultroid_bot.on(pattern=r"figdeadfrog")
+@ultroid_cmd.on(pattern=r"figdeadfrog")
 async def figdeadfrog(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -3790,7 +3790,7 @@ async def figdeadfrog(e):
         )
 
 
-@ultroid_bot.on(pattern=r"fuck")
+@ultroid_cmd.on(pattern=r"fuck")
 async def gtfo(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(
@@ -4118,7 +4118,7 @@ moji = [
 ]
 
 
-@ultroid_bot.on(pattern="eem(?: |$)(.*)")
+@ultroid_cmd.on(pattern="eem(?: |$)(.*)")
 async def itachi(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -4140,7 +4140,7 @@ async def itachi(event):
     await event.edit(result)
 
 
-@ultroid_bot.on(pattern="cmoji(?: |$)(.*)")
+@ultroid_cmd.on(pattern="cmoji(?: |$)(.*)")
 async def itachi(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -4209,7 +4209,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 11])
 
-@ultroid_bot.on(pattern=r"thack")
+@ultroid_cmd.on(pattern=r"thack")
 async def _(event):
     if event.fwd_from:
         return
