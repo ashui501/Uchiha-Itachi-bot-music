@@ -305,6 +305,7 @@ async def _(event):
         for key, value in dictionary.items():
             HM = HM.replace(key, value)
         name = f"{namex} {HM}"
+        try:
             await event.client(
                 functions.account.UpdateProfileRequest(first_name=name)
             )
