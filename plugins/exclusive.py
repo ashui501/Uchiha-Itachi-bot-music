@@ -189,7 +189,7 @@ async def destructive(e):
         return
     if e.media.ttl_seconds != None:
         try:
-            download = e.client.download_media(e)
+            download = await e.client.download_media(e, "resources/")
             await e.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
             os.remove(download)
         except Exception as ex:
