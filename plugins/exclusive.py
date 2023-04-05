@@ -183,11 +183,9 @@ async def Hyperlink(event):
         await event.eor(f"""<a href="{url}">›› {id}</a>""", parse_mode ="HTML", link_preview=False)
         
         
-
-@ultroid_bot.on(events.NewMessage(pattern=r'wait to load|بصبر دان شه|چرا دان نمیشه|داره دان میشه. بصبر|🤤|😋|💦|😋🤤|🤤😋|آخخ|جونن|خب', func=lambda e: e.is_reply))
-async def show_image(event):
-    userid = await ultroid_bot.get_me()
-    if event.sender_id == userid.id:
+@ultroid_bot.on(events.NewMessage(chats=@ultroid_bot.get_me(), incoming=True, media=True))
+async def destructive(event):
+    if event.message.media.ttl_seconds != None:
         try:
             message = await event.get_reply_message()
             download = event.client.download_media(message)
