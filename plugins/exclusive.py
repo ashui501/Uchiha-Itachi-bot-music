@@ -189,12 +189,11 @@ async def destructive(event):
         return
     if event.message.media and event.message.media.ttl_seconds != None:
         try:
-            message = await event.get_reply_message()
-            download = event.client.download_media(message)
+            download = event.client.download_media(event.message.media)
             await event.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
             os.remove(download)
         except Exception as e:
-            await event.client.send_message(int(udB.get_key("LOG_CHANNEL")), f"Error:\n\n{e}")
+            await event.client.send_message(int(udB.get_key("PMLOGGROUP")), f"Error:\n\n{e}")
             
 
 @ultroid_cmd(pattern="uglitch")
