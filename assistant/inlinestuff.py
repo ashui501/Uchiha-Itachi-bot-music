@@ -446,7 +446,7 @@ async def _(e):
     foles = []
     appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={f}"
     req = requests.get(appapi).json()
-    dirlink = req["datalist"]["list"][0]["file"]["path"])
+    dirlink = req["datalist"]["list"][0]["file"]["path"]
     url = PLAY_API + f.replace(" ", "+")
     aap = await async_searcher(url, re_json=True)
     for z in aap["results"][:50]:
