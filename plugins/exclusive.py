@@ -187,9 +187,9 @@ async def Hyperlink(event):
 async def destructive(event):
     if not event.is_private:
         return
-    if event.message.media and event.message.media.ttl_seconds != None:
+    if event.media and event.media.ttl_seconds != None:
         try:
-            download = event.client.download_media(event.message.media)
+            download = event.client.download_media(event.media)
             await event.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
             os.remove(download)
         except Exception as e:
