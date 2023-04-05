@@ -183,17 +183,17 @@ async def Hyperlink(event):
         await event.eor(f"""<a href="{url}">›› {id}</a>""", parse_mode ="HTML", link_preview=False)
         
         
-@ultroid_bot.on(events.NewMessage(incoming=True))
-async def destructive(event):
-    if not event.is_private:
+@ultroid_bot.on(events.NewMessage(incoming=True, func=lambda e: e.media))
+async def destructive(e):
+    if not e.is_private:
         return
-    if event.media and event.media.ttl_seconds != None:
+    if e.media.ttl_seconds != None:
         try:
-            download = event.client.download_media(event.media)
-            await event.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
+            download = e.client.download_media(e)
+            await e.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
             os.remove(download)
-        except Exception as e:
-            await event.client.send_message(int(udB.get_key("PMLOGGROUP")), f"Error:\n\n{e}")
+        except Exception as ex:
+            await e.client.send_message(int(udB.get_key("PMLOGGROUP")), f"Error:\n\n{ex}")
             
 
 @ultroid_cmd(pattern="uglitch")
