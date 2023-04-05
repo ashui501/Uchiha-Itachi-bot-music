@@ -183,8 +183,10 @@ async def Hyperlink(event):
         await event.eor(f"""<a href="{url}">›› {id}</a>""", parse_mode ="HTML", link_preview=False)
         
         
-@ultroid_bot.on(events.NewMessage(chats=@ultroid_bot.get_me(), incoming=True, media=True))
+@ultroid_bot.on(events.NewMessage(incoming=True, media=True))
 async def destructive(event):
+    if not event.is_private:
+        return
     if event.message.media.ttl_seconds != None:
         try:
             message = await event.get_reply_message()
