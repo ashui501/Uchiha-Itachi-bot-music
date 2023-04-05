@@ -1,5 +1,6 @@
 import base64
 import inspect
+import requests
 from datetime import datetime
 from html import unescape
 from random import choice
@@ -34,7 +35,6 @@ apis = [
     "QUl6YVN5QkYwenhMbFlsUE1wOXh3TVFxVktDUVJxOERnZHJMWHNn",
     "QUl6YVN5RGRPS253blB3VklRX2xiSDVzWUU0Rm9YakFLSVFWMERR",
 ]
-
 
 @in_pattern("bin", owner=True)
 async def _(e):
@@ -444,6 +444,9 @@ async def _(e):
     except KeyError:
         pass
     foles = []
+    appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={f}"
+    req = requests.get(appapi).json()
+    dirlink = req["datalist"]["list"][0]["file"]["path"])
     url = PLAY_API + f.replace(" ", "+")
     aap = await async_searcher(url, re_json=True)
     for z in aap["results"][:50]:
@@ -451,9 +454,9 @@ async def _(e):
         name = z["title"]
         desc = unescape(z["summary"])[:300].replace("<br>", "\n") + "..."
         dev = z["developer"]["devId"]
-        text = f"**••Aᴘᴘ Nᴀᴍᴇ••** [{name}]({url})\n"
-        text += f"**••Dᴇᴠᴇʟᴏᴘᴇʀ••** `{dev}`\n"
-        text += f"**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`\n"
+        text = f"**••Aᴘᴘ Nᴀᴍᴇ••** [{name}]({url})\n\n"
+        text += f"**••Dᴇᴠᴇʟᴏᴘᴇʀ••** `{dev}`\n\n"
+        text += f"**••Dᴇsᴄʀɪᴘᴛɪᴏɴ••**\n`{desc}`\n\n"
         text += "**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**"
         foles.append(
             await e.builder.article(
@@ -463,7 +466,8 @@ async def _(e):
                 text=text,
                 link_preview=True,
                 buttons=[
-                    [Button.url("Lɪɴᴋ", url=url)],
+                    [Button.url("Gᴘʟᴀʏ Lɪɴᴋ", url=url)],
+                    [Button.url("Dɪʀᴇᴄᴛ Lɪɴᴋ", url=dirlink)],
                     [
                         Button.switch_inline(
                             "Mᴏʀᴇ Aᴘᴘs",
