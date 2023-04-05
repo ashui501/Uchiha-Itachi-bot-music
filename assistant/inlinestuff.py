@@ -440,7 +440,7 @@ async def _(e):
         )
     try:
         return await e.answer(
-            APP_CACHE[f], switch_pm="Application Searcher", switch_pm_param="start"
+            APP_CACHE[quer], switch_pm="Application Searcher", switch_pm_param="start"
         )
     except KeyError:
         pass
@@ -448,7 +448,7 @@ async def _(e):
     appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={quer}"
     req = requests.get(appapi).json()
     dirlink = req["datalist"]["list"][0]["file"]["path"]
-    url = PLAY_API + f.replace(" ", "+")
+    url = PLAY_API + quer.replace(" ", "+")
     aap = await async_searcher(url, re_json=True)
     for z in aap["results"][:50]:
         url = "https://play.google.com/store/apps/details?id=" + z["appId"]
@@ -484,11 +484,11 @@ async def _(e):
                 ],
             ),
         )
-    APP_CACHE.update({f: foles})
+    APP_CACHE.update({quer: foles})
     if RECENTS.get(e.sender_id):
-        RECENTS[e.sender_id].append(f)
+        RECENTS[e.sender_id].append(quer)
     else:
-        RECENTS.update({e.sender_id: [f]})
+        RECENTS.update({e.sender_id: [quer]})
     await e.answer(foles, switch_pm="Application Searcher", switch_pm_param="start")
 
 
