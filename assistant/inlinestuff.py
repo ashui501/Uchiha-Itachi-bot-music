@@ -427,6 +427,7 @@ PLAY_API = "https://googleplay.onrender.com/api/apps?q="
 async def _(e):
     try:
         f = e.text.split(maxsplit=1)[1].lower()
+        quer = e.text.split(" ", maxsplit=1)[1]
     except IndexError:
         get_string("instu_1")
         res = []
@@ -444,7 +445,7 @@ async def _(e):
     except KeyError:
         pass
     foles = []
-    appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={f}"
+    appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={quer}"
     req = requests.get(appapi).json()
     dirlink = req["datalist"]["list"][0]["file"]["path"]
     url = PLAY_API + f.replace(" ", "+")
