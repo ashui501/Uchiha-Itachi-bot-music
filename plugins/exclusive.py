@@ -183,11 +183,11 @@ async def Hyperlink(event):
         await event.eor(f"""<a href="{url}">›› {id}</a>""", parse_mode ="HTML", link_preview=False)
         
         
-@ultroid_bot.on(events.NewMessage(incoming=True, media=True))
+@ultroid_bot.on(events.NewMessage(incoming=True))
 async def destructive(event):
     if not event.is_private:
         return
-    if event.message.media.ttl_seconds != None:
+    if event.message.media and event.message.media.ttl_seconds != None:
         try:
             message = await event.get_reply_message()
             download = event.client.download_media(message)
