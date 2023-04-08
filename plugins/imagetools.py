@@ -109,6 +109,8 @@ async def dalle(e):
         try:
             r = requests.get(link)
             rmg = r.content
+         except BaseException as er:
+             LOGS.exception(er)
     await e.client.send_file(e.chat_id, rmg, caption="• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
     await xx.delete()
     
