@@ -1,8 +1,11 @@
 """
 ✘ Commands Available -
 
+• `{i}dalle <prompt>`
+    Create AI image using DALL-E engine.
+    
 • `{i}border <reply to photo/sticker>`
-    To create border around that media..
+    To create border around that media.
     Ex - `{i}border 12,22,23`
        - `{i}border 12,22,23 ; width (in number)`
 
@@ -47,6 +50,7 @@
     Create a Pixelated Image..
 """
 import os
+import openai
 
 from . import LOGS, con
 
@@ -79,6 +83,21 @@ from . import (
 )
 
 
+@ultroid_cmd(pattern="dalle (.*)")
+async def dalle(e):
+    reply = await e.get_reply_message()
+    x = e.pattern_match.group(1).strip()
+    openai.api_key = udB.get_key("GPTKEY")
+    xx = await e.eor("`Making AI Image 🎨🖌️...`")
+    img = openai.Image.create(
+        prompt=str(x), 
+        n=4, 
+        size="512x512"
+    )
+    await e.client.send_file(e.chat_id, img, caption= "• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
+    await xx.delete()
+    
+    
 @ultroid_cmd(pattern="color$")
 async def _(event):
     reply = await event.get_reply_message()
