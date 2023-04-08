@@ -5,7 +5,7 @@ __doc__ = get_help("help_chatbot")
 
 from CythonX.fns.tools import get_chatbot_reply
 
-from . import LOGS, eod, get_string, inline_mention, udB, ultroid_cmd
+from . import asyncio, LOGS, eod, get_string, inline_mention, udB, ultroid_cmd
 
 
 @ultroid_cmd(pattern="repai")
@@ -17,6 +17,8 @@ async def im_lonely_chat_with_me(event):
             message = event.text.split(" ", 1)[1]
         except IndexError:
             return await eod(event, get_string("tban_1"), time=10)
+    async with event.client.action(event.chat_id, "typing"):
+        await asyncio.sleep(5)
     reply_ = await get_chatbot_reply(message=message)
     await event.eor(reply_)
 
