@@ -49,7 +49,9 @@
 • `{i}pixelator <reply image>`
     Create a Pixelated Image..
 """
+
 import os
+import json
 import openai
 
 from . import LOGS, con
@@ -94,7 +96,20 @@ async def dalle(e):
         n=4, 
         size="512x512"
     )
-    await e.client.send_file(e.chat_id, img, caption= "• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
+    try:
+        data = json.loads(img)
+    except json.JSONDecodeError:
+        return
+    if not isinstance(data, list):
+        return
+    for link in data:
+        try:
+            filename = os.path.basename(link)
+            await e.client.download_media(link, file=filename)
+        except errors.LocationInvalidError:
+            continue
+    await e.client.send_file(e.chat_id, filename, caption="• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
+    os.remove(filename)
     await xx.delete()
     
     
