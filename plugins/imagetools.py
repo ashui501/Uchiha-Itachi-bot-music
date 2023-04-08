@@ -54,6 +54,7 @@ import os
 import json
 import openai
 import requests 
+from urllib.parse import urlparse
 
 from . import LOGS, con
 
@@ -92,6 +93,7 @@ async def dalle(e):
     x = e.pattern_match.group(1).strip()
     openai.api_key = udB.get_key("GPTKEY")
     xx = await e.eor("`Making AI Image 🎨🖌️...`")
+    urls = []
     img = openai.Image.create(
         prompt=str(x), 
         n=4, 
@@ -99,13 +101,22 @@ async def dalle(e):
     )
     try:
         for i in img["data"]:
-            x = json.dumps(i)
-            data = json.loads(x)
+            jstring = f'''
+                [
+                    {i}
+                ]
+            '''
+            data = json.loads(jstring)
+        for item in data:
+            url = item["url"]
+            purl = urlparse(url)
+            if purl.scheme and purl.netloc:
+                urls.append(url)
     except json.JSONDecodeError:
         return
     if not isinstance(data, list):
         return
-    for link in data:
+    for link in urls:
         try:
             r = requests.get(link)
             rmg = r.content
