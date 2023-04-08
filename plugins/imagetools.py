@@ -53,6 +53,7 @@
 import os
 import json
 import openai
+import requests 
 
 from . import LOGS, con
 
