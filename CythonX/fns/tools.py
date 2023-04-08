@@ -422,24 +422,18 @@ async def get_google_images(query):
     return google_images
 
 
-
 async def get_chatbot_reply(message):
     try:
         openai.api_key = udB.get_key("GPTKEY")
-        chatbot_base = openai.Completion.create(
-          model="text-davinci-003",
-          prompt=message,
-          temperature=0.9,
-          max_tokens=1024,
-          top_p=1,
-          frequency_penalty=0.0,
-          presence_penalty=0.6,
-          stop=[" Human:", " AI:"]
+        chatbot_base = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", 
+            messages=[{"role": "user", "content": message}]
         )
-        return chatbot_base.choices[0]["text"]
+        return chatbot_base.choices[0].message.content
     except Exception as er:
         LOGS.info(f"**ERROR:**`{str(er)}`")
 
+        
 def check_filename(filroid):
     if os.path.exists(filroid):
         no = 1
