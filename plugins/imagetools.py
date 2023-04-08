@@ -98,7 +98,8 @@ async def dalle(e):
     )
     try:
         for i in img["data"]:
-            data = json.loads(i)
+            x = json.dumps(i)
+            data = json.loads(x)
     except json.JSONDecodeError:
         return
     if not isinstance(data, list):
