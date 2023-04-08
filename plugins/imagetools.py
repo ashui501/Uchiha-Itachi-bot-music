@@ -106,14 +106,9 @@ async def dalle(e):
         return
     for link in data:
         try:
-            filename = os.path.basename(link)
-            ext = "jpg"
-            filepath = f"{filename}.{ext}" 
-            await e.client.download_media(link, file=filepath)
-        except errors.LocationInvalidError:
-            continue
-    await e.client.send_file(e.chat_id, filepath, caption="• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
-    os.remove(filepath)
+            r = requests.get(link)
+            rmg = r.content
+    await e.client.send_file(e.chat_id, rmg, caption="• AI image made by CɪᴘʜᴇʀX Suᴩᴇr Tᴇᴄhnᴏlᴏgy Bᴏᴛ", reply_to=reply)
     await xx.delete()
     
     
