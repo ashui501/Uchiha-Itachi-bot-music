@@ -4,6 +4,7 @@ import os
 import random
 import re
 import secrets
+import openai
 import ssl
 from io import BytesIO
 from json.decoder import JSONDecodeError
@@ -49,6 +50,7 @@ try:
     from bs4 import BeautifulSoup
 except ImportError:
     BeautifulSoup = None
+    
 
 # ~~~~~~~~~~~~~~~~~~~~OFOX API~~~~~~~~~~~~~~~~~~~~
 
@@ -420,18 +422,23 @@ async def get_google_images(query):
     return google_images
 
 
-# Thanks https://t.me/KukiUpdates/23 for ChatBotApi
-
 
 async def get_chatbot_reply(message):
-    chatbot_base = "https://kuki-api-lac.vercel.app/message={}"
-    req_link = chatbot_base.format(
-        message,
-    )
     try:
-        return (await async_searcher(req_link, re_json=True)).get("reply")
-    except Exception:
-        LOGS.info(f"**ERROR:**`{format_exc()}`")
+        openai.api_key = udB.get_key("GPTKEY")
+        chatbot_base = openai.Completion.create(
+          model="text-davinci-003",
+          prompt=message,
+          temperature=0.9,
+          max_tokens=1024,
+          top_p=1,
+          frequency_penalty=0.0,
+          presence_penalty=0.6,
+          stop=[" Human:", " AI:"]
+        )
+        return chatbot_base.choices[0]["text"]
+    except Exception as er:
+        LOGS.info(f"**ERROR:**`{str(er)}`")
 
 def check_filename(filroid):
     if os.path.exists(filroid):
