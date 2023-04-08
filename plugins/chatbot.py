@@ -19,8 +19,8 @@ async def im_lonely_chat_with_me(event):
             return await eod(event, get_string("tban_1"), time=10)
     async with event.client.action(event.chat_id, "typing"):
         await asyncio.sleep(5)
-    reply_ = await get_chatbot_reply(message=message)
-    await event.eor(reply_)
+        reply_ = await get_chatbot_reply(message=message)
+        await event.eor(reply_)
 
 
 @ultroid_cmd(pattern="addai")
