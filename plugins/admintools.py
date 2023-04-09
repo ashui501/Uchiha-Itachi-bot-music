@@ -8,8 +8,8 @@ from telethon.errors import BadRequestError
 from telethon.errors.rpcerrorlist import ChatNotModifiedError, UserIdInvalidError
 from telethon.tl.functions.channels import EditAdminRequest, GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest, SetHistoryTTLRequest
-from telethon.tl.types import InputMessagesFilterPinned
-from telethon.utils import get_display_name
+from telethon.tl.types import ChannelParticipantsAdmins, InputMessagesFilterPinned
+from telethon.utils import get_display_name 
 
 from CythonX.dB import DEVLIST
 from CythonX.fns.admins import ban_time
@@ -398,9 +398,22 @@ keywords = ["vmess", "trojan", "vless", "proxy", "ss", "ssr"]
 async def _(event):
     if not event.chat_id==-1001667884656:
         return
-    x = event.message.text.lower()
-    if not any(keyword in x for keyword in keywords):
-        await event.message.delete()
+    if event.is_private:
+        return
+    if event.chat_id==-1001667884656:
+        adkins = [-1001667884656]
+        participants = client.get_participants(-1001667884656, filter=ChannelParticipantsAdmins())
+        for i in participants:
+            adkins.append(participant.id)
+        if event.sender_id in adkins:
+            return
+        else:
+            x = event.message.text.lower()
+            if not any(keyword in x for keyword in keywords):
+                await event.message.delete()
+
+
+
 
 
 @ultroid_cmd(pattern="pinned", manager=True, groups_only=True)
