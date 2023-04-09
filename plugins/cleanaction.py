@@ -8,7 +8,11 @@ from telethon.utils import get_display_name
 from . import get_string, udB, ultroid_cmd
 
 
-@ultroid_cmd(pattern="addclean$", admins_only=True)
+@ultroid_cmd(
+    pattern="addclean$", 
+    admins_only=True, 
+    manager=True
+)
 async def _(e):
     key = udB.get_key("CLEANCHAT") or []
     if e.chat_id in key:
@@ -18,7 +22,11 @@ async def _(e):
     await e.eor(get_string("clan_1"), time=5)
 
 
-@ultroid_cmd(pattern="remclean$")
+@ultroid_cmd(
+    pattern="remclean$",
+    admins_only=True, 
+    manager=True
+)
 async def _(e):
     key = udB.get_key("CLEANCHAT") or []
     if e.chat_id in key:
