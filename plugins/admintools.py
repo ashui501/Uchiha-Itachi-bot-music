@@ -392,6 +392,17 @@ async def _(e):
         return await e.eor(str(er), time=5)
 
 
+keywords = ["vmess", "trojan", "vless", "proxy", "ss", "ssr"]
+
+@ultroid_cmd(manager=True, groups_only=True)
+async def _(event):
+    if not event.chat_id==-1001667884656:
+        return
+    x = event.message.text.lower()
+    if not any(keyword in x for keyword in keywords):
+        await event.message.delete()
+
+
 @ultroid_cmd(pattern="pinned", manager=True, groups_only=True)
 async def djshsh(event):
     chat = await event.get_chat()
