@@ -402,7 +402,7 @@ async def _(event):
         return
     if event.chat_id==-1001667884656:
         adkins = [-1001667884656]
-        participants = client.get_participants(-1001667884656, filter=ChannelParticipantsAdmins())
+        participants = await event.client.get_participants(-1001667884656, filter=ChannelParticipantsAdmins())
         for i in participants:
             adkins.append(participant.id)
         if event.sender_id in adkins:
