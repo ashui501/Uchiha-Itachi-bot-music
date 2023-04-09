@@ -413,9 +413,6 @@ async def _(event):
                 await event.message.delete()
 
 
-
-
-
 @ultroid_cmd(pattern="pinned", manager=True, groups_only=True)
 async def djshsh(event):
     chat = await event.get_chat()
