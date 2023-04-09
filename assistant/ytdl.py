@@ -148,6 +148,7 @@ async def _(event):
         ext = lets_split[3]
     except IndexError:
         ext = "mp3"
+        extv = "mkv"
     if lets_split[0] == "audio":
         opts = {
             "format": "bestaudio",
@@ -212,7 +213,7 @@ async def _(event):
             "key": "FFmpegMetadata",
             "prefer_ffmpeg": True,
             "geo_bypass": True,
-            "outtmpl": f"%(id)s.{ext}",
+            "outtmpl": f"%(id)s.{extv}",
             "logtostderr": False,
             "postprocessors": [{"key": "FFmpegMetadata"}],
         }
@@ -241,13 +242,13 @@ async def _(event):
         likes = numerize(ytdl_data.get("like_count")) or 0
         hi, wi = ytdl_data.get("height") or 720, ytdl_data.get("width") or 1280
         duration = ytdl_data.get("duration") or 0
-        filepath = f"{vid_id}.{ext}"
+        filepath = f"{vid_id}.{extv}"
         if not os.path.exists(filepath):
-            filepath = f"{filepath}.{ext}"
+            filepath = f"{filepath}.{extv}"
         size = os.path.getsize(filepath)
         file, _ = await event.client.fast_uploader(
             filepath,
-            filename=f"{title}.mkv",
+            filename=f"{title}.{extv}",
             show_progress=True,
             event=event,
             to_delete=True,
