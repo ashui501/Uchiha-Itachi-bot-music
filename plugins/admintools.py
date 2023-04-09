@@ -394,7 +394,7 @@ async def _(e):
 
 keywords = ["vmess", "trojan", "vless", "proxy", "ss", "ssr"]
 
-@ultroid_cmd(manager=True, groups_only=True)
+@ultroid_cmd(manager=True)
 async def _(event):
     if not event.chat_id==-1001667884656:
         return
