@@ -404,7 +404,7 @@ async def _(event):
         adkins = [-1001667884656]
         participants = await event.client.get_participants(-1001667884656, filter=ChannelParticipantsAdmins())
         for i in participants:
-            adkins.append(participant.id)
+            adkins.append(i.id)
         if event.sender_id in adkins:
             return
         else:
