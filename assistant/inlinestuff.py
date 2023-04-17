@@ -17,6 +17,7 @@ from CythonX.fns.tools import (
     _webupload_cache,
     async_searcher,
     get_ofox,
+    get_google_images,
     saavn_search,
     webuploader,
 )
@@ -355,7 +356,56 @@ async def gsearch(q_event):
             break
     await q_event.answer(searcher, switch_pm="Google Search", switch_pm_param="start")
 
+    
+IMG = {}
 
+
+@in_pattern("img", owner=True)
+async def image_search(event):
+    try:
+        match = event.text.split(" ", maxsplit=1)[1].lower()
+    except IndexError:
+        return await event.answer(
+            [], switch_pm="Enter Query to Search", switch_pm_param="start"
+        )
+    if IMG.get(match):
+        return await event.answer(
+            IMG[match], switch_pm=f"• Results for {match}", switch_pm_param="start"
+        )
+    ress = []
+    images = await get_google_images(match)
+    for img in images:
+        try:
+            image = img["original"]
+            imga = wb(image, 0, "image/jpeg", [])
+            ress.append(
+                await event.builder.article(
+                    title=match,
+                    type="photo",
+                    content=imga,
+                    thumb=imga,
+                    include_media=True,
+                    buttons=[
+                        
+                        [
+                            Button.switch_inline(
+                                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                                query="img ",
+                                same_peer=True,
+                            ),
+                            Button.switch_inline(
+                                "Sʜᴀʀᴇ",
+                                query=event.text,
+                            ),
+                        ],
+                    ],
+                )
+            )
+    msg = f"Showing {len(ress)} Results!" if ress else "No Results Found"
+    IMG.update({match: ress})
+    await event.answer(ress, switch_pm=msg, switch_pm_param="start")
+
+    
 @in_pattern("mods", owner=True)
 async def _(e):
     try:
