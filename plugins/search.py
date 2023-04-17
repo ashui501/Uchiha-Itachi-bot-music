@@ -10,12 +10,12 @@
 • `{i}github <username>`
     Get full information of the users github profile.
 
-• `{i}img <query>`
+• `{i}img <query> ; <no of results>`
   `{i}img <query>`
-    For doing Images search.
+    For doing images search.
 
 • `{i}reverse`
-    Reply an Image or sticker to find its sauce.
+    Reply an image or sticker to find its sauce.
 """
 import os
 
@@ -104,9 +104,17 @@ async def goimg(event):
     if not query:
         return await event.eor(get_string("autopic_1"))
     nn = await event.eor(get_string("com_1"))
+    lmt = 5
+    if ";" in query:
+        try:
+            lmt = int(query.split(";")[1])
+            query = query.split(";")[0]
+        except BaseException:
+            pass
     images = await get_google_images(query)
-    for img in images[:10]:
-        x = img["original"]
+    x = []
+    for img in images[:lmt]:
+        x.append(img["original"])
     try:
         await event.client.send_file(event.chat_id, file=x)
     except Exception as er:
