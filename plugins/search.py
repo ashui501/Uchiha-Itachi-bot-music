@@ -105,9 +105,9 @@ async def goimg(event):
         return await event.eor(get_string("autopic_1"))
     nn = await event.eor(get_string("com_1"))
     images = await get_google_images(query)
-    for img in images:
+    for img in images[:10]:
         try:
-            await event.client.send_file(event.chat_id, file=img["original"][:10])
+            await event.client.send_file(event.chat_id, file=img["original"])
         except Exception as er:
             LOGS.exception(er)
     await nn.delete()
