@@ -11,7 +11,7 @@
     Get full information of the users github profile.
 
 • `{i}img <query>`
-  `{i}img <query> ; <no of results>`
+  `{i}img <query>`
     For doing Images search.
 
 • `{i}reverse`
@@ -106,10 +106,11 @@ async def goimg(event):
     nn = await event.eor(get_string("com_1"))
     images = await get_google_images(query)
     for img in images[:10]:
-        try:
-            await event.client.send_file(event.chat_id, file=img["original"])
-        except Exception as er:
-            LOGS.exception(er)
+        x = img["original"]
+    try:
+        await event.client.send_file(event.chat_id, file=x)
+    except Exception as er:
+        LOGS.exception(er)
     await nn.delete()
 
 
