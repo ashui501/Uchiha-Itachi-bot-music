@@ -94,7 +94,7 @@ async def google(event):
         url = item["link"]
         des = item["snippet"]
         out += f"✨ [{text}]({url})\n`{des}`\n\n"
-    omk = f"**✵ Google Search By CɪᴘʜᴇʀX Ⲃⲟⲧ:**\n`{inp}`\n\n**Results:**\n{out}"
+    omk = f"**✵ Google Search By CɪᴘʜᴇʀX Ⲃⲟⲧ**\n\n**✵ Query :** `{inp}`\n\n**✵ Results :**\n{out}"
     await x.eor(omk, link_preview=False)
 
 
