@@ -326,7 +326,7 @@ async def gsearch(q_event):
         try:
             title = i["title"]
             link = i["link"]
-            desc = i["description"]
+            desc = i["snippet"]
             searcher.append(
                 await q_event.builder.article(
                     title=title,
