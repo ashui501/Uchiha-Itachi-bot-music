@@ -112,13 +112,15 @@ async def goimg(event):
         except BaseException:
             pass
     images = await get_google_images(query)
-    x = []
     for img in images[:lmt]:
-        x.append(img["original"])
-    try:
-        await event.client.send_file(event.chat_id, file=x)
-    except Exception as er:
-        LOGS.exception(er)
+        try:
+            await event.client.send_file(
+                event.chat_id, 
+                file=img["original"],
+                caption="**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**",
+            )
+        except Exception as er:
+            LOGS.exception(er)
     await nn.delete()
 
 
@@ -150,17 +152,7 @@ async def reverse(event):
     alls = div.find("a")
     link = alls["href"]
     text = alls.text
-    await ult.edit(f"`Dimension ~ {x} : {y}`\nSauce ~ [{text}](google.com{link})")
-    images = await get_google_images(text)
-    for z in images[:2]:
-        try:
-            await event.client.send_file(
-                event.chat_id,
-                file=z["original"],
-                caption="Similar Images Realted to Search",
-            )
-        except Exception as er:
-            LOGS.exception(er)
+    await ult.edit(f"`Dimension ~ {x} : {y}`\nSource ~ [{text}](google.com{link})")
     os.remove(file)
 
 
