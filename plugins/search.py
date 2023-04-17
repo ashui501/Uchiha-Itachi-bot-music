@@ -79,10 +79,7 @@ async def gitsearch(event):
     await event.delete()
 
 
-@ultroid_cmd(
-    pattern="google( (.*)|$)",
-    manager=True,
-)
+@ultroid_cmd(pattern="google( (.*)|$)")
 async def google(event):
     inp = event.pattern_match.group(1).strip()
     if not inp:
@@ -92,12 +89,12 @@ async def google(event):
     if not gs:
         return await eod(x, get_string("autopic_2").format(inp))
     out = ""
-    for res in gs:
-        text = res["title"]
-        url = res["link"]
-        des = res["description"]
-        out += f" 👉🏻  [{text}]({url})\n`{des}`\n\n"
-    omk = f"**Google Search Query:**\n`{inp}`\n\n**Results:**\n{out}"
+    for item in final:
+        text = item["title"]
+        url = item["link"]
+        des = item["snippet"]
+        out += f"✨ [{text}]({url})\n`{des}`\n\n"
+    omk = f"**✵ Google Search By CɪᴘʜᴇʀX Ⲃⲟⲧ:**\n`{inp}`\n\n**Results:**\n{out}"
     await x.eor(omk, link_preview=False)
 
 
