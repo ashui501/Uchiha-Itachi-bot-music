@@ -382,6 +382,7 @@ async def image_search(event):
                 await event.builder.article(
                     title=match,
                     type="photo",
+                    text="**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**",
                     content=imga,
                     thumb=imga,
                     include_media=True,
