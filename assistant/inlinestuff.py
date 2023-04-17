@@ -376,7 +376,7 @@ async def image_search(event):
     images = await get_google_images(match)
     for img in images:
         try:
-            image = img["original"]
+            image = img["original"][:10]
             imga = wb(image, 0, "image/jpeg", [])
             ress.append(
                 await event.builder.article(
