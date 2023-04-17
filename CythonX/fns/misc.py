@@ -6,6 +6,7 @@ import string
 from logging import WARNING
 from random import choice, randrange, shuffle
 from traceback import format_exc
+from serpapi import GoogleSearch
 
 from CythonX.exceptions import DependencyMissingError
 
@@ -111,34 +112,23 @@ async def YtDataScraper(url: str):
 
 # --------------------------------------------------
 
+# All Credits Belong to ToxygenX/CipherX
 
 async def google_search(query):
-    query = query.replace(" ", "+")
-    _base = "https://google.com"
-    headers = {
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-        "User-Agent": choice(some_random_headers),
+    params = {
+      "engine": "google",
+      "q": f"{query}",
+      "num": "12",
+      "api_key": f"{udB.get_key("GSEARCH")}"
     }
-    con = await async_searcher(_base + "/search?q=" + query, headers=headers)
-    soup = BeautifulSoup(con, "html.parser")
-    result = []
-    pdata = soup.find_all("a", href=re.compile("url="))
-    for data in pdata:
-        if not data.find("div"):
-            continue
-        try:
-            result.append(
-                {
-                    "title": data.find("div").text,
-                    "link": data["href"].split("&url=")[1].split("&ved=")[0],
-                    "description": data.find_all("div")[-1].text,
-                }
-            )
-        except BaseException as er:
-            LOGS.exception(er)
-    return result
-
+    try:
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        final = results["organic_results"]
+    except BaseException as er:
+        LOGS.exception(er)
+    return final
+   
 
 # ----------------------------------------------------
 
