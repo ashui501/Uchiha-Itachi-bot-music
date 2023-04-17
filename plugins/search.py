@@ -118,6 +118,7 @@ async def goimg(event):
                 event.chat_id, 
                 file=img["original"],
                 caption="**✨ CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ ✨**",
+                force_document=False,
             )
         except Exception as er:
             LOGS.exception(er)
