@@ -4,7 +4,7 @@
 • `{i}saavn <search query>`
     Download songs from Saavn.
 
-• `{i}google <query>`
+• `{i}go <query>`
     For doing google search.
 
 • `{i}github <username>`
@@ -79,7 +79,7 @@ async def gitsearch(event):
     await event.delete()
 
 
-@ultroid_cmd(pattern="google( (.*)|$)")
+@ultroid_cmd(pattern="go( (.*)|$)")
 async def google(event):
     inp = event.pattern_match.group(1).strip()
     if not inp:
@@ -104,15 +104,8 @@ async def goimg(event):
     if not query:
         return await event.eor(get_string("autopic_1"))
     nn = await event.eor(get_string("com_1"))
-    lmt = 5
-    if ";" in query:
-        try:
-            lmt = int(query.split(";")[1])
-            query = query.split(";")[0]
-        except BaseException:
-            pass
     images = await get_google_images(query)
-    for img in images[:lmt]:
+    for img in images:
         try:
             await event.client.send_file(event.chat_id, file=img["original"])
         except Exception as er:
