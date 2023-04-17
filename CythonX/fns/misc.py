@@ -115,11 +115,12 @@ async def YtDataScraper(url: str):
 # All Credits Belong to ToxygenX/CipherX
 
 async def google_search(query):
+    gsearch = udB.get_key("GSEARCH")
     params = {
       "engine": "google",
       "q": f"{query}",
       "num": "12",
-      "api_key": f"{udB.get_key("GSEARCH")}"
+      "api_key": f"{gsearch}"
     }
     try:
         search = GoogleSearch(params)
