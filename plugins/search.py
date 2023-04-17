@@ -89,7 +89,7 @@ async def google(event):
     if not gs:
         return await eod(x, get_string("autopic_2").format(inp))
     out = ""
-    for item in final:
+    for item in gs:
         text = item["title"]
         url = item["link"]
         des = item["snippet"]
