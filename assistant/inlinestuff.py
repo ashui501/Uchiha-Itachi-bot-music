@@ -401,6 +401,8 @@ async def image_search(event):
                     ],
                 )
             )
+        except IndexError:
+            break
     msg = f"Showing {len(ress)} Results!" if ress else "No Results Found"
     IMG.update({match: ress})
     await event.answer(ress, switch_pm=msg, switch_pm_param="start")
