@@ -161,12 +161,16 @@ namex = str(OWNER_NAME) if OWNER_NAME else "CɪᴘʜᴇʀX"
 
 @ultroid_bot.on(events.NewMessage)
 async def Dice(event):
+    if udB.get_key("GUESS")!= "True":
+        return
     if event.dice and event.dice.emoticon == "🎲":
         await event.eor(f"Dice number is {event.dice.value}")
 
 
 @ultroid_bot.on(events.NewMessage)
 async def Dart(event):
+    if udB.get_key("GUESS")!= "True":
+        return
     if event.dice and event.dice.emoticon == "🎯":
         await event.eor(f"Dart sybl number is {event.dice.value}")
 
