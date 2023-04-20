@@ -8,6 +8,7 @@ import random
 
 from telethon.utils import get_display_name
 
+from CythonX.fns.info import get_uinfo
 from . import Carbon, ultroid_cmd, get_string, inline_mention
 
 _colorspath = "resources/colorlist.txt"
