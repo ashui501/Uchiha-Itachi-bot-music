@@ -24,6 +24,7 @@ else:
 )
 async def cr_bn(event):
     xxxx = await event.eor(get_string("com_1"))
+    user = await get_uinfo(event)
     te = event.pattern_match.group(1)
     col = random.choice(all_col) if te[0] == "r" else "White"
     if event.reply_to_msg_id:
@@ -46,7 +47,7 @@ async def cr_bn(event):
         return
     await xxxx.delete()
     await event.reply(
-        f"Carbonised by {inline_mention(event.sender)}",
+        f"Carbonised by {inline_mention(user)}",
         file=xx,
     )
 
@@ -56,6 +57,7 @@ async def cr_bn(event):
 )
 async def crbn(event):
     match = event.pattern_match.group(1).strip()
+    user = await get_uinfo(event)
     if not match:
         return await event.eor(get_string("carbon_3"))
     msg = await event.eor(get_string("com_1"))
@@ -78,7 +80,7 @@ async def crbn(event):
     xx = await Carbon(code=code, backgroundColor=match)
     await msg.delete()
     await event.reply(
-        f"Carbonised by {inline_mention(event.sender)}",
+        f"Carbonised by {inline_mention(user)}",
         file=xx,
     )
 
