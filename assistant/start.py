@@ -81,7 +81,7 @@ async def ultroid(event):
                     )
                 )
             await event.client.send_message(
-                udB.get_key("LOG_CHANNEL"), msg, buttons=buttons
+                udB.get_key("OWNER_ID"), msg, buttons=buttons
             )
     if event.sender_id not in SUDO_M.fullsudos:
         ok = ""
