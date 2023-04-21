@@ -763,7 +763,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     await event.edit(
         "┏━━━┓╋╋╋╋┏━━━┓ \n┃┏━┓┃╋╋╋╋┃┏━┓┃ \n┃┃╋┃┣┓┏┓┏┫┃╋┃┃ \n┃┃╋┃┃┗┛┗┛┃┃╋┃┃ \n┃┗━┛┣┓┏┓┏┫┗━┛┃ \n┗━━━┛┗┛┗┛┗━━━┛"
     )
@@ -778,7 +778,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="ok")
@@ -870,7 +870,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     await event.edit("thinking")
     animation_chars = [
         "THINKING",
@@ -912,7 +912,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="snake")
 async def _(event):
@@ -962,7 +962,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     await event.edit("Police")
     animation_chars = [
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
@@ -980,7 +980,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="gangestar ?(.*)")
@@ -1272,7 +1272,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.5
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     await event.edit("loveu")
     animation_chars = [
         "😀",
@@ -1313,7 +1313,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="donce")
 async def _(event):
@@ -1712,7 +1712,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1744,7 +1744,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="human")
 async def _(event):
@@ -1779,7 +1779,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1812,14 +1812,14 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="solar")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     animation_chars = [
         "`◼️◼️◼️◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️🌎◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️◼️◼️◼️`",
         "`◼️◼️◼️◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️🌎◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️◼️◼️◼️`",
@@ -1969,14 +1969,14 @@ async def _(event):
 
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 40])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="smoon")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.3
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     input_str = event.pattern_match.group(1)
     if input_str == "smoon":
         await event.edit(input_str)
@@ -1992,14 +1992,14 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 40])
+            await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="tmoon")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 36)
+    animation_ttl = range(0, 64)
     input_str = event.pattern_match.group(1)
     if input_str == "tmoon":
         await event.edit(input_str)
@@ -2039,7 +2039,7 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 40])
+            await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="lmoon")
