@@ -25,7 +25,7 @@
 • `{i}square`
 • `{i}oop`
 • `{i}round`
-• `{i}cipherx`
+• `{i}comp`
 • `{i}joon`
 • `{i}bigoof`
 • `{i}ok`
@@ -226,8 +226,7 @@ async def glitch(event):
         if starky and os.path.exists(starky):
             os.remove(starky)
             
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.chtori", outgoing=True))
+@ultroid_cmd(pattern="chtori")
 async def _(event):
     reply = await event.get_reply_message()
     await event.delete()
@@ -237,8 +236,8 @@ async def _(event):
         voice_note=True,
         reply_to=reply,
     )
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.bnzm", outgoing=True))
+    
+@ultroid_cmd(pattern="bnzm")
 async def _(event):
     reply = await event.get_reply_message()
     await event.delete()
@@ -249,7 +248,7 @@ async def _(event):
         reply_to=reply,
     )
 
-@ultroid_bot.on(events.NewMessage(pattern=r"\.momo", outgoing=True))
+@ultroid_cmd(pattern="momo")
 async def _(event):
     reply = await event.get_reply_message()
     await event.delete()
@@ -259,8 +258,8 @@ async def _(event):
         voice_note=True,
         reply_to=reply,
     )
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.fy", outgoing=True))
+    
+@ultroid_cmd(pattern="fy")
 async def _(event):
     reply = await event.get_reply_message()
     await event.delete()
@@ -270,8 +269,8 @@ async def _(event):
         voice_note=True,
         reply_to=reply,
     )
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.shafa", outgoing=True))
+    
+@ultroid_cmd(pattern="shafa")
 async def _(event):
     reply = await event.get_reply_message()
     await event.delete()
@@ -316,8 +315,8 @@ async def _(event):
         await asyncio.sleep(deltime)
     await eod(sed, f"CɪᴘʜᴇʀX ᴀᴜᴛᴏ ɴᴀᴍᴇ ʜᴀs ʙᴇᴇɴ sᴛᴀʀᴛᴇᴅ", timeout=3)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.slash", outgoing=True))
+    
+@ultroid_cmd(pattern="slash")
 async def kek(keks):
     if keks.fwd_from:
         return
@@ -327,8 +326,7 @@ async def kek(keks):
         time.sleep(0.3)
         await keks.edit(":" + uio[i % 2])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.para", outgoing=True))
+@ultroid_cmd(pattern="para")
 async def kek(keks):
     if keks.fwd_from:
         return
@@ -337,8 +335,8 @@ async def kek(keks):
     for i in range(1, 15):
         time.sleep(0.3)
         await keks.edit(":" + uio[i % 2])
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.fl", outgoing=True))
+        
+@ultroid_cmd(pattern="fl")
 async def typewriter(typew):
     if typew.fwd_from:
         return
@@ -647,8 +645,8 @@ async def typewriter(typew):
     await typew.edit(str(number) + "%   ████████████████▌")
     sleep(0.5)
     await typew.edit("`Done!`")
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.question", outgoing=True))
+    
+@ultroid_cmd(pattern="question")
 async def _(event):
     if event.fwd_from:
         return
@@ -658,8 +656,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.oof", outgoing=True))
+@ultroid_cmd(pattern="oof")
 async def Oof(e):
     if e.fwd_from:
         return
@@ -668,8 +665,7 @@ async def Oof(e):
         t = t[:-1] + "of"
         await e.edit(t)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.motion", outgoing=True))
+@ultroid_cmd(pattern="motion")
 async def _(event):
     if event.fwd_from:
         return
@@ -680,8 +676,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 4])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.square", outgoing=True))
+@ultroid_cmd(pattern="square")
 async def _(event):
     if event.fwd_from:
         return
@@ -692,8 +687,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 4])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.oop", outgoing=True))
+@ultroid_cmd(pattern="oop")
 async def _(event):
     if event.fwd_from:
         return
@@ -704,8 +698,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 4])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.round", outgoing=True))
+@ultroid_cmd(pattern="round")
 async def _(event):
     if event.fwd_from:
         return
@@ -716,8 +709,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 4])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.ultroid_bot", outgoing=True))
+@ultroid_cmd(pattern="comp")
 async def _(event):
     if event.fwd_from:
         return
@@ -812,8 +804,7 @@ async def _(event):
         await asyncio.sleep(0.3)
         await event.edit("Ok")
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.meme", outgoing=True))
+@ultroid_cmd(pattern="meme")
 async def meme(event):
     if event.fwd_from:
         return
@@ -837,8 +828,7 @@ async def meme(event):
     await event.edit(memeVar)
     await asyncio.sleep(sleepValue)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.rmeme", outgoing=True))
+@ultroid_cmd(pattern="rmeme")
 async def meme(event):
     if event.fwd_from:
         return
@@ -880,7 +870,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 288)
+    animation_ttl = range(0, 36)
     await event.edit("thinking")
     animation_chars = [
         "THINKING",
@@ -922,10 +912,9 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 72])
+        await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@ultroid_cmd(pattern="snake")
 async def _(event):
     if event.fwd_from:
         return
@@ -973,7 +962,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     await event.edit("Police")
     animation_chars = [
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
@@ -991,8 +980,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        animation_chars += [" "]*(64 - len(animation_chars))
-        await event.edit(animation_chars[i % 64])
+        await event.edit(animation_chars[i % 40])
 
 
 @ultroid_cmd(pattern="gangestar ?(.*)")
@@ -1014,8 +1002,7 @@ async def _(event):
         await asyncio.sleep(0.3)
         await event.edit("Everybody was Gangestar Until I Arrived 🔥")
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.flower", outgoing=True))
+@ultroid_cmd(pattern="flower")
 async def meme(event):
     if event.fwd_from:
         return
@@ -1059,8 +1046,7 @@ async def meme(event):
     )
     await asyncio.sleep(sleepValue)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.melow", outgoing=True))
+@ultroid_cmd(pattern="melow")
 async def _(event):
     if event.fwd_from:
         return
@@ -1070,8 +1056,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.cute", outgoing=True))
+@ultroid_cmd(pattern="cute")
 async def _(event):
     if event.fwd_from:
         return
@@ -1081,8 +1066,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.tlol", outgoing=True))
+@ultroid_cmd(pattern="tlol")
 async def _(event):
     if event.fwd_from:
         return
@@ -1092,8 +1076,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.teeth", outgoing=True))
+@ultroid_cmd(pattern="teeth")
 async def _(event):
     if event.fwd_from:
         return
@@ -1103,8 +1086,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.gym", outgoing=True))
+@ultroid_cmd(pattern="gym")
 async def _(event):
     if event.fwd_from:
         return
@@ -1114,8 +1096,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.run", outgoing=True))
+@ultroid_cmd(pattern="run")
 async def _(event):
     if event.fwd_from:
         return
@@ -1125,8 +1106,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.candy", outgoing=True))
+@ultroid_cmd(pattern="candy")
 async def _(event):
     if event.fwd_from:
         return
@@ -1136,8 +1116,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.kiss", outgoing=True))
+@ultroid_cmd(pattern="kiss")
 async def _(event):
     if event.fwd_from:
         return
@@ -1147,8 +1126,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.butterfly", outgoing=True))
+@ultroid_cmd(pattern="butterfly")
 async def _(event):
     if event.fwd_from:
         return
@@ -1158,8 +1136,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.box", outgoing=True))
+@ultroid_cmd(pattern="box")
 async def _(event):
     if event.fwd_from:
         return
@@ -1169,8 +1146,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.clock", outgoing=True))
+@ultroid_cmd(pattern="clock")
 async def _(event):
     if event.fwd_from:
         return
@@ -1180,8 +1156,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.moon", outgoing=True))
+@ultroid_cmd(pattern="moon")
 async def _(event):
     if event.fwd_from:
         return
@@ -1191,8 +1166,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.earth", outgoing=True))
+@ultroid_cmd(pattern="earth")
 async def _(event):
     if event.fwd_from:
         return
@@ -1202,8 +1176,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.smile", outgoing=True))
+@ultroid_cmd(pattern="smile")
 async def _(event):
     if event.fwd_from:
         return
@@ -1213,8 +1186,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.laugh", outgoing=True))
+@ultroid_cmd(pattern="laugh")
 async def _(event):
     if event.fwd_from:
         return
@@ -1224,8 +1196,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.cat", outgoing=True))
+@ultroid_cmd(pattern="cat")
 async def _(event):
     if event.fwd_from:
         return
@@ -1235,8 +1206,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.poker", outgoing=True))
+@ultroid_cmd(pattern="poker")
 async def _(event):
     if event.fwd_from:
         return
@@ -1246,8 +1216,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.wow", outgoing=True))
+@ultroid_cmd(pattern="wow")
 async def _(event):
     if event.fwd_from:
         return
@@ -1257,8 +1226,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.monkey", outgoing=True))
+@ultroid_cmd(pattern="monkey")
 async def _(event):
     if event.fwd_from:
         return
@@ -1268,8 +1236,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.starheart", outgoing=True))
+@ultroid_cmd(pattern="starheart")
 async def _(event):
     if event.fwd_from:
         return
@@ -1279,8 +1246,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.wink", outgoing=True))
+@ultroid_cmd(pattern="wink")
 async def _(event):
     if event.fwd_from:
         return
@@ -1290,8 +1256,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.lip", outgoing=True))
+@ultroid_cmd(pattern="lip")
 async def _(event):
     if event.fwd_from:
         return
@@ -1307,7 +1272,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.5
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     await event.edit("loveu")
     animation_chars = [
         "😀",
@@ -1348,11 +1313,9 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        animation_chars += [" "]*(64 - len(animation_chars))
-        await event.edit(animation_chars[i % 64])
+        await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.donce", outgoing=True))
+@ultroid_cmd(pattern="donce")
 async def _(event):
     if event.fwd_from:
         return
@@ -1498,8 +1461,7 @@ async def _(event):
         await asyncio.sleep(0.6)
         await event.edit("👌🏻")
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.angry", outgoing=True))
+@ultroid_cmd(pattern="angry")
 async def _(event):
     if event.fwd_from:
         return
@@ -1509,8 +1471,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.sad", outgoing=True))
+@ultroid_cmd(pattern="sad")
 async def _(event):
     if event.fwd_from:
         return
@@ -1520,8 +1481,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.amaze", outgoing=True))
+@ultroid_cmd(pattern="amaze")
 async def _(event):
     if event.fwd_from:
         return
@@ -1531,10 +1491,8 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.omg", outgoing=True))
+@ultroid_cmd(pattern="omg")
 async def _(event):
-
     if event.fwd_from:
         return
     deq = deque(list("🙄😳🙄😳🙄😳"))
@@ -1543,8 +1501,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.tongue", outgoing=True))
+@ultroid_cmd(pattern="tongue")
 async def _(event):
     if event.fwd_from:
         return
@@ -1554,8 +1511,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.sun", outgoing=True))
+@ultroid_cmd(pattern="sun")
 async def _(event):
     if event.fwd_from:
         return
@@ -1565,8 +1521,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.speaker", outgoing=True))
+@ultroid_cmd(pattern="speaker")
 async def _(event):
     if event.fwd_from:
         return
@@ -1576,8 +1531,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.heart", outgoing=True))
+@ultroid_cmd(pattern="heart")
 async def _(event):
     if event.fwd_from:
         return
@@ -1598,8 +1552,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.sand", outgoing=True))
+@ultroid_cmd(pattern="sand")
 async def _(event):
     if event.fwd_from:
         return
@@ -1609,8 +1562,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.storm", outgoing=True))
+@ultroid_cmd(pattern="storm")
 async def _(event):
     if event.fwd_from:
         return
@@ -1620,19 +1572,17 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.floodwarn", outgoing=True))
+@ultroid_cmd(pattern="floodwarn")
 async def _(event):
     if event.fwd_from:
         return
-    deq = deque(list("💙💛💓💔💘💕💜💚💝💞💟"))
+    deq = deque(list("💙💛💓💘💕💜💚💝💞💟"))
     for _ in range(64):
         await asyncio.sleep(0.1)
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.rain", outgoing=True))
+@ultroid_cmd(pattern="rain")
 async def _(event):
     if event.fwd_from:
         return
@@ -1642,8 +1592,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.brain", outgoing=True))
+@ultroid_cmd(pattern="brain")
 async def _(event):
     if event.fwd_from:
         return
@@ -1670,8 +1619,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 14])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.dump", outgoing=True))
+@ultroid_cmd(pattern="dump")
 async def _(message):
     try:
         obj = message.pattern_match.group(1)
@@ -1759,13 +1707,12 @@ async def _(event):
         await asyncio.sleep(0.5)
         await event.edit("GOOD MORNING ,HAVE A NICE DAY 😊")
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.snake", outgoing=True))
+@ultroid_cmd(pattern="snake")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1797,11 +1744,9 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        animation_chars += [" "]*(64 - len(animation_chars))
-        await event.edit(animation_chars[i % 64])
+        await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.human", outgoing=True))
+@ultroid_cmd(pattern="human")
 async def _(event):
     if event.fwd_from:
         return
@@ -1829,13 +1774,12 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 27])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.mc", outgoing=True))
+@ultroid_cmd(pattern="mc")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1868,16 +1812,14 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        animation_chars += [" "]*(64 - len(animation_chars))
-        await event.edit(animation_chars[i % 64])
+        await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.solar", outgoing=True))
+@ultroid_cmd(pattern="solar")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     animation_chars = [
         "`◼️◼️◼️◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️🌎◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️◼️◼️◼️`",
         "`◼️◼️◼️◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️🌎◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️◼️◼️◼️`",
@@ -2027,16 +1969,14 @@ async def _(event):
 
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        animation_chars += [" "]*(64 - len(animation_chars))
-        await event.edit(animation_chars[i % 64])
+        await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@ultroid_cmd(pattern="smoon")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.3
-    animation_ttl = range(0, 64)
+    animation_ttl = range(0, 36)
     input_str = event.pattern_match.group(1)
     if input_str == "smoon":
         await event.edit(input_str)
@@ -2052,16 +1992,14 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            animation_chars += [" "]*(64 - len(animation_chars))
-            await event.edit(animation_chars[i % 64])
+            await event.edit(animation_chars[i % 40])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@ultroid_cmd(pattern="tmoon")
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 100)
+    animation_ttl = range(0, 36)
     input_str = event.pattern_match.group(1)
     if input_str == "tmoon":
         await event.edit(input_str)
@@ -2101,7 +2039,7 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 100])
+            await event.edit(animation_chars[i % 40])
 
 
 @ultroid_cmd(pattern="lmoon")
@@ -2189,12 +2127,10 @@ async def test(event):
 🌴/         🚖  🚘     |                     \🌲"""
     )
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.bombs", outgoing=True))
+@ultroid_cmd(pattern="bombs")
 async def _(event):
     if event.fwd_from:
         return
-
     await event.edit("▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n")
     await asyncio.sleep(0.5)
     await event.edit("💣💣💣💣 \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n")
@@ -2215,12 +2151,10 @@ async def _(event):
     await asyncio.sleep(0.5)
     await event.edit("RIP...")
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.plane", outgoing=True))
+@ultroid_cmd(pattern="plane")
 async def _(event):
     if event.fwd_from:
         return
-
     await event.edit("✈-------------")
     await asyncio.sleep(0.3)
     await event.edit("-✈------------")
@@ -3334,6 +3268,34 @@ async def hi(event):
     await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
 
     await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+    
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
+
+    await event.edit("❤️❤️❤️❤️\n🧡🧡🧡🧡\n💛💛💛💛\n💚💚💚💚")
+
+    await event.edit("💙💙💙💙\n💜💜💜💜\n🖤🖤🖤🖤\n🤎🤎🤎🤎")
 
     await event.edit("ʟᴏᴅɪɴɢ")
 
@@ -3410,7 +3372,35 @@ async def hi(event):
     await event.edit("💖💖𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💖💖")
 
     await event.edit("💕💕𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💕💕")
+    
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
 
+    await event.edit("❤️❤️𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖❤️❤️")
+
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
+
+    await event.edit("💜💜𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💜💜")
+
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
+
+    await event.edit("💛💛𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💛💛")
+
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
+
+    await event.edit("💚💚𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💚💚")
+
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
+
+    await event.edit("🧡🧡𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖🧡🧡")
+
+    await event.edit("💓💓𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💓💓")
+
+    await event.edit("💙💙𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💙💙")
+
+    await event.edit("💜💜𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💜💜")
+
+    await event.edit("💚💚𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💚💚")
+    
     await event.edit("💝💝𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💝💝")
 
     await event.edit("💕💕𝑰 𝒍𝒐𝒗𝒆 𝒚𝒐𝒖💕💕")
@@ -3816,8 +3806,7 @@ async def gtfo(e):
             "\n..............\.............\..."
         )
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@ultroid_cmd(pattern="jagh")
 async def _(event):
     if event.fwd_from:
         return
@@ -3842,7 +3831,7 @@ async def _(event):
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 8])
 
-@ultroid_bot.on(events.NewMessage(pattern=r"\.xmas", outgoing=True))
+@ultroid_cmd(pattern="xmas")
 async def _(event):
     if event.fwd_from:
         return
@@ -4098,8 +4087,7 @@ async def itachi(event):
 SHUTDOWN = "https://filetolinktelegrambot.herokuapp.com/41750275203384/voice.ogg"
 STARTUP = "https://filetolinktelegrambot.herokuapp.com/41767455072568/funny.gif.mp4"
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.fhack", outgoing=True))
+@ultroid_cmd(pattern="fhack")
 async def _(event):
     await event.client.send_file(
         event.chat_id,
@@ -4131,6 +4119,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 11])
 
+        
 @ultroid_cmd(pattern="thack")
 async def _(event):
     if event.fwd_from:
@@ -4154,8 +4143,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 11])
 
-
-@ultroid_bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@ultroid_cmd(pattern="whack")
 async def _(event):
     if event.fwd_from:
         return
