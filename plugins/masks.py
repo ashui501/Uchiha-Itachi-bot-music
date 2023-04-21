@@ -61,40 +61,40 @@ async def scan(event):
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "toxic":
-      os.system("wget https://telegra.ph/file/df2d739544595ae337642.png")
-      maskPath = "df2d739544595ae337642.png"
+        os.system("wget https://telegra.ph/file/df2d739544595ae337642.png")
+        maskPath = "df2d739544595ae337642.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "anon":
-      os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
-      maskPath = "4cc40d1e0846667488341.png"
+        os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
+        maskPath = "4cc40d1e0846667488341.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "clown":
-      os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
-      maskPath = "55fcb205c6f8f4790585e.png"
+        os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
+        maskPath = "55fcb205c6f8f4790585e.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "krish":
-      os.system("wget https://telegra.ph/file/54d2a267d411951b41a20.png")
-      maskPath = "54d2a267d411951b41a20.png"
+        os.system("wget https://telegra.ph/file/54d2a267d411951b41a20.png")
+        maskPath = "54d2a267d411951b41a20.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "n95":
-      os.system("wget https://telegra.ph/file/b934a713abb321bd1a9fe.png")
-      maskPath = "b934a713abb321bd1a9fe.png"
+        os.system("wget https://telegra.ph/file/b934a713abb321bd1a9fe.png")
+        maskPath = "b934a713abb321bd1a9fe.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
@@ -107,7 +107,6 @@ async def scan(event):
         file=hehe,
         force_document=False,
     )
-  
     for files in (hehe, lol):
         if files and os.path.exists(files):
             os.remove(files)
