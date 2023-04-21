@@ -980,7 +980,10 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 11])
+        curr_msg = animation_chars[i % 11]
+        if curr_msg != prev_msg:
+            await event.edit(curr_msg)
+            prev_msg = curr_msg
 
 
 @ultroid_cmd(pattern="gangestar ?(.*)")
