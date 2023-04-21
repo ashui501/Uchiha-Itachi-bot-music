@@ -107,7 +107,7 @@ async def scan(event):
         file=hehe,
         force_document=False,
     )
-    for files in (hehe, lol):
+    for files in (hehe, ultt):
         if files and os.path.exists(files):
             os.remove(files)
     await xx.delete()
