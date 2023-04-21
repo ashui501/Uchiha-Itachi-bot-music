@@ -42,10 +42,10 @@ async def scan(event):
     file = await con.convert(ultt, convert_to="png", outname="ult")
     cascPath = "./resources/face.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
+    ult = cv2.imread(file)
     ultroid = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(ultroid, 1.15)
     background = Image.open(ultt)
-    ult = cv2.imread(file)
     if match == "cmask":
         for (x, y, w, h) in faces:
             mask = Image.open(ultt)
