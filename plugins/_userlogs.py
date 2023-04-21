@@ -1,6 +1,6 @@
 import os
 import re
-
+import pytz
 from telethon.errors.rpcerrorlist import (
     ChannelPrivateError,
     ChatWriteForbiddenError,
@@ -161,8 +161,9 @@ if udB.get_key("TAG_LOG"):
             return LOGS.exception(er)
         TEXT = MSG.text
         if msg:
-            TEXT += "\n\n🖋 **Later Edited to !**"
-        strf = event.edit_date.strftime("%H:%M:%S")
+            TEXT += "\n\n🖋 **Edited to**"
+        md = pytz.timezone("Asia/Tehran")
+        strf = event.edit_date.astimezone(md).strftime("%H:%M:%S")
         if "\n" not in event.text:
             TEXT += f"\n• `{strf}` : {event.text}"
         else:
