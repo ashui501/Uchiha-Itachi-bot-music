@@ -36,7 +36,7 @@ async def scan(event):
     if not (ureply and (ureply.media)):
         await xx.edit(get_string("cvt_3"))
         return
-    ultt = await reply.download_media(ureply.media, "cipherx")
+    ultt = await ureply.download_media(ureply.media, "cipherx")
     if ultt.endswith(".tgs"):
         xx = await xx.edit(get_string("sts_9"))
     file = await con.convert(ultt, convert_to="png", outname="ult")
