@@ -101,6 +101,7 @@ async def scan(event):
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     file_name = "cipherx.png"
+    path = "./cipherx"
     hehe = path + "/" + file_name
     background.save(hehe, "PNG")
     await ureply.reply(
