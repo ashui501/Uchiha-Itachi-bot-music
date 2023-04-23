@@ -713,7 +713,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 2
+    animation_interval = 0.7
     animation_ttl = range(0, 11)
     animation_chars = [
         "**===================**\n      **CɪᴘʜᴇʀX Server Details**  \n**===================**\n\n\n**=>>>   CPU   <<<=**\n\n    **🔹current_freq:** 2500.09MHz\n    **🔹total_usage:** 10%\n\n    ●○○○○○○○○○\n\n    **🔹cpu core**\n\n        **🔹core_usage:** 5.9%\n        **🔹current_freq:** 2500.09MHz\n        |██████████▉  |\n       \n**=>>>   RAM   <<<=**\n\n    **🔹free:** 8.13GB\n    **🔹used:** 33.77GB\n    **🔹total:** 60.0GB\n    \n    ●●●●●●●○○○\n\n\n**=>>>   DISK   <<<=**\n\n   **🔹free:** 224.12GB\n    **🔹used:** 131.84GB\n    **🔹total:** 375.02GB\n    **🔹usage:** 37.0%\n\n    |████▍        |\n\n\n**=>>>   NETWORK   <<<=**\n\n    **🔹sent:** 158.98GB\n    **🔹recv:** 146.27GB\n    **🔹sent_packets:** 84518799\n    **🔹recv_packets:** 159720314\n\n\n**===================**\n",
@@ -762,8 +762,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     await event.edit(
         "┏━━━┓╋╋╋╋┏━━━┓ \n┃┏━┓┃╋╋╋╋┃┏━┓┃ \n┃┃╋┃┣┓┏┓┏┫┃╋┃┃ \n┃┃╋┃┃┗┛┗┛┃┃╋┃┃ \n┃┗━┛┣┓┏┓┏┫┗━┛┃ \n┗━━━┛┗┛┗┛┗━━━┛"
     )
@@ -869,8 +869,8 @@ async def meme(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     await event.edit("thinking")
     animation_chars = [
         "THINKING",
@@ -918,8 +918,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.3
-    animation_ttl = range(0, 27)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     input_str = event.pattern_match.group(1)
     if input_str == "snake":
         await event.edit(input_str)
@@ -954,16 +954,15 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 27])
+            await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="police")
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 1
-    animation_ttl = range(0, 64)
-    prev_msg = ""
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     await event.edit("Police")
     animation_chars = [
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
@@ -981,10 +980,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        curr_msg = animation_chars[i % 11]
-        if curr_msg != prev_msg:
-            await event.edit(curr_msg)
-            prev_msg = curr_msg
+        await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="gangestar ?(.*)")
@@ -1275,8 +1271,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.5
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     await event.edit("loveu")
     animation_chars = [
         "😀",
@@ -1323,8 +1319,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 100)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     await event.edit("Connecting...")
     animation_chars = [
         "⠀⠀⠀⣶⣿⣶\n⠀⠀⠀⣿⣿⣿⣀\n⠀⣀⣿⣿⣿⣿⣿⣿\n⣶⣿⠛⣭⣿⣿⣿⣿\n⠛⠛⠛⣿⣿⣿⣿⠿\n⠀⠀⠀⠀⣿⣿⣿\n⠀⠀⣀⣭⣿⣿⣿⣿⣀\n⠀⠤⣿⣿⣿⣿⣿⣿⠉\n⠀⣿⣿⣿⣿⣿⣿⠉\n⣿⣿⣿⣿⣿⣿\n⣿⣿⣶⣿⣿\n⠉⠛⣿⣿⣶⣤\n⠀⠀⠉⠿⣿⣿⣤\n⠀⠀⣀⣤⣿⣿⣿\n⠀⠒⠿⠛⠉⠿⣿\n⠀⠀⠀⠀⠀⣀⣿⣿\n⠀⠀⠀⠀⣶⠿⠿⠛\n",
@@ -1335,7 +1331,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 100])
+        await event.edit(animation_chars[i % 11])
 
 
 @ultroid_cmd(pattern="cheart ?(.*)")
@@ -1715,8 +1711,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1754,8 +1750,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.3
-    animation_ttl = range(0, 27)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     animation_chars = [
         "⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n🔲🔲🔲🔲🔲🔲🔲",
         "⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛⬛\n⬛⬛⬛⬛⬛⬛🚗\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n🔲🔲🔲🔲🔲🔲🔲",
@@ -1776,14 +1772,14 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 27])
+        await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="mc")
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     animation_chars = [
         "◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
         "◻️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️\n◼️◼️◼️◼️◼️",
@@ -1822,8 +1818,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     animation_chars = [
         "`◼️◼️◼️◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️🌎◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️◼️◼️◼️`",
         "`◼️◼️◼️◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️🌎◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️◼️◼️◼️`",
@@ -1979,8 +1975,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.3
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     input_str = event.pattern_match.group(1)
     if input_str == "smoon":
         await event.edit(input_str)
@@ -2002,8 +1998,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 0.1
-    animation_ttl = range(0, 64)
+    animation_interval = 0.7
+    animation_ttl = range(0, 11)
     input_str = event.pattern_match.group(1)
     if input_str == "tmoon":
         await event.edit(input_str)
@@ -3815,7 +3811,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.3
-    animation_ttl = range(0, 60)
+    animation_ttl = range(0, 11)
     input_str = event.pattern_match.group(1)
     if input_str == "jagh":
         await event.edit(input_str)
@@ -3833,7 +3829,7 @@ async def _(event):
         ]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 8])
+            await event.edit(animation_chars[i % 11])
 
 @ultroid_cmd(pattern="xmas")
 async def _(event):
@@ -4153,26 +4149,23 @@ async def _(event):
         return
     animation_interval = 2
     animation_ttl = range(0, 15)
-    input_str = event.pattern_match.group(1)
-    if input_str == "whack":
-        await event.edit(input_str)
-        animation_chars = [
-            "Looking for WhatsApp databases in targeted person...",
-            " User online: True\nTelegram access: True\nRead Storage: True ",
-            "Hacking... 0%\n[░░░░░░░░░░░░░░░░░░░░]\n`Looking for WhatsApp...`\nETA: 0m, 20s",
-            "Hacking... 11.07%\n[██░░░░░░░░░░░░░░░░░░]\n`Looking for WhatsApp...`\nETA: 0m, 18s",
-            "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]\n`Found folder C:/WhatsApp`\nETA: 0m, 16s",
-            "Hacking... 34.42%\n[█████░░░░░░░░░░░░░░░]\n`Found folder C:/WhatsApp`\nETA: 0m, 14s",
-            "Hacking... 42.17%\n[███████░░░░░░░░░░░░░]\n`Searching for databases`\nETA: 0m, 12s",
-            "Hacking... 55.30%\n[█████████░░░░░░░░░░░]\n`Found msgstore.db.crypt12`\nETA: 0m, 10s",
-            "Hacking... 64.86%\n[███████████░░░░░░░░░]\n`Found msgstore.db.crypt12`\nETA: 0m, 08s",
-            "Hacking... 74.02%\n[█████████████░░░░░░░]\n`Trying to Decrypt...`\nETA: 0m, 06s",
-            "Hacking... 86.21%\n[███████████████░░░░░]\n`Trying to Decrypt...`\nETA: 0m, 04s",
-            "Hacking... 93.50%\n[█████████████████░░░]\n`Decryption successful!`\nETA: 0m, 02s",
-            "Hacking... 100%\n[████████████████████]\n`Scanning file...`\nETA: 0m, 00s",
-            "Hacking complete!\nUploading file...",
-            "Targeted Account Hacked...!\n\n ✅ File has been successfully uploaded to CɪᴘʜᴇʀX server.\nWhatsApp Database:\n`./DOWNLOADS/msgstore.db.crypt12`",
-        ]
-        for i in animation_ttl:
-            await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 15])
+    animation_chars = [
+        "Looking for WhatsApp databases in targeted person...",
+        " User online: True\nTelegram access: True\nRead Storage: True ",
+        "Hacking... 0%\n[░░░░░░░░░░░░░░░░░░░░]\n`Looking for WhatsApp...`\nETA: 0m, 20s",
+        "Hacking... 11.07%\n[██░░░░░░░░░░░░░░░░░░]\n`Looking for WhatsApp...`\nETA: 0m, 18s",
+        "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]\n`Found folder C:/WhatsApp`\nETA: 0m, 16s",
+        "Hacking... 34.42%\n[█████░░░░░░░░░░░░░░░]\n`Found folder C:/WhatsApp`\nETA: 0m, 14s",
+        "Hacking... 42.17%\n[███████░░░░░░░░░░░░░]\n`Searching for databases`\nETA: 0m, 12s",
+        "Hacking... 55.30%\n[█████████░░░░░░░░░░░]\n`Found msgstore.db.crypt12`\nETA: 0m, 10s",
+        "Hacking... 64.86%\n[███████████░░░░░░░░░]\n`Found msgstore.db.crypt12`\nETA: 0m, 08s",
+        "Hacking... 74.02%\n[█████████████░░░░░░░]\n`Trying to Decrypt...`\nETA: 0m, 06s",
+        "Hacking... 86.21%\n[███████████████░░░░░]\n`Trying to Decrypt...`\nETA: 0m, 04s",
+        "Hacking... 93.50%\n[█████████████████░░░]\n`Decryption successful!`\nETA: 0m, 02s",
+        "Hacking... 100%\n[████████████████████]\n`Scanning file...`\nETA: 0m, 00s",
+        "Hacking complete!\nUploading file...",
+        "Targeted Account Hacked...!\n\n ✅ File has been successfully uploaded to CɪᴘʜᴇʀX server.\nWhatsApp Database:\n`./DOWNLOADS/msgstore.db.crypt12`",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 15])
