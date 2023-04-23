@@ -61,8 +61,8 @@ async def scan(event):
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "toxic":
-        os.system("wget https://graph.org/file/32733acad6a5cd5a70f47.png")
-        maskPath = "32733acad6a5cd5a70f47.png"
+        os.system("wget https://telegra.ph/file/df2d739544595ae337642.png")
+        maskPath = "df2d739544595ae337642.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
