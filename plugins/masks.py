@@ -8,6 +8,13 @@
   •`{i}clown`
   •`{i}krish`
   •`{i}n95`
+  •`{i}momo`
+  •`{i}neon`
+  •`{i}skelet`
+  •`{i}golden`
+  •`{i}zoro`
+  •`{i}zombie`
+
 """
 
 import os
@@ -28,7 +35,7 @@ except ImportError:
     
 from . import *
 
-@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95)$")
+@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95|momo|neon|skelet|golden|zoro|zombie)$")
 async def scan(event):
     match = event.pattern_match.group(1)
     ureply = await event.get_reply_message()
@@ -39,20 +46,14 @@ async def scan(event):
     ultt = await event.client.download_media(ureply.media, "./cipherx/")
     if ultt.endswith(".tgs"):
         xx = await xx.edit(get_string("sts_9"))
-    #file = await con.convert(ultt, convert_to="png", outname="ult")
+        ultt = await con.convert(ultt, convert_to="png", outname="ult")
     cascPath = "./resources/face.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
     ult = cv2.imread(ultt)
     ultroid = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(ultroid, 1.15)
     background = Image.open(ultt)
-    if match == "cmask":
-        for (x, y, w, h) in faces:
-            mask = Image.open(ultt)
-            mask = mask.resize((w, h), Image.ANTIALIAS)
-            offset = (x, y)
-            background.paste(mask, offset, mask=mask)
-    elif match == "sosmas":
+    if match == "sosmas":
         os.system("wget https://telegra.ph/file/f061c861ba85fbb23a51e.png")
         maskPath = "f061c861ba85fbb23a51e.png"
         for (x, y, w, h) in faces:
@@ -95,6 +96,54 @@ async def scan(event):
     elif match == "n95":
         os.system("wget https://telegra.ph/file/b934a713abb321bd1a9fe.png")
         maskPath = "b934a713abb321bd1a9fe.png"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "momo":
+        os.system("wget https://graph.org/file/5ebbf5298f6c46b84883a.jpg")
+        maskPath = "5ebbf5298f6c46b84883a.jpg"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "neon":
+        os.system("wget https://graph.org/file/27d21d43df7b60e385371.jpg")
+        maskPath = "27d21d43df7b60e385371.jpg"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "skelet":
+        os.system("wget https://graph.org/file/48b12c7d2a79475be0daf.png")
+        maskPath = "48b12c7d2a79475be0daf.png"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "golden":
+        os.system("wget https://graph.org/file/11fff712ae37da38c8c87.png")
+        maskPath = "11fff712ae37da38c8c87.png"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "zoro":
+        os.system("wget https://graph.org/file/a71bfbc5f86cb094161eb.png")
+        maskPath = "a71bfbc5f86cb094161eb.png"
+        for (x, y, w, h) in faces:
+            mask = Image.open(maskPath)
+            mask = mask.resize((w, h), Image.ANTIALIAS)
+            offset = (x, y)
+            background.paste(mask, offset, mask=mask)
+    elif match == "zombie":
+        os.system("wget https://graph.org/file/8908cd2b3595a1be14726.png")
+        maskPath = "8908cd2b3595a1be14726.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
