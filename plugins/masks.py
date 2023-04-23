@@ -101,16 +101,16 @@ async def scan(event):
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "fear":
-        os.system("wget https://graph.org/file/5ebbf5298f6c46b84883a.jpg")
-        maskPath = "5ebbf5298f6c46b84883a.jpg"
+        os.system("wget https://graph.org/file/19a3ca172e76e499045aa.png")
+        maskPath = "19a3ca172e76e499045aa.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "neon":
-        os.system("wget https://graph.org/file/27d21d43df7b60e385371.jpg")
-        maskPath = "27d21d43df7b60e385371.jpg"
+        os.system("wget https://graph.org/file/f1c6109df4e3389379501.png")
+        maskPath = "f1c6109df4e3389379501.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
