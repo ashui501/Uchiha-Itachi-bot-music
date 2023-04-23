@@ -8,9 +8,8 @@
   •`{i}clown`
   •`{i}krish`
   •`{i}n95`
-  •`{i}momo`
+  •`{i}fear`
   •`{i}neon`
-  •`{i}skelet`
   •`{i}golden`
   •`{i}zoro`
   •`{i}zombie`
@@ -35,7 +34,7 @@ except ImportError:
     
 from . import *
 
-@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95|momo|neon|skelet|golden|zoro|zombie)$")
+@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95|fear|neon|golden|zoro|zombie)$")
 async def scan(event):
     match = event.pattern_match.group(1)
     ureply = await event.get_reply_message()
@@ -101,7 +100,7 @@ async def scan(event):
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
-    elif match == "momo":
+    elif match == "fear":
         os.system("wget https://graph.org/file/5ebbf5298f6c46b84883a.jpg")
         maskPath = "5ebbf5298f6c46b84883a.jpg"
         for (x, y, w, h) in faces:
@@ -112,14 +111,6 @@ async def scan(event):
     elif match == "neon":
         os.system("wget https://graph.org/file/27d21d43df7b60e385371.jpg")
         maskPath = "27d21d43df7b60e385371.jpg"
-        for (x, y, w, h) in faces:
-            mask = Image.open(maskPath)
-            mask = mask.resize((w, h), Image.ANTIALIAS)
-            offset = (x, y)
-            background.paste(mask, offset, mask=mask)
-    elif match == "skelet":
-        os.system("wget https://graph.org/file/48b12c7d2a79475be0daf.png")
-        maskPath = "48b12c7d2a79475be0daf.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
@@ -142,8 +133,8 @@ async def scan(event):
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
     elif match == "zombie":
-        os.system("wget https://graph.org/file/8908cd2b3595a1be14726.png")
-        maskPath = "8908cd2b3595a1be14726.png"
+        os.system("wget https://graph.org/file/72ce0e545f1ad6f93831e.png")
+        maskPath = "72ce0e545f1ad6f93831e.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
