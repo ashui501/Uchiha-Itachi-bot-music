@@ -8,7 +8,7 @@
   •`{i}clown`
   •`{i}krish`
   •`{i}n95`
-  •`{i}fear`
+  •`{i}batman`
   •`{i}neon`
   •`{i}golden`
   •`{i}zoro`
@@ -34,7 +34,7 @@ except ImportError:
     
 from . import *
 
-@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95|fear|neon|golden|zoro|zombie)$")
+@ultroid_cmd(pattern="(cmask|sosmas|toxic|anon|clown|krish|n95|batman|neon|golden|zoro|zombie)$")
 async def scan(event):
     match = event.pattern_match.group(1)
     ureply = await event.get_reply_message()
@@ -100,9 +100,9 @@ async def scan(event):
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
             background.paste(mask, offset, mask=mask)
-    elif match == "fear":
-        os.system("wget https://graph.org/file/06d829faa0ca317d5b322.png")
-        maskPath = "06d829faa0ca317d5b322.png"
+    elif match == "batman":
+        os.system("wget https://graph.org/file/438b017f522e92e292207.png")
+        maskPath = "438b017f522e92e292207.png"
         for (x, y, w, h) in faces:
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
