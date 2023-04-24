@@ -22,6 +22,11 @@ if not os.path.isdir("./cipherx/"):
     os.makedirs("./cipherx/")
     
 try:
+    import face_recognition
+except ImportError:
+    LOGS.error(f"{__file__}: face_recognition not Installed.")
+    
+try:
     import cv2
 except ImportError:
     LOGS.error(f"{__file__}: OpenCv not Installed.")
@@ -47,6 +52,8 @@ async def scan(event):
         xx = await xx.edit(get_string("sts_9"))
         ultt = await con.convert(ultt, convert_to="png", outname="ult")
     cascPath = "./resources/face.xml"
+    loading = face_recognition.load_image_file(ultt)
+    encoding = face_recognition.face_encodings(loading)[0]
     faceCascade = cv2.CascadeClassifier(cascPath)
     ult = cv2.imread(ultt)
     ultroid = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
@@ -139,7 +146,7 @@ async def scan(event):
             mask = Image.open(maskPath)
             mask = mask.resize((w, h), Image.ANTIALIAS)
             offset = (x, y)
-            background.paste(mask, offset, mask=mask)
+            encoding.paste(mask, offset, mask=mask)
     file_name = "cipherx.png"
     path = "./cipherx"
     hehe = path + "/" + file_name
