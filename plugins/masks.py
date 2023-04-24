@@ -50,7 +50,7 @@ async def scan(event):
     faceCascade = cv2.CascadeClassifier(cascPath)
     ult = cv2.imread(ultt)
     ultroid = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
-    faces = faceCascade.detectMultiScale(ultroid, 1.15)
+    faces = faceCascade.detectMultiScale(ultroid, 1.3, 5)
     background = Image.open(ultt)
     if match == "sosmas":
         os.system("wget https://telegra.ph/file/f061c861ba85fbb23a51e.png")
