@@ -82,13 +82,15 @@ async def scan(event):
         os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
         maskPath = "4cc40d1e0846667488341.png"
         mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
         for (x, y, w, h) in faces:
             resized_mask = cv2.resize(mask, (w, h))
-        mask_image = np.zeros((input_image.shape[0], input_image.shape[1], resized_mask.shape[2]), dtype=resized_mask.dtype)
-        mask_image[y:y+h, x:x+w, :] = cv2.resize(resized_mask, (w, h))
-        resized_input_image = cv2.resize(input_image, (w, h)).astype(resized_mask.dtype)
-        masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-        masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], cv2.resize(resized_mask, (w, h)))
+            mask_image = np.zeros((input_image.shape[0], input_image.shape[1], resized_mask.shape[2]), dtype=resized_mask.dtype)
+            mask_image[y:y+h, x:x+w, :] = cv2.resize(resized_mask, (w, h))
+            resized_input_image = cv2.resize(input_image, (w, h)).astype(resized_mask.dtype)
+            masked_image = cv2.bitwise_and(cv2.cvtColor(resized_input_image, cv2.COLOR_BGR2GRAY), cv2.cvtColor(resized_input_image, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
+            masked_image = cv2.cvtColor(masked_image, cv2.COLOR_GRAY2BGR)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], cv2.resize(resized_mask, (w, h)))
         output_path = "cipherx/cipherx.jpg"
         cv2.imwrite(output_path, masked_image)
     elif match == "clown":
