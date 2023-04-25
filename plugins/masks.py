@@ -85,10 +85,10 @@ async def scan(event):
         mask = mask[:,:,0:3]
         for (x, y, w, h) in faces:
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros((input_image.shape[0], input_image.shape[1], resized_mask.shape[2]), dtype=resized_mask.dtype)
+            input_image_resized = cv2.resize(input_image, (w, h))
+            mask_image = np.zeros((input_image_resized.shape[0], input_image_resized.shape[1], resized_mask.shape[2]), dtype=resized_mask.dtype)
             mask_image[y:y+h, x:x+w, :] = cv2.resize(resized_mask, (w, h))
-            resized_input_image = cv2.resize(input_image, (w, h)).astype(resized_mask.dtype)
-            masked_image = cv2.bitwise_and(cv2.cvtColor(resized_input_image, cv2.COLOR_BGR2GRAY), cv2.cvtColor(resized_input_image, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
+            masked_image = cv2.bitwise_and(cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
             masked_image = cv2.cvtColor(masked_image, cv2.COLOR_GRAY2BGR)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], cv2.resize(resized_mask, (w, h)))
         output_path = "cipherx/cipherx.jpg"
