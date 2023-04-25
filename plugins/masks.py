@@ -84,11 +84,11 @@ async def scan(event):
         mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
         for (x, y, w, h) in faces:
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros((h, w), dtype=mask.dtype)
-            mask_image[y:y+h, x:x+w] = resized_mask
+            mask_image = np.zeros((input_image.shape[0], input_image.shape[1]), dtype=mask.dtype)
+            mask_image[y:y+h, x:x+w] = cv2.resize(resized_mask, (w, h))
             resized_input_image = cv2.resize(input_image, (w, h)).astype(mask.dtype)
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], cv2.resize(resized_mask, (w, h)))
         output_path = "cipherx/cipherx.jpg"
         cv2.imwrite(output_path, masked_image)
     elif match == "clown":
