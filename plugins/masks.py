@@ -94,12 +94,11 @@ async def scan(event):
             if resized_mask_crop.shape != mask_image[y:y+h, x:x+w, :].shape:
                 continue
             mask_image[y:y+h, x:x+w, :] = resized_mask_crop
-            masked_image_temp = cv2.bitwise_and(cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
-            masked_image_temp = cv2.cvtColor(masked_image_temp, cv2.COLOR_GRAY2BGR)
-            masked_image_temp[y:y+h, x:x+w] = cv2.add(masked_image_temp[y:y+h, x:x+w], resized_mask_crop)
-            masked_image = cv2.add(masked_image, masked_image_temp) 
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
         output_path = "cipherx/cipherx.jpg"
         cv2.imwrite(output_path, masked_image)
+
     elif match == "clown":
         os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
         maskPath = "55fcb205c6f8f4790585e.png"
