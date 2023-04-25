@@ -83,6 +83,7 @@ async def scan(event):
         maskPath = "4cc40d1e0846667488341.png"
         mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
         mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
             resized_mask = cv2.resize(mask, (w, h))
             input_image_resized = cv2.resize(input_image, (w, h)) 
@@ -93,9 +94,10 @@ async def scan(event):
             if resized_mask_crop.shape != mask_image[y:y+h, x:x+w, :].shape:
                 continue
             mask_image[y:y+h, x:x+w, :] = resized_mask_crop
-            masked_image = cv2.bitwise_and(cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
-            masked_image = cv2.cvtColor(masked_image, cv2.COLOR_GRAY2BGR)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask_crop)
+            masked_image_temp = cv2.bitwise_and(cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
+            masked_image_temp = cv2.cvtColor(masked_image_temp, cv2.COLOR_GRAY2BGR)
+            masked_image_temp[y:y+h, x:x+w] = cv2.add(masked_image_temp[y:y+h, x:x+w], resized_mask_crop)
+            masked_image = cv2.add(masked_image, masked_image_temp) 
         output_path = "cipherx/cipherx.jpg"
         cv2.imwrite(output_path, masked_image)
     elif match == "clown":
