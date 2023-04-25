@@ -56,31 +56,33 @@ async def scan(event):
         await xx.edit("No faces detected...")
         return
     if match == "sosmas":
-        os.system("wget https://telegra.ph/file/f061c861ba85fbb23a51e.png")
         maskPath = "f061c861ba85fbb23a51e.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/f061c861ba85fbb23a51e.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "toxic":
-        os.system("wget https://telegra.ph/file/df2d739544595ae337642.png")
         maskPath = "df2d739544595ae337642.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/df2d739544595ae337642.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w])
     elif match == "anon":
         maskPath = "4cc40d1e0846667488341.png"
         if not os.path.isfile(maskPath):
@@ -95,112 +97,120 @@ async def scan(event):
             mask_image[...] = resized_mask
             masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
-        output_path = "cipherx/cipherx.jpg"
-        cv2.imwrite(output_path, masked_image)
     elif match == "clown":
-        os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
         maskPath = "55fcb205c6f8f4790585e.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "krish":
-        os.system("wget https://telegra.ph/file/54d2a267d411951b41a20.png")
         maskPath = "54d2a267d411951b41a20.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/54d2a267d411951b41a20.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "n95":
-        os.system("wget https://telegra.ph/file/b934a713abb321bd1a9fe.png")
         maskPath = "b934a713abb321bd1a9fe.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/b934a713abb321bd1a9fe.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "batman":
-        os.system("wget https://graph.org/file/438b017f522e92e292207.png")
         maskPath = "438b017f522e92e292207.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://graph.org/file/438b017f522e92e292207.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "neon":
-        os.system("wget https://graph.org/file/f1c6109df4e3389379501.png")
         maskPath = "f1c6109df4e3389379501.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://graph.org/file/f1c6109df4e3389379501.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "golden":
-        os.system("wget https://graph.org/file/11fff712ae37da38c8c87.png")
         maskPath = "11fff712ae37da38c8c87.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://graph.org/file/11fff712ae37da38c8c87.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "zoro":
-        os.system("wget https://graph.org/file/a71bfbc5f86cb094161eb.png")
         maskPath = "a71bfbc5f86cb094161eb.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://graph.org/file/a71bfbc5f86cb094161eb.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
     elif match == "zombie":
-        os.system("wget https://graph.org/file/e61967306ec8802534e74.png")
         maskPath = "e61967306ec8802534e74.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://graph.org/file/e61967306ec8802534e74.png")
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
+        mask = mask[:,:,0:3]
+        masked_image = input_image.copy()
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
-            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
-            masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
+            masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
+            masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
+    output_path = "cipherx/cipherx.jpg"
+    cv2.imwrite(output_path, masked_image)
     await ureply.reply(
         file=output_path,
         force_document=False,
