@@ -60,7 +60,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -72,7 +73,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -84,7 +86,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -96,7 +99,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -108,7 +112,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -120,7 +125,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -132,7 +138,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -144,7 +151,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -156,7 +164,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -168,7 +177,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
@@ -180,7 +190,8 @@ async def scan(event):
             resized_mask = cv2.resize(mask, (w, h))
             mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
-            masked_image = cv2.bitwise_and(input_image, input_image, mask=mask_image)
+            resized_input_image = cv2.resize(input_image, (w, h))
+            masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
