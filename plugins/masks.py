@@ -81,16 +81,16 @@ async def scan(event):
     elif match == "anon":
         os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
         maskPath = "4cc40d1e0846667488341.png"
+        mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
         for (x, y, w, h) in faces:
-            mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
-            mask_image[y:y+h, x:x+w] = 255
-            resized_input_image = cv2.resize(input_image, (w, h))
+            mask_image = np.zeros((h, w), dtype=mask.dtype)
+            mask_image[y:y+h, x:x+w] = resized_mask
+            resized_input_image = cv2.resize(input_image, (w, h)).astype(mask.dtype)
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image[y:y+h, x:x+w], resized_mask)
-            output_path = "cipherx/cipherx.jpg"
-            cv2.imwrite(output_path, masked_image)
+        output_path = "cipherx/cipherx.jpg"
+        cv2.imwrite(output_path, masked_image)
     elif match == "clown":
         os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
         maskPath = "55fcb205c6f8f4790585e.png"
