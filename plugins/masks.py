@@ -52,6 +52,9 @@ async def scan(event):
     gray = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier("./resources/face.xml")
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    if len(faces) == 0:
+        await xx.edit("No faces detected...")
+        return
     if match == "sosmas":
         os.system("wget https://telegra.ph/file/f061c861ba85fbb23a51e.png")
         maskPath = "f061c861ba85fbb23a51e.png"
@@ -79,26 +82,21 @@ async def scan(event):
             output_path = "cipherx/cipherx.jpg"
             cv2.imwrite(output_path, masked_image)
     elif match == "anon":
-        os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
         maskPath = "4cc40d1e0846667488341.png"
+        if not os.path.isfile(maskPath):
+            os.system("wget https://telegra.ph/file/4cc40d1e0846667488341.png")
         mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
         mask = mask[:,:,0:3]
         masked_image = input_image.copy()
         for (x, y, w, h) in faces:
             resized_mask = cv2.resize(mask, (w, h))
-            input_image_resized = cv2.resize(input_image, (w, h)) 
-            mask_image = np.zeros((input_image_resized.shape[0], input_image_resized.shape[1], resized_mask.shape[2]), dtype=resized_mask.dtype)
-            if resized_mask.shape[0] > h or resized_mask.shape[1] > w:
-                continue
-            resized_mask_crop = resized_mask[0:h, 0:w, :]
-            if resized_mask_crop.shape != mask_image[y:y+h, x:x+w, :].shape:
-                continue
-            mask_image[y:y+h, x:x+w, :] = resized_mask_crop
+            input_image_resized = cv2.resize(input_image[y:y+h, x:x+w], (resized_mask.shape[1], resized_mask.shape[0]))
+            mask_image = np.zeros((resized_mask.shape[0], resized_mask.shape[1], input_image_resized.shape[2]), dtype=resized_mask.dtype)
+            mask_image[...] = resized_mask
             masked_image_temp = cv2.bitwise_and(input_image_resized, mask_image)
             masked_image[y:y+h, x:x+w] = cv2.add(masked_image_temp, masked_image[y:y+h, x:x+w]) 
         output_path = "cipherx/cipherx.jpg"
         cv2.imwrite(output_path, masked_image)
-
     elif match == "clown":
         os.system("wget https://telegra.ph/file/55fcb205c6f8f4790585e.png")
         maskPath = "55fcb205c6f8f4790585e.png"
