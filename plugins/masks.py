@@ -48,7 +48,7 @@ async def scan(event):
     if ultt.endswith(".tgs"):
         xx = await xx.edit(get_string("sts_9"))
         ultt = await con.convert(ultt, convert_to="png", outname="ult")
-    input_image = cv2.imread(ultt)
+    input_image = cv2.imread(ultt).astype(np.uint8)
     gray = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier("./resources/face.xml")
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -58,7 +58,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -71,7 +71,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -84,7 +84,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -97,7 +97,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -110,7 +110,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -123,7 +123,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -136,7 +136,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -149,7 +149,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -162,7 +162,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -175,7 +175,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
@@ -188,7 +188,7 @@ async def scan(event):
         for (x, y, w, h) in faces:
             mask = cv2.imread(maskPath, cv2.IMREAD_UNCHANGED)
             resized_mask = cv2.resize(mask, (w, h))
-            mask_image = np.zeros(input_image.shape[:2], dtype=input_image.dtype)
+            mask_image = np.zeros(input_image.shape[:2], dtype=np.uint8)
             mask_image[y:y+h, x:x+w] = 255
             resized_input_image = cv2.resize(input_image, (w, h))
             masked_image = cv2.bitwise_and(resized_input_image, resized_input_image, mask=mask_image)
