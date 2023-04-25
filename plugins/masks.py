@@ -90,6 +90,8 @@ async def scan(event):
             if resized_mask.shape[0] > h or resized_mask.shape[1] > w:
                 continue
             resized_mask_crop = resized_mask[0:h, 0:w, :]
+            if resized_mask_crop.shape != mask_image[y:y+h, x:x+w, :].shape:
+                continue
             mask_image[y:y+h, x:x+w, :] = resized_mask_crop
             masked_image = cv2.bitwise_and(cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), cv2.cvtColor(input_image_resized, cv2.COLOR_BGR2GRAY), mask=cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY))
             masked_image = cv2.cvtColor(masked_image, cv2.COLOR_GRAY2BGR)
