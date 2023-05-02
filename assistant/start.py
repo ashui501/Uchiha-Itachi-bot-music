@@ -72,7 +72,7 @@ async def ultroid(event):
         keym.add(event.sender_id)
         kak_uiw = udB.get_key("OFF_START_LOG")
         if not kak_uiw or kak_uiw != True:
-            msg = f"{inline_mention(event.sender)} [`{event.sender_id}`] started your [Assistant bot](@{asst.me.username})."
+            msg = f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n\n**Started CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ Ⲃⲟⲧ**"
             buttons = [[Button.inline("Info", "itkkstyo")]]
             if event.sender.username:
                 buttons[0].append(
