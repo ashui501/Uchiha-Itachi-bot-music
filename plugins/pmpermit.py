@@ -152,21 +152,32 @@ if udB.get_key("PMLOG"):
     )
     async def permitpm(event):
         user = await event.get_sender()
+        own = await event.client.get_me()
         if user.bot or user.is_self or user.verified or Logm.contains(user.id):
             return
         #await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
-        buttons = [[Button.text(f"{(await event.client.get_me()).first_name}")]]
+        buttons = [[Button.url(f"{own.first_name}", url=f"https://t.me/{own.username}")]]
         if user.username:
             buttons[0].append(
                 Button.mention(
                     f"{user.first_name}", await event.client.get_input_entity(user.id)
                 )
             )
-        await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
-            f"{inline_mention(event.sender)} [`{event.sender_id}`] :\n\n`{event.text}`",
-            buttons=buttons
-        )
+        if event.media:
+            media = await event.download_media()
+            await asst.send_message(
+                udB.get_key("LOG_CHANNEL"),
+                f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n\n**Message:**`{event.text}`",
+                file=media,
+                buttons=buttons
+            )
+        os.remove(media)
+        else:   
+            await asst.send_message(
+                udB.get_key("LOG_CHANNEL"),
+                f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n\n**Message:**`{event.text}`",
+                buttons=buttons
+            )
 
 if udB.get_key("PMSETTING"):
     if udB.get_key("AUTOAPPROVE"):
