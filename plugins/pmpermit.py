@@ -171,7 +171,7 @@ if udB.get_key("PMLOG"):
                 file=media,
                 buttons=buttons
             )
-        os.remove(media)
+            os.remove(media)
         else:   
             await asst.send_message(
                 udB.get_key("LOG_CHANNEL"),
