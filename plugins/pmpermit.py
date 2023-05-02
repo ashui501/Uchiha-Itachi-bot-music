@@ -156,7 +156,7 @@ if udB.get_key("PMLOG"):
         if user.bot or user.is_self or user.verified or Logm.contains(user.id):
             return
         #await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
-        buttons = [[Button.url(f"{own.first_name}", url=f"https://t.me/{own.username}")]]
+        buttons = [[Button.url(f"🏴‍☠{own.first_name}", url=f"https://t.me/{own.username}")]]
         if user.username:
             buttons[0].append(
                 Button.mention(
