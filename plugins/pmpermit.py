@@ -154,8 +154,15 @@ if udB.get_key("PMLOG"):
         user = await event.get_sender()
         if user.bot or user.is_self or user.verified or Logm.contains(user.id):
             return
-        await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
-
+        #await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
+        await asst.send_message(
+            udB.get_key("LOG_CHANNEL"),
+            f"<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] :\n\n<code>{event.text}</code>",
+            buttons=[
+                Button.mention(f"{user.first_name}", await event.client.get_input_entity(event.sender_id))
+            ],
+            parse_mode="html",
+        )
 
 if udB.get_key("PMSETTING"):
     if udB.get_key("AUTOAPPROVE"):
