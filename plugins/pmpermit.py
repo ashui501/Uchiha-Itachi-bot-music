@@ -166,7 +166,8 @@ if udB.get_key("PMLOG"):
         if event.media:
             media = await event.download_media()
             await asst.send_message(
-                udB.get_key("LOG_CHANNEL"),
+                #udB.get_key("LOG_CHANNEL"),
+                -1001296928120,
                 f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
                 file=media,
                 buttons=buttons
@@ -174,7 +175,8 @@ if udB.get_key("PMLOG"):
             os.remove(media)
         else:   
             await asst.send_message(
-                udB.get_key("LOG_CHANNEL"),
+                #udB.get_key("LOG_CHANNEL"),
+                -1001296928120,
                 f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
                 buttons=buttons
             )
