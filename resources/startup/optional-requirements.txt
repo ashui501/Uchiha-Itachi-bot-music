@@ -17,6 +17,7 @@ htmlwebshot
 lottie
 lxml
 numpy>=1.21.2
+openai
 oauth2client
 opencv-python-headless
 pillow>=7.0.0
