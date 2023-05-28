@@ -1,0 +1,3 @@
+if [ -f .env ] ; then  set -o allexport; source .env; set +o allexport ; fi
+
+if [ $SESSION1 ] ; then python3 root/main.py ; else python3 -m root/CythonX ; fi
