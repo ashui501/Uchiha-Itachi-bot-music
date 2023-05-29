@@ -4,6 +4,7 @@ import random
 import shutil
 import time
 from random import randint
+from pathlib import Path
 
 from ..configs import Var
 
@@ -97,7 +98,8 @@ async def startup_stuff():
     x = ["resources/auth", "resources/downloads"]
     for x in x:
         if not os.path.isdir(x):
-            os.mkdir(x)
+            (Path(x)).mkdir()
+            #os.mkdir(x)
 
     CT = udB.get_key("CUSTOM_THUMBNAIL")
     if CT:
