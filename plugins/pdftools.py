@@ -51,7 +51,7 @@ from . import (
 
 if not os.path.isdir("pdf"):
     #(Path("pdf")).mkdir()
-    os.mkdir("pdf")
+    await bash("mkdir pdf")
 
 
 @ultroid_cmd(
@@ -90,7 +90,7 @@ async def pdfseimg(event):
         shutil.rmtree("pdf")
         #(Path("pdf")).mkdir()
         if not os.path.isdir("pdf"):
-            os.mkdir("pdf")
+            await bash("mkdir df")
         await xx.delete()
     elif "-" in msg:
         ok = int(msg.split("-")[-1]) - 1
