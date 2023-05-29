@@ -37,7 +37,8 @@ from telethon.tl.types import (
 from telethon.utils import get_peer_id
 
 from .. import LOGS, ULTConfig
-from ..fns.helper import download_file, inline_mention, updater, Bash
+
+from ..fns.helper import *
 
 db_url = 0
 
