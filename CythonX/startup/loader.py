@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 from shutil import rmtree
-
+from pathlib import Path
 from decouple import config
 from git import Repo
 
@@ -125,7 +125,8 @@ def load_other_plugins(addons=None, pmbot=None, manager=None, vcbot=None):
                 )
             try:
                 if not os.path.exists("vcbot/downloads"):
-                    os.mkdir("vcbot/downloads")
+                    #os.mkdir("vcbot/downloads")
+                    (Path("vcbot/downloads")).mkdir()
                 Loader(path="vcbot", key="VCBot").load(after_load=_after_load)
             except FileNotFoundError as e:
                 LOGS.error(f"{e} Skipping VCBot Installation.")
