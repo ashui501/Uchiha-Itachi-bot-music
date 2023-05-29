@@ -11,7 +11,7 @@ from ..dB._core import HELP
 from ..loader import Loader
 from . import *
 from .utils import load_addons
-from ..fns.helper import Bash
+from ..fns.helper import bash
 
 def _after_load(loader, module, plugin_name=""):
     if not module or plugin_name.startswith("_"):
@@ -125,7 +125,7 @@ def load_other_plugins(addons=None, pmbot=None, manager=None, vcbot=None):
                 )
             try:
                 if not os.path.exists("vcbot/downloads"):
-                    await bash("mkdir vcbot/downloads")
+                    subprocess.run("mkdir vcbot/downloads", shell=True)
                     #(Path("vcbot/downloads")).mkdir()
                 Loader(path="vcbot", key="VCBot").load(after_load=_after_load)
             except FileNotFoundError as e:
