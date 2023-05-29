@@ -92,7 +92,7 @@ async def unzipp(event):
         file = image.name
     if os.path.isdir("unzip"):
         await bash("rm -rf unzip")
-    os.mkdir("unzip")
+    await bash("mkdir unzip")
     await bash(f"7z x {file} -aoa -ounzip")
     await asyncio.sleep(4)
     ok = get_all_files("unzip")
@@ -118,7 +118,8 @@ async def azipp(event):
         return
     xx = await event.eor(get_string("com_1"))
     if not os.path.isdir("zip"):
-        os.mkdir("zip")
+        await bash("mkdir zip")
+
     if reply.media:
         if hasattr(reply.media, "document"):
             file = reply.media.document
