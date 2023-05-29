@@ -51,7 +51,7 @@ from . import (
 
 if not os.path.isdir("pdf"):
     #(Path("pdf")).mkdir()
-    await bash("mkdir pdf")
+    subprocess.run("mkdir pdf", shell=True)
 
 
 @ultroid_cmd(
