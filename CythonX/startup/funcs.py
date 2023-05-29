@@ -37,7 +37,7 @@ from telethon.tl.types import (
 from telethon.utils import get_peer_id
 
 from .. import LOGS, ULTConfig
-from ..fns.helper import download_file, inline_mention, updater
+from ..fns.helper import download_file, inline_mention, updater, Bash
 
 db_url = 0
 
@@ -98,8 +98,8 @@ async def startup_stuff():
     x = ["resources/auth", "resources/downloads"]
     for x in x:
         if not os.path.isdir(x):
-            (Path(x)).mkdir()
-            #os.mkdir(x)
+            #(Path(x)).mkdir()
+            await bash(f"mkdir {x}")
 
     CT = udB.get_key("CUSTOM_THUMBNAIL")
     if CT:
@@ -393,7 +393,7 @@ async def plug(plugin_channels):
     if os.path.exists("addons") and not os.path.exists("addons/.git"):
         shutil.rmtree("addons")
     if not os.path.exists("addons"):
-        os.mkdir("addons")
+        await bash("mkdir addons")
     if not os.path.exists("addons/__init__.py"):
         with open("addons/__init__.py", "w") as f:
             f.write("from plugins import *\n\nbot = ultroid_bot")
