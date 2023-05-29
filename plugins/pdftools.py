@@ -90,7 +90,7 @@ async def pdfseimg(event):
         shutil.rmtree("pdf")
         #(Path("pdf")).mkdir()
         if not os.path.isdir("pdf"):
-            await bash("mkdir df")
+            await bash("mkdir pdf")
         await xx.delete()
     elif "-" in msg:
         ok = int(msg.split("-")[-1]) - 1
