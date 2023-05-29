@@ -23,6 +23,7 @@ import glob
 import os
 import shutil
 import time
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -49,7 +50,8 @@ from . import (
 )
 
 if not os.path.isdir("pdf"):
-    os.mkdir("pdf")
+    (Path("pdf")).mkdir()
+    #os.mkdir("pdf")
 
 
 @ultroid_cmd(
@@ -86,7 +88,8 @@ async def pdfseimg(event):
         for z in ok:
             await event.client.send_file(event.chat_id, z)
         shutil.rmtree("pdf")
-        os.mkdir("pdf")
+        (Path("pdf")).mkdir()
+        #os.mkdir("pdf")
         await xx.delete()
     elif "-" in msg:
         ok = int(msg.split("-")[-1]) - 1
