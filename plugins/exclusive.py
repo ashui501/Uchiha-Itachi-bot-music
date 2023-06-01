@@ -301,7 +301,7 @@ async def _(event):
             "8": "₈",
             "9": "₉",
         }
-        HM = time.strftime("%H . %M")
+        HM = str(int(time.strftime("%H"))-1) + " . " + time.strftime("%M")
         for key, value in dictionary.items():
             HM = HM.replace(key, value)
         name = f"{namex} {HM}"
