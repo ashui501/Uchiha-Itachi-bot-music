@@ -498,9 +498,9 @@ async def _(e):
     except KeyError:
         pass
     foles = []
-    appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={quer}"
-    req = requests.get(appapi).json()
-    dirlink = req["datalist"]["list"][0]["file"]["path"]
+    #appapi = f"https://dev-venompy.pantheonsite.io/wp-admin/api_apps.php?query={quer}"
+    #req = requests.get(appapi).json()
+    #dirlink = req["datalist"]["list"][0]["file"]["path"]
     url = PLAY_API + quer.replace(" ", "+")
     aap = await async_searcher(url, re_json=True)
     for z in aap["results"][:50]:
@@ -521,7 +521,7 @@ async def _(e):
                 link_preview=True,
                 buttons=[
                     [Button.url("Gᴘʟᴀʏ Lɪɴᴋ", url=url)],
-                    [Button.url("Dɪʀᴇᴄᴛ Lɪɴᴋ", url=dirlink)],
+                    #[Button.url("Dɪʀᴇᴄᴛ Lɪɴᴋ", url=dirlink)],
                     [
                         Button.switch_inline(
                             "Mᴏʀᴇ Aᴘᴘs",
