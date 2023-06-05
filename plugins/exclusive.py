@@ -162,18 +162,18 @@ namex = str(OWNER_NAME) if OWNER_NAME else "CɪᴘʜᴇʀX"
 @ultroid_bot.on(events.NewMessage)
 async def Dice(event):
     if event.media and hasattr(event.media, "value") and event.media.emoticon == "🎲":
-        if udB.get_key("GUESS")!= "True":
+        if udB.get_key("GUESS") == "False":
             return
-        else:
+        elif udB.get_key("GUESS") == "True":
             await event.eor(f"Dice number is {event.media.value}")
 
 
 @ultroid_bot.on(events.NewMessage)
 async def Dart(event):
     if event.media and hasattr(event.media, "value") and event.media.emoticon == "🎯":
-        if udB.get_key("GUESS")!= "True":
+        if udB.get_key("GUESS") == "False":
             return
-        else:
+        elif udB.get_key("GUESS") == "True":
             await event.eor(f"Dart sybl number is {event.media.value}")
 
 
