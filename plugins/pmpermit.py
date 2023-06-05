@@ -163,7 +163,7 @@ if udB.get_key("PMLOG"):
                     f"{user.first_name}", await event.client.get_input_entity(user.id)
                 )
             )
-        if event.media:
+        if event.media and not hasattr(event.media,"value"):
             media = await event.download_media()
             await asst.send_message(
                 #udB.get_key("LOG_CHANNEL"),
