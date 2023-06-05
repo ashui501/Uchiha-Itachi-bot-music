@@ -161,18 +161,20 @@ namex = str(OWNER_NAME) if OWNER_NAME else "CɪᴘʜᴇʀX"
 
 @ultroid_bot.on(events.NewMessage)
 async def Dice(event):
-    if udB.get_key("GUESS")!= "True":
-        return
     if event.dice and event.dice.emoticon == "🎲":
-        await event.eor(f"Dice number is {event.dice.value}")
+        if udB.get_key("GUESS")!= "True":
+            return
+        else:
+            await event.eor(f"Dice number is {event.dice.value}")
 
 
 @ultroid_bot.on(events.NewMessage)
 async def Dart(event):
-    if udB.get_key("GUESS")!= "True":
-        return
     if event.dice and event.dice.emoticon == "🎯":
-        await event.eor(f"Dart sybl number is {event.dice.value}")
+        if udB.get_key("GUESS")!= "True":
+            return
+        else:
+            await event.eor(f"Dart sybl number is {event.dice.value}")
 
 
 @ultroid_cmd(pattern="hyper")
@@ -301,7 +303,12 @@ async def _(event):
             "8": "₈",
             "9": "₉",
         }
-        HM = str(int(time.strftime("%H"))-1) + " . " + time.strftime("%M")
+        hour = int(time.strftime("%H"))
+        if hour == 0:
+            hour = 23
+        else:
+            hour -= 1
+        HM = f"{hour:02d} . {time.strftime('%M')}"
         for key, value in dictionary.items():
             HM = HM.replace(key, value)
         name = f"{namex} {HM}"
