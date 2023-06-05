@@ -161,20 +161,20 @@ namex = str(OWNER_NAME) if OWNER_NAME else "CɪᴘʜᴇʀX"
 
 @ultroid_bot.on(events.NewMessage)
 async def Dice(event):
-    if event.dice and event.dice.emoticon == "🎲":
+    if event.media and hasattr(event.media, "value") and event.media.emoticon == "🎲":
         if udB.get_key("GUESS")!= "True":
             return
         else:
-            await event.eor(f"Dice number is {event.dice.value}")
+            await event.eor(f"Dice number is {event.media.value}")
 
 
 @ultroid_bot.on(events.NewMessage)
 async def Dart(event):
-    if event.dice and event.dice.emoticon == "🎯":
+    if event.media and hasattr(event.media, "value") and event.media.emoticon == "🎯":
         if udB.get_key("GUESS")!= "True":
             return
         else:
-            await event.eor(f"Dart sybl number is {event.dice.value}")
+            await event.eor(f"Dart sybl number is {event.media.value}")
 
 
 @ultroid_cmd(pattern="hyper")
@@ -191,7 +191,7 @@ async def Hyperlink(event):
 async def destructive(e):
     if not e.is_private:
         return
-    if e.media and e.media.ttl_seconds != None:
+    if e.media and not hasattr(e.media, "value") and e.media.ttl_seconds != None:
         try:
             download = await e.client.download_media(e.media, "resources/")
             await e.client.send_message('me', '✨CɪᴘʜᴇʀX Ⲉⲭⲥⳑυⲋⲓⳳⲉ ⲃⲟⲧ✨', file=download)
