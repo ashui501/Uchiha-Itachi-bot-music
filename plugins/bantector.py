@@ -20,7 +20,7 @@ async def revenge():
         users = [
             p.id
             for p in await asst.get_participants(
-                -1001888066860, filter=types.ChannelParticipantsKicked
+                -1001192530125, filter=types.ChannelParticipantsKicked
             )
             if p.participant.kicked_by == user_id and p.participant.date >= x
         ]
