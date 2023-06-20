@@ -14,7 +14,7 @@ from CythonX._misc._assistant import callback, in_pattern
 from CythonX.dB._core import HELP, LIST
 from CythonX.version import __version__ as UltVer
 from CythonX.version import ultroid_version 
-from CythonX.fns.helper import gen_chlog, time_formatter, updater
+from CythonX.fns.helper import gen_chlog, time_formatter #updater
 from CythonX.fns.misc import split_list
 
 from . import (
@@ -249,8 +249,8 @@ async def uptd_plugin(event):
 
 @callback(data="doupdate", owner=True)
 async def _(event):
-    if not await updater():
-        return await event.answer(get_string("inline_9"), cache_time=0, alert=True)
+    #if not await updater():
+        #return await event.answer(get_string("inline_9"), cache_time=0, alert=True)
     if not inline_pic():
         return await event.answer(f"Do '{HNDLR}update' to update..")
     repo = Repo.init()
