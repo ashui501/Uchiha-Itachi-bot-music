@@ -424,40 +424,6 @@ async def plug(plugin_channels):
 # some stuffs
 
 
-async def fetch_ann():
-    from .. import asst, udB
-    from ..fns.tools import async_searcher
-
-    get_ = udB.get_key("OLDANN") or []
-    chat_id = udB.get_key("LOG_CHANNEL")
-
-    try:
-        updts = await async_searcher(
-            "https://ultroid-api.vercel.app/announcements", post=True, re_json=True
-        )
-        for upt in updts:
-            key = list(upt.keys())[0]
-            if key not in get_:
-                cont = upt[key]
-                if isinstance(cont, dict) and cont.get("lang"):
-                    if cont["lang"] != (udB.get_key("language") or "en"):
-                        continue
-                    cont = cont["msg"]
-                if isinstance(cont, str):
-                    await asst.send_message(chat_id, cont)
-                elif isinstance(cont, dict) and cont.get("chat"):
-                    await asst.forward_messages(chat_id, cont["msg_id"], cont["chat"])
-                else:
-                    LOGS.info(cont)
-                    LOGS.info(
-                        "Invalid Type of Announcement Detected!\nMake sure you are on latest version.."
-                    )
-                get_.append(key)
-        udB.set_key("OLDANN", get_)
-    except Exception as er:
-        LOGS.exception(er)
-
-
 async def ready():
     from .. import asst, udB, ultroid_bot
 
@@ -498,7 +464,6 @@ async def ready():
             LOGS.exception(ef)
     if spam_sent and not spam_sent.media:
         udB.set_key("LAST_UPDATE_LOG_SPAM", spam_sent.id)
-    await fetch_ann()
 
 
 async def WasItRestart(udb):
