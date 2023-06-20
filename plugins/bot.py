@@ -54,7 +54,7 @@ from . import (
     udB,
     ultroid_cmd,
     ultroid_version,
-    updater,
+    #updater
 )
 
 ULTPIC = inline_pic() or choice(ULTROID_IMAGES)
@@ -316,7 +316,7 @@ async def _(e):
         await xx.edit(get_string("upd_7"))
         os.execl(sys.executable, "python3", "-m", "CythonX")
         # return
-    m = await updater()
+    #m = await updater()
     branch = (Repo.init()).active_branch
     if m:
         x = await asst.send_file(
