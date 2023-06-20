@@ -43,7 +43,7 @@ try:
 except ImportError:
     tabulate = None
 from telethon import events
-from telethon.errors import MessageNotModifiedError
+from telethon.errors import MessageNotModifiedError, ButtonUserInvalidError
 from telethon.tl.functions.contacts import (
     BlockRequest,
     GetBlockedRequest,
@@ -165,21 +165,28 @@ if udB.get_key("PMLOG"):
             )
         if event.media and not hasattr(event.media,"value"):
             media = await event.download_media()
-            await asst.send_message(
-                #udB.get_key("LOG_CHANNEL"),
-                -1001296928120,
-                f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
-                file=media,
-                buttons=buttons
-            )
-            os.remove(media)
+            try:
+                await asst.send_message(
+                    #udB.get_key("LOG_CHANNEL"),
+                    -1001296928120,
+                    f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
+                    file=media,
+                    buttons=buttons
+                )
+                os.remove(media)
+            except ButtonUserInvalidError:
+                pass
         else:   
-            await asst.send_message(
-                #udB.get_key("LOG_CHANNEL"),
-                -1001296928120,
-                f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
-                buttons=buttons
-            )
+            try:
+                await asst.send_message(
+                    #udB.get_key("LOG_CHANNEL"),
+                    -1001296928120,
+                    f"**User:** {inline_mention(event.sender)}\n**User ID:** `{event.sender_id}`\n**Message:** `{event.text}`",
+                    buttons=buttons
+                )
+            except ButtonUserInvalidError:
+                pass
+
 
 if udB.get_key("PMSETTING"):
     if udB.get_key("AUTOAPPROVE"):
