@@ -477,15 +477,17 @@ async def ready():
                 await ultroid_bot.delete_messages(chat_id, int(prev_spam))
             except Exception as E:
                 LOGS.info("Error while Deleting Previous Update Message :" + str(E))
-        if await updater():
-            BTTS = Button.inline("Update Available", "updtavail")
+        #if await updater():
+            #BTTS = Button.inline("Update Available", "updtavail")
 
     try:
-        spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
+        #spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
+        spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO)
     except ValueError as e:
         try:
             await (await ultroid_bot.send_message(chat_id, str(e))).delete()
-            spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
+            #spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
+            spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO)
         except Exception as g:
             LOGS.info(g)
     except Exception as el:
