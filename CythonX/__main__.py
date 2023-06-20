@@ -6,7 +6,7 @@ def main():
     import sys
     import time
 
-    from .fns.helper import bash, time_formatter, updater
+    from .fns.helper import bash, time_formatter #updater
     from .startup.funcs import (
         WasItRestart,
         autopilot,
@@ -24,14 +24,14 @@ def main():
         AsyncIOScheduler = None
 
     # Option to Auto Update On Restarts..
-    if (
-        udB.get_key("UPDATE_ON_RESTART")
-        and os.path.exists(".git")
-        and ultroid_bot.run_in_loop(updater())
-    ):
-        ultroid_bot.run_in_loop(bash("bash installer.sh"))
+    #if (
+    #    udB.get_key("UPDATE_ON_RESTART")
+    #    and os.path.exists(".git")
+    #    and ultroid_bot.run_in_loop(updater())
+    #):
+    #    ultroid_bot.run_in_loop(bash("bash installer.sh"))
 
-        os.execl(sys.executable, sys.executable, "-m", "CythonX")
+    #    os.execl(sys.executable, sys.executable, "-m", "CythonX")
 
     ultroid_bot.run_in_loop(startup_stuff())
 
