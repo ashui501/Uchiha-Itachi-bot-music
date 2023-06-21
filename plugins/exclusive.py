@@ -303,13 +303,12 @@ async def _(event):
             "8": "₈",
             "9": "₉",
         }
-        HM = f"{int(time.strftime("%H")):02d} . {time.strftime('%M')}"
-        #hour = int(time.strftime("%H"))
+        hour = int(time.strftime("%H"))
         #if hour == 0:
         #    hour = 23
         #else:
             #hour -= 1
-        #HM = f"{hour:02d} . {time.strftime('%M')}"
+        HM = f"{hour:02d} . {time.strftime('%M')}"
         for key, value in dictionary.items():
             HM = HM.replace(key, value)
         name = f"{namex} {HM}"
