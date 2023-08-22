@@ -47,7 +47,7 @@ async def _(e):
     await e.eor(get_string("wspr_3"))
 
 
-@in_pattern("wspr", owner=True)
+@in_pattern("wspr")
 async def _(e):
     iuser = e.query.user_id
     zzz = e.text.split(maxsplit=2)
@@ -102,7 +102,7 @@ async def _(e):
     await e.answer([sur])
 
 
-@in_pattern("msg", owner=True)
+@in_pattern("msg")
 async def _(e):
     zzz = e.text.split(maxsplit=1)
     desc = "Touch me"
@@ -140,7 +140,7 @@ async def _(e):
             Button.url("Privᴀᴛᴇ", url=url),
             Button.switch_inline(
                 "Sᴇᴄrᴇᴛ Mᴇssᴀgᴇ",
-                query=f"wspr {query} Hello 👋",
+                query=f"wspr {query} پیامتو اینجا بنویس",
                 same_peer=True,
             ),
         ]
