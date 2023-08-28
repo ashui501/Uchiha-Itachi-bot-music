@@ -21,7 +21,7 @@ numpy>=1.21.2
 openai
 oauth2client
 opencv-python-headless
-pillow>=9.5.0
+pillow==9.5.0
 profanitydetector
 psutil
 pypdf2>=1.26.0
