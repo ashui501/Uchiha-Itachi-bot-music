@@ -1,5 +1,5 @@
-# Mᴇgᴀᴛrᴏn Bot
-A stable pluggable Telegram bot, based on Telethon.
+# vegeta Robot
+A anime themef stable pluggable Telegram bot, based on Telethon.
 
 <p align="center">
   <img src="./resources/extras/cipherx.jpg" alt="ToxygenX">
